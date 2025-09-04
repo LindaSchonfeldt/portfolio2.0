@@ -24,7 +24,5 @@ export const colors = css`
   --button-text: #fff;
   --button-hover-bg: #0056b3;
   --card-bg: #fff;
-  --card-border: #dee2e6;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `
 export default colors

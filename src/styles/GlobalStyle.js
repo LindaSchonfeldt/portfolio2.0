@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
+    ${colors}
   }
 
   body {
@@ -19,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ${typography}
-  ${colors}
 `
 
 export default GlobalStyle
