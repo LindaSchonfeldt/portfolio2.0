@@ -1,9 +1,9 @@
-import GlobalStyles from './styles/GlobalStyles'
+import GlobalStyle from './styles/GlobalStyle'
 
 export const App = () => {
   return (
     <>
-      <GlobalStyles />
+      <GlobalStyle />
       <h1>React Boilerplate</h1>
     </>
   )
