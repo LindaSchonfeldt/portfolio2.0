@@ -21,3 +21,9 @@ const devices = {
 }
 
 export default devices
+
+// Usage example:
+// import devices from './media'
+// const Example = styled.div`
+//   @media ${devices.tablet} { ... }
+// `

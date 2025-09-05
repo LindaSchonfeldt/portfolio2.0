@@ -1,10 +1,12 @@
 import styled from 'styled-components'
+import { HamburgerMenu } from '../components/HamburgerMenu'
 
 import { Hero } from '../sections/Hero'
 
 const Home = () => {
   return (
     <Container>
+      <HamburgerMenu />
       <Hero />
     </Container>
   )

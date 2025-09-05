@@ -1,13 +1,25 @@
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
+import devices from '../styles/devices'
+
 export const Nav = () => {
   return (
     <NavContainer>
       <NavLinks>
         <NavItem>
-          <StyledNavLink to='/' end>
-            Home
+          <StyledNavLink to='/' $primary>
+            About
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink to='/projects' $primary>
+            Projects
+          </StyledNavLink>
+        </NavItem>
+        <NavItem>
+          <StyledNavLink to='/contact' $primary>
+            Contact
           </StyledNavLink>
         </NavItem>
       </NavLinks>
@@ -16,71 +28,50 @@ export const Nav = () => {
 }
 
 const NavContainer = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-`
+  display: none;
 
-const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  a {
-    text-decoration: none;
-    color: var(--primary-green-dark, #2c3e2f);
+  @media ${devices.laptop} {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 20%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 1000;
   }
 `
 
 const NavLinks = styled.ul`
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
   list-style: none;
 `
 
 const NavItem = styled.li`
   position: relative;
+  width: 100%;
 `
 
 const StyledNavLink = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  color: var(--text-main, #333);
+  background-color: var(--accent-orange);
+  color: white;
   font-weight: 500;
-  transition: color 0.3s ease;
-  padding: 0.5rem 0;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-green-dark, #2c3e2f);
-    transition: width 0.3s ease;
-  }
+  padding: 1rem;
+  width: 100px;
+  text-align: center;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: var(--primary-green-dark, #2c3e2f);
-
-    &::after {
-      width: 100%;
-    }
+    background-color: var(--accent-orange);
+    transform: translateX(-5px);
   }
 
   &.active {
-    color: var(--primary-green-dark, #2c3e2f);
-
-    &::after {
-      width: 100%;
-    }
+    background-color: var(--accent-orange);
   }
 `

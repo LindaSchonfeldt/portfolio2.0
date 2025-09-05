@@ -69,13 +69,14 @@ const HeroContent = styled.div`
   }
 
   .heroTitle {
-    font-color: var(--primary-green-dark);
+    color: var(--primary-green-dark);
     font-size: 5rem;
     line-height: 0.8;
     margin-bottom: 0.7rem;
   }
 
   .heroSubtitle {
+    color: var(--primary-green-dark);
     font-size: 2.5rem;
     line-height: 1;
     width: 90%;
