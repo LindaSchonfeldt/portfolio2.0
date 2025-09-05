@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
-import { typography } from './typography'
+
 import { colors } from './colors'
+import { spacing } from './spacing'
+import { typography } from './typography'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -13,12 +15,7 @@ const GlobalStyle = createGlobalStyle`
     ${colors}
   }
 
-  body {
-    background-color: #f5f5f5;
-    color: #333;
-    font-family: 'Poppins', sans-serif; /* Set your default font here */
-  }
-
+  ${spacing}
   ${typography}
 `
 

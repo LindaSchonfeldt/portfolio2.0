@@ -1,10 +1,19 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import { Nav } from './components/Nav'
+import Home from './pages/Home'
 import GlobalStyle from './styles/GlobalStyle'
 
-export const App = () => {
+function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
-      <h1>React Boilerplate</h1>
-    </>
+      <Nav />
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
+
+export default App

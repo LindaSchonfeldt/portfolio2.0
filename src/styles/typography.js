@@ -4,13 +4,13 @@ export const typography = css`
   h1,
   h2,
   h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Jost', sans-serif;
   }
 
   h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   h2 {

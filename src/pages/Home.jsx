@@ -1,22 +1,20 @@
 import styled from 'styled-components'
 
-export const Home = () => {
+import { Hero } from '../sections/Hero'
+
+const Home = () => {
   return (
-    <div>
-      <h1>Home Page</h1>
-    </div>
+    <Container>
+      <Hero />
+    </Container>
   )
 }
+export default Home
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   min-height: 100vh;
-`
-
-const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 1rem;
 `
