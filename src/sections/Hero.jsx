@@ -1,9 +1,17 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
+import { Logo } from '../components/Logo'
 
 export const Hero = () => {
   return (
-    <Section>
+    <Section id='introduction'>
+      <MotionLogoWrapper
+        initial={{ scale: 2, opacity: 0.8, y: 50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+      >
+        <Logo size='small' alt='' />
+      </MotionLogoWrapper>
       <MotionHeroContent
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -87,5 +95,12 @@ const HeroContent = styled.div`
     width: 100%;
   }
 `
+
 // Motion components for animation
 const MotionHeroContent = motion(HeroContent)
+
+const LogoWrapper = styled.div`
+  align-self: flex-start;
+`
+
+const MotionLogoWrapper = motion(LogoWrapper)
