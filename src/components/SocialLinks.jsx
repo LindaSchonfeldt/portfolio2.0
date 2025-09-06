@@ -4,29 +4,6 @@ import { FaDribbble } from 'react-icons/fa'
 import { FaInstagram } from 'react-icons/fa'
 import styled from 'styled-components'
 
-const StyledSocialLinks = styled.nav`
-  margin: var(--space-lg) 0 0 0;
-
-  .socialIcons {
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-lg);
-  }
-
-  .socialIcons a {
-    display: inline-block;
-    transition: transform 0.2s ease;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
-  .socialIcon {
-    fill: var(--secondary-color);
-    transition: all 0.3s ease-in-out;
-  }
-`
-
 export const SocialLinks = () => {
   return (
     <StyledSocialLinks>
@@ -83,3 +60,27 @@ export const SocialLinks = () => {
     </StyledSocialLinks>
   )
 }
+
+const StyledSocialLinks = styled.nav`
+  margin: var(--gap-md) 0 0 0;
+
+  .socialIcons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-md);
+    list-style: none;
+  }
+
+  .socialIcons a {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .socialIcon {
+    fill: var(--accent-orange);
+    transition: all 0.3s ease-in-out;
+  }
+`

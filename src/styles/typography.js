@@ -9,14 +9,15 @@ export const typography = css`
 
   h1 {
     font-size: 3.5rem;
-    margin-bottom: 1rem;
     font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1rem;
   }
 
   h2 {
     font-size: 2.5rem;
-    margin-bottom: 0.75rem;
     font-weight: 600;
+    margin-bottom: 0.75rem;
   }
 
   h3 {

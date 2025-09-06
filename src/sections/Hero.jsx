@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import { Emphasize } from '../components/Emphasize'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
+import { SocialLinks } from '../components/SocialLinks'
 import devices from '../styles/devices'
 
 export const Hero = () => {
@@ -49,12 +50,14 @@ export const Hero = () => {
             building thoughtful, empowering products.
           </p>
         </div>
+        <SocialLinks />
         <ButtonWrapper>
           <Button
             variant='primary'
             className='heroButton'
             href='/cv.pdf'
             target='_blank'
+            aria-label='Download CV'
           >
             Download CV
           </Button>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { Hero } from '../sections/Hero'
 import { SkillSection } from '../sections/SkillSection'
 
