@@ -1,10 +1,12 @@
-import { useMenuStore } from '../stores/useMenuStore'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { useMenuStore } from '../stores/useMenuStore'
 import devices from '../styles/devices.js'
+
 // Import styling CSS variables
 import '../styles/colors.js'
 import '../styles/spacing.js'
@@ -102,40 +104,61 @@ export const HamburgerMenu = () => {
         <Bar $isOpen={isOpen} />
       </HamburgerButton>
 
-      {isOpen && (
-        <Portal>
-          <Backdrop
-            onClick={handleClose}
-            role='presentation'
-            aria-hidden='true'
-          />
-          <Menu
-            id={menuId}
-            role='dialog'
-            aria-modal='true'
-            ref={menuRef}
-            onKeyDown={onMenuKeyDown}
-          >
-            <Link to='/' className='link-underline' onClick={handleClose}>
-              About
-            </Link>
-            <Link
-              to='/projects'
-              className='link-underline'
+      <AnimatePresence>
+        {isOpen && (
+          <Portal>
+            <Backdrop
               onClick={handleClose}
+              role='presentation'
+              aria-hidden='true'
+              as={motion.div}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <Menu
+              id={menuId}
+              role='dialog'
+              aria-modal='true'
+              ref={menuRef}
+              onKeyDown={onMenuKeyDown}
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
-              Projects
-            </Link>
-            <Link
-              to='/contact'
-              className='link-underline'
-              onClick={handleClose}
-            >
-              Contact
-            </Link>
-          </Menu>
-        </Portal>
-      )}
+              <NavLink
+                to='/'
+                onClick={handleClose}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                About
+              </NavLink>
+              <NavLink
+                to='/projects'
+                onClick={handleClose}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Projects
+              </NavLink>
+              <NavLink
+                to='/contact'
+                onClick={handleClose}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Contact
+              </NavLink>
+            </Menu>
+          </Portal>
+        )}
+      </AnimatePresence>
     </>
   )
 }
@@ -148,22 +171,37 @@ const Bar = styled.span`
   margin: 4px 0;
   border-radius: 2px;
   transition: transform 0.3s, opacity 0.3s, background-color 0.2s;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
   &:nth-child(1) {
+    top: ${({ $isOpen }) => ($isOpen ? '50%' : 'calc(50% - 8px)')};
     transform: ${({ $isOpen }) =>
-      $isOpen ? 'rotate(45deg) translateY(9px)' : 'none'};
+      $isOpen
+        ? 'translateX(-50%) rotate(45deg)'
+        : 'translateX(-50%) rotate(0)'};
   }
   &:nth-child(2) {
+    top: 50%;
+    transform: translateX(-50%);
     opacity: ${({ $isOpen }) => ($isOpen ? 0 : 1)};
   }
   &:nth-child(3) {
+    top: ${({ $isOpen }) => ($isOpen ? '50%' : 'calc(50% + 8px)')};
     transform: ${({ $isOpen }) =>
-      $isOpen ? 'rotate(-45deg) translateY(-10px)' : 'none'};
+      $isOpen
+        ? 'translateX(-50%) rotate(-45deg)'
+        : 'translateX(-50%) rotate(0)'};
   }
 `
 
 const HamburgerButton = styled.button`
   z-index: 6000;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   inline-size: 48px;
   block-size: 48px;
   background: none;
@@ -171,17 +209,22 @@ const HamburgerButton = styled.button`
   cursor: pointer;
   padding: 0;
   position: absolute;
-  left: var(--gap-md);
+  right: var(--gap-xs);
+
   &:focus-visible {
     outline: 2px solid var(--accent-orange);
     outline-offset: 2px;
   }
+
+  @media ${devices.tablet} {
+    right: var(--gap-md);
+  }
+
   @media ${devices.laptop} {
     display: none;
   }
 `
 
-/* Non-focusable backdrop */
 const Backdrop = styled.div`
   position: fixed;
   top: 80px;
@@ -192,7 +235,7 @@ const Backdrop = styled.div`
   z-index: 9997;
 `
 
-const Menu = styled.nav`
+const Menu = styled(motion.nav)`
   position: fixed;
   top: 60px;
   left: 0;
@@ -202,24 +245,27 @@ const Menu = styled.nav`
   z-index: 9998;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: flex-start;
   padding: var(--gap-md);
   gap: var(--gap-md);
   border-top: 1px solid var(--gray-200);
+`
 
-  a {
-    color: var(--text-main);
-    text-decoration: none;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 16px;
-    padding: 6px 0;
-  }
-  a:hover,
-  a:focus-visible {
+// Create a motion component first, then style it
+const MotionLink = motion(Link)
+const NavLink = styled(MotionLink)`
+  color: var(--text-main);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 6px 0;
+
+  &:hover,
+  &:focus-visible {
     color: var(--accent-orange);
   }
 `

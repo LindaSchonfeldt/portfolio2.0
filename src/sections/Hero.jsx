@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Button from '../components/Button'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
+import devices from '../styles/devices'
 
 export const Hero = () => {
   return (
@@ -80,17 +81,25 @@ const HeroContent = styled.div`
 
   .heroTitle {
     color: var(--primary-green-dark);
-    font-size: 5rem;
+    font-size: 3.7rem;
     line-height: 0.8;
     margin-bottom: 0.7rem;
+
+    ${devices.mobileL} {
+      font-size: 5rem;
+    }
   }
 
   .heroSubtitle {
     color: var(--primary-green-dark);
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1;
     width: 90%;
     margin-bottom: 1.5rem;
+
+    ${devices.mobileL} {
+      font-size: 2.5rem;
+    }
   }
 
   .heroText {
