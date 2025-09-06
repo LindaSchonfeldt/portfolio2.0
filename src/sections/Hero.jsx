@@ -1,21 +1,24 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
+
+import Button from '../components/Button'
 import { Logo } from '../components/Logo'
+import SectionContainer from '../components/SectionContainer'
 
 export const Hero = () => {
   return (
-    <Section id='introduction'>
+    <SectionContainer id='introduction'>
       <MotionLogoWrapper
-        initial={{ scale: 2, opacity: 0.8, y: 50 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+        initial={{ scale: 2.5, opacity: 0.7 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       >
         <Logo size='small' alt='' />
       </MotionLogoWrapper>
       <MotionHeroContent
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
         as={HeroContent}
       >
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
@@ -43,25 +46,24 @@ export const Hero = () => {
             empowering products.
           </p>
         </div>
+        <ButtonWrapper>
+          <Button
+            variant='primary'
+            className='heroButton'
+            href='/cv.pdf'
+            target='_blank'
+          >
+            Download CV
+          </Button>
+        </ButtonWrapper>
       </MotionHeroContent>
-    </Section>
+    </SectionContainer>
   )
 }
 
-const Section = styled.section`
-  background: var(--background-light);
-  padding: var(--section-padding);
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 100vh;
-`
-
 const HeroContent = styled.div`
   max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
   text-align: left;
 
   p {
@@ -96,11 +98,18 @@ const HeroContent = styled.div`
   }
 `
 
+const ButtonWrapper = styled.div`
+  display: inline-block;
+  margin-top: 1rem;
+`
+
 // Motion components for animation
 const MotionHeroContent = motion(HeroContent)
 
 const LogoWrapper = styled.div`
   align-self: flex-start;
+  transform-origin: left center;
+  display: inline-block;
 `
 
 const MotionLogoWrapper = motion(LogoWrapper)

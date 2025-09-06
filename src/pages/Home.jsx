@@ -1,22 +1,20 @@
 import styled from 'styled-components'
-import { HamburgerMenu } from '../components/HamburgerMenu'
-
 import { Hero } from '../sections/Hero'
+import { SkillSection } from '../sections/SkillSection'
 
 const Home = () => {
   return (
-    <Container>
-      <HamburgerMenu />
+    <HomeContainer>
       <Hero />
-    </Container>
+      <SkillSection />
+    </HomeContainer>
   )
 }
-export default Home
 
-const Container = styled.div`
+const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 100vh;
+  width: 100%;
 `
+
+export default Home

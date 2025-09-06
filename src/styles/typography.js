@@ -8,19 +8,19 @@ export const typography = css`
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     font-weight: 600;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-bottom: 0.75rem;
     font-weight: 600;
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.6rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
   }
