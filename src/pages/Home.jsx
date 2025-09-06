@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { Experience } from '../sections/Experience'
 import { Hero } from '../sections/Hero'
 import { SkillSection } from '../sections/SkillSection'
 
@@ -8,6 +9,7 @@ const Home = () => {
     <HomeContainer>
       <Hero />
       <SkillSection />
+      <Experience />
     </HomeContainer>
   )
 }

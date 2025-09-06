@@ -11,7 +11,10 @@ const StyledSpan = styled.span`
 `
 
 // Create the actual component with animation
-export const Emphasize = ({ children }) => {
+export const Emphasize = ({ children, delay = false }) => {
+  // Base delay is 0.3s, with additional 0.5s if delay prop is true
+  const animationDelay = delay ? 1.5 : 1.0
+
   return (
     <StyledSpan>
       {children}
@@ -33,7 +36,7 @@ export const Emphasize = ({ children }) => {
         transition={{
           duration: 0.8,
           ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a more natural highlighting feel
-          delay: 0.3
+          delay: animationDelay
         }}
       />
     </StyledSpan>

@@ -37,7 +37,7 @@ export const Hero = () => {
           </p>
           <p>
             What drives me is the{' '}
-            <Emphasize>desire to bring clarity to complexity.</Emphasize> I love
+            <Emphasize delay>desire to bring clarity to complexity.</Emphasize> I love
             organizing — whether it's structuring information for better
             usability, designing intuitive user flows, mapping out a product
             roadmap, or learning to write cleaner, more maintainable code.
@@ -45,23 +45,25 @@ export const Hero = () => {
             is where I thrive.
           </p>
           <p>
-            I'm especially drawn to <Emphasize>mission-driven teams</Emphasize>{' '}
+            I'm especially drawn to <Emphasize delay>mission-driven teams</Emphasize>{' '}
             that lead with empathy, value curiosity, and care deeply about
             building thoughtful, empowering products.
           </p>
         </div>
-        <SocialLinks />
-        <ButtonWrapper>
-          <Button
-            variant='primary'
-            className='heroButton'
-            href='/cv.pdf'
-            target='_blank'
-            aria-label='Download CV'
-          >
-            Download CV
-          </Button>
-        </ButtonWrapper>
+        <ActionWrapper>
+          <ButtonWrapper>
+            <Button
+              variant='primary'
+              className='heroButton'
+              href='/cv.pdf'
+              target='_blank'
+              aria-label='Download CV'
+            >
+              Download CV
+            </Button>
+          </ButtonWrapper>
+          <SocialLinks />
+        </ActionWrapper>
       </MotionHeroContent>
     </SectionContainer>
   )
@@ -114,7 +116,41 @@ const HeroContent = styled.div`
 
 const ButtonWrapper = styled.div`
   display: inline-block;
+  width: 100%;
+
+  Button {
+    width: 100%;
+  }
+
+  @media ${devices.mobileL} {
+    Button {
+      width: auto;
+    }
+  }
+`
+
+const ActionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
   margin-top: 1rem;
+
+  .socialIcons {
+    display: flex;
+    gap: var(--gap-md);
+    width: 100%;
+    justify-content: center;
+
+    @media ${devices.mobileM} {
+      gap: var(--gap-lg);
+    }
+
+    @media ${devices.mobileL} {
+      justify-content: flex-start;
+      gap: var(--gap-sm);
+    }
+  }
 `
 
 // Motion components for animation

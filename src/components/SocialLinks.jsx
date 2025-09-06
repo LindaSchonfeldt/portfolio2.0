@@ -62,13 +62,15 @@ export const SocialLinks = () => {
 }
 
 const StyledSocialLinks = styled.nav`
-  margin: var(--gap-md) 0 0 0;
+  margin: var(--gap-sm) 0 0 0;
+  width: 100%;
 
   .socialIcons {
     display: flex;
     flex-direction: row;
     gap: var(--gap-md);
     list-style: none;
+    width: 100%;
   }
 
   .socialIcons a {

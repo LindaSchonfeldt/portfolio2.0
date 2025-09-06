@@ -214,8 +214,6 @@ const SkillStyles = styled.div`
       position: relative;
     }
 
-    /* Removed vertical dividers */
-
     .skillList h3 {
       margin-top: 0;
     }

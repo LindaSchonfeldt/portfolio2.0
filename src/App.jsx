@@ -5,6 +5,7 @@ import { HamburgerMenu } from './components/HamburgerMenu'
 import { Nav } from './components/Nav'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
+import { Footer } from './sections/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 
 const AppContainer = styled.div`
@@ -12,6 +13,7 @@ const AppContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  position: relative;
 `
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
           <Route path='/projects' element={<Projects />} />
           {/* <Route path='/contact' element={<Contact />} /> */}
         </Routes>
+        <Footer />
       </AppContainer>
     </BrowserRouter>
   )
