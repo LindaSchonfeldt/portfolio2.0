@@ -1,8 +1,8 @@
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-import devices from '../styles/devices'
 import { useNavStore } from '../stores/useNavStore'
+import devices from '../styles/devices'
 
 export const Nav = () => {
   // Use the nav store for global state
@@ -124,7 +124,6 @@ const NavContainer = styled.nav`
 const NavLinks = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   list-style: none;
 `
 
@@ -141,22 +140,25 @@ const StyledNavLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  background-color: var(--accent-orange);
+  background-color: var(--accent-red);
+  border-color: var(--accent-red);
   color: white;
   font-weight: 500;
   padding: 1rem;
   width: 110px;
+  height: 60px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 
   &:hover {
-    background-color: var(--accent-orange);
     width: 120px; /* Expand to the left */
   }
 
   &.active {
-    background-color: var(--accent-orange);
+    background-color: var(--accent-red);
   }
 
   ${(props) =>
@@ -187,7 +189,6 @@ const SectionLink = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  background-color: var(--background-light);
   color: var(--text-main);
   font-weight: 400;
   font-size: 0.8rem;
@@ -197,8 +198,13 @@ const SectionLink = styled(Link)`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--accent-orange);
-    color: white;
+    color: var(--text-main);
     width: 95px; /* Expand to the left */
+  }
+
+  &:active {
+    color: var(--text-main);
+    text-decoration: underline;
+    font-weight: 500;
   }
 `

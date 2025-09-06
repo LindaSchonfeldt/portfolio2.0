@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import Button from '../components/Button'
+import { Emphasize } from '../components/Emphasize'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
 import devices from '../styles/devices'
@@ -34,7 +35,8 @@ export const Hero = () => {
             creates meaningful impact.
           </p>
           <p>
-            What drives me is the desire to bring clarity to complexity. I love
+            What drives me is the{' '}
+            <Emphasize>desire to bring clarity to complexity.</Emphasize> I love
             organizing — whether it's structuring information for better
             usability, designing intuitive user flows, mapping out a product
             roadmap, or learning to write cleaner, more maintainable code.
@@ -42,9 +44,9 @@ export const Hero = () => {
             is where I thrive.
           </p>
           <p>
-            I'm especially drawn to mission-driven teams that lead with empathy,
-            value curiosity, and care deeply about building thoughtful,
-            empowering products.
+            I'm especially drawn to <Emphasize>mission-driven teams</Emphasize>{' '}
+            that lead with empathy, value curiosity, and care deeply about
+            building thoughtful, empowering products.
           </p>
         </div>
         <ButtonWrapper>

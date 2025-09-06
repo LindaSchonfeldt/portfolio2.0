@@ -4,6 +4,7 @@ export const colors = css`
   --primary-green: #c7d9c4;
   --primary-green-dark: #2c3e2f;
   --accent-orange: #ff9900;
+  --accent-red: #7e101d;
   --background-light: #fff;
   --background-green: #c7d9c4;
   --background-dark: #2c3e2f;

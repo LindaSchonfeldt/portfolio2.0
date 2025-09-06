@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-import { Nav } from './components/Nav'
-import { HamburgerMenu } from './components/HamburgerMenu'
-import Home from './pages/Home'
-import GlobalStyle from './styles/GlobalStyle'
 import styled from 'styled-components'
+
+import { HamburgerMenu } from './components/HamburgerMenu'
+import { Nav } from './components/Nav'
+import Home from './pages/Home'
+import Projects from './pages/Projects'
+import GlobalStyle from './styles/GlobalStyle'
 
 const AppContainer = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           {/* Add more routes here as your site grows */}
-          {/* <Route path='/projects' element={<Projects />} /> */}
+          <Route path='/projects' element={<Projects />} />
           {/* <Route path='/contact' element={<Contact />} /> */}
         </Routes>
       </AppContainer>
