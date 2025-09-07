@@ -2,37 +2,52 @@ import styled from 'styled-components'
 
 import footerBg from '../assets/footer.JPG'
 import { Logo } from '../components/Logo'
-import SectionContainer from '../components/SectionContainer'
 import devices from '../styles/devices'
+import { fullBleed } from '../styles/spacing'
 
 export const Footer = () => {
   return (
     <StyledFooter>
       <FooterBackground />
-      <FooterContent>
-        <InfoContainer>
-          <h2>Let's talk!</h2>
-          <p>linda.schonfeldt@gmail.com</p>
-          <br />
-          &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
-          reserved.
-        </InfoContainer>
-        <Logo size='large' alt='' className='footer-logo' />
-      </FooterContent>
+      <ContentContainer>
+        <FooterContent>
+          <InfoContainer>
+            <h2>Let's talk!</h2>
+            <p>linda.schonfeldt@gmail.com</p>
+            <br />
+            &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
+            reserved.
+          </InfoContainer>
+          <Logo size='large' alt='' className='footer-logo' />
+        </FooterContent>
+      </ContentContainer>
     </StyledFooter>
   )
 }
 
 const StyledFooter = styled.footer`
   position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  ${fullBleed}
   height: auto;
   min-height: 250px;
   margin-top: auto; /* Push footer to bottom if content is short */
   padding: 0; /* Remove padding as we'll handle it in the FooterContent */
   overflow: hidden; /* Ensure the background stays within the footer */
   box-sizing: border-box;
+`
+
+const ContentContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media ${devices.laptop} {
+    max-width: 1200px;
+  }
+
+  @media ${devices.desktop} {
+    max-width: 1400px;
+  }
 `
 
 const FooterBackground = styled.div`

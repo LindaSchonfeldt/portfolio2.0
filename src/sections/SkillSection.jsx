@@ -2,8 +2,8 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import styled from 'styled-components'
 
-import SectionContainer from '../components/SectionContainer'
 import devices from '../styles/devices'
+import { fullBleed } from '../styles/spacing'
 
 export const SkillSection = () => {
   // Create a ref for the section
@@ -14,80 +14,101 @@ export const SkillSection = () => {
 
   return (
     <StyledSkillsSection id='skills' ref={sectionRef}>
-      <MotionSkillsContent
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        as={SkillStyles}
-      >
-        <SkillStyles>
-          <h2>Skills</h2>
-          <div className='skillContainer'>
-            <div className='skillList code'>
-              <h3>Code</h3>
-              <ul>
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>JavaScript ES6</li>
-                <li>React</li>
-                <li>Node.js</li>
-                <li>Styled Components</li>
-                <li>MongoDB/Mongoose</li>
-              </ul>
-            </div>
+      <ContentContainer>
+        <MotionSkillsContent
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          as={SkillStyles}
+        >
+          <SkillStyles>
+            <h2>Skills</h2>
+            <div className='skillContainer'>
+              <div className='skillList code'>
+                <h3>Code</h3>
+                <ul>
+                  <li>HTML5</li>
+                  <li>CSS3</li>
+                  <li>JavaScript ES6</li>
+                  <li>React</li>
+                  <li>Node.js</li>
+                  <li>Styled Components</li>
+                  <li>MongoDB/Mongoose</li>
+                </ul>
+              </div>
 
-            <div className='skillList design'>
-              <h3>Design</h3>
-              <ul>
-                <li>User Flows</li>
-                <li>Wireframing</li>
-                <li>Prototyping</li>
-                <li>User Interviews</li>
-                <li>Facilitating workshops</li>
-                <li>UX Research</li>
-              </ul>
-            </div>
+              <div className='skillList design'>
+                <h3>Design</h3>
+                <ul>
+                  <li>User Flows</li>
+                  <li>Wireframing</li>
+                  <li>Prototyping</li>
+                  <li>User Interviews</li>
+                  <li>Facilitating workshops</li>
+                  <li>UX Research</li>
+                </ul>
+              </div>
 
-            <div className='skillList toolbox'>
-              <h3>Toolbox</h3>
-              <ul>
-                <li>Adobe Illustrator</li>
-                <li>Figma</li>
-                <li>Github</li>
-                <li>Notion</li>
-                <li>Trello/Clickup</li>
-                <li>Slack</li>
-              </ul>
-            </div>
+              <div className='skillList toolbox'>
+                <h3>Toolbox</h3>
+                <ul>
+                  <li>Adobe Illustrator</li>
+                  <li>Figma</li>
+                  <li>Github</li>
+                  <li>Notion</li>
+                  <li>Trello/Clickup</li>
+                  <li>Slack</li>
+                </ul>
+              </div>
 
-            <div className='skillList more'>
-              <h3>More</h3>
-              <ul>
-                <li>Strategy</li>
-                <li>Process Design</li>
-                <li>Concept Development</li>
-                <li>Agile Methodology</li>
-              </ul>
-            </div>
+              <div className='skillList more'>
+                <h3>More</h3>
+                <ul>
+                  <li>Strategy</li>
+                  <li>Process Design</li>
+                  <li>Concept Development</li>
+                  <li>Agile Methodology</li>
+                </ul>
+              </div>
 
-            <div className='skillList upcoming'>
-              <h3>Upcoming</h3>
-              <ul>
-                <li>TypeScript</li>
-              </ul>
+              <div className='skillList upcoming'>
+                <h3>Upcoming</h3>
+                <ul>
+                  <li>TypeScript</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </SkillStyles>
-      </MotionSkillsContent>
+          </SkillStyles>
+        </MotionSkillsContent>
+      </ContentContainer>
     </StyledSkillsSection>
   )
 }
 
 // Create a styled version of SectionContainer
-const StyledSkillsSection = styled(SectionContainer)`
+const StyledSkillsSection = styled.section`
+  ${fullBleed}
   background-color: var(--background-green);
   box-sizing: border-box;
+  padding: var(--section-padding);
+
+  @media ${devices.laptop} {
+    padding: var(--section-padding);
+  }
+`
+
+const ContentContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
+
+  @media ${devices.laptop} {
+    max-width: 1200px;
+  }
+
+  @media ${devices.desktop} {
+    max-width: 1400px;
+  }
 `
 
 // Style the inner content
