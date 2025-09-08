@@ -12,7 +12,7 @@ export const Nav = () => {
   // Define sections for each page
   const pageSections = {
     about: ['Introduction', 'Skills', 'Experience'],
-    projects: ['Web Development', 'Design', 'Case Studies'],
+    projects: ['Web Dev', 'Design'],
     contact: ['Form', 'Social Media', 'Email']
   }
 

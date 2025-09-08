@@ -1,6 +1,8 @@
+import { IoMail } from 'react-icons/io5'
 import styled from 'styled-components'
 
 import footerBg from '../assets/footer.JPG'
+import LazyImage from '../components/LazyImage'
 import { Logo } from '../components/Logo'
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
@@ -8,12 +10,16 @@ import { fullBleed } from '../styles/spacing'
 export const Footer = () => {
   return (
     <StyledFooter>
-      <FooterBackground />
+      <FooterBackground>
+        <LazyImage src={footerBg} alt='Footer background' />
+      </FooterBackground>
       <ContentContainer>
         <FooterContent>
           <InfoContainer>
             <h2>Let's talk!</h2>
-            <p>linda.schonfeldt@gmail.com</p>
+            <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
+              <IoMail size={32} color='var(--primary-green-dark)' />
+            </a>
             <br />
             &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
             reserved.
@@ -38,7 +44,7 @@ const StyledFooter = styled.footer`
 
 const ContentContainer = styled.div`
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 3rem auto;
   width: 100%;
 
   @media ${devices.laptop} {
@@ -56,11 +62,16 @@ const FooterBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(${footerBg});
-  background-size: cover;
-  background-position: center;
   opacity: 0.2; /* Adjust opacity to make the content readable */
   z-index: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 `
 
 const FooterContent = styled.div`
