@@ -1,16 +1,23 @@
 import styled from 'styled-components'
 
+import Meta from '../components/Meta'
 import { Experience } from '../sections/Experience'
 import { Hero } from '../sections/Hero'
 import { SkillSection } from '../sections/SkillSection'
 
 const Home = () => {
   return (
-    <HomeContainer>
-      <Hero />
-      <SkillSection />
-      <Experience />
-    </HomeContainer>
+    <>
+      <Meta
+        title='Home | Linda Schönfeldt Portfolio'
+        description="Welcome to Linda Schönfeldt's portfolio. Frontend developer and designer."
+      />
+      <HomeContainer>
+        <Hero />
+        <SkillSection />
+        <Experience />
+      </HomeContainer>
+    </>
   )
 }
 

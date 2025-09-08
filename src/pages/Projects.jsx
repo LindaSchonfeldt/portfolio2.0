@@ -4,17 +4,23 @@ import SectionContainer from '../components/SectionContainer'
 
 const Projects = () => {
   return (
-    <SectionContainer id='projects'>
-      <h1>Projects</h1>
-      <Project>
-        <h2>Web Development</h2>
-        <p>Collection of my web development projects.</p>
-      </Project>
-      <Project>
-        <h2>UX Design</h2>
-        <p>Collection of my UX design projects.</p>
-      </Project>
-    </SectionContainer>
+    <>
+      <Meta
+        title='Projects | Linda Schönfeldt Portfolio'
+        description="Explore Linda Schönfeldt's projects in web development and UX design."
+      />
+      <SectionContainer id='projects'>
+        <h1>Projects</h1>
+        <Project>
+          <h2>Web Development</h2>
+          <p>Collection of my web development projects.</p>
+        </Project>
+        <Project>
+          <h2>UX Design</h2>
+          <p>Collection of my UX design projects.</p>
+        </Project>
+      </SectionContainer>
+    </>
   )
 }
 export default Projects
