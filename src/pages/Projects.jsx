@@ -12,7 +12,6 @@ const Projects = () => {
       />
       <SectionContainer id='projects'>
         <h1>Projects</h1>
-        <p>Welcome to the Projects section. More content coming soon!</p>
         {projectsData.code.map((project, idx) => (
           <ProjectCard key={project.id || idx} project={project} />
         ))}

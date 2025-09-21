@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 import { ButtonGroup } from './buttonGroup'
+import { Tag } from './Tag'
 
 export const ProjectCard = ({ project }) => {
   if (!project) return null
@@ -24,6 +25,10 @@ export const ProjectCard = ({ project }) => {
         />
       </ImageContainer>
       <TextContainer>
+        <TagContainer>
+          {project.tags &&
+            project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
+        </TagContainer>
         <StyledTitle>{project.title}</StyledTitle>
         <StyledDescription>{project.description}</StyledDescription>
         <LinkContainer>
@@ -81,6 +86,16 @@ const TextContainer = styled.div`
   @media ${devices.tablet} {
     width: 70%;
   }
+`
+
+const TagContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
 `
 
 const StyledTitle = styled.h3`

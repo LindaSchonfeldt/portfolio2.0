@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 // Create a styled motion component
@@ -14,10 +15,12 @@ export const Emphasize = ({ children, delay = false }) => {
   // Base delay is 0.3s, with additional 0.5s if delay prop is true
   const animationDelay = delay ? 1.5 : 1.0
 
+  const MotionSpan = motion.span
+
   return (
     <StyledSpan>
       {children}
-      <motion.span
+      <MotionSpan
         style={{
           position: 'absolute',
           bottom: '0px',
