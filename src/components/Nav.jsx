@@ -12,8 +12,8 @@ export const Nav = () => {
   // Define sections for each page
   const pageSections = {
     about: ['Introduction', 'Skills', 'Experience'],
-    projects: ['Web Dev', 'Design'],
-    contact: ['Form', 'Social Media', 'Email']
+    projects: [],
+    contact: []
   }
 
   return (
@@ -54,7 +54,7 @@ export const Nav = () => {
         </NavItem>
         <NavItem>
           <StyledNavLink
-            to='/projects'
+            to={'/projects'}
             $primary
             onClick={() => toggleExpanded('projects')}
             $expanded={expandedItem === 'projects'}
@@ -143,6 +143,7 @@ const StyledNavLink = styled(NavLink)`
   background-color: var(--accent-red);
   border-color: var(--accent-red);
   color: white;
+  font-family: 'Raleway', sans-serif;
   font-weight: 500;
   padding: 1rem;
   width: 110px;

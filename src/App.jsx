@@ -31,7 +31,6 @@ function App() {
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path='/' element={<Home />} />
-            {/* Add more routes here as your site grows */}
             <Route path='/projects' element={<Projects />} />
             {/* <Route path='/contact' element={<Contact />} /> */}
           </Routes>

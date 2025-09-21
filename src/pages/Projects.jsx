@@ -1,41 +1,23 @@
-import styled from 'styled-components'
-
+import Meta from '../components/Meta'
+import { ProjectCard } from '../components/ProjectCard'
 import SectionContainer from '../components/SectionContainer'
+import projectsData from '../data/projects.json'
 
 const Projects = () => {
   return (
     <>
       <Meta
         title='Projects | Linda Schönfeldt Portfolio'
-        description="Explore Linda Schönfeldt's projects in web development and UX design."
+        description="Explore Linda Schönfeldt's projects in web development."
       />
       <SectionContainer id='projects'>
         <h1>Projects</h1>
-        <Project>
-          <h2>Web Development</h2>
-          <p>Collection of my web development projects.</p>
-        </Project>
-        <Project>
-          <h2>UX Design</h2>
-          <p>Collection of my UX design projects.</p>
-        </Project>
+        <p>Welcome to the Projects section. More content coming soon!</p>
+        {projectsData.code.map((project, idx) => (
+          <ProjectCard key={project.id || idx} project={project} />
+        ))}
       </SectionContainer>
     </>
   )
 }
 export default Projects
-
-const Project = styled.div`
-  background-color: var(--primary-green);
-  color: var(--primary-green-dark);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-
-  h2 {
-    text-size: 1rem;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-`

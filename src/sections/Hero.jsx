@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-import Button from '../components/Button'
+import { Button } from '../components/Button'
 import { Emphasize } from '../components/Emphasize'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
@@ -37,17 +37,18 @@ export const Hero = () => {
           </p>
           <p>
             What drives me is the{' '}
-            <Emphasize delay>desire to bring clarity to complexity.</Emphasize> I love
-            organizing — whether it's structuring information for better
+            <Emphasize delay>desire to bring clarity to complexity.</Emphasize>{' '}
+            I love organizing — whether it's structuring information for better
             usability, designing intuitive user flows, mapping out a product
             roadmap, or learning to write cleaner, more maintainable code.
             Turning chaos into something clear, purposeful, and human-centered
             is where I thrive.
           </p>
           <p>
-            I'm especially drawn to <Emphasize delay>mission-driven teams</Emphasize>{' '}
-            that lead with empathy, value curiosity, and care deeply about
-            building thoughtful, empowering products.
+            I'm especially drawn to{' '}
+            <Emphasize delay>mission-driven teams</Emphasize> that lead with
+            empathy, value curiosity, and care deeply about building thoughtful,
+            empowering products.
           </p>
         </div>
         <ActionWrapper>

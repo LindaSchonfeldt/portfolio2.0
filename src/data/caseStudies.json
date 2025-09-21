@@ -1,0 +1,66 @@
+{
+  "caseStudies": [
+    {
+      "id": 1,
+      "caseStudyId": 1,
+      "title": "Guiding the Product Vision and Roadmap",
+      "subtitle": "UX Design & Strategy for an Interactive Webinar Platform",
+      "heroImage": "/src/assets/projects/univid-hero.png",
+      "timeline": "January - May 2024",
+      "role": "UX Design Intern",
+      "team": [
+        "Founders",
+        "Developers",
+        "Customer Success Manager",
+        "Sales Manager",
+        "Marketing Intern"
+      ],
+
+      "overview": {
+        "summary": "I joined a startup focused on building an interactive webinar platform. In a fast-moving, cross-functional team, I helped shape the product vision and roadmap while ensuring that design decisions aligned with both user needs and business goals.",
+        "keyPoints": [
+          "Led user research to identify key pain points in the webinar experience",
+          "Developed user personas and journey maps to guide feature prioritization",
+          "Created wireframes and prototypes for new features",
+          "Collaborated with developers to ensure feasible implementation"
+        ]
+      },
+
+      "challenge": {
+        "problem": "The product had grown rapidly to meet early market demands, but as the team looked to the future, it became clear that a more unified product direction was needed. During my early conversations with the four original team members, I realized each of them had a slightly different vision for where the product should go. This diversity of perspectives—while valuable—created a need for alignment. The challenge became to support the team in clarifying a shared long-term vision and translating that into a tangible, user-centered roadmap within a fast-paced, agile environment.",
+        "goals": [
+          "Clarify and align the long-term product vision",
+
+          "Translate team insights into actionable design directions",
+
+          "Improve the user journey for webinar hosts and participants",
+
+          "Use design as a tool to support prioritization and collaboration"
+        ]
+      },
+
+      "process": {
+        "research": {
+          "description": "Research description here",
+          "methods": ["User interviews", "Competitive analysis"]
+        },
+        "design": {
+          "description": "Design process description here"
+        },
+        "implementation": {
+          "description": "Implementation details here"
+        }
+      },
+
+      "results": {
+        "outcomes": ["Outcome 1", "Outcome 2"],
+        "impact": "Impact description here"
+      },
+
+      "learnings": {
+        "reflections": "Reflections here",
+        "takeaways": ["Takeaway 1", "Takeaway 2"]
+      }
+    }
+  ]
+}

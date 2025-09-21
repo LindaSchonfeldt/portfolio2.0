@@ -1,0 +1,24 @@
+{
+  "techStack": [
+    { "id": "html5", "name": "HTML5" },
+    { "id": "css3", "name": "CSS3" },
+    { "id": "javascript", "name": "JavaScript" },
+    { "id": "flexbox", "name": "Flexbox" },
+    { "id": "grid", "name": "Grid" },
+    { "id": "react", "name": "React" },
+    { "id": "zustand", "name": "Zustand" },
+    { "id": "styledcomponents", "name": "Styled Components" },
+    { "id": "react-hooks", "name": "React Hooks" },
+    { "id": "nodejs", "name": "Node.js" },
+    { "id": "git", "name": "Git" },
+    { "id": "mongodb", "name": "MongoDB" },
+    { "id": "vite", "name": "Vite" },
+    { "id": "npm", "name": "NPM" },
+    { "id": "api", "name": "APIs" },
+    { "id": "rest", "name": "REST" },
+    { "id": "mongodb", "name": "MongoDB" },
+    { "id": "mongoose", "name": "Mongoose" },
+    { "id": "mob-programming", "name": "Mob Programming" },
+    { "id": "pair-programming", "name": "Pair Programming" }
+  ]
+}

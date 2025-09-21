@@ -1,71 +1,12 @@
-import { useNavigate } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import devices from '../styles/devices'
 
-export function ButtonGroup({ actions = [] }) {
-  console.log('ButtonGroup received actions:', actions) // Debug log
-
-  if (!actions || actions.length === 0) {
-    console.log('ButtonGroup: No actions provided')
-    return null
-  }
-
-  return (
-    <StyledButtonGroup>
-      {actions.map((action, index) => {
-        console.log(`Rendering button ${index}:`, action)
-        return (
-          <Button
-            key={index}
-            text={action.text}
-            href={action.href}
-            onClick={action.onClick}
-            target={action.target}
-            variant={action.variant || 'primary'}
-            internal={action.internal}
-            className={action.className}
-          />
-        )
-      })}
-    </StyledButtonGroup>
-  )
-}
-
-export default function Button({
-  text,
-  href,
-  onClick,
-  target = '_self',
-  variant = 'primary', // 'primary' | 'secondary' | 'tertiary'
-  internal = false,
-  className = '',
-  children
-}) {
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    if (href) {
-      if (internal) {
-        navigate(href)
-      } else {
-        window.open(href, target, 'noopener,noreferrer')
-      }
-    } else if (onClick) {
-      onClick()
-    }
-  }
-
-  return (
-    <StyledButton
-      $variant={variant} // Transient prop
-      className={className}
-      onClick={handleClick}
-    >
-      {text || children}
-    </StyledButton>
-  )
-}
+export const Button = ({ label, url }) => (
+  <a href={url} target='_blank' rel='noopener noreferrer'>
+    {label}
+  </a>
+)
 
 const hover = css`
   &:hover {
@@ -82,6 +23,13 @@ const secondaryHover = css`
 `
 
 const StyledButton = styled.button`
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;

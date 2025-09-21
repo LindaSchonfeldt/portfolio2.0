@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 const Meta = ({ title, description, image }) => {
   useEffect(() => {
     // Update document title
-    document.title = title || 'LS Portfolio'
+    document.title = title || 'Linda Schönfeldt'
 
     // Find or create meta description
     let metaDescription = document.querySelector('meta[name="description"]')
@@ -17,7 +17,7 @@ const Meta = ({ title, description, image }) => {
       'Linda Schönfeldt portfolio website showcasing frontend development skills'
 
     // Set other meta tags
-    updateOrCreateMeta('og:title', title || 'LS Portfolio')
+    updateOrCreateMeta('og:title', title || 'Linda Schönfeldt Portfolio')
     updateOrCreateMeta(
       'og:description',
       description || 'Linda Schönfeldt portfolio website'
