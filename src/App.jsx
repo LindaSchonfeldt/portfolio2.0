@@ -7,6 +7,7 @@ import Intro from './components/Intro'
 import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
+import ScrollToTop from './components/ScrollToTop'
 import { Footer } from './sections/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <ScrollToTop />
       <AppContainer>
         {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
         <Nav />
