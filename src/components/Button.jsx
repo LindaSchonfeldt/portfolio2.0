@@ -8,6 +8,8 @@ export const Button = ({ label, url }) => (
 
 const StyledButton = styled.button`
   display: inline-block;
+  width: auto;
+  min-width: 120px;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;

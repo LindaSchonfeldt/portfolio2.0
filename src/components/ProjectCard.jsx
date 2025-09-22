@@ -115,7 +115,12 @@ const LinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding: 10px;
-  width: 10%;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 1.5rem;
+
+  @media ${devices.tablet} {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
 `

@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { HamburgerMenu } from './components/HamburgerMenu'
+import Intro from './components/Intro'
 import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
@@ -22,10 +23,13 @@ const AppContainer = styled.div`
 `
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true)
+
   return (
     <BrowserRouter>
       <GlobalStyle />
       <AppContainer>
+        {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
         <Nav />
         <HamburgerMenu />
         <Suspense fallback={<LoadingFallback />}>
