@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { HamburgerMenu } from './components/HamburgerMenu'
@@ -23,15 +23,28 @@ const AppContainer = styled.div`
   position: relative;
 `
 
-function App() {
+import { useRef } from 'react'
+
+function AppContent() {
   const [showIntro, setShowIntro] = useState(true)
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+  const introPlayed = useRef(false)
+
+  // Only show intro if on home and it hasn't played yet
+  const shouldShowIntro = showIntro && isHome && !introPlayed.current
+
+  const handleIntroComplete = () => {
+    setShowIntro(false)
+    introPlayed.current = true
+  }
 
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
       <AppContainer>
-        {showIntro ? (
-          <Intro onComplete={() => setShowIntro(false)} />
+        {shouldShowIntro ? (
+          <Intro onComplete={handleIntroComplete} />
         ) : (
           <>
             <ScrollToTop />
@@ -49,6 +62,14 @@ function App() {
           </>
         )}
       </AppContainer>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   )
 }

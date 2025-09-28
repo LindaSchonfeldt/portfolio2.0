@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion'
+
 import Meta from '../components/Meta'
 import { ProjectCard } from '../components/ProjectCard'
 import SectionContainer from '../components/SectionContainer'
@@ -10,12 +13,18 @@ const Projects = () => {
         title='Projects | Linda Schönfeldt Portfolio'
         description="Explore Linda Schönfeldt's projects in web development."
       />
-      <SectionContainer id='projects'>
-        <h1>Projects</h1>
-        {projectsData.code.map((project, idx) => (
-          <ProjectCard key={project.id || idx} project={project} />
-        ))}
-      </SectionContainer>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <SectionContainer id='projects'>
+          <h1>Projects</h1>
+          {projectsData.code.map((project, idx) => (
+            <ProjectCard key={project.id || idx} project={project} />
+          ))}
+        </SectionContainer>
+      </motion.div>
     </>
   )
 }
