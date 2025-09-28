@@ -15,40 +15,68 @@ const Intro = ({ onComplete }) => {
 
   return (
     <IntroContainer>
+      {/* Initial background layer sliding left */}
+      <BackgroundLayer
+        as={motion.div}
+        initial={{ x: '0%' }}
+        animate={{ x: '0%' }}
+        transition={{
+          duration: 1,
+          ease: 'easeInOut',
+          delay: 0
+        }}
+        color='var(--background-main)'
+      />
+
+      {/* Left green rectangle - fade in */}
+      <GreenRectangle
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 0.8,
+          ease: 'easeInOut',
+          delay: 0.2
+        }}
+        color='var(--primary-green-dark)'
+        position='left'
+      />
+
+      {/* Right green rectangle - fade in */}
+      <GreenRectangle
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 1.5,
+          ease: 'easeInOut',
+          delay: 0.4
+        }}
+        color='var(--primary-green)'
+        position='right'
+      />
+
       {/* Background layers */}
       <BackgroundLayer
         as={motion.div}
         initial={{ x: '0%' }}
         animate={{ x: '-100%' }}
         transition={{
-          duration: 2,
+          duration: 1.5,
           ease: 'easeInOut',
-          delay: 1.5
+          delay: 0.4
         }}
         color='var(--primary-green-dark)'
-      />
-
-      <BackgroundLayer
-        as={motion.div}
-        initial={{ x: '0%' }}
-        animate={{ x: '-100%' }}
-        transition={{
-          duration: 2,
-          ease: 'easeInOut',
-          delay: 1.2
-        }}
-        color='var(--primary-green)'
       />
 
       {/* White curved shape */}
       <WhiteShape
         as={motion.div}
-        initial={{ x: '100%' }}
-        animate={{ x: '-100%' }}
+        initial={{ x: '100%', opacity: 1 }}
+        animate={{ x: '-120%', opacity: 0 }}
         transition={{
-          duration: 2.5,
-          ease: 'easeInOut',
-          delay: 0.5
+          x: { duration: 2.6, ease: 'easeInOut', delay: 1.0 },
+          opacity: { duration: 0.7, delay: 2.3, ease: 'easeInOut' }
         }}
       />
 
@@ -77,6 +105,15 @@ const IntroContainer = styled.div`
   background: var(--background-main);
 `
 
+const GreenRectangle = styled.div`
+  position: absolute;
+  top: 0;
+  ${(props) => (props.position === 'left' ? 'left: 0;' : 'right: 0;')}
+  width: 50%;
+  height: 100%;
+  background: ${(props) => props.color};
+`
+
 const BackgroundLayer = styled.div`
   position: absolute;
   top: 0;
@@ -91,14 +128,11 @@ const WhiteShape = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 150%;
+  width: 300%;
   height: 100%;
   background: white;
-  clip-path: ellipse(60% 100% at 80% 50%);
+  clip-path: ellipse(50% 100% at 80% 50%);
   transform-origin: right center;
-
-  /* Alternative curved shape - uncomment if you prefer this */
-  /* clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%); */
 `
 
 const FadeOverlay = styled.div`

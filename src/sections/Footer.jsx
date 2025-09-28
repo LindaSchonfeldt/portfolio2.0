@@ -17,7 +17,12 @@ export const Footer = () => {
         <FooterContent>
           <InfoContainer>
             <h2>Let's talk!</h2>
-            <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
+            <a
+              href='mailto:linda.schonfeldt@gmail.com'
+              aria-label='Email me'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               <IoMail size={32} color='var(--primary-green-dark)' />
             </a>
             <br />

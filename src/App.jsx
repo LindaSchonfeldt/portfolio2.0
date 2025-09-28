@@ -29,20 +29,25 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <ScrollToTop />
       <AppContainer>
-        {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
-        <Nav />
-        <HamburgerMenu />
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/projects' element={<Projects />} />
-            {/* <Route path='/contact' element={<Contact />} /> */}
-          </Routes>
-        </Suspense>
-        <Footer />
-        <PerformanceMonitor />
+        {showIntro ? (
+          <Intro onComplete={() => setShowIntro(false)} />
+        ) : (
+          <>
+            <ScrollToTop />
+            <Nav />
+            <HamburgerMenu />
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/projects' element={<Projects />} />
+                {/* <Route path='/contact' element={<Contact />} /> */}
+              </Routes>
+            </Suspense>
+            <Footer />
+            <PerformanceMonitor />
+          </>
+        )}
       </AppContainer>
     </BrowserRouter>
   )

@@ -55,13 +55,12 @@ export const Hero = () => {
           <ButtonWrapper>
             <Button
               variant='primary'
+              label={'Download CV'}
               className='heroButton'
               href='/cv.pdf'
               target='_blank'
               aria-label='Download CV'
-            >
-              Download CV
-            </Button>
+            />
           </ButtonWrapper>
           <SocialLinks />
         </ActionWrapper>
