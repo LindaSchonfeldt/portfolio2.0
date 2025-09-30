@@ -21,9 +21,15 @@ const Projects = () => {
       >
         <SectionContainer id='projects'>
           <h1>Projects</h1>
-          {projectsData.code.map((project, idx) => (
-            <ProjectCard key={project.id || idx} project={project} />
-          ))}
+          <ProjectGrid>
+            {projectsData.code.map((project, idx) => (
+              <ProjectCard
+                key={project.id || idx}
+                project={project}
+                size={project.size || 'medium'}
+              />
+            ))}
+          </ProjectGrid>
         </SectionContainer>
       </motion.div>
     </>

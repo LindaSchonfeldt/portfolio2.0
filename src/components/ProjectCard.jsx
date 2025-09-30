@@ -1,8 +1,8 @@
+import { ButtonGroup } from './buttonGroup'
+import { Tag } from './Tag'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
-import { ButtonGroup } from './buttonGroup'
-import { Tag } from './Tag'
 
 export const ProjectCard = ({ project, size = 'medium' }) => {
   if (!project) return null
@@ -43,21 +43,21 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
 
 const sizeStyles = {
   small: {
-    width: '220px',
+    width: '320px',
     height: '180px',
     padding: '1rem',
     fontSize: '0.9rem',
     background: 'var(--primary-green-light)'
   },
   medium: {
-    width: '320px',
+    width: '420px',
     height: '240px',
     padding: '1.5rem',
     fontSize: '1rem',
     background: 'var(--background-light)'
   },
   large: {
-    width: '420px',
+    width: '640px',
     height: '320px',
     padding: '2rem',
     fontSize: '1.15rem',
@@ -74,7 +74,6 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
   transition: box-shadow 0.2s;
 
   @media ${devices.tablet} {

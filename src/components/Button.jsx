@@ -1,10 +1,31 @@
 import styled from 'styled-components'
 
-export const Button = ({ label, url }) => (
-  <StyledButton href={url} target='_blank' rel='noopener noreferrer'>
-    {label}
-  </StyledButton>
-)
+export const Button = ({
+  label,
+  url,
+  variant = 'button',
+  onClick,
+  ...props
+}) => {
+  if (variant === 'link') {
+    return (
+      <StyledButton
+        as='a'
+        href={url}
+        target='_blank'
+        rel='noopener noreferrer'
+        {...props}
+      >
+        {label}
+      </StyledButton>
+    )
+  }
+  return (
+    <StyledButton type='button' onClick={onClick} {...props}>
+      {label}
+    </StyledButton>
+  )
+}
 
 const StyledButton = styled.button`
   display: inline-block;

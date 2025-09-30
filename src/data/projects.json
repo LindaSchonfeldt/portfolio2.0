@@ -8,7 +8,8 @@
       "description": "A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
       "tags": ["React", "Vite", "Styled Components", "Zustand"],
       "netlify": "",
-      "github": "https://github.com/LindaSchonfeldt/naima-website"
+      "github": "https://github.com/LindaSchonfeldt/naima-website",
+      "size": "large"
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "description": "You're looking at it. This is a showcase of user-centered design in action. Explore projects that merge creativity and functionality, all wrapped in clean aesthetics and intuitive navigation.",
       "tags": ["React", "Vite", "Styled Components", "Zustand"],
       "netlify": "",
-      "github": "https://github.com/LindaSchonfeldt/js-project-portfolio"
+      "github": "https://github.com/LindaSchonfeldt/js-project-portfolio",
+      "size": "small"
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "description": "A feel-good full-stack app where users can share positive thoughts and like each other’s messages. Built with React and Vite on the frontend, and Node.js with Express and MongoDB on the backend. The app features dynamic updates via a REST API, responsive design, and real-time message interaction.",
       "tags": ["React", "Vite", "Styled Components", "APIs"],
       "netlify": "https://creative-hotteok-2e5655.netlify.app/",
-      "github": "https://github.com/LindaSchonfeldt/js-project-happy-thoughts/tree/main"
+      "github": "https://github.com/LindaSchonfeldt/js-project-happy-thoughts/tree/main",
+      "size": "medium"
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "description": "Together with Cathi, I created Screamflix, a curated archive that lets users explore horror films by decade. The design and concept were inspired by the aesthetics of classic horror, and the goal was to offer a fun and slightly spooky way to browse cult classics and hidden gems.",
       "tags": ["React", "Custom Hooks", "Vite", "APIs"],
       "netlify": "https://screamflix.netlify.app/decade/1950",
-      "github": "https://github.com/LindaSchonfeldt/js-project-movies"
+      "github": "https://github.com/LindaSchonfeldt/js-project-movies",
+      "size": "small"
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
       "description": "A responsive web-based application that fetches real-time weather data through API integration. Focused on a clear user flow and modern design.",
       "tags": ["JavaScript", "TypeScript", "APIs"],
       "netlify": "https://gorgeous-bubblegum-c0333a.netlify.app/",
-      "github": "https://github.com/LindaSchonfeldt/weather-app"
+      "github": "https://github.com/LindaSchonfeldt/weather-app",
+      "size": "small"
     },
     {
       "id": 6,
@@ -58,7 +63,8 @@
       "description": "A deliciously simple web app where users can explore a world of recipes. Designed for smooth navigation and a tasteful user experience.",
       "tags": ["JavaScript", "APIs"],
       "netlify": "https://recipe-library.netlify.app/",
-      "github": "https://github.com/LindaSchonfeldt/js-project-recipe-library"
+      "github": "https://github.com/LindaSchonfeldt/js-project-recipe-library",
+      "size": "small"
     }
   ]
 }
