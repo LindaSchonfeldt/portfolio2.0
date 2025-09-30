@@ -35,7 +35,7 @@ export const Experience = () => {
             <TimelineContent>
               <TimelinePeriod>Sep 2025 - Present</TimelinePeriod>
               <TimelineTitle>Frontend Developer Intern</TimelineTitle>
-              <TimelineCompany>FIXMEAPP</TimelineCompany>
+              <TimelineInstitution>FIXMEAPP</TimelineInstitution>
               <TimelineDescription>
                 Developing responsive web applications using React,
                 styled-components, and modern JavaScript. Creating user-centered
@@ -54,8 +54,8 @@ export const Experience = () => {
             </TimelineIcon>
             <TimelineContent>
               <TimelinePeriod>Jan - Oct 2025</TimelinePeriod>
-              <TimelineTitle>Frontend Development</TimelineTitle>
-              <TimelineCompany>Technigo JavaScript Bootcamp</TimelineCompany>
+              <TimelineTitle>JavaScript Bootcamp</TimelineTitle>
+              <TimelineInstitution>Technigo</TimelineInstitution>
               <TimelineDescription>
                 Intensive 32-week bootcamp focused on modern web development
                 technologies. Built multiple projects using React, Node.js, and
@@ -75,7 +75,7 @@ export const Experience = () => {
             <TimelineContent>
               <TimelinePeriod>Nov 2024 - Present</TimelinePeriod>
               <TimelineTitle>UX/UI Designer / Frontend Developer</TimelineTitle>
-              <TimelineCompany>Sampler</TimelineCompany>
+              <TimelineInstitution>Sampler</TimelineInstitution>
               <TimelineDescription>
                 Developing responsive web applications using React,
                 styled-components, and modern JavaScript. Creating user-centered
@@ -95,7 +95,7 @@ export const Experience = () => {
             <TimelineContent>
               <TimelinePeriod>Nov 2023 - May 2024</TimelinePeriod>
               <TimelineTitle>UX Designer Intern</TimelineTitle>
-              <TimelineCompany>Univid</TimelineCompany>
+              <TimelineInstitution>Univid</TimelineInstitution>
               <TimelineDescription>
                 Worked on UX design for a B2B SaaS webinar platform. Designed
                 user-centered prototypes, iterated on mockups, and collaborated
@@ -115,11 +115,11 @@ export const Experience = () => {
               <FaGraduationCap />
             </TimelineIcon>
             <TimelineContent>
-              <TimelinePeriod>2021 - 2024</TimelinePeriod>
+              <TimelinePeriod>Aug 2021 - June 2024</TimelinePeriod>
               <TimelineTitle>
                 Bachelor's Degree in Interaction Design
               </TimelineTitle>
-              <TimelineCompany>Stockholm University</TimelineCompany>
+              <TimelineInstitution>Stockholm University</TimelineInstitution>
               <TimelineDescription>
                 Studied the principles of human-computer interaction, user
                 research methods, and the design of digital products and
@@ -245,7 +245,7 @@ const TimelineTitle = styled.h3`
   color: var(--text-main);
 `
 
-const TimelineCompany = styled.h4`
+const TimelineInstitution = styled.h4`
   margin: 0 0 0.5rem 0;
   font-family: 'Jost', sans-serif;
   font-size: 1rem;

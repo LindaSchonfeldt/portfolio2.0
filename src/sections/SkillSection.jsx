@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
+import skillsData from '../data/content.json'
 
 export const SkillSection = () => {
   // Create a ref for the section
@@ -24,59 +25,19 @@ export const SkillSection = () => {
           <SkillStyles>
             <h2>Skills</h2>
             <div className='skillContainer'>
-              <div className='skillList code'>
-                <h3>Code</h3>
-                <ul>
-                  <li>HTML5</li>
-                  <li>CSS3</li>
-                  <li>JavaScript ES6</li>
-                  <li>React</li>
-                  <li>Node.js</li>
-                  <li>Styled Components</li>
-                  <li>MongoDB/Mongoose</li>
-                </ul>
-              </div>
-
-              <div className='skillList design'>
-                <h3>Design</h3>
-                <ul>
-                  <li>User Flows</li>
-                  <li>Wireframing</li>
-                  <li>Prototyping</li>
-                  <li>User Interviews</li>
-                  <li>Facilitating workshops</li>
-                  <li>UX Research</li>
-                </ul>
-              </div>
-
-              <div className='skillList toolbox'>
-                <h3>Toolbox</h3>
-                <ul>
-                  <li>Adobe Illustrator</li>
-                  <li>Figma</li>
-                  <li>Github</li>
-                  <li>Notion</li>
-                  <li>Trello/Clickup</li>
-                  <li>Slack</li>
-                </ul>
-              </div>
-
-              <div className='skillList more'>
-                <h3>More</h3>
-                <ul>
-                  <li>Strategy</li>
-                  <li>Process Design</li>
-                  <li>Concept Development</li>
-                  <li>Agile Methodology</li>
-                </ul>
-              </div>
-
-              <div className='skillList upcoming'>
-                <h3>Upcoming</h3>
-                <ul>
-                  <li>TypeScript</li>
-                </ul>
-              </div>
+              {skillsData.skills.map((skillGroup) => (
+                <div
+                  className={`skillList ${skillGroup.category.toLowerCase()}`}
+                  key={skillGroup.category}
+                >
+                  <h3>{skillGroup.category}</h3>
+                  <ul>
+                    {skillGroup.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </SkillStyles>
         </MotionSkillsContent>

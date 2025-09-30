@@ -20,5 +20,56 @@
     { "id": "mongoose", "name": "Mongoose" },
     { "id": "mob-programming", "name": "Mob Programming" },
     { "id": "pair-programming", "name": "Pair Programming" }
+  ],
+
+  "skills": [
+    {
+      "category": "Code",
+      "items": [
+        "HTML5",
+        "CSS3",
+        "JavaScript ES6",
+        "React",
+        "Node.js",
+        "Styled Components",
+        "MongoDB/Mongoose"
+      ]
+    },
+    {
+      "category": "Design",
+      "items": [
+        "User Flows",
+        "Wireframing",
+        "Prototyping",
+        "User Interviews",
+        "Facilitating workshops",
+        "UX Research"
+      ]
+    },
+    {
+      "category": "Toolbox",
+      "items": [
+        "Adobe Illustrator",
+        "Figma",
+        "Github",
+        "Notion",
+        "Trello/Clickup",
+        "Slack",
+        "VS Code"
+      ]
+    },
+    {
+      "category": "More",
+      "items": [
+        "Strategy",
+        "Process Design",
+        "Concept Development",
+        "Agile Methodology"
+      ]
+    },
+    {
+      "category": "Upcoming",
+      "items": ["TypeScript"]
+    }
   ]
 }
