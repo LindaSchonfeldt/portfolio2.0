@@ -1,14 +1,19 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import styled from 'styled-components'
 
-export const Emphasize = ({ children, delay = false }) => {
-  // Base delay is 0.3s, with additional 0.5s if delay prop is true
-  const animationDelay = delay ? 1.5 : 1.0
-
+export const Emphasize = ({ children }) => {
+  const [highlighted, setHighlighted] = useState(false)
   const MotionSpan = motion.span
 
+  // Handler for pointer over (triggers highlight)
+  const handleHighlight = () => {
+    console.log('onPointerOver fired')
+    if (!highlighted) setHighlighted(true)
+  }
+
   return (
-    <StyledSpan>
+    <StyledSpan onPointerOver={handleHighlight} onFocus={handleHighlight}>
       {children}
       <MotionSpan
         style={{
@@ -20,15 +25,15 @@ export const Emphasize = ({ children, delay = false }) => {
           width: '100%',
           backgroundColor: 'var(--accent-orange)',
           transformOrigin: 'left',
-          opacity: 0.4,
-          zIndex: -1
+          opacity: 0.4, // back to normal
+          zIndex: -1 // behind text
         }}
         initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
+        animate={{ scaleX: highlighted ? 1 : 0 }}
         transition={{
-          duration: 0.8,
-          ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for a more natural highlighting feel
-          delay: animationDelay
+          duration: 0.5,
+          ease: [0.22, 1, 0.36, 1],
+          delay: 0
         }}
       />
     </StyledSpan>
@@ -40,5 +45,5 @@ const StyledSpan = styled.span`
   display: inline-block;
   color: var(--text-main);
   font-weight: 600;
-  z-index: 1;
+  z-index: 0;
 `

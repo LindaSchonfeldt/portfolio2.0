@@ -4,7 +4,7 @@ import devices from '../styles/devices'
 import { ButtonGroup } from './buttonGroup'
 import { Tag } from './Tag'
 
-export const ProjectCard = ({ project }) => {
+export const ProjectCard = ({ project, size = 'medium' }) => {
   if (!project) return null
 
   // Transform github/netlify fields into actions array
@@ -17,27 +17,70 @@ export const ProjectCard = ({ project }) => {
   }
 
   return (
-    <CardContent>
-      <ImageContainer>
-        <StyledImage
-          src={project.image || 'tree.svg'}
-          alt={project.alt || 'Project Image'}
-        />
-      </ImageContainer>
-      <TextContainer>
-        <TagContainer>
-          {project.tags &&
-            project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
-        </TagContainer>
-        <StyledTitle>{project.title}</StyledTitle>
-        <StyledDescription>{project.description}</StyledDescription>
-        <LinkContainer>
-          <ButtonGroup actions={actions} />
-        </LinkContainer>
-      </TextContainer>
-    </CardContent>
+    <CardContainer size={size}>
+      <CardContent>
+        <ImageContainer>
+          <StyledImage
+            src={project.image || 'tree.svg'}
+            alt={project.alt || 'Project Image'}
+          />
+        </ImageContainer>
+        <TextContainer>
+          <TagContainer>
+            {project.tags &&
+              project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
+          </TagContainer>
+          <StyledTitle>{project.title}</StyledTitle>
+          <StyledDescription>{project.description}</StyledDescription>
+          <LinkContainer>
+            <ButtonGroup actions={actions} />
+          </LinkContainer>
+        </TextContainer>
+      </CardContent>
+    </CardContainer>
   )
 }
+
+const sizeStyles = {
+  small: {
+    width: '220px',
+    height: '180px',
+    padding: '1rem',
+    fontSize: '0.9rem',
+    background: 'var(--primary-green-light)'
+  },
+  medium: {
+    width: '320px',
+    height: '240px',
+    padding: '1.5rem',
+    fontSize: '1rem',
+    background: 'var(--background-light)'
+  },
+  large: {
+    width: '420px',
+    height: '320px',
+    padding: '2rem',
+    fontSize: '1.15rem',
+    background: 'var(--accent-orange)'
+  }
+}
+
+const CardContainer = styled.div`
+  width: ${({ size }) => sizeStyles[size].width};
+  height: ${({ size }) => sizeStyles[size].height};
+  padding: ${({ size }) => sizeStyles[size].padding};
+  font-size: ${({ size }) => sizeStyles[size].fontSize};
+  background: ${({ size }) => sizeStyles[size].background};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem;
+  transition: box-shadow 0.2s;
+
+  @media ${devices.tablet} {
+    flex-direction: column;
+  }
+`
 
 const CardContent = styled.div`
   display: flex;
@@ -47,10 +90,9 @@ const CardContent = styled.div`
   height: auto;
   margin-bottom: 20px;
   background: var(--background-light);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   @media ${devices.tablet} {
-    flex-direction: row;
+    flex-direction: column;
   }
 `
 
@@ -61,10 +103,6 @@ const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: var(--accent-orange); /* Fallback background color */
-
-  @media ${devices.tablet} {
-    width: 30%;
-  }
 `
 
 const StyledImage = styled.img`
@@ -82,10 +120,6 @@ const TextContainer = styled.div`
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-
-  @media ${devices.tablet} {
-    width: 70%;
-  }
 `
 
 const TagContainer = styled.div`

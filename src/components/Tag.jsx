@@ -6,11 +6,12 @@ export const Tag = ({ text }) => {
 
 const StyledTag = styled.span`
   display: inline-block;
-  color: var(--text-dark);
+  color: var(--text-light);
   font-size: 1rem;
   font-weight: 400;
   padding: 0.2rem 0.3rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  border: black 1px solid;
+  background-color: var(--background-light);
+  border: white 1px solid;
 `
