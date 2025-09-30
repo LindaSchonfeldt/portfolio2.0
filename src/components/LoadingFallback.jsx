@@ -1,5 +1,15 @@
 import styled from 'styled-components'
 
+const LoadingFallback = () => {
+  return (
+    <LoadingContainer>
+      <LoadingSpinner />
+    </LoadingContainer>
+  )
+}
+
+export default LoadingFallback
+
 const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -22,13 +32,3 @@ const LoadingSpinner = styled.div`
     }
   }
 `
-
-const LoadingFallback = () => {
-  return (
-    <LoadingContainer>
-      <LoadingSpinner />
-    </LoadingContainer>
-  )
-}
-
-export default LoadingFallback
