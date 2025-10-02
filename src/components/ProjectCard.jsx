@@ -1,8 +1,8 @@
-import { ButtonGroup } from './buttonGroup'
-import { Tag } from './Tag'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
+import { ButtonGroup } from './buttonGroup'
+import { Tag } from './Tag'
 
 export const ProjectCard = ({ project, size = 'medium' }) => {
   if (!project) return null
@@ -26,9 +26,15 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
           />
         </ImageContainer>
         <TextContainer>
+          <CategoryContainer>
+            {project.categories &&
+              project.categories.map((cat, index) => (
+                <Tag variant='category' key={index} text={cat} />
+              ))}
+          </CategoryContainer>
           <TagContainer>
-            {project.tags &&
-              project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
+            {project.stack &&
+              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
           </TagContainer>
           <StyledTitle>{project.title}</StyledTitle>
           <StyledDescription>{project.description}</StyledDescription>
@@ -44,21 +50,21 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
 const sizeStyles = {
   small: {
     width: '320px',
-    height: '180px',
+    minHeight: '180px',
     padding: '1rem',
     fontSize: '0.9rem',
     background: 'var(--primary-green-light)'
   },
   medium: {
     width: '420px',
-    height: '240px',
+    minHeight: '240px',
     padding: '1.5rem',
     fontSize: '1rem',
     background: 'var(--background-light)'
   },
   large: {
     width: '640px',
-    height: '320px',
+    minHeight: '320px',
     padding: '2rem',
     fontSize: '1.15rem',
     background: 'var(--accent-orange)'
@@ -67,7 +73,8 @@ const sizeStyles = {
 
 const CardContainer = styled.div`
   width: ${({ size }) => sizeStyles[size].width};
-  height: ${({ size }) => sizeStyles[size].height};
+  min-height: ${({ size }) => sizeStyles[size].minHeight};
+  height: auto;
   padding: ${({ size }) => sizeStyles[size].padding};
   font-size: ${({ size }) => sizeStyles[size].fontSize};
   background: ${({ size }) => sizeStyles[size].background};
@@ -75,6 +82,8 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   transition: box-shadow 0.2s;
+  box-sizing: border-box;
+  grid-column: ${({ size }) => (size === 'large' ? 'span 2' : 'span 1')};
 
   @media ${devices.tablet} {
     flex-direction: column;
@@ -119,6 +128,15 @@ const TextContainer = styled.div`
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
+`
+
+const CategoryContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
 `
 
 const TagContainer = styled.div`

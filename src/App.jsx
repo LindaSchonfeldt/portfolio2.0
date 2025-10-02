@@ -43,24 +43,23 @@ function AppContent() {
     <>
       <GlobalStyle />
       <AppContainer>
-        {shouldShowIntro ? (
+        {/*         {shouldShowIntro ? (
           <Intro onComplete={handleIntroComplete} />
-        ) : (
-          <>
-            <ScrollToTop />
-            <Nav />
-            <HamburgerMenu />
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/projects' element={<Projects />} />
-                {/* <Route path='/contact' element={<Contact />} /> */}
-              </Routes>
-            </Suspense>
-            <Footer />
-            <PerformanceMonitor />
-          </>
-        )}
+        ) : ( */}
+        <>
+          <ScrollToTop />
+          <Nav />
+          <HamburgerMenu />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/projects' element={<Projects />} />
+              {/* <Route path='/contact' element={<Contact />} /> */}
+            </Routes>
+          </Suspense>
+          <Footer />
+          <PerformanceMonitor />
+        </>
       </AppContainer>
     </>
   )
