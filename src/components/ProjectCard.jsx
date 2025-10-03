@@ -47,47 +47,16 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
   )
 }
 
-const sizeStyles = {
-  small: {
-    width: '320px',
-    minHeight: '180px',
-    padding: '1rem',
-    fontSize: '0.9rem',
-    background: 'var(--primary-green-light)'
-  },
-  medium: {
-    width: '420px',
-    minHeight: '240px',
-    padding: '1.5rem',
-    fontSize: '1rem',
-    background: 'var(--background-light)'
-  },
-  large: {
-    width: '640px',
-    minHeight: '320px',
-    padding: '2rem',
-    fontSize: '1.15rem',
-    background: 'var(--accent-orange)'
-  }
-}
-
 const CardContainer = styled.div`
-  width: ${({ size }) => sizeStyles[size].width};
-  min-height: ${({ size }) => sizeStyles[size].minHeight};
-  height: auto;
-  padding: ${({ size }) => sizeStyles[size].padding};
-  font-size: ${({ size }) => sizeStyles[size].fontSize};
-  background: ${({ size }) => sizeStyles[size].background};
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: box-shadow 0.2s;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
   box-sizing: border-box;
-  grid-column: ${({ size }) => (size === 'large' ? 'span 2' : 'span 1')};
-
-  @media ${devices.tablet} {
-    flex-direction: column;
-  }
+  padding: 0 10px;
 `
 
 const CardContent = styled.div`
@@ -100,7 +69,7 @@ const CardContent = styled.div`
   background: var(--background-light);
 
   @media ${devices.tablet} {
-    flex-direction: column;
+    flex-direction: row;
   }
 `
 

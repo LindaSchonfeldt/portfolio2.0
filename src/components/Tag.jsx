@@ -7,22 +7,26 @@ export const Tag = ({ text, variant = 'tag' }) => {
 const tagStyles = css`
   background-color: black;
   color: var(--text-light);
-  border: white 1px solid;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-right: 0.2rem;
 `
 
 const categoryStyles = css`
-  background-color: var(--accent-orange);
+  background-color: var(--background-green);
   color: var(--text-main);
   border: none;
+  font-size: 1rem;
   font-weight: 600;
+  padding: 0.3rem 0.5rem;
+  margin-right: 0.5rem;
 `
 
 const StyledTag = styled.span`
   display: inline-block;
   font-family: 'Raleway', sans-serif;
-  font-size: 0.8rem;
   padding: 0.2rem 0.3rem;
-  margin-right: 0.2rem;
   margin-bottom: 0.5rem;
+
   ${({ variant }) => (variant === 'category' ? categoryStyles : tagStyles)}
 `
