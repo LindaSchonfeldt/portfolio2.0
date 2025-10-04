@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
@@ -89,7 +90,8 @@ const ImageContainer = styled.div`
   align-items: center;
   flex: 1;
   height: 100%;
-  background-color: var(--accent-orange); /* Fallback background color */
+  position: relative;
+  overflow: hidden;
 `
 
 const StyledImage = styled.img`
@@ -97,6 +99,8 @@ const StyledImage = styled.img`
   height: 100%;
   object-fit: cover;
   background: transparent;
+  background-color: #ffb347;
+  display: block;
 `
 
 const TextContainer = styled.div`
