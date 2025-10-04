@@ -12,7 +12,7 @@ const SectionContainer = styled.div`
   }
 
   @media ${devices.laptop} {
-    margin: 0 0.5rem;
+    margin: 0;
   }
 
   @media ${devices.desktop} {

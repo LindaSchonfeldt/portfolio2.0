@@ -12,7 +12,7 @@ const Projects = () => {
     <>
       <Meta
         title='Projects | Linda Schönfeldt Portfolio'
-        description="Explore Linda Schönfeldt's projects in web development."
+        description="Explore Linda Schönfeldt's projects in web development and UX design."
       />
       <motion.div
         initial={{ opacity: 0, y: 40 }}

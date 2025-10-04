@@ -64,10 +64,10 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto 40px auto;
+  max-width: auto;
+  margin: 0 auto 2rem auto;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 0;
   height: 100%;
 `
 
