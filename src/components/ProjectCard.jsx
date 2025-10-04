@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 import { ButtonGroup } from './buttonGroup'
+import { ReadMore } from './ReadMore'
 import { Tag } from './Tag'
 
 export const ProjectCard = ({ project, size = 'medium' }) => {
@@ -10,10 +11,20 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
   // Transform github/netlify fields into actions array
   const actions = []
   if (project.github) {
-    actions.push({ label: 'GitHub', url: project.github, type: 'github' })
+    actions.push({
+      label: 'GitHub',
+      url: project.github,
+      type: 'github',
+      variant: 'secondary'
+    })
   }
   if (project.netlify) {
-    actions.push({ label: 'Live Site', url: project.netlify, type: 'netlify' })
+    actions.push({
+      label: 'Live Site',
+      url: project.netlify,
+      type: 'netlify',
+      variant: 'primary'
+    })
   }
 
   return (
@@ -33,11 +44,11 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
               ))}
           </CategoryContainer>
           <TagContainer>
-            {project.stack &&
-              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
+            {project.tags &&
+              project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
           </TagContainer>
           <StyledTitle>{project.title}</StyledTitle>
-          <StyledDescription>{project.description}</StyledDescription>
+          <ReadMore text={project.description} maxLength={150} />
           <LinkContainer>
             <ButtonGroup actions={actions} />
           </LinkContainer>
@@ -94,7 +105,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 0 20px;
   width: 100%;
   box-sizing: border-box;
 `

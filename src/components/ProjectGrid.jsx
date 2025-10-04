@@ -6,6 +6,6 @@ export const ProjectGrid = styled.div`
   gap: 2rem;
   justify-items: flex-start;
   align-items: stretch;
-  margin: 2rem 0;
+  margin: 2rem 0.5rem;
   grid-auto-flow: dense;
 `

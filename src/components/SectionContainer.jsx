@@ -12,13 +12,11 @@ const SectionContainer = styled.div`
   }
 
   @media ${devices.laptop} {
-    max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 0.5rem;
   }
 
   @media ${devices.desktop} {
-    /* Desktop-specific styling */
-    max-width: 1600px;
+    margin: 0 1rem;
   }
 `
 

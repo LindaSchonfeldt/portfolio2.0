@@ -14,6 +14,7 @@ export const Button = ({
         href={url}
         target='_blank'
         rel='noopener noreferrer'
+        variant={variant}
         {...props}
       >
         {label}
@@ -21,7 +22,7 @@ export const Button = ({
     )
   }
   return (
-    <StyledButton type='button' onClick={onClick} {...props}>
+    <StyledButton type='button' onClick={onClick} variant={variant} {...props}>
       {label}
     </StyledButton>
   )
@@ -49,4 +50,12 @@ const StyledButton = styled.button`
     background-color: var(--primary-green);
     opacity: 0.9;
   }
+
+  ${({ variant }) =>
+    variant === 'secondary' &&
+    `
+      background-color: var(--background-light);
+      color: var(--primary-green-dark);
+      border: 2px solid var(--primary-green-dark);
+    `}
 `
