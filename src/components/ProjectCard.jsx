@@ -64,11 +64,10 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: auto;
+  height: 100%;
   margin: 0 auto 2rem auto;
   box-sizing: border-box;
   padding: 0;
-  height: 100%;
 `
 
 const CardContent = styled.div`
@@ -86,7 +85,7 @@ const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  flex: 1;
   height: 100%;
   background-color: var(--accent-orange); /* Fallback background color */
 `
@@ -104,9 +103,9 @@ const TextContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 20px;
-  width: 50%;
-  box-sizing: border-box;
   flex: 1;
+  height: 100%;
+  box-sizing: border-box;
 `
 
 const CategoryContainer = styled.div`
