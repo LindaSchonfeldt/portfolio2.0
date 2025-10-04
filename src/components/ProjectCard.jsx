@@ -5,7 +5,7 @@ import { ButtonGroup } from './buttonGroup'
 import { ReadMore } from './ReadMore'
 import { Tag } from './Tag'
 
-export const ProjectCard = ({ project, size = 'medium' }) => {
+export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
   if (!project) return null
 
   // Transform github/netlify fields into actions array
@@ -28,7 +28,7 @@ export const ProjectCard = ({ project, size = 'medium' }) => {
   }
 
   return (
-    <CardContainer size={size}>
+    <CardContainer size={size} fullRow={fullRow}>
       <CardContent>
         <ImageContainer>
           <StyledImage
@@ -68,6 +68,8 @@ const CardContainer = styled.div`
   margin: 0 auto 2rem auto;
   box-sizing: border-box;
   padding: 0;
+
+  ${({ fullRow }) => fullRow && 'grid-column: 1 / -1;'}
 `
 
 const CardContent = styled.div`
