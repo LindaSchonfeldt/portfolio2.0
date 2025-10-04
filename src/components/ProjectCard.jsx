@@ -68,27 +68,25 @@ const CardContainer = styled.div`
   margin: 0 auto 40px auto;
   box-sizing: border-box;
   padding: 0 10px;
+  height: 100%;
 `
 
 const CardContent = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: stretch;
   width: 100%;
-  height: auto;
+  height: 100%;
   margin-bottom: 20px;
   background: var(--background-light);
-
-  @media ${devices.tablet} {
-    flex-direction: row;
-  }
+  flex: 1;
 `
 
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 50%;
   height: 100%;
   background-color: var(--accent-orange); /* Fallback background color */
 `
@@ -106,8 +104,9 @@ const TextContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 20px;
-  width: 100%;
+  width: 50%;
   box-sizing: border-box;
+  flex: 1;
 `
 
 const CategoryContainer = styled.div`
@@ -148,7 +147,7 @@ const LinkContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: auto;
 
   @media ${devices.tablet} {
     flex-direction: row;
