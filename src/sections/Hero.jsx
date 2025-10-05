@@ -58,7 +58,7 @@ export const Hero = () => {
         <ActionWrapper>
           <ButtonWrapper>
             <Button
-              variant='link'
+              variant='primary'
               label={'Download CV'}
               className='heroButton'
               url='/cv.pdf'

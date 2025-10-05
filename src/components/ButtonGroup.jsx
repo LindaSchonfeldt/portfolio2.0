@@ -31,6 +31,6 @@ const StyledButtonGroup = styled.div`
 
   @media ${devices.tablet} {
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 `
