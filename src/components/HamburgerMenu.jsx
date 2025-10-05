@@ -253,7 +253,7 @@ const Menu = styled(motion.nav)`
 `
 
 // Create a motion component first, then style it
-const MotionLink = motion(Link)
+const MotionLink = motion.create(Link)
 const NavLink = styled(MotionLink)`
   color: var(--text-main);
   text-decoration: none;

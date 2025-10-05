@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Tag = ({ text, variant = 'tag' }) => {
-  return <StyledTag variant={variant}>{text}</StyledTag>
+  return <StyledTag $variant={variant}>{text}</StyledTag>
 }
 
 const tagStyles = css`
@@ -28,5 +28,5 @@ const StyledTag = styled.span`
   padding: 0.2rem 0.3rem;
   margin-bottom: 0.5rem;
 
-  ${({ variant }) => (variant === 'category' ? categoryStyles : tagStyles)}
+  ${({ $variant }) => ($variant === 'category' ? categoryStyles : tagStyles)}
 `

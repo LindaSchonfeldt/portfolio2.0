@@ -29,7 +29,7 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
   }
 
   return (
-    <CardContainer size={size} fullRow={fullRow}>
+    <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
         <ImageContainer>
           <StyledImage
@@ -70,7 +70,7 @@ const CardContainer = styled.div`
   box-sizing: border-box;
   padding: 0;
 
-  ${({ fullRow }) => fullRow && 'grid-column: 1 / -1;'}
+  ${({ $fullRow }) => $fullRow && 'grid-column: 1 / -1;'}
 `
 
 const CardContent = styled.div`
