@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Fullstack E-commerce Website for naima",
-      "image": "",
+      "image": "naima",
       "alt": "",
       "description": "A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
       "categories": ["UI/UX", "Fullstack"],
@@ -22,7 +22,7 @@
     {
       "id": 2,
       "title": "Portfolio",
-      "video": "portfolio",
+      "video": "",
       "image": "",
       "alt": "",
       "description": "You're looking at it. This is a showcase of user-centered design in action. Explore projects that merge creativity and functionality, all wrapped in clean aesthetics and intuitive navigation.",

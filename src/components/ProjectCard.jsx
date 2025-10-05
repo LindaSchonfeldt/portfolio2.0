@@ -6,37 +6,16 @@ import { ReadMore } from './ReadMore'
 import ResponsiveImage from './ResponsiveImage'
 import ResponsiveVideo from './ResponsiveVideo'
 import { Tag } from './Tag'
+import { getMediaPath } from '../utils/mediaPath'
+import { getProjectActions } from '../utils/projectActions'
 
 export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
   if (!project) return null
 
-  // Transform github/netlify fields into actions array
-  const actions = []
-  if (project.github) {
-    actions.push({
-      label: 'GitHub',
-      url: project.github,
-      variant: 'secondary'
-    })
-  }
-  if (project.netlify) {
-    actions.push({
-      label: 'Live Site',
-      url: project.netlify,
-      variant: 'primary'
-    })
-  }
+  // Get actions array using helper
+  const actions = getProjectActions(project)
 
-  // Generate media paths
-  const getMediaPath = (fileName, folder = 'optimized') => {
-    if (!fileName) return null
-    try {
-      return new URL(`../assets/${folder}/${fileName}`, import.meta.url).href
-    } catch {
-      return null
-    }
-  }
-
+  // Generate media paths using helper
   const imagePath = project.image ? getMediaPath(`${project.image}.png`) : null
   const videoWebm = project.video
     ? getMediaPath(`${project.video}.webm`, 'videos')
