@@ -34,7 +34,7 @@
     {
       "id": 3,
       "title": "Happy Thoughts",
-      "image": "",
+      "image": "happythoughts2",
       "alt": "",
       "description": "A feel-good full-stack app where users can share positive thoughts and like each other’s messages. Built with React and Vite on the frontend, and Node.js with Express and MongoDB on the backend. The app features dynamic updates via a REST API, responsive design, and real-time message interaction.",
       "categories": ["Fullstack"],
@@ -46,7 +46,7 @@
     {
       "id": 4,
       "title": "Screamflix",
-      "image": "",
+      "image": "screamflix",
       "alt": "Screenshot of Screamflix horror movie browser",
       "description": "Together with Cathi, I created Screamflix, a curated archive that lets users explore horror films by decade. The design and concept were inspired by the aesthetics of classic horror, and the goal was to offer a fun and slightly spooky way to browse cult classics and hidden gems.",
       "categories": ["UI/UX", "Frontend"],
