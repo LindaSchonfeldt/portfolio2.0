@@ -1,7 +1,4 @@
-import { FaLinkedin } from 'react-icons/fa'
-import { FaGithub } from 'react-icons/fa'
-import { FaDribbble } from 'react-icons/fa'
-import { FaInstagram } from 'react-icons/fa'
+import { FaDribbble, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import styled from 'styled-components'
 
 export const SocialLinks = () => {

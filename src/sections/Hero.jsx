@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 
@@ -16,19 +15,10 @@ const SocialLinks = lazy(() =>
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <MotionLogoWrapper
-        initial={{ scale: 2.5, opacity: 0.7 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-      >
+      <LogoWrapper>
         <Logo size='small' alt='' />
-      </MotionLogoWrapper>
-      <MotionHeroContent
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-        as={HeroContent}
-      >
+      </LogoWrapper>
+      <HeroContent>
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
         <h1 className='heroTitle'>Web Developer</h1>
         <h2 className='heroSubtitle'>
@@ -66,9 +56,11 @@ export const Hero = () => {
               aria-label='Download CV'
             />
           </ButtonWrapper>
-          <SocialLinks />
+          <Suspense fallback={<div style={{ height: '40px' }} />}>
+            <SocialLinks />
+          </Suspense>
         </ActionWrapper>
-      </MotionHeroContent>
+      </HeroContent>
     </SectionContainer>
   )
 }
@@ -159,13 +151,8 @@ const ActionWrapper = styled.div`
   }
 `
 
-// Motion components for animation
-const MotionHeroContent = motion(HeroContent)
-
 const LogoWrapper = styled.div`
   align-self: flex-start;
   transform-origin: left center;
   display: inline-block;
 `
-
-const MotionLogoWrapper = motion(LogoWrapper)
