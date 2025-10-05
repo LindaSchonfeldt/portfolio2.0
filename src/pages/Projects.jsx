@@ -28,6 +28,7 @@ const Projects = () => {
                 project={project}
                 size={project.size || 'medium'}
                 fullRow={idx === 0}
+                eager={idx < 2}
               />
             ))}
           </ProjectGrid>

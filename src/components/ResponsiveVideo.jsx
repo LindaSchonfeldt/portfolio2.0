@@ -11,7 +11,8 @@ const ResponsiveVideo = ({
   muted = true,
   playsInline = true,
   controls = false,
-  preload = 'metadata'
+  preload = 'metadata',
+  eager = false // If true, load immediately without lazy loading
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const videoRef = useRef(null)
@@ -21,6 +22,32 @@ const ResponsiveVideo = ({
 
     const videoElement = videoRef.current
 
+    // If eager loading, load immediately without intersection observer
+    if (eager) {
+      const sources = videoElement.querySelectorAll('source')
+
+      sources.forEach((source) => {
+        const dataSrc = source.getAttribute('data-src')
+        if (dataSrc) {
+          source.src = dataSrc
+        }
+      })
+
+      // Load the video
+      videoElement.load()
+
+      videoElement.onloadeddata = () => {
+        setIsLoaded(true)
+        if (autoPlay) {
+          videoElement.play().catch((err) => {
+            console.warn('Autoplay prevented:', err)
+          })
+        }
+      }
+      return
+    }
+
+    // Otherwise use lazy loading with intersection observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -58,7 +85,7 @@ const ResponsiveVideo = ({
         observer.unobserve(videoElement)
       }
     }
-  }, [autoPlay])
+  }, [autoPlay, eager])
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>

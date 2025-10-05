@@ -6,7 +6,8 @@ const ResponsiveImage = ({
   alt,
   className,
   style,
-  sizes = '(max-width: 768px) 400px, (max-width: 1200px) 800px, 1200px'
+  sizes = '(max-width: 768px) 400px, (max-width: 1200px) 800px, 1200px',
+  eager = false // If true, load immediately without lazy loading
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const pictureRef = useRef(null)
@@ -27,7 +28,34 @@ const ResponsiveImage = ({
     if (!pictureRef.current) return
 
     const pictureElement = pictureRef.current
+    const img = pictureElement.querySelector('img')
 
+    // If eager loading, load immediately without intersection observer
+    if (eager) {
+      const sources = pictureElement.querySelectorAll('source')
+
+      sources.forEach((source) => {
+        const dataSrcset = source.getAttribute('data-srcset')
+        if (dataSrcset) {
+          source.srcset = dataSrcset
+        }
+      })
+
+      const dataSrc = img.getAttribute('data-src')
+      const dataSrcset = img.getAttribute('data-srcset')
+
+      if (dataSrc) {
+        img.src = dataSrc
+      }
+      if (dataSrcset) {
+        img.srcset = dataSrcset
+      }
+
+      img.onload = () => setIsLoaded(true)
+      return
+    }
+
+    // Otherwise use lazy loading with intersection observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -65,7 +93,7 @@ const ResponsiveImage = ({
         observer.unobserve(pictureElement)
       }
     }
-  }, [])
+  }, [eager])
 
   const webpSrcSet = generateSrcSet(webpSrc)
   const fallbackSrcSet = generateSrcSet(fallbackSrc)

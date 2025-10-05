@@ -9,7 +9,12 @@ import { Tag } from './Tag'
 import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
 
-export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
+export const ProjectCard = ({
+  project,
+  size = 'medium',
+  fullRow,
+  eager = false
+}) => {
   if (!project) return null
 
   // Get actions array using helper
@@ -44,6 +49,7 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
               loop={true}
               muted={true}
               playsInline={true}
+              eager={eager}
             />
           ) : imagePath ? (
             <ResponsiveImage
@@ -51,6 +57,7 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
               fallbackSrc={imagePath}
               alt={project.alt || `${project.title} project screenshot`}
               className='project-image'
+              eager={eager}
             />
           ) : (
             <StyledImage
