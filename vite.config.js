@@ -22,7 +22,12 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'motion-vendor'
             }
-            if (id.includes('emailjs') || id.includes('react-hook-form') || id.includes('validator') || id.includes('recaptcha')) {
+            if (
+              id.includes('emailjs') ||
+              id.includes('react-hook-form') ||
+              id.includes('validator') ||
+              id.includes('recaptcha')
+            ) {
               return 'form-vendor'
             }
             if (id.includes('react-icons')) {

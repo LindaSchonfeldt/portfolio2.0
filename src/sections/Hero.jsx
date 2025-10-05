@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 
@@ -8,15 +9,26 @@ import SectionContainer from '../components/SectionContainer'
 import devices from '../styles/devices'
 
 // Lazy load non-critical components
-const SocialLinks = lazy(() => import('../components/SocialLinks').then(m => ({ default: m.SocialLinks })))
+const SocialLinks = lazy(() =>
+  import('../components/SocialLinks').then((m) => ({ default: m.SocialLinks }))
+)
 
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <LogoWrapper>
+      <MotionLogoWrapper
+        initial={{ scale: 2.5, opacity: 0.7 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
         <Logo size='small' alt='' />
-      </LogoWrapper>
-      <HeroContent>
+      </MotionLogoWrapper>
+      <MotionHeroContent
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+        as={HeroContent}
+      >
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
         <h1 className='heroTitle'>Web Developer</h1>
         <h2 className='heroSubtitle'>
@@ -54,11 +66,9 @@ export const Hero = () => {
               aria-label='Download CV'
             />
           </ButtonWrapper>
-          <Suspense fallback={<div style={{ height: '40px' }} />}>
-            <SocialLinks />
-          </Suspense>
+          <SocialLinks />
         </ActionWrapper>
-      </HeroContent>
+      </MotionHeroContent>
     </SectionContainer>
   )
 }
@@ -149,8 +159,13 @@ const ActionWrapper = styled.div`
   }
 `
 
+// Motion components for animation
+const MotionHeroContent = motion(HeroContent)
+
 const LogoWrapper = styled.div`
   align-self: flex-start;
   transform-origin: left center;
   display: inline-block;
 `
+
+const MotionLogoWrapper = motion(LogoWrapper)
