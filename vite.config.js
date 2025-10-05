@@ -7,14 +7,33 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'router-vendor': ['react-router-dom'],
-          'styled-vendor': ['styled-components'],
-          'motion-vendor': ['framer-motion'],
-          'form-vendor': ['react-hook-form', 'emailjs-com', 'validator', 'react-google-recaptcha'],
-          icons: ['react-icons'],
-          'state-vendor': ['zustand']
+        manualChunks(id) {
+          // Split vendors by package for better caching
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor'
+            }
+            if (id.includes('react-router')) {
+              return 'router-vendor'
+            }
+            if (id.includes('styled-components')) {
+              return 'styled-vendor'
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion-vendor'
+            }
+            if (id.includes('emailjs') || id.includes('react-hook-form') || id.includes('validator') || id.includes('recaptcha')) {
+              return 'form-vendor'
+            }
+            if (id.includes('react-icons')) {
+              return 'icons'
+            }
+            if (id.includes('zustand')) {
+              return 'state-vendor'
+            }
+            // All other node_modules
+            return 'vendor'
+          }
         }
       }
     },
@@ -23,15 +42,19 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false, // Keep console for debugging
+        drop_console: true, // Remove console logs in production for smaller bundle
         drop_debugger: true,
-        passes: 2
+        passes: 3, // More compression passes
+        pure_funcs: ['console.info', 'console.debug', 'console.warn'],
+        unused: true,
+        dead_code: true
       },
       mangle: {
-        safari10: true
+        safari10: true,
+        toplevel: true // More aggressive minification
       },
       format: {
-        comments: false // Remove comments from production build
+        comments: false
       }
     },
     sourcemap: false, // Disable sourcemaps in production for smaller files

@@ -1,29 +1,22 @@
-import { motion } from 'framer-motion'
+import { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
 import { Emphasize } from '../components/Emphasize'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
-import { SocialLinks } from '../components/SocialLinks'
 import devices from '../styles/devices'
+
+// Lazy load non-critical components
+const SocialLinks = lazy(() => import('../components/SocialLinks').then(m => ({ default: m.SocialLinks })))
 
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <MotionLogoWrapper
-        initial={{ scale: 1.2, opacity: 1 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-      >
+      <LogoWrapper>
         <Logo size='small' alt='' />
-      </MotionLogoWrapper>
-      <MotionHeroContent
-        initial={{ opacity: 1, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-        as={HeroContent}
-      >
+      </LogoWrapper>
+      <HeroContent>
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
         <h1 className='heroTitle'>Web Developer</h1>
         <h2 className='heroSubtitle'>
@@ -61,9 +54,11 @@ export const Hero = () => {
               aria-label='Download CV'
             />
           </ButtonWrapper>
-          <SocialLinks />
+          <Suspense fallback={<div style={{ height: '40px' }} />}>
+            <SocialLinks />
+          </Suspense>
         </ActionWrapper>
-      </MotionHeroContent>
+      </HeroContent>
     </SectionContainer>
   )
 }
@@ -154,13 +149,8 @@ const ActionWrapper = styled.div`
   }
 `
 
-// Motion components for animation
-const MotionHeroContent = motion(HeroContent)
-
 const LogoWrapper = styled.div`
   align-self: flex-start;
   transform-origin: left center;
   display: inline-block;
 `
-
-const MotionLogoWrapper = motion(LogoWrapper)
