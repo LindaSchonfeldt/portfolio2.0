@@ -54,11 +54,10 @@ export const Hero = () => {
         <ActionWrapper>
           <ButtonWrapper>
             <Button
-              variant='primary'
+              variant='link'
               label={'Download CV'}
               className='heroButton'
-              href='/cv.pdf'
-              target='_blank'
+              url='/cv.pdf'
               aria-label='Download CV'
             />
           </ButtonWrapper>
@@ -118,12 +117,14 @@ const ButtonWrapper = styled.div`
   display: inline-block;
   width: 100%;
 
-  Button {
+  a,
+  button {
     width: 100%;
   }
 
   @media ${devices.mobileL} {
-    Button {
+    a,
+    button {
       width: auto;
     }
   }

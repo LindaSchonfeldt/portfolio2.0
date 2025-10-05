@@ -1,4 +1,4 @@
-import { onCLS, onFID, onFCP, onLCP, onTTFB } from 'web-vitals'
+import { onCLS, onINP, onFCP, onLCP, onTTFB } from 'web-vitals'
 
 // Only run in production
 const isProduction = import.meta.env.PROD
@@ -25,16 +25,14 @@ export const initWebVitals = () => {
   }
 
   // Core Web Vitals
-  getCLS(sendToAnalytics)
-  getFID(sendToAnalytics)
-  getLCP(sendToAnalytics)
+  onCLS(sendToAnalytics)
+  onINP(sendToAnalytics) // Replaced FID with INP
+  onLCP(sendToAnalytics)
 
   // Other useful metrics
-  getFCP(sendToAnalytics)
-  getTTFB(sendToAnalytics)
-}
-
-// Performance budgets (thresholds for good performance)
+  onFCP(sendToAnalytics)
+  onTTFB(sendToAnalytics)
+} // Performance budgets (thresholds for good performance)
 export const PERFORMANCE_BUDGETS = {
   LCP: 2500, // Largest Contentful Paint (ms)
   FID: 100, // First Input Delay (ms)

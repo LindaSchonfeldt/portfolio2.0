@@ -2,12 +2,16 @@ import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useNavStore } from '../stores/useNavStore'
+import { useRoutePreloader } from '../utils/routePreloader'
 import devices from '../styles/devices'
 
 export const Nav = () => {
   // Use the nav store for global state
   const expandedItem = useNavStore((state) => state.expandedItem)
   const toggleExpanded = useNavStore((state) => state.toggleExpanded)
+
+  // Route preloader for better performance
+  const { preloadOnHover } = useRoutePreloader()
 
   // Define sections for each page
   const pageSections = {
@@ -25,6 +29,7 @@ export const Nav = () => {
             $primary
             onClick={() => toggleExpanded('about')}
             $expanded={expandedItem === 'about'}
+            {...preloadOnHover('home')}
           >
             About
           </StyledNavLink>
@@ -58,6 +63,7 @@ export const Nav = () => {
             $primary
             onClick={() => toggleExpanded('projects')}
             $expanded={expandedItem === 'projects'}
+            {...preloadOnHover('projects')}
           >
             Projects
           </StyledNavLink>
@@ -83,6 +89,7 @@ export const Nav = () => {
             $primary
             onClick={() => toggleExpanded('contact')}
             $expanded={expandedItem === 'contact'}
+            {...preloadOnHover('contact')}
           >
             Contact
           </StyledNavLink>

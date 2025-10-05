@@ -1,13 +1,21 @@
 import styled from 'styled-components'
+import devices from '../styles/devices'
 
 export const ProjectGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  /* Mobile: Simple flex column layout */
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  justify-items: flex-start;
-  align-items: stretch;
   margin: 2rem 0;
-  grid-auto-flow: dense;
   max-width: 1600px;
   width: 100%;
+
+  /* Tablet and up: Grid layout */
+  @media ${devices.tablet} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-items: flex-start;
+    align-items: stretch;
+    grid-auto-flow: dense;
+  }
 `

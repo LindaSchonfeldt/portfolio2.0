@@ -75,23 +75,32 @@ const CardContainer = styled.div`
 
 const CardContent = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
   background: var(--background-light);
   flex: 1;
+
+  @media ${devices.tablet} {
+    flex-direction: row;
+  }
 `
 
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  height: 100%;
+  width: 100%;
+  height: 200px;
   position: relative;
   overflow: hidden;
+
+  @media ${devices.tablet} {
+    flex: 1;
+    height: 100%;
+  }
 `
 
 const StyledImage = styled.img`
@@ -108,10 +117,14 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 20px;
+  padding: 20px;
   flex: 1;
-  height: 100%;
   box-sizing: border-box;
+
+  @media ${devices.tablet} {
+    padding: 0 20px;
+    height: 100%;
+  }
 `
 
 const CategoryContainer = styled.div`
