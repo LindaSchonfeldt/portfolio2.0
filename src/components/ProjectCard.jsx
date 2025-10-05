@@ -41,15 +41,15 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
                 <Tag variant='category' key={index} text={cat} />
               ))}
           </CategoryContainer>
-          <TagContainer>
-            {project.tags &&
-              project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
-          </TagContainer>
           <StyledTitle>{project.title}</StyledTitle>
           <StyledReadMore text={project.description} maxLength={150} />
           <LinkContainer>
             <ButtonGroup actions={actions} />
           </LinkContainer>
+          <StackContainer>
+            {project.stack &&
+              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
+          </StackContainer>
         </TextContainer>
       </CardContent>
     </CardContainer>
@@ -138,7 +138,7 @@ const CategoryContainer = styled.div`
   width: 100%;
 `
 
-const TagContainer = styled.div`
+const StackContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
