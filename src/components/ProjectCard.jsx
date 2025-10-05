@@ -14,7 +14,6 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
     actions.push({
       label: 'GitHub',
       url: project.github,
-      type: 'github',
       variant: 'secondary'
     })
   }
@@ -22,7 +21,6 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
     actions.push({
       label: 'Live Site',
       url: project.netlify,
-      type: 'netlify',
       variant: 'primary'
     })
   }
