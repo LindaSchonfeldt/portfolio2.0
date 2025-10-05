@@ -58,7 +58,7 @@
     {
       "id": 5,
       "title": "Weather App",
-      "image": "../assets/optimized/weatherapp.png",
+      "image": "weatherapp",
       "alt": "Screenshot of weather app showing current conditions",
       "description": "A responsive web-based application that fetches real-time weather data through API integration. Focused on a clear user flow and modern design.",
       "categories": ["Frontend"],

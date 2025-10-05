@@ -26,19 +26,35 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
     })
   }
 
+  // Generate image paths
+  const getImagePath = (imageName) => {
+    if (!imageName) return null
+    try {
+      return new URL(`../assets/optimized/${imageName}.png`, import.meta.url)
+        .href
+    } catch {
+      return null
+    }
+  }
+
+  const imagePath = project.image ? getImagePath(project.image) : null
+
   return (
     <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
         <ImageContainer>
-          {project.image ? (
+          {imagePath ? (
             <ResponsiveImage
-              webpSrc={project.image.replace(/\.(png|jpg|jpeg)$/, '.webp')}
-              fallbackSrc={project.image}
+              webpSrc={imagePath.replace(/\.png$/, '.webp')}
+              fallbackSrc={imagePath}
               alt={project.alt || `${project.title} project screenshot`}
               className='project-image'
             />
           ) : (
-            <StyledImage src='tree.svg' alt='Placeholder' />
+            <StyledImage
+              src={new URL('../assets/tree.svg', import.meta.url).href}
+              alt='Placeholder'
+            />
           )}
         </ImageContainer>
         <TextContainer>

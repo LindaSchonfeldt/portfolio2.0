@@ -71,27 +71,57 @@ const ResponsiveImage = ({
   const fallbackSrcSet = generateSrcSet(fallbackSrc)
 
   return (
-    <picture
-      ref={pictureRef}
-      className={`${className} ${isLoaded ? 'loaded' : 'loading'}`}
-      style={style}
-    >
-      <source data-srcset={webpSrcSet} type='image/webp' sizes={sizes} />
-      <img
-        data-src={fallbackSrc}
-        data-srcset={fallbackSrcSet}
-        sizes={sizes}
-        alt={alt}
-        style={{
-          opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.3s',
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center'
-        }}
-      />
-    </picture>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {!isLoaded && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+            backgroundSize: '200% 100%',
+            animation: 'shimmer 1.5s infinite',
+            zIndex: 1
+          }}
+        />
+      )}
+      <picture
+        ref={pictureRef}
+        className={`${className} ${isLoaded ? 'loaded' : 'loading'}`}
+        style={{ ...style, position: 'relative', zIndex: 2 }}
+      >
+        <source data-srcset={webpSrcSet} type='image/webp' sizes={sizes} />
+        <img
+          data-src={fallbackSrc}
+          data-srcset={fallbackSrcSet}
+          sizes={sizes}
+          alt={alt}
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 0.3s',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center'
+          }}
+        />
+      </picture>
+      <style>
+        {`
+          @keyframes shimmer {
+            0% {
+              background-position: -200% 0;
+            }
+            100% {
+              background-position: 200% 0;
+            }
+          }
+        `}
+      </style>
+    </div>
   )
 }
 
