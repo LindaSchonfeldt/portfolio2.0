@@ -4,6 +4,7 @@ import devices from '../styles/devices'
 import { ButtonGroup } from './ButtonGroup'
 import { ReadMore } from './ReadMore'
 import ResponsiveImage from './ResponsiveImage'
+import ResponsiveVideo from './ResponsiveVideo'
 import { Tag } from './Tag'
 
 export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
@@ -26,24 +27,46 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
     })
   }
 
-  // Generate image paths
-  const getImagePath = (imageName) => {
-    if (!imageName) return null
+  // Generate media paths
+  const getMediaPath = (fileName, folder = 'optimized') => {
+    if (!fileName) return null
     try {
-      return new URL(`../assets/optimized/${imageName}.png`, import.meta.url)
-        .href
+      return new URL(`../assets/${folder}/${fileName}`, import.meta.url).href
     } catch {
       return null
     }
   }
 
-  const imagePath = project.image ? getImagePath(project.image) : null
+  const imagePath = project.image ? getMediaPath(`${project.image}.png`) : null
+  const videoWebm = project.video
+    ? getMediaPath(`${project.video}.webm`, 'videos')
+    : null
+  const videoMp4 = project.video
+    ? getMediaPath(`${project.video}.mp4`, 'videos')
+    : null
+  const videoPoster = project.videoPoster
+    ? getMediaPath(`${project.videoPoster}.png`)
+    : imagePath
+
+  // Determine whether to show video or image
+  const hasVideo = project.video && (videoWebm || videoMp4)
 
   return (
     <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
         <ImageContainer>
-          {imagePath ? (
+          {hasVideo ? (
+            <ResponsiveVideo
+              webmSrc={videoWebm}
+              mp4Src={videoMp4}
+              posterSrc={videoPoster}
+              className='project-video'
+              autoPlay={true}
+              loop={true}
+              muted={true}
+              playsInline={true}
+            />
+          ) : imagePath ? (
             <ResponsiveImage
               webpSrc={imagePath.replace(/\.png$/, '.webp')}
               fallbackSrc={imagePath}
@@ -141,6 +164,15 @@ const ImageContainer = styled.div`
   /* Scale up to crop out padding from image */
   .project-image img {
     transform: scale(1.15);
+  }
+
+  /* Style for ResponsiveVideo */
+  .project-video,
+  .project-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 `
 
