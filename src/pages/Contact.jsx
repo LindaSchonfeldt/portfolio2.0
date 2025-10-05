@@ -1,10 +1,12 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
-import styled from 'styled-components'
 import { FiCopy } from 'react-icons/fi'
+import styled from 'styled-components'
 
-import SectionContainer from '../components/SectionContainer'
-import Meta from '../components/Meta'
 import LoadingFallback from '../components/LoadingFallback'
+import Meta from '../components/Meta'
+import SectionContainer from '../components/SectionContainer'
 
 // Lazy load the ContactForm to reduce initial bundle size
 const ContactForm = lazy(() =>
@@ -29,28 +31,34 @@ const Contact = () => {
         title='Contact | Linda Schönfeldt Portfolio'
         description='Get in touch with Linda Schönfeldt for web development and design inquiries.'
       />
-      <SectionContainer id='contact'>
-        <h2>Contact</h2>
-        <p>
-          Have a project in mind? I'd love to help bring your ideas to life
-          through thoughtful design and development.
-        </p>
-        <EmailRow>
-          <span>{email}</span>
-          <CopyIcon
-            onClick={handleCopy}
-            title='Copy email'
-            tabIndex={0}
-            role='button'
-          >
-            <FiCopy />
-          </CopyIcon>
-          {copied && <CopiedText>Copied!</CopiedText>}
-        </EmailRow>
-        <Suspense fallback={<LoadingFallback />}>
-          <ContactForm />
-        </Suspense>
-      </SectionContainer>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <SectionContainer id='contact'>
+          <h2>Contact</h2>
+          <p>
+            Have a project in mind? I'd love to help bring your ideas to life
+            through thoughtful design and development.
+          </p>
+          <EmailRow>
+            <span>{email}</span>
+            <CopyIcon
+              onClick={handleCopy}
+              title='Copy email'
+              tabIndex={0}
+              role='button'
+            >
+              <FiCopy />
+            </CopyIcon>
+            {copied && <CopiedText>Copied!</CopiedText>}
+          </EmailRow>
+          <Suspense fallback={<LoadingFallback />}>
+            <ContactForm />
+          </Suspense>
+        </SectionContainer>
+      </motion.div>
     </>
   )
 }
