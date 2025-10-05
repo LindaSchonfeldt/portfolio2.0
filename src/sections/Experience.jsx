@@ -37,9 +37,10 @@ export const Experience = () => {
               <TimelineTitle>Frontend Developer Intern</TimelineTitle>
               <TimelineInstitution>FIXMEAPP</TimelineInstitution>
               <TimelineDescription>
-                Developing responsive web applications using React,
-                styled-components, and modern JavaScript. Creating user-centered
-                designs with a focus on accessibility and performance.
+                Contributing to the development of a web app that simplifies
+                digital booking experiences. Building scalable, accessible
+                front-end components in React and TailwindCSS while
+                collaborating closely with designers and product leads.
               </TimelineDescription>
             </TimelineContent>
           </TimelineItem>
@@ -77,9 +78,10 @@ export const Experience = () => {
               <TimelineTitle>UX/UI Designer / Frontend Developer</TimelineTitle>
               <TimelineInstitution>Sampler</TimelineInstitution>
               <TimelineDescription>
-                Developing responsive web applications using React,
-                styled-components, and modern JavaScript. Creating user-centered
-                designs with a focus on accessibility and performance.
+                Designing and developing a marketing game and a client-facing
+                web portal. Working with React and modern JavaScript to create
+                engaging user experiences that connect brands with consumers
+                through gamified sampling.
               </TimelineDescription>
             </TimelineContent>
           </TimelineItem>
