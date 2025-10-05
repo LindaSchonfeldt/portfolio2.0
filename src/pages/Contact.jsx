@@ -30,8 +30,11 @@ const Contact = () => {
         description='Get in touch with Linda Schönfeldt for web development and design inquiries.'
       />
       <SectionContainer id='contact'>
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out for web development and design inquiries!</p>
+        <h2>Contact</h2>
+        <p>
+          Have a project in mind? I'd love to help bring your ideas to life
+          through thoughtful design and development.
+        </p>
         <EmailRow>
           <span>{email}</span>
           <CopyIcon

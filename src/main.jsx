@@ -12,5 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 )
 
-// Initialize Web Vitals monitoring
-initWebVitals()
+// Initialize Web Vitals monitoring after the page loads
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => initWebVitals())
+} else {
+  setTimeout(() => initWebVitals(), 1000)
+}

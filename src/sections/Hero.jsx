@@ -12,16 +12,16 @@ export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
       <MotionLogoWrapper
-        initial={{ scale: 2.5, opacity: 0.7 }}
+        initial={{ scale: 1.2, opacity: 1 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <Logo size='small' alt='' />
       </MotionLogoWrapper>
       <MotionHeroContent
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
         as={HeroContent}
       >
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>

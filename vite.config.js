@@ -8,15 +8,17 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['styled-components', 'framer-motion'],
-          'form-vendor': ['react-hook-form', 'emailjs-com', 'validator'],
+          'react-vendor': ['react', 'react-dom'],
+          'router-vendor': ['react-router-dom'],
+          'styled-vendor': ['styled-components'],
+          'motion-vendor': ['framer-motion'],
+          'form-vendor': ['react-hook-form', 'emailjs-com', 'validator', 'react-google-recaptcha'],
           icons: ['react-icons'],
           'state-vendor': ['zustand']
         }
       }
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 300, // More aggressive warning
     cssCodeSplit: true,
     minify: 'terser',
     terserOptions: {
