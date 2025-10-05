@@ -65,9 +65,13 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto 0.5rem auto;
   box-sizing: border-box;
   padding: 0;
+
+  @media ${devices.tablet} {
+    margin: 0 auto 2rem auto;
+  }
 
   ${({ $fullRow }) => $fullRow && 'grid-column: 1 / -1;'}
 `
@@ -78,12 +82,13 @@ const CardContent = styled.div`
   align-items: stretch;
   width: 100%;
   height: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   background: var(--background-light);
   flex: 1;
 
   @media ${devices.tablet} {
     flex-direction: row;
+    margin-bottom: 20px;
   }
 `
 
