@@ -26,7 +26,7 @@ export const ButtonGroup = ({ actions }) => {
 
 const StyledButtonGroup = styled.div`
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
+  flex-direction: column;
   width: 100%;
 
   @media ${devices.tablet} {

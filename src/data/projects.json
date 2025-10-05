@@ -58,25 +58,13 @@
     {
       "id": 5,
       "title": "Weather App",
-      "image": "",
-      "alt": "",
+      "image": "../assets/optimized/weatherapp.png",
+      "alt": "Screenshot of weather app showing current conditions",
       "description": "A responsive web-based application that fetches real-time weather data through API integration. Focused on a clear user flow and modern design.",
       "categories": ["Frontend"],
       "stack": ["JavaScript", "TypeScript", "APIs"],
       "netlify": "https://gorgeous-bubblegum-c0333a.netlify.app/",
       "github": "https://github.com/LindaSchonfeldt/weather-app",
-      "size": "small"
-    },
-    {
-      "id": 6,
-      "title": "Recipe Library",
-      "image": "",
-      "alt": "",
-      "description": "A deliciously simple web app where users can explore a world of recipes. Designed for smooth navigation and a tasteful user experience.",
-      "categories": ["Frontend"],
-      "stack": ["JavaScript"],
-      "netlify": "https://recipe-library.netlify.app/",
-      "github": "https://github.com/LindaSchonfeldt/js-project-recipe-library",
       "size": "small"
     }
   ]

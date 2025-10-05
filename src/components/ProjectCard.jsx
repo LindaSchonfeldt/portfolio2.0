@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import devices from '../styles/devices'
 import { ButtonGroup } from './ButtonGroup'
 import { ReadMore } from './ReadMore'
+import ResponsiveImage from './ResponsiveImage'
 import { Tag } from './Tag'
 
 export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
@@ -29,10 +30,16 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
     <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
         <ImageContainer>
-          <StyledImage
-            src={project.image || 'tree.svg'}
-            alt={project.alt || 'Project Image'}
-          />
+          {project.image ? (
+            <ResponsiveImage
+              webpSrc={project.image.replace(/\.(png|jpg|jpeg)$/, '.webp')}
+              fallbackSrc={project.image}
+              alt={project.alt || `${project.title} project screenshot`}
+              className='project-image'
+            />
+          ) : (
+            <StyledImage src='tree.svg' alt='Placeholder' />
+          )}
         </ImageContainer>
         <TextContainer>
           <CategoryContainer>
@@ -102,6 +109,16 @@ const ImageContainer = styled.div`
   @media ${devices.tablet} {
     flex: 1;
     height: 100%;
+  }
+
+  /* Style for ResponsiveImage */
+  .project-image,
+  .project-image img,
+  .project-image picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 `
 
