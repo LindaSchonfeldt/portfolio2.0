@@ -1,5 +1,16 @@
 import { useEffect } from 'react'
 
+// Helper function to update or create meta tags
+const updateOrCreateMeta = (property, content) => {
+  let meta = document.querySelector(`meta[property="${property}"]`)
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('property', property)
+    document.head.appendChild(meta)
+  }
+  meta.content = content
+}
+
 const Meta = ({ title, description, image }) => {
   useEffect(() => {
     // Update document title
@@ -26,16 +37,6 @@ const Meta = ({ title, description, image }) => {
       updateOrCreateMeta('og:image', image)
     }
   }, [title, description, image])
-
-  const updateOrCreateMeta = (property, content) => {
-    let meta = document.querySelector(`meta[property="${property}"]`)
-    if (!meta) {
-      meta = document.createElement('meta')
-      meta.setAttribute('property', property)
-      document.head.appendChild(meta)
-    }
-    meta.content = content
-  }
 
   // This component doesn't render anything
   return null
