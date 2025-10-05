@@ -16,20 +16,31 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 500, // Lowered from 1000 to be more strict
+    chunkSizeWarningLimit: 500,
     cssCodeSplit: true,
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
+        drop_console: false, // Keep console for debugging
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'],
         passes: 2
       },
       mangle: {
         safari10: true
+      },
+      format: {
+        comments: false // Remove comments from production build
       }
-    }
+    },
+    sourcemap: false, // Disable sourcemaps in production for smaller files
+    target: 'es2020' // Modern browsers only for smaller bundle
+  },
+  server: {
+    open: false,
+    cors: true
+  },
+  preview: {
+    port: 3000
   },
   // Optimize development
   optimizeDeps: {

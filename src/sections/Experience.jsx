@@ -40,7 +40,7 @@ export const Experience = () => {
                 Contributing to the development of a web app that simplifies
                 digital booking experiences. Building scalable, accessible
                 front-end components in React and TailwindCSS while
-                collaborating closely with designers and product leads.
+                collaborating closely with the rest of the team.
               </TimelineDescription>
             </TimelineContent>
           </TimelineItem>
@@ -48,7 +48,7 @@ export const Experience = () => {
           <TimelineItem
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <TimelineIcon>
               <FaGraduationCap />
@@ -111,7 +111,7 @@ export const Experience = () => {
           <TimelineItem
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <TimelineIcon>
               <FaGraduationCap />

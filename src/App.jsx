@@ -26,10 +26,12 @@ const AppContainer = styled.div`
 `
 
 function AppContent() {
-  const [showIntro, setShowIntro] = useState(true)
+  // Disable intro animation for better performance
+  // Set to true to enable the intro animation
+  const [showIntro, setShowIntro] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
-  const introPlayed = useRef(false)
+  const introPlayed = useRef(true) // Start as true to skip intro
 
   // Only show intro if on home and it hasn't played yet
   const shouldShowIntro = showIntro && isHome && !introPlayed.current
@@ -41,24 +43,36 @@ function AppContent() {
 
   // Preload routes when app loads for better navigation performance
   useEffect(() => {
-    // Preload the most commonly visited pages after a short delay
-    const timer = setTimeout(() => {
-      if (location.pathname === '/') {
-        // If on home, preload projects and contact
-        preloadRoute('projects')
-        preloadRoute('contact')
-      } else if (location.pathname === '/projects') {
-        // If on projects, preload home and contact
-        preloadRoute('home')
-        preloadRoute('contact')
-      } else if (location.pathname === '/contact') {
-        // If on contact, preload home and projects
-        preloadRoute('home')
-        preloadRoute('projects')
-      }
-    }, 1000) // Wait 1 second after initial load
-
-    return () => clearTimeout(timer)
+    // Preload the most commonly visited pages using requestIdleCallback for better performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        if (location.pathname === '/') {
+          preloadRoute('projects')
+          preloadRoute('contact')
+        } else if (location.pathname === '/projects') {
+          preloadRoute('home')
+          preloadRoute('contact')
+        } else if (location.pathname === '/contact') {
+          preloadRoute('home')
+          preloadRoute('projects')
+        }
+      })
+    } else {
+      // Fallback with reduced delay
+      const timer = setTimeout(() => {
+        if (location.pathname === '/') {
+          preloadRoute('projects')
+          preloadRoute('contact')
+        } else if (location.pathname === '/projects') {
+          preloadRoute('home')
+          preloadRoute('contact')
+        } else if (location.pathname === '/contact') {
+          preloadRoute('home')
+          preloadRoute('projects')
+        }
+      }, 500)
+      return () => clearTimeout(timer)
+    }
   }, [location.pathname])
 
   return (

@@ -43,15 +43,3 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default GlobalStyle
-
-// Eample usage in a styled component
-/* const Button = styled.button`
-  background: var(--accent-orange);
-  color: var(--text-light);
-  border: 1px solid var(--border-color);
-`
-
-const Section = styled.section`
-  background: var(--background-green);
-  color: var(--text-main);
-` */

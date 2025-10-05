@@ -23,34 +23,26 @@
 
     <title>LS portfolio</title>
 
-    <!-- Critical fonts loaded first -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;1,400&family=Raleway:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Non-critical fonts loaded asynchronously -->
+    <!-- Critical fonts loaded with display=swap for better FCP -->
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..300;0,700..900;1,100..300;1,500..900&family=Raleway:ital,wght@0,100..300;0,800..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;1,400&family=Raleway:wght@400;500;600;700&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-
-    <!-- Fallback for browsers that don't support preload -->
     <noscript>
       <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;1,400&family=Raleway:wght@400;500;600;700&display=swap"
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..300;0,700..900;1,100..300;1,500..900&family=Raleway:ital,wght@0,100..300;0,800..900;1,100..900&display=swap"
       />
     </noscript>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="./src/main.jsx"></script>
-    
-    <!-- Google reCAPTCHA v2 -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Google reCAPTCHA v2 - loaded dynamically on contact page -->
+    <!-- Removed from initial load to improve performance -->
 
     <!-- Prefetch other routes for faster navigation -->
     <script>

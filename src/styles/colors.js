@@ -21,9 +21,7 @@ export const colors = css`
   --error-color: #dc3545;
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #fff;
-  --button-hover-bg: #0056b3;
+
   --card-bg: #fff;
 `
 export default colors
