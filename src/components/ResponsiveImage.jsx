@@ -91,7 +91,14 @@ const ResponsiveImage = ({
       <picture
         ref={pictureRef}
         className={`${className} ${isLoaded ? 'loaded' : 'loading'}`}
-        style={{ ...style, position: 'relative', zIndex: 2 }}
+        style={{
+          ...style,
+          position: 'relative',
+          zIndex: 2,
+          width: '100%',
+          height: '100%',
+          display: 'block'
+        }}
       >
         <source data-srcset={webpSrcSet} type='image/webp' sizes={sizes} />
         <img
@@ -105,7 +112,8 @@ const ResponsiveImage = ({
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: 'center'
+            objectPosition: 'center',
+            display: 'block'
           }}
         />
       </picture>

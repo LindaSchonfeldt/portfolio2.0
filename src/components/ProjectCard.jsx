@@ -118,13 +118,14 @@ const ImageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 200px;
+  height: 180px;
   position: relative;
   overflow: hidden;
 
   @media ${devices.tablet} {
     flex: 1;
     height: 100%;
+    min-height: 250px;
   }
 
   /* Style for ResponsiveImage */
@@ -135,6 +136,11 @@ const ImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  /* Scale up to crop out padding from image */
+  .project-image img {
+    transform: scale(1.15);
   }
 `
 
