@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
-import { ButtonGroup } from './buttonGroup'
+import { ButtonGroup } from './ButtonGroup'
 import { ReadMore } from './ReadMore'
 import { Tag } from './Tag'
 
