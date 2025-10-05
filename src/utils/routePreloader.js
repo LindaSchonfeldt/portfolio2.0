@@ -6,12 +6,10 @@ const componentCache = new Map()
 // Preload function that returns a promise
 export const preloadRoute = (routeName) => {
   if (componentCache.has(routeName)) {
-    console.log(`Route ${routeName} already preloaded`)
     return componentCache.get(routeName)
   }
 
   let promise
-  console.log(`Preloading route: ${routeName}`)
   switch (routeName) {
     case 'projects':
       promise = import('../pages/Projects')
@@ -23,19 +21,10 @@ export const preloadRoute = (routeName) => {
       promise = import('../pages/Home')
       break
     default:
-      console.warn(`No component loader found for route: ${routeName}`)
       return Promise.resolve()
   }
 
   componentCache.set(routeName, promise)
-  promise
-    .then(() => {
-      console.log(`Successfully preloaded route: ${routeName}`)
-    })
-    .catch((error) => {
-      console.error(`Failed to preload route ${routeName}:`, error)
-    })
-
   return promise
 }
 

@@ -37,7 +37,6 @@ export const ContactForm = () => {
   }, [])
 
   const onRecaptchaChange = (token) => {
-    console.log('reCAPTCHA token received:', token ? 'Yes' : 'No')
     setRecaptchaToken(token)
     setRecaptchaError(null)
   }
@@ -55,10 +54,6 @@ export const ContactForm = () => {
   }
 
   const onSubmit = async (data) => {
-    console.log('Form submission started')
-    console.log('reCAPTCHA token exists:', !!recaptchaToken)
-    console.log('RECAPTCHA_SITE_KEY:', RECAPTCHA_SITE_KEY ? 'Set' : 'Not set')
-
     // Check if reCAPTCHA is completed
     if (!recaptchaToken) {
       alert('Please complete the reCAPTCHA verification.')
@@ -78,7 +73,6 @@ export const ContactForm = () => {
         'g-recaptcha-response': recaptchaToken
       }
 
-      console.log('Sending email with reCAPTCHA token')
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailData, USER_ID)
       reset()
       setRecaptchaToken(null)
