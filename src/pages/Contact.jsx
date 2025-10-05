@@ -1,5 +1,86 @@
+import { lazy, Suspense, useState } from 'react'
+import styled from 'styled-components'
+import { FiCopy } from 'react-icons/fi'
+
+import SectionContainer from '../components/SectionContainer'
+import Meta from '../components/Meta'
+import LoadingFallback from '../components/LoadingFallback'
+
+// Lazy load the ContactForm to reduce initial bundle size
+const ContactForm = lazy(() =>
+  import('../components/ContactForm').then((module) => ({
+    default: module.ContactForm
+  }))
+)
+
 const Contact = () => {
-  return <div>Contact Page</div>
+  const [copied, setCopied] = useState(false)
+
+  const email = 'linda.schonfeldt@gmail.com'
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  return (
+    <>
+      <Meta
+        title='Contact | Linda Schönfeldt Portfolio'
+        description='Get in touch with Linda Schönfeldt for web development and design inquiries.'
+      />
+      <SectionContainer id='contact'>
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out for web development and design inquiries!</p>
+        <EmailRow>
+          <span>{email}</span>
+          <CopyIcon
+            onClick={handleCopy}
+            title='Copy email'
+            tabIndex={0}
+            role='button'
+          >
+            <FiCopy />
+          </CopyIcon>
+          {copied && <CopiedText>Copied!</CopiedText>}
+        </EmailRow>
+        <Suspense fallback={<LoadingFallback />}>
+          <ContactForm />
+        </Suspense>
+      </SectionContainer>
+    </>
+  )
 }
 
 export default Contact
+
+const EmailRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  span {
+    cursor: pointer;
+  }
+`
+
+const CopyIcon = styled.span`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--primary-green-dark);
+  transition: color 0.2s;
+  &:hover {
+    color: var(--accent-orange);
+  }
+`
+
+const CopiedText = styled.span`
+  margin-left: 0.5rem;
+  color: var(--accent-orange);
+  font-size: 0.95em;
+`

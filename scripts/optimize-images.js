@@ -28,18 +28,33 @@ async function optimizeImages() {
       const inputPath = path.join(sourceDir, file)
       const fileBase = path.basename(file, path.extname(file))
 
-      // Create WebP version
-      const webpPath = path.join(outputDir, `${fileBase}.webp`)
-      await sharp(inputPath)
-        .resize(1200) // Max width of 1200px (maintain aspect ratio)
-        .webp({ quality: 80 })
-        .toFile(webpPath)
+      // Create multiple sizes for responsive loading
+      const sizes = [
+        { suffix: '', width: 1200, quality: 80 },
+        { suffix: '-medium', width: 800, quality: 75 },
+        { suffix: '-small', width: 400, quality: 70 }
+      ]
 
-      // Create optimized original format version
-      const optimizedPath = path.join(outputDir, file)
-      await sharp(inputPath).resize(1200).toFile(optimizedPath)
+      for (const size of sizes) {
+        // Create WebP version
+        const webpPath = path.join(outputDir, `${fileBase}${size.suffix}.webp`)
+        await sharp(inputPath)
+          .resize(size.width)
+          .webp({ quality: size.quality })
+          .toFile(webpPath)
 
-      console.log(`Optimized: ${file} → WebP and optimized original`)
+        // Create optimized original format version
+        const optimizedPath = path.join(
+          outputDir,
+          `${fileBase}${size.suffix}${path.extname(file)}`
+        )
+        await sharp(inputPath)
+          .resize(size.width)
+          .jpeg({ quality: size.quality })
+          .toFile(optimizedPath)
+      }
+
+      console.log(`Optimized: ${file} → WebP and optimized originals (3 sizes)`)
     }
 
     console.log('Image optimization complete!')

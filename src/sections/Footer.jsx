@@ -1,8 +1,9 @@
 import { IoMail } from 'react-icons/io5'
 import styled from 'styled-components'
 
-import footerBg from '../assets/footer.JPG'
-import LazyImage from '../components/LazyImage'
+import footerBgWebP from '../assets/optimized/footer.webp'
+import footerBgJpg from '../assets/optimized/footer.jpg'
+import ResponsiveImage from '../components/ResponsiveImage'
 import { Logo } from '../components/Logo'
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
@@ -11,7 +12,11 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <FooterBackground>
-        <LazyImage src={footerBg} alt='Footer background' />
+        <ResponsiveImage
+          webpSrc={footerBgWebP}
+          fallbackSrc={footerBgJpg}
+          alt='Footer background'
+        />
       </FooterBackground>
       <ContentContainer>
         <FooterContent>

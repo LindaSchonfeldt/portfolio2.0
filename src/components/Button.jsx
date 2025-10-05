@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import { buttonBase } from '../styles/mixins'
 
 export const Button = ({
   label,
   url,
   variant = 'button',
+  type = 'button',
   onClick,
   ...props
 }) => {
@@ -14,7 +16,7 @@ export const Button = ({
         href={url}
         target='_blank'
         rel='noopener noreferrer'
-        variant={variant}
+        $variant={variant}
         {...props}
       >
         {label}
@@ -22,40 +24,30 @@ export const Button = ({
     )
   }
   return (
-    <StyledButton type='button' onClick={onClick} variant={variant} {...props}>
+    <StyledButton type={type} onClick={onClick} $variant={variant} {...props}>
       {label}
     </StyledButton>
   )
 }
 
 const StyledButton = styled.button`
-  display: inline-block;
-  width: auto;
+  ${buttonBase}
   min-width: 120px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-  border-radius: 4px;
   background-color: var(--primary-green-dark);
   color: var(--text-light);
-  border: 2px solid var(--primary-green-dark);
-  text-align: center;
-  text-decoration: none;
+  border-color: var(--primary-green-dark);
   margin-bottom: 0.5rem;
-  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: var(--primary-green);
     opacity: 0.9;
   }
 
-  ${({ variant }) =>
-    variant === 'secondary' &&
+  ${({ $variant }) =>
+    $variant === 'secondary' &&
     `
       background-color: var(--background-light);
       color: var(--primary-green-dark);
-      border: 2px solid var(--primary-green-dark);
+      border-color: var(--primary-green-dark);
     `}
 `

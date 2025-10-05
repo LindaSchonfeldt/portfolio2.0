@@ -10,18 +10,29 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui-vendor': ['styled-components', 'framer-motion'],
-          icons: ['react-icons']
+          'form-vendor': ['react-hook-form', 'emailjs-com', 'validator'],
+          icons: ['react-icons'],
+          'state-vendor': ['zustand']
         }
       }
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500, // Lowered from 1000 to be more strict
     cssCodeSplit: true,
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
+        passes: 2
+      },
+      mangle: {
+        safari10: true
       }
     }
+  },
+  // Optimize development
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'styled-components', 'framer-motion']
   }
 })
