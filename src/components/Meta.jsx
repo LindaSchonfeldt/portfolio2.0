@@ -1,22 +1,15 @@
 import { useEffect } from 'react'
 
-// Helper function to update or create meta tags
-const updateOrCreateMeta = (property, content) => {
-  let meta = document.querySelector(`meta[property="${property}"]`)
-  if (!meta) {
-    meta = document.createElement('meta')
-    meta.setAttribute('property', property)
-    document.head.appendChild(meta)
-  }
-  meta.content = content
-}
-
-const Meta = ({ title, description, image }) => {
+function Meta({ title, description, image }) {
   useEffect(() => {
     // Update document title
-    document.title = title || 'Linda Schönfeldt'
+    if (title) {
+      document.title = title
+    } else {
+      document.title = 'Linda Schönfeldt'
+    }
 
-    // Find or create meta description
+    // Update or create meta description
     let metaDescription = document.querySelector('meta[name="description"]')
     if (!metaDescription) {
       metaDescription = document.createElement('meta')
@@ -27,18 +20,38 @@ const Meta = ({ title, description, image }) => {
       description ||
       'Linda Schönfeldt portfolio website showcasing frontend development skills'
 
-    // Set other meta tags
-    updateOrCreateMeta('og:title', title || 'Linda Schönfeldt Portfolio')
-    updateOrCreateMeta(
-      'og:description',
-      description || 'Linda Schönfeldt portfolio website'
+    // Update or create og:title
+    let ogTitle = document.querySelector('meta[property="og:title"]')
+    if (!ogTitle) {
+      ogTitle = document.createElement('meta')
+      ogTitle.setAttribute('property', 'og:title')
+      document.head.appendChild(ogTitle)
+    }
+    ogTitle.content = title || 'Linda Schönfeldt Portfolio'
+
+    // Update or create og:description
+    let ogDescription = document.querySelector(
+      'meta[property="og:description"]'
     )
+    if (!ogDescription) {
+      ogDescription = document.createElement('meta')
+      ogDescription.setAttribute('property', 'og:description')
+      document.head.appendChild(ogDescription)
+    }
+    ogDescription.content = description || 'Linda Schönfeldt portfolio website'
+
+    // Update or create og:image if provided
     if (image) {
-      updateOrCreateMeta('og:image', image)
+      let ogImage = document.querySelector('meta[property="og:image"]')
+      if (!ogImage) {
+        ogImage = document.createElement('meta')
+        ogImage.setAttribute('property', 'og:image')
+        document.head.appendChild(ogImage)
+      }
+      ogImage.content = image
     }
   }, [title, description, image])
 
-  // This component doesn't render anything
   return null
 }
 

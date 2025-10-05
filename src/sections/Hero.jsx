@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 
@@ -15,10 +16,18 @@ const SocialLinks = lazy(() =>
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <LogoWrapper>
+      <MotionLogoWrapper
+        initial={{ scale: 2.5, opacity: 0.7 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
         <Logo size='small' alt='' />
-      </LogoWrapper>
-      <HeroContent>
+      </MotionLogoWrapper>
+      <MotionHeroContent
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+      >
         <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
         <h1 className='heroTitle'>Web Developer</h1>
         <h2 className='heroSubtitle'>
@@ -60,7 +69,7 @@ export const Hero = () => {
             <SocialLinks />
           </Suspense>
         </ActionWrapper>
-      </HeroContent>
+      </MotionHeroContent>
     </SectionContainer>
   )
 }
@@ -156,3 +165,7 @@ const LogoWrapper = styled.div`
   transform-origin: left center;
   display: inline-block;
 `
+
+// Motion components for animations
+const MotionLogoWrapper = motion(LogoWrapper)
+const MotionHeroContent = motion(HeroContent)

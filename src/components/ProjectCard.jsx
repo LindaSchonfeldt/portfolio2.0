@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
@@ -49,7 +48,7 @@ export const ProjectCard = ({ project, size = 'medium', fullRow }) => {
               project.tags.map((tag, index) => <Tag key={index} text={tag} />)}
           </TagContainer>
           <StyledTitle>{project.title}</StyledTitle>
-          <ReadMore text={project.description} maxLength={150} />
+          <StyledReadMore text={project.description} maxLength={150} />
           <LinkContainer>
             <ButtonGroup actions={actions} />
           </LinkContainer>
@@ -117,7 +116,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 20px 0;
   flex: 1;
   box-sizing: border-box;
 
@@ -151,12 +150,13 @@ const StyledTitle = styled.h3`
   width: 100%;
 `
 
-const StyledDescription = styled.p`
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  width: 100%;
-  box-sizing: border-box;
+const StyledReadMore = styled(ReadMore)`
+  margin-bottom: 1.5rem;
+  display: block;
+
+  @media ${devices.tablet} {
+    margin-bottom: 1rem;
+  }
 `
 
 const LinkContainer = styled.div`

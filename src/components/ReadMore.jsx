@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-export const ReadMore = ({ text, maxLength = 150 }) => {
+export const ReadMore = ({ text, maxLength = 150, className }) => {
   const [expanded, setExpanded] = useState(false)
   const isLong = text.length > maxLength
   const displayText =
     expanded || !isLong ? text : text.slice(0, maxLength) + '...'
 
   return (
-    <div>
+    <div className={className}>
       <p>{displayText}</p>
       {isLong && (
         <StyledLink
@@ -35,7 +35,7 @@ const StyledLink = styled.a`
   padding: 0;
   display: inline-block;
   &:hover {
-    text-decoration: underline wavy;
-    color: var(--primary-green);
+    text-decoration: underline;
+    color: var(--accent-orange);
   }
 `
