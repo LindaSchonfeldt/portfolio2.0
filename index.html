@@ -31,6 +31,22 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Jost:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Preload critical images -->
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/optimized/weatherapp-small.webp"
+      type="image/webp"
+      media="(max-width: 768px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/optimized/weatherapp-medium.webp"
+      type="image/webp"
+      media="(min-width: 769px)"
+    />
   </head>
   <body>
     <div id="root"></div>

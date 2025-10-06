@@ -30,9 +30,9 @@ async function optimizeImages() {
 
       // Create multiple sizes for responsive loading
       const sizes = [
-        { suffix: '', width: 1200, quality: 80 },
-        { suffix: '-medium', width: 800, quality: 75 },
-        { suffix: '-small', width: 400, quality: 70 }
+        { width: 1200, suffix: '' },
+        { width: 800, suffix: '-medium' },
+        { width: 400, suffix: '-small' }
       ]
 
       for (const size of sizes) {
@@ -40,7 +40,7 @@ async function optimizeImages() {
         const webpPath = path.join(outputDir, `${fileBase}${size.suffix}.webp`)
         await sharp(inputPath)
           .resize(size.width)
-          .webp({ quality: size.quality })
+          .webp({ quality: 75 }) // Reduced from default 80
           .toFile(webpPath)
 
         // Create optimized original format version
@@ -50,7 +50,8 @@ async function optimizeImages() {
         )
         await sharp(inputPath)
           .resize(size.width)
-          .jpeg({ quality: size.quality })
+          .jpeg({ quality: 80 }) // For JPG
+          .png({ compressionLevel: 9 }) // Max compression for PNG
           .toFile(optimizedPath)
       }
 

@@ -134,6 +134,7 @@ const ResponsiveImage = ({
           data-srcset={fallbackSrcSet}
           sizes={sizes}
           alt={alt}
+          fetchpriority={eager ? 'high' : 'auto'}
           style={{
             opacity: isLoaded ? 1 : 0,
             transition: 'opacity 0.3s',
