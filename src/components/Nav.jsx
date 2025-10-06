@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
 import { useRoutePreloader } from '../utils/routePreloader'
+import { preloadProjectImages } from '../utils/imagePreloader'
 
 export const Nav = () => {
   // Use the nav store for global state
@@ -63,6 +64,7 @@ export const Nav = () => {
             $primary
             onClick={() => toggleExpanded('projects')}
             $expanded={expandedItem === 'projects'}
+            onMouseEnter={preloadProjectImages}
             {...preloadOnHover('projects')}
           >
             Projects
