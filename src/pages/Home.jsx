@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Meta from '../components/Meta'
 import { Experience } from '../sections/Experience'
 import { Hero } from '../sections/Hero'
-import { Services } from '../sections/Services'
+import { Services } from '../sections/Services.tsx'
 import { SkillSection } from '../sections/SkillSection'
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
       />
       <HomeContainer>
         <Hero />
-        {/* <Services /> */}
+        <Services />
         <SkillSection />
         <Experience />
       </HomeContainer>

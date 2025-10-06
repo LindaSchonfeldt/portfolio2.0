@@ -2,8 +2,8 @@ import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useNavStore } from '../stores/useNavStore'
-import { useRoutePreloader } from '../utils/routePreloader'
 import devices from '../styles/devices'
+import { useRoutePreloader } from '../utils/routePreloader'
 
 export const Nav = () => {
   // Use the nav store for global state
@@ -15,7 +15,7 @@ export const Nav = () => {
 
   // Define sections for each page
   const pageSections = {
-    about: ['Introduction', 'Skills', 'Experience'],
+    about: ['Introduction', 'Services', 'Skills', 'Experience'],
     projects: [],
     contact: []
   }
