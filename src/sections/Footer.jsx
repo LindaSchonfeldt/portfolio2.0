@@ -28,7 +28,7 @@ export const Footer = () => {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <IoMail size={32} color='var(--primary-green-dark)' />
+              <IoMail size={32} color='var(--accent-orange)' />
             </a>
             <br />
             &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
