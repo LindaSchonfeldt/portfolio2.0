@@ -13,9 +13,9 @@ import { Footer } from './sections/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 
 // Lazy loaded components
-const Home = lazy(() => import('./pages/Home'))
 const Projects = lazy(() => import('./pages/Projects'))
 const Contact = lazy(() => import('./pages/Contact'))
+const Home = lazy(() => import('./pages/Home'))
 
 const AppContainer = styled.div`
   display: flex;
