@@ -35,8 +35,8 @@ export const Footer = () => {
             reserved.
           </InfoContainer>
           <Logo size='large' alt='' className='footer-logo' />
+          <SocialLinks />
         </FooterContent>
-        <SocialLinks />
       </ContentContainer>
     </StyledFooter>
   )
