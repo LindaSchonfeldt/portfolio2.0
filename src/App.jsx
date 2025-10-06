@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -7,10 +7,10 @@ import Intro from './components/Intro'
 import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
-import { preloadRoute } from './utils/routePreloader'
 import ScrollToTop from './components/ScrollToTop'
 import { Footer } from './sections/Footer'
 import GlobalStyle from './styles/GlobalStyle'
+import { preloadRoute } from './utils/routePreloader'
 
 // Lazy loaded components
 const Projects = lazy(() => import('./pages/Projects'))
