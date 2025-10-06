@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
 import { useRoutePreloader } from '../utils/routePreloader'
-import { preloadProjectImages } from '../utils/imagePreloader'
+import { preloadProjectImages } from '../utils/preloadImages'
 
 export const Nav = () => {
   // Use the nav store for global state
@@ -16,7 +16,7 @@ export const Nav = () => {
 
   // Define sections for each page
   const pageSections = {
-    about: ['Introduction', 'Services', 'Skills', 'Experience'],
+    about: ['Introduction', 'Skills', 'Experience'],
     projects: [],
     contact: []
   }
@@ -153,7 +153,7 @@ const StyledNavLink = styled(NavLink)`
   border-color: var(--accent-red);
   color: white;
   font-family: 'Raleway', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   padding: 1rem;
   width: 110px;
   height: 60px;
@@ -164,7 +164,7 @@ const StyledNavLink = styled(NavLink)`
   border-bottom-left-radius: 50px;
 
   &:hover {
-    width: 120px; /* Expand to the left */
+    width: 120px;
   }
 
   &.active {
@@ -174,7 +174,7 @@ const StyledNavLink = styled(NavLink)`
   ${(props) =>
     props.$expanded &&
     `
-    width: 120px; /* Expand to the left when expanded */
+    width: 120px;
   `}
 `
 
@@ -209,7 +209,7 @@ const SectionLink = styled(Link)`
 
   &:hover {
     color: var(--text-main);
-    width: 95px; /* Expand to the left */
+    width: 95px;
   }
 
   &:active {
