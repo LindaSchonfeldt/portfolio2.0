@@ -1,8 +1,6 @@
 import { IoMail } from 'react-icons/io5'
 import styled from 'styled-components'
 
-import footerBgWebP from '../assets/optimized/footer.webp'
-import footerBgJpg from '../assets/optimized/footer.jpg'
 import ResponsiveImage from '../components/ResponsiveImage'
 import { Logo } from '../components/Logo'
 import devices from '../styles/devices'
@@ -14,9 +12,10 @@ export const Footer = () => {
     <StyledFooter>
       <FooterBackground>
         <ResponsiveImage
-          webpSrc={footerBgWebP}
-          fallbackSrc={footerBgJpg}
+          webpSrc='/images/footer.webp'
+          fallbackSrc='/images/footer.jpg'
           alt='Footer background'
+          eager={true}
         />
       </FooterBackground>
       <ContentContainer>
@@ -48,9 +47,9 @@ const StyledFooter = styled.footer`
   ${fullBleed}
   height: auto;
   min-height: 250px;
-  margin-top: auto; /* Push footer to bottom if content is short */
-  padding: 0; /* Remove padding as we'll handle it in the FooterContent */
-  overflow: hidden; /* Ensure the background stays within the footer */
+  margin-top: auto;
+  padding: 0;
+  overflow: hidden;
   box-sizing: border-box;
 
   background: linear-gradient(
@@ -89,7 +88,7 @@ const FooterBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.2; /* Adjust opacity to make the content readable */
+  opacity: 0.2;
   z-index: 0;
   overflow: hidden;
 
