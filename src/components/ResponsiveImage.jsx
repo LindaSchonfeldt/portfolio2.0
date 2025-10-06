@@ -7,96 +7,103 @@ const ResponsiveImage = ({
   className,
   style,
   sizes = '(max-width: 768px) 400px, (max-width: 1200px) 800px, 1200px',
-  eager = false // If true, load immediately without lazy loading
+  eager = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const pictureRef = useRef(null)
 
-  // Generate srcset from base filename
-  const generateSrcSet = (baseSrc) => {
-    const ext = baseSrc.split('.').pop()
-    const base = baseSrc.replace(`.${ext}`, '')
+  // Generate srcset for both WebP and fallback
+  const webpSrcSet = webpSrc
+    ? `${webpSrc.replace(
+        /\.(webp|png|jpg)$/,
+        '-small.webp'
+      )} 400w, ${webpSrc.replace(
+        /\.(webp|png|jpg)$/,
+        '-medium.webp'
+      )} 800w, ${webpSrc} 1200w`
+    : ''
 
-    return [
-      `${base}-small.${ext} 400w`,
-      `${base}-medium.${ext} 800w`,
-      `${base}.${ext} 1200w`
-    ].join(', ')
-  }
+  const fallbackSrcSet = fallbackSrc
+    ? `${fallbackSrc.replace(
+        /\.(webp|png|jpg)$/,
+        '-small.png'
+      )} 400w, ${fallbackSrc.replace(
+        /\.(webp|png|jpg)$/,
+        '-medium.png'
+      )} 800w, ${fallbackSrc} 1200w`
+    : ''
 
   useEffect(() => {
-    if (!pictureRef.current) return
+    const picture = pictureRef.current
+    if (!picture) return
 
-    const pictureElement = pictureRef.current
-    const img = pictureElement.querySelector('img')
+    const img = picture.querySelector('img')
+    if (!img) return
 
-    // If eager loading, load immediately without intersection observer
-    if (eager) {
-      const sources = pictureElement.querySelectorAll('source')
+    const loadImage = () => {
+      // If eager loading, load immediately
+      if (eager) {
+        const dataSrc = img.getAttribute('data-src')
+        const dataSrcSet = img.getAttribute('data-srcset')
 
-      sources.forEach((source) => {
-        const dataSrcset = source.getAttribute('data-srcset')
-        if (dataSrcset) {
-          source.srcset = dataSrcset
+        if (dataSrc) img.src = dataSrc
+        if (dataSrcSet) img.srcset = dataSrcSet
+
+        // Also update source elements
+        const sources = picture.querySelectorAll('source')
+        sources.forEach((source) => {
+          const dataSrcSet = source.getAttribute('data-srcset')
+          if (dataSrcSet) source.srcset = dataSrcSet
+        })
+
+        // Set loaded when image loads
+        img.onload = () => setIsLoaded(true)
+        img.onerror = () => {
+          console.error('Failed to load image:', dataSrc)
+          setIsLoaded(true) // Show placeholder
         }
-      })
 
-      const dataSrc = img.getAttribute('data-src')
-      const dataSrcset = img.getAttribute('data-srcset')
-
-      if (dataSrc) {
-        img.src = dataSrc
-      }
-      if (dataSrcset) {
-        img.srcset = dataSrcset
+        return
       }
 
-      img.onload = () => setIsLoaded(true)
-      return
-    }
+      // Lazy loading with IntersectionObserver
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const dataSrc = img.getAttribute('data-src')
+              const dataSrcSet = img.getAttribute('data-srcset')
 
-    // Otherwise use lazy loading with intersection observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const picture = entry.target
-          const sources = picture.querySelectorAll('source')
-          const img = picture.querySelector('img')
+              if (dataSrc) img.src = dataSrc
+              if (dataSrcSet) img.srcset = dataSrcSet
 
-          sources.forEach((source) => {
-            const dataSrcset = source.getAttribute('data-srcset')
-            if (dataSrcset) {
-              source.srcset = dataSrcset
+              // Also update source elements
+              const sources = picture.querySelectorAll('source')
+              sources.forEach((source) => {
+                const dataSrcSet = source.getAttribute('data-srcset')
+                if (dataSrcSet) source.srcset = dataSrcSet
+              })
+
+              img.onload = () => setIsLoaded(true)
+              img.onerror = () => {
+                console.error('Failed to load image:', dataSrc)
+                setIsLoaded(true)
+              }
+
+              observer.unobserve(img)
             }
           })
+        },
+        { rootMargin: '50px' }
+      )
 
-          const dataSrc = img.getAttribute('data-src')
-          const dataSrcset = img.getAttribute('data-srcset')
+      observer.observe(img)
 
-          if (dataSrc) {
-            img.src = dataSrc
-          }
-          if (dataSrcset) {
-            img.srcset = dataSrcset
-          }
-
-          img.onload = () => setIsLoaded(true)
-          observer.unobserve(picture)
-        }
-      })
-    })
-
-    observer.observe(pictureElement)
-
-    return () => {
-      if (pictureElement) {
-        observer.unobserve(pictureElement)
-      }
+      return () => observer.disconnect()
     }
-  }, [eager])
 
-  const webpSrcSet = generateSrcSet(webpSrc)
-  const fallbackSrcSet = generateSrcSet(fallbackSrc)
+    loadImage()
+  }, [eager])
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
