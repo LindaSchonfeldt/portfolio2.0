@@ -26,11 +26,24 @@
 
     <title>Linda Schönfeldt | Frontend Developer & UX Designer</title>
 
-    <!-- Critical fonts loaded synchronously for faster LCP -->
+    <!-- Load fonts asynchronously to avoid render blocking -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Jost:wght@400;500;600&display=swap"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Jost:wght@400;500;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Jost:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Preload critical images for first 2 projects (Naima and Portfolio) -->
     <link
