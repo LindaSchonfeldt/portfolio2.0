@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const inputDir = path.join(__dirname, '../src/assets')
-const outputDir = path.join(__dirname, '../src/assets/optimized')
+const outputDir = path.join(__dirname, '../public/images') // Changed to public/images
 
 // Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
@@ -28,7 +28,7 @@ const optimizeImage = async (inputPath, filename) => {
     try {
       const image = sharp(inputPath)
 
-      // Generate WebP version with aggressive compression
+      // Generate WebP version with VERY aggressive compression
       const webpPath = path.join(outputDir, `${name}${size.suffix}.webp`)
       await image
         .clone()
@@ -36,10 +36,19 @@ const optimizeImage = async (inputPath, filename) => {
           withoutEnlargement: true,
           fit: 'inside'
         })
-        .webp({ quality: 70, effort: 6 }) // Reduced from 75, increased effort
+        .webp({
+          quality: 60, // Reduced from 70
+          effort: 6, // Maximum compression effort
+          smartSubsample: true // Better quality at lower file sizes
+        })
         .toFile(webpPath)
 
-      console.log(`✓ Created WebP: ${name}${size.suffix}.webp`)
+      // Check file size
+      const stats = fs.statSync(webpPath)
+      const fileSizeKB = (stats.size / 1024).toFixed(2)
+      console.log(
+        `✓ Created WebP: ${name}${size.suffix}.webp (${fileSizeKB} KB)`
+      )
 
       // Generate fallback version with better compression
       const outputPath = path.join(
@@ -54,15 +63,26 @@ const optimizeImage = async (inputPath, filename) => {
 
       if (ext === '.jpg' || ext === '.jpeg') {
         await outputImage
-          .jpeg({ quality: 75, progressive: true })
+          .jpeg({
+            quality: 70, // Reduced from 75
+            progressive: true,
+            mozjpeg: true // Use mozjpeg for better compression
+          })
           .toFile(outputPath)
       } else {
         await outputImage
-          .png({ compressionLevel: 9, quality: 75 })
+          .png({
+            compressionLevel: 9,
+            quality: 70 // Reduced from 75
+          })
           .toFile(outputPath)
       }
 
-      console.log(`✓ Created fallback: ${name}${size.suffix}${ext}`)
+      const fallbackStats = fs.statSync(outputPath)
+      const fallbackSizeKB = (fallbackStats.size / 1024).toFixed(2)
+      console.log(
+        `✓ Created fallback: ${name}${size.suffix}${ext} (${fallbackSizeKB} KB)`
+      )
     } catch (error) {
       console.error(
         `Error processing ${filename} at size ${size.suffix}:`,
@@ -85,3 +105,8 @@ for (const file of files) {
 }
 
 console.log('\n✓ Image optimization complete!')
+console.log('\nImages saved to: public/images/')
+console.log('\nTarget file sizes:')
+console.log('  - Small (400px): ~20-40 KB')
+console.log('  - Medium (800px): ~60-100 KB')
+console.log('  - Large (1200px): ~100-180 KB')

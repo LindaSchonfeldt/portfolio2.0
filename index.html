@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <title>Linda Schönfeldt | Portfolio</title>
+    <title>Linda Schönfeldt | Frontend Developer & UX Designer</title>
 
     <!-- Critical fonts loaded synchronously for faster LCP -->
     <link
@@ -32,20 +32,27 @@
       rel="stylesheet"
     />
 
-    <!-- Preload critical images -->
+    <!-- Preload critical images for first 2 projects (Naima and Portfolio) -->
     <link
       rel="preload"
       as="image"
-      href="/src/assets/optimized/weatherapp-small.webp"
+      href="/images/naima-small.webp"
       type="image/webp"
       media="(max-width: 768px)"
     />
     <link
       rel="preload"
       as="image"
-      href="/src/assets/optimized/weatherapp-medium.webp"
+      href="/images/naima-medium.webp"
       type="image/webp"
-      media="(min-width: 769px)"
+      media="(min-width: 769px) and (max-width: 1200px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/images/naima.webp"
+      type="image/webp"
+      media="(min-width: 1201px)"
     />
   </head>
   <body>
@@ -53,9 +60,6 @@
     <!-- Preload critical scripts -->
     <link rel="modulepreload" href="./src/main.jsx" />
     <script type="module" src="./src/main.jsx"></script>
-
-    <!-- Google reCAPTCHA v2 - loaded dynamically on contact page -->
-    <!-- Removed from initial load to improve performance -->
 
     <!-- Prefetch other routes for faster navigation -->
     <script>
