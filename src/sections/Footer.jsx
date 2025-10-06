@@ -35,8 +35,10 @@ export const Footer = () => {
             reserved.
           </InfoContainer>
           <Logo size='large' alt='' className='footer-logo' />
-          <SocialLinks />
         </FooterContent>
+        <BottomSocials>
+          <SocialLinks />
+        </BottomSocials>
       </ContentContainer>
     </StyledFooter>
   )
@@ -72,6 +74,8 @@ const ContentContainer = styled.div`
   max-width: 1200px;
   margin: 3rem auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   @media ${devices.laptop} {
     max-width: 1200px;
@@ -89,7 +93,7 @@ const FooterBackground = styled.div`
   right: 0;
   bottom: 0;
   opacity: 0.2;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
 
   img {
@@ -97,12 +101,13 @@ const FooterBackground = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: center;
+    z-index: 0;
   }
 `
 
 const FooterContent = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,13 +115,12 @@ const FooterContent = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  height: 100%;
-  padding: 2rem var(--gap-md);
+  padding: 2rem var(--gap-md) 0;
   box-sizing: border-box;
   text-align: flex-start;
   font-family: 'Raleway', sans-serif;
   font-size: 1rem;
-  color: var(--text-main);
+  color: var(--text-light);
 
   .footer-logo {
     display: none;
@@ -153,8 +157,16 @@ const InfoContainer = styled.div`
   }
 `
 
-const FooterText = styled.p`
-  color: var(--text-light);
-  font-size: 0.9rem;
-  margin: 0;
+const BottomSocials = styled.div`
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+  padding: 1rem var(--gap-md) 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @media ${devices.tablet} {
+    justify-content: center;
+  }
 `
