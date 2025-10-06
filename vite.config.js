@@ -14,7 +14,7 @@ export default defineConfig({
           'router-vendor': ['react-router-dom'],
           'styled-vendor': ['styled-components'],
           'motion-vendor': ['framer-motion'],
-          'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'form-vendor': ['react-hook-form'],
           'icons-vendor': ['react-icons']
         }
       }
