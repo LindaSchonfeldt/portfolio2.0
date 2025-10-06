@@ -23,7 +23,6 @@ export const Experience = () => {
         <h2>Experience & Education</h2>
 
         <Timeline>
-          {/* Work Experience */}
           <TimelineItem
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -106,7 +105,6 @@ export const Experience = () => {
               </TimelineDescription>
             </TimelineContent>
           </TimelineItem>
-          {/* Education */}
 
           <TimelineItem
             initial={{ opacity: 0, x: -20 }}
