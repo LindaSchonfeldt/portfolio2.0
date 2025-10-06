@@ -1,67 +1,87 @@
-// optimize-images.js
-import { promises as fs } from 'fs'
+import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
+import { fileURLToPath } from 'url'
 
-// Directory containing your images
-const sourceDir = './src/assets'
-const outputDir = './src/assets/optimized'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-async function optimizeImages() {
-  try {
-    // Ensure output directory exists
-    await fs.mkdir(outputDir, { recursive: true })
+const inputDir = path.join(__dirname, '../src/assets')
+const outputDir = path.join(__dirname, '../src/assets/optimized')
 
-    // Get all files in source directory
-    const files = await fs.readdir(sourceDir)
+// Ensure output directory exists
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true })
+}
 
-    // Filter for image files
-    const imageFiles = files.filter((file) => {
-      const ext = path.extname(file).toLowerCase()
-      return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext)
-    })
+const sizes = [
+  { width: 400, suffix: '-small' },
+  { width: 800, suffix: '-medium' },
+  { width: 1200, suffix: '' }
+]
 
-    console.log(`Found ${imageFiles.length} images to optimize`)
+const optimizeImage = async (inputPath, filename) => {
+  const ext = path.extname(filename).toLowerCase()
+  const name = path.basename(filename, ext)
 
-    // Process each image
-    for (const file of imageFiles) {
-      const inputPath = path.join(sourceDir, file)
-      const fileBase = path.basename(file, path.extname(file))
+  for (const size of sizes) {
+    try {
+      const image = sharp(inputPath)
 
-      // Create multiple sizes for responsive loading
-      const sizes = [
-        { width: 1200, suffix: '' },
-        { width: 800, suffix: '-medium' },
-        { width: 400, suffix: '-small' }
-      ]
+      // Generate WebP version with aggressive compression
+      const webpPath = path.join(outputDir, `${name}${size.suffix}.webp`)
+      await image
+        .clone()
+        .resize(size.width, null, {
+          withoutEnlargement: true,
+          fit: 'inside'
+        })
+        .webp({ quality: 70, effort: 6 }) // Reduced from 75, increased effort
+        .toFile(webpPath)
 
-      for (const size of sizes) {
-        // Create WebP version
-        const webpPath = path.join(outputDir, `${fileBase}${size.suffix}.webp`)
-        await sharp(inputPath)
-          .resize(size.width)
-          .webp({ quality: 75 }) // Reduced from default 80
-          .toFile(webpPath)
+      console.log(`✓ Created WebP: ${name}${size.suffix}.webp`)
 
-        // Create optimized original format version
-        const optimizedPath = path.join(
-          outputDir,
-          `${fileBase}${size.suffix}${path.extname(file)}`
-        )
-        await sharp(inputPath)
-          .resize(size.width)
-          .jpeg({ quality: 80 }) // For JPG
-          .png({ compressionLevel: 9 }) // Max compression for PNG
-          .toFile(optimizedPath)
+      // Generate fallback version with better compression
+      const outputPath = path.join(
+        outputDir,
+        `${name}${size.suffix}${ext === '.jpg' ? '.jpg' : '.png'}`
+      )
+
+      const outputImage = image.clone().resize(size.width, null, {
+        withoutEnlargement: true,
+        fit: 'inside'
+      })
+
+      if (ext === '.jpg' || ext === '.jpeg') {
+        await outputImage
+          .jpeg({ quality: 75, progressive: true })
+          .toFile(outputPath)
+      } else {
+        await outputImage
+          .png({ compressionLevel: 9, quality: 75 })
+          .toFile(outputPath)
       }
 
-      console.log(`Optimized: ${file} → WebP and optimized originals (3 sizes)`)
+      console.log(`✓ Created fallback: ${name}${size.suffix}${ext}`)
+    } catch (error) {
+      console.error(
+        `Error processing ${filename} at size ${size.suffix}:`,
+        error
+      )
     }
-
-    console.log('Image optimization complete!')
-  } catch (err) {
-    console.error('Error optimizing images:', err)
   }
 }
 
-optimizeImages()
+// Process all images in the assets directory
+const files = fs.readdirSync(inputDir)
+
+for (const file of files) {
+  const ext = path.extname(file).toLowerCase()
+  if (['.jpg', '.jpeg', '.png'].includes(ext)) {
+    const inputPath = path.join(inputDir, file)
+    console.log(`\nProcessing: ${file}`)
+    await optimizeImage(inputPath, file)
+  }
+}
+
+console.log('\n✓ Image optimization complete!')
