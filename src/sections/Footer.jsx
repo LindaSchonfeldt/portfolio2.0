@@ -7,6 +7,7 @@ import ResponsiveImage from '../components/ResponsiveImage'
 import { Logo } from '../components/Logo'
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
+import { SocialLinks } from '../components/SocialLinks'
 
 export const Footer = () => {
   return (
@@ -36,6 +37,7 @@ export const Footer = () => {
           </InfoContainer>
           <Logo size='large' alt='' className='footer-logo' />
         </FooterContent>
+        <SocialLinks />
       </ContentContainer>
     </StyledFooter>
   )
@@ -50,6 +52,21 @@ const StyledFooter = styled.footer`
   padding: 0; /* Remove padding as we'll handle it in the FooterContent */
   overflow: hidden; /* Ensure the background stays within the footer */
   box-sizing: border-box;
+
+  background: linear-gradient(
+      to bottom,
+      rgba(13, 69, 58, 0.95),
+      rgba(13, 69, 58, 0.98)
+    ),
+    url('/images/footer.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-top: 2px solid var(--primary-green-dark);
+
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+  }
 `
 
 const ContentContainer = styled.div`
@@ -135,4 +152,10 @@ const InfoContainer = styled.div`
   @media ${devices.tablet} {
     margin-bottom: 0;
   }
+`
+
+const FooterText = styled.p`
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin: 0;
 `
