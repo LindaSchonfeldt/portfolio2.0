@@ -26,7 +26,7 @@
 
     <title>Linda Schönfeldt | Frontend Developer & UX Designer</title>
 
-    <!-- Load fonts asynchronously to avoid render blocking -->
+    <!-- Load fonts asynchronously -->
     <link
       rel="preload"
       as="style"
@@ -44,46 +44,9 @@
         rel="stylesheet"
       />
     </noscript>
-
-    <!-- Preload critical images for first project (Naima) -->
-    <link
-      rel="preload"
-      as="image"
-      href="/images/naima-small.webp"
-      type="image/webp"
-      media="(max-width: 768px)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/images/naima-medium.webp"
-      type="image/webp"
-      media="(min-width: 769px) and (max-width: 1200px)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/images/naima.webp"
-      type="image/webp"
-      media="(min-width: 1201px)"
-    />
   </head>
   <body>
     <div id="root"></div>
-    <!-- Preload critical scripts -->
-    <link rel="modulepreload" href="./src/main.jsx" />
-    <script type="module" src="./src/main.jsx"></script>
-
-    <!-- Prefetch other routes for faster navigation -->
-    <script>
-      // Prefetch route chunks when the page is idle
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          import('./src/pages/Projects.jsx')
-          import('./src/pages/Contact.jsx')
-        })
-      }
-    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
