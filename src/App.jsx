@@ -13,7 +13,9 @@ import GlobalStyle from './styles/GlobalStyle'
 import { preloadRoute } from './utils/routePreloader'
 
 // Lazy loaded components
+const About = lazy(() => import('./pages/About'))
 const Projects = lazy(() => import('./pages/Projects'))
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Home = lazy(() => import('./pages/Home'))
 
@@ -90,6 +92,10 @@ function AppContent() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/projects' element={<Projects />} />
+                <Route
+                  path='/projects/:projectId'
+                  element={<ProjectDetail />}
+                />
                 <Route path='/contact' element={<Contact />} />
               </Routes>
               <Footer />

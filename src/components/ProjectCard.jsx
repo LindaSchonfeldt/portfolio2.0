@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { MdArrowForwardIos } from 'react-icons/md'
 
 import devices from '../styles/devices'
 import { ButtonGroup } from './ButtonGroup'
@@ -38,34 +40,76 @@ export const ProjectCard = ({
   return (
     <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
-        <ImageContainer>
-          {hasVideo ? (
-            <ResponsiveVideo
-              webmSrc={videoWebm}
-              mp4Src={videoMp4}
-              posterSrc={videoPoster}
-              className='project-video'
-              autoPlay={true}
-              loop={true}
-              muted={true}
-              playsInline={true}
-              eager={eager}
-            />
-          ) : imagePath ? (
-            <ResponsiveImage
-              webpSrc={imagePath.replace(/\.png$/, '.webp')}
-              fallbackSrc={imagePath}
-              alt={project.alt || `${project.title} project screenshot`}
-              className='project-image'
-              eager={eager}
-            />
-          ) : (
-            <StyledImage
-              src={new URL('../assets/tree.svg', import.meta.url).href}
-              alt='Placeholder'
-            />
-          )}
-        </ImageContainer>
+        {project.hasDetail ? (
+          <ImageLink to={`/projects/${project.slug || project.id}`}>
+            <ImageContainer>
+              <MediaWrapper>
+                {hasVideo ? (
+                  <ResponsiveVideo
+                    webmSrc={videoWebm}
+                    mp4Src={videoMp4}
+                    posterSrc={videoPoster}
+                    className='project-video'
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
+                    eager={eager}
+                  />
+                ) : imagePath ? (
+                  <ResponsiveImage
+                    webpSrc={imagePath.replace(/\.png$/, '.webp')}
+                    fallbackSrc={imagePath}
+                    alt={project.alt || `${project.title} project screenshot`}
+                    className='project-image'
+                    eager={eager}
+                  />
+                ) : (
+                  <StyledImage
+                    src={new URL('../assets/tree.svg', import.meta.url).href}
+                    alt='Placeholder'
+                  />
+                )}
+              </MediaWrapper>
+              <ImageOverlay>
+                <ViewProjectButton>
+                  View Project <MdArrowForwardIos />
+                </ViewProjectButton>
+              </ImageOverlay>
+            </ImageContainer>
+          </ImageLink>
+        ) : (
+          <ImageContainer>
+            <MediaWrapper>
+              {hasVideo ? (
+                <ResponsiveVideo
+                  webmSrc={videoWebm}
+                  mp4Src={videoMp4}
+                  posterSrc={videoPoster}
+                  className='project-video'
+                  autoPlay={true}
+                  loop={true}
+                  muted={true}
+                  playsInline={true}
+                  eager={eager}
+                />
+              ) : imagePath ? (
+                <ResponsiveImage
+                  webpSrc={imagePath.replace(/\.png$/, '.webp')}
+                  fallbackSrc={imagePath}
+                  alt={project.alt || `${project.title} project screenshot`}
+                  className='project-image'
+                  eager={eager}
+                />
+              ) : (
+                <StyledImage
+                  src={new URL('../assets/tree.svg', import.meta.url).href}
+                  alt='Placeholder'
+                />
+              )}
+            </MediaWrapper>
+          </ImageContainer>
+        )}
         <TextContainer>
           <CategoryContainer>
             {project.categories &&
@@ -79,8 +123,10 @@ export const ProjectCard = ({
             <ButtonGroup actions={actions} />
           </LinkContainer>
           <StackContainer>
-            {project.stack &&
-              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
+            {project.technologies &&
+              project.technologies.map((tag, index) => (
+                <Tag key={index} text={tag} />
+              ))}
           </StackContainer>
         </TextContainer>
       </CardContent>
@@ -127,15 +173,18 @@ const ImageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 180px;
+  height: 100%;
   position: relative;
   overflow: hidden;
+`
 
-  @media ${devices.tablet} {
-    flex: 1;
-    height: 100%;
-    min-height: 250px;
-  }
+const MediaWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 
   /* Style for ResponsiveImage */
   .project-image,
@@ -159,6 +208,70 @@ const ImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+`
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(13, 69, 58, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  pointer-events: none;
+`
+
+const ViewProjectButton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--accent-orange);
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  pointer-events: auto;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
+    svg {
+      transform: translateX(5px);
+    }
+  }
+`
+
+const ImageLink = styled(Link)`
+  display: block;
+  width: 100%;
+  height: 180px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+
+  @media ${devices.tablet} {
+    flex: 1;
+    height: 100%;
+    min-height: 250px;
+  }
+
+  &:hover {
+    ${ImageOverlay} {
+      opacity: 1;
+    }
   }
 `
 

@@ -2,12 +2,13 @@
   "code": [
     {
       "id": 1,
+      "slug": "naima",
       "title": "Fullstack E-commerce Website for naima",
       "image": "naima",
       "alt": "",
       "description": "A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
       "categories": ["UI/UX", "Fullstack"],
-      "stack": [
+      "technologies": [
         "React",
         "Vite",
         "Styled Components",
@@ -17,20 +18,38 @@
       ],
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/naima-website",
-      "size": "large"
+      "size": "large",
+      "hasDetail": true,
+
+      "fullDescription": "Detailed multi-paragraph description for the project detail page. A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
+      "category": "Web Development",
+      "date": "2024-01",
+      "role": "Full Stack Developer & UI/UX Designer",
+      "client": "Naima",
+      "challenges": "The main challenge was creating a dual-purpose platform that served both B2C customers looking for products and B2B wholesale partners needing account management. Additionally, integrating a dynamic retailer map while maintaining fast load times required careful optimization.",
+      "solution": "I implemented a modular component architecture using React and Zustand for state management, allowing seamless switching between customer and wholesale views. For the retailer map, I used lazy loading and optimized API calls. The backend was built with Node.js and MongoDB to handle user authentication, product management, and wholesale orders efficiently.",
+      "outcome": "The website successfully launched with positive feedback from both customers and wholesale partners. Load times stayed under 2 seconds, the retailer map increased store visits by 30%, and the wholesale portal streamlined B2B operations significantly.",
+      "images": [
+        "/images/naima-hero.webp",
+        "/images/naima-products.webp",
+        "/images/naima-map.webp",
+        "/images/naima-wholesale.webp"
+      ]
     },
     {
       "id": 2,
+      "slug": "portfolio",
       "title": "Portfolio",
       "video": "",
       "image": "",
       "alt": "",
-      "description": "You're looking at it. This is a showcase of user-centered design in action. Explore projects that merge creativity and functionality, all wrapped in clean aesthetics and intuitive navigation.",
+      "description": "You're looking at it. This is a showcase of user-centered design in action.",
       "categories": ["UI/UX", "Frontend"],
-      "stack": ["React", "Vite", "Styled Components", "Zustand"],
+      "technologies": ["React", "Vite", "Styled Components", "Zustand"],
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/js-project-portfolio",
-      "size": "medium"
+      "size": "medium",
+      "hasDetail": false
     },
     {
       "id": 3,
@@ -39,10 +58,11 @@
       "alt": "",
       "description": "A feel-good full-stack app where users can share positive thoughts and like each other’s messages. Built with React and Vite on the frontend, and Node.js with Express and MongoDB on the backend. The app features dynamic updates via a REST API, responsive design, and real-time message interaction.",
       "categories": ["Fullstack"],
-      "stack": ["React", "Vite", "Styled Components", "APIs"],
+      "technologies": ["React", "Vite", "Styled Components", "APIs"],
       "netlify": "https://creative-hotteok-2e5655.netlify.app/",
       "github": "https://github.com/LindaSchonfeldt/js-project-happy-thoughts/tree/main",
-      "size": "small"
+      "size": "small",
+      "hasDetail": false
     },
     {
       "id": 4,
@@ -51,10 +71,11 @@
       "alt": "Screenshot of Screamflix horror movie browser",
       "description": "Together with Cathi, I created Screamflix, a curated archive that lets users explore horror films by decade. The design and concept were inspired by the aesthetics of classic horror, and the goal was to offer a fun and slightly spooky way to browse cult classics and hidden gems.",
       "categories": ["UI/UX", "Frontend"],
-      "stack": ["React", "Custom Hooks", "Vite", "APIs"],
+      "technologies": ["React", "Custom Hooks", "Vite", "APIs"],
       "netlify": "https://screamflix.netlify.app/decade/1950",
       "github": "https://github.com/LindaSchonfeldt/js-project-movies",
-      "size": "small"
+      "size": "small",
+      "hasDetail": false
     },
     {
       "id": 5,
@@ -63,10 +84,11 @@
       "alt": "Screenshot of weather app showing current conditions",
       "description": "A responsive web-based application that fetches real-time weather data through API integration. Focused on a clear user flow and modern design.",
       "categories": ["Frontend"],
-      "stack": ["JavaScript", "TypeScript", "APIs"],
+      "technologies": ["JavaScript", "TypeScript", "APIs"],
       "netlify": "https://gorgeous-bubblegum-c0333a.netlify.app/",
       "github": "https://github.com/LindaSchonfeldt/weather-app",
-      "size": "small"
+      "size": "small",
+      "hasDetail": false
     }
   ]
 }

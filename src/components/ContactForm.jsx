@@ -1,10 +1,11 @@
-import { useForm } from 'react-hook-form'
 import emailjs from 'emailjs-com'
-import styled from 'styled-components'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
-import devices from '../styles/devices'
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
 import validator from 'validator'
+
+import devices from '../styles/devices'
 import { Button } from './Button'
 
 // Load environment variables for EmailJS and reCAPTCHA
@@ -24,17 +25,6 @@ export const ContactForm = () => {
   const [recaptchaToken, setRecaptchaToken] = useState(null)
   const [recaptchaError, setRecaptchaError] = useState(null)
   const recaptchaRef = useRef(null)
-
-  // Load reCAPTCHA script dynamically only when contact form is rendered
-  useEffect(() => {
-    if (!window.grecaptcha) {
-      const script = document.createElement('script')
-      script.src = 'https://www.google.com/recaptcha/api.js'
-      script.async = true
-      script.defer = true
-      document.body.appendChild(script)
-    }
-  }, [])
 
   const onRecaptchaChange = (token) => {
     setRecaptchaToken(token)
