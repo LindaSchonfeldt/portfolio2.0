@@ -47,7 +47,7 @@
       "categories": ["UI/UX", "Frontend"],
       "technologies": ["React", "Vite", "Styled Components", "Zustand"],
       "netlify": "",
-      "github": "https://github.com/LindaSchonfeldt/js-project-portfolio",
+      "github": "https://github.com/LindaSchonfeldt/portfolio2.0",
       "size": "medium",
       "hasDetail": false
     },
@@ -60,7 +60,7 @@
       "categories": ["Fullstack"],
       "technologies": ["React", "Vite", "Styled Components", "APIs"],
       "netlify": "https://creative-hotteok-2e5655.netlify.app/",
-      "github": "https://github.com/LindaSchonfeldt/js-project-happy-thoughts/tree/main",
+      "github": "https://github.com/LindaSchonfeldt/js-project-happy-thoughts",
       "size": "small",
       "hasDetail": false
     },
