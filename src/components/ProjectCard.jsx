@@ -2,6 +2,7 @@ import { MdArrowForwardIos } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import siteConfig from '../data/siteConfig.json'
 import devices from '../styles/devices'
 import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
@@ -37,79 +38,74 @@ export const ProjectCard = ({
   // Determine whether to show video or image
   const hasVideo = project.video && (videoWebm || videoMp4)
 
+  // Check if project is under construction (only matters if hasDetail is true)
+  const isUnderConstruction =
+    project.hasDetail &&
+    siteConfig.underConstruction.projectIds.includes(project.id)
+
+  // Determine if the link should be clickable
+  // Link is disabled if: no detail page OR under construction
+  const isLinkDisabled = !project.hasDetail || isUnderConstruction
+
+  // Render media content
+  const mediaContent = (
+    <ImageContainer>
+      <MediaWrapper>
+        {hasVideo ? (
+          <ResponsiveVideo
+            webmSrc={videoWebm}
+            mp4Src={videoMp4}
+            posterSrc={videoPoster}
+            className='project-video'
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            eager={eager}
+          />
+        ) : imagePath ? (
+          <ResponsiveImage
+            webpSrc={imagePath.replace(/\.png$/, '.webp')}
+            fallbackSrc={imagePath}
+            alt={project.alt || `${project.title} project screenshot`}
+            className='project-image'
+            eager={eager}
+          />
+        ) : (
+          <StyledImage
+            src={new URL('../assets/tree.svg', import.meta.url).href}
+            alt='Placeholder'
+          />
+        )}
+      </MediaWrapper>
+      <ImageOverlay>
+        <ViewProjectButton $disabled={isLinkDisabled}>
+          {!project.hasDetail ? (
+            <>🚧 No Details Available</>
+          ) : isUnderConstruction ? (
+            <>🚧 Under Construction</>
+          ) : (
+            <>
+              View Project <MdArrowForwardIos />
+            </>
+          )}
+        </ViewProjectButton>
+      </ImageOverlay>
+    </ImageContainer>
+  )
+
   return (
     <CardContainer size={size} $fullRow={fullRow}>
       <CardContent>
-        {project.hasDetail ? (
-          <ImageLink to={`/projects/${project.slug || project.id}`}>
-            <ImageContainer>
-              <MediaWrapper>
-                {hasVideo ? (
-                  <ResponsiveVideo
-                    webmSrc={videoWebm}
-                    mp4Src={videoMp4}
-                    posterSrc={videoPoster}
-                    className='project-video'
-                    autoPlay={true}
-                    loop={true}
-                    muted={true}
-                    playsInline={true}
-                    eager={eager}
-                  />
-                ) : imagePath ? (
-                  <ResponsiveImage
-                    webpSrc={imagePath.replace(/\.png$/, '.webp')}
-                    fallbackSrc={imagePath}
-                    alt={project.alt || `${project.title} project screenshot`}
-                    className='project-image'
-                    eager={eager}
-                  />
-                ) : (
-                  <StyledImage
-                    src={new URL('../assets/tree.svg', import.meta.url).href}
-                    alt='Placeholder'
-                  />
-                )}
-              </MediaWrapper>
-              <ImageOverlay>
-                <ViewProjectButton>
-                  View Project <MdArrowForwardIos />
-                </ViewProjectButton>
-              </ImageOverlay>
-            </ImageContainer>
-          </ImageLink>
+        {/* Conditionally render Link or div based on isLinkDisabled */}
+        {isLinkDisabled ? (
+          <ImageWrapper>{mediaContent}</ImageWrapper>
         ) : (
-          <ImageContainer>
-            <MediaWrapper>
-              {hasVideo ? (
-                <ResponsiveVideo
-                  webmSrc={videoWebm}
-                  mp4Src={videoMp4}
-                  posterSrc={videoPoster}
-                  className='project-video'
-                  autoPlay={true}
-                  loop={true}
-                  muted={true}
-                  playsInline={true}
-                  eager={eager}
-                />
-              ) : imagePath ? (
-                <ResponsiveImage
-                  webpSrc={imagePath.replace(/\.png$/, '.webp')}
-                  fallbackSrc={imagePath}
-                  alt={project.alt || `${project.title} project screenshot`}
-                  className='project-image'
-                  eager={eager}
-                />
-              ) : (
-                <StyledImage
-                  src={new URL('../assets/tree.svg', import.meta.url).href}
-                  alt='Placeholder'
-                />
-              )}
-            </MediaWrapper>
-          </ImageContainer>
+          <ImageLink to={`/projects/${project.slug || project.id}`}>
+            {mediaContent}
+          </ImageLink>
         )}
+
         <TextContainer>
           <CategoryContainer>
             {project.categories &&
@@ -123,10 +119,8 @@ export const ProjectCard = ({
             <ButtonGroup actions={actions} />
           </LinkContainer>
           <StackContainer>
-            {project.technologies &&
-              project.technologies.map((tag, index) => (
-                <Tag key={index} text={tag} />
-              ))}
+            {project.stack &&
+              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
           </StackContainer>
         </TextContainer>
       </CardContent>
@@ -232,24 +226,39 @@ const ViewProjectButton = styled.div`
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 2rem;
-  background: var(--accent-orange);
+  background: ${({ $disabled }) =>
+    $disabled ? 'var(--text-secondary)' : 'var(--accent-orange)'};
   color: white;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: transform 0.2s ease;
   pointer-events: auto;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ $disabled }) => ($disabled ? '0.7' : '1')};
 
   svg {
     transition: transform 0.2s ease;
   }
+`
+
+const ImageWrapper = styled.div`
+  display: block;
+  width: 100%;
+  height: 180px;
+  position: relative;
+  cursor: default;
+
+  @media ${devices.tablet} {
+    flex: 1;
+    height: 100%;
+    min-height: 250px;
+  }
 
   &:hover {
-    transform: scale(1.05);
-
-    svg {
-      transform: translateX(5px);
+    ${ImageOverlay} {
+      opacity: 1;
     }
   }
 `
@@ -271,6 +280,14 @@ const ImageLink = styled(Link)`
   &:hover {
     ${ImageOverlay} {
       opacity: 1;
+    }
+
+    ${ViewProjectButton} {
+      transform: scale(1.05);
+
+      svg {
+        transform: translateX(5px);
+      }
     }
   }
 `

@@ -1,11 +1,8 @@
 {
   "_comment": "Configuration for pages under construction",
   "underConstruction": {
-    "_comment": "Array of case study IDs that are under construction",
-    "code": [1],
-    "caseStudies": [1],
-    "articles": [1],
-    "_pagesComment": "Could also track other pages",
-    "pages": []
+    "_comment": "Array of project IDs that are under construction",
+    "projectIds": [1, 3],
+    "_note": "Projects with these IDs will show 'under construction' message instead of full detail page"
   }
 }
