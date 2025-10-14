@@ -1,15 +1,15 @@
+import { MdArrowForwardIos } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { MdArrowForwardIos } from 'react-icons/md'
 
 import devices from '../styles/devices'
+import { getMediaPath } from '../utils/mediaPath'
+import { getProjectActions } from '../utils/projectActions'
 import { ButtonGroup } from './ButtonGroup'
 import { ReadMore } from './ReadMore'
 import ResponsiveImage from './ResponsiveImage'
 import ResponsiveVideo from './ResponsiveVideo'
 import { Tag } from './Tag'
-import { getMediaPath } from '../utils/mediaPath'
-import { getProjectActions } from '../utils/projectActions'
 
 export const ProjectCard = ({
   project,
@@ -237,7 +237,7 @@ const ViewProjectButton = styled.div`
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: transform 0.2s ease;
   pointer-events: auto;
 
