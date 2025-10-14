@@ -1,108 +1,88 @@
-import emailjs from 'emailjs-com'
-import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import validator from 'validator'
 
+import { useEmailForm } from '../hooks/useEmailForm'
+import { useRecaptcha } from '../hooks/useRecaptcha'
 import devices from '../styles/devices'
 import { Button } from './Button'
-
-// Load environment variables for EmailJS and reCAPTCHA
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY
 
 export const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful }
-  } = useForm()
+    errors,
+    isSubmitting,
+    submitSuccess,
+    submitError,
+    onSubmit,
+    formRef
+  } = useEmailForm()
 
-  const [recaptchaToken, setRecaptchaToken] = useState(null)
-  const [recaptchaError, setRecaptchaError] = useState(null)
-  const recaptchaRef = useRef(null)
+  const {
+    recaptchaToken,
+    recaptchaError,
+    recaptchaRef,
+    recaptchaSiteKey,
+    onRecaptchaChange,
+    onRecaptchaError,
+    onRecaptchaExpired,
+    resetRecaptcha,
+    setRecaptchaError
+  } = useRecaptcha()
 
-  const onRecaptchaChange = (token) => {
-    setRecaptchaToken(token)
-    setRecaptchaError(null)
-  }
-
-  const onRecaptchaError = () => {
-    console.error('reCAPTCHA error occurred')
-    setRecaptchaError('reCAPTCHA failed to load. Please refresh and try again.')
-    setRecaptchaToken(null)
-  }
-
-  const onRecaptchaExpired = () => {
-    console.warn('reCAPTCHA expired')
-    setRecaptchaToken(null)
-    setRecaptchaError('reCAPTCHA expired. Please verify again.')
-  }
-
-  const onSubmit = async (data) => {
-    // Check if reCAPTCHA is completed
+  const handleFormSubmit = async (data) => {
     if (!recaptchaToken) {
-      alert('Please complete the reCAPTCHA verification.')
+      setRecaptchaError('Please complete the reCAPTCHA verification.')
       return
     }
 
-    // Validate email using validator.js
-    if (!validator.isEmail(data.email)) {
-      alert('Please enter a valid email address.')
-      return
-    }
-
-    try {
-      // Include reCAPTCHA token in the email data
-      const emailData = {
-        ...data,
-        'g-recaptcha-response': recaptchaToken
-      }
-
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailData, USER_ID)
-      reset()
-      setRecaptchaToken(null)
-      recaptchaRef.current?.reset()
-      alert('Message sent!')
-    } catch (error) {
-      console.error('EmailJS error:', error)
-      alert('Failed to send message.')
+    const success = await onSubmit(data, recaptchaToken)
+    if (success) {
+      resetRecaptcha()
     }
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm ref={formRef} onSubmit={handleSubmit(handleFormSubmit)}>
       <InputRow>
         <label htmlFor='name'>Name</label>
-        <input id='name' {...register('name', { required: true })} />
-        {errors.name && <span>Name is required</span>}
+        <input
+          id='name'
+          name='from_name'
+          {...register('from_name', { required: 'Name is required' })}
+        />
+        {errors.from_name && <ErrorText>{errors.from_name.message}</ErrorText>}
       </InputRow>
 
       <InputRow>
         <label htmlFor='email'>Email</label>
         <input
           id='email'
+          name='reply_to'
           type='email'
-          {...register('email', { required: true })}
+          {...register('reply_to', {
+            required: 'Email is required'
+          })}
         />
-        {errors.email && <span>Email is required</span>}
+        {errors.reply_to && <ErrorText>{errors.reply_to.message}</ErrorText>}
       </InputRow>
 
       <InputRow>
         <label htmlFor='message'>Message</label>
-        <textarea id='message' {...register('message', { required: true })} />
-        {errors.message && <span>Message is required</span>}
+        <textarea
+          id='message'
+          name='message'
+          rows={5}
+          {...register('message', { required: 'Message is required' })}
+        />
+        {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
       </InputRow>
 
-      {RECAPTCHA_SITE_KEY ? (
+      {recaptchaSiteKey ? (
         <RecaptchaContainer>
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={RECAPTCHA_SITE_KEY}
+            sitekey={recaptchaSiteKey}
             onChange={onRecaptchaChange}
             onErrored={onRecaptchaError}
             onExpired={onRecaptchaExpired}
@@ -118,10 +98,16 @@ export const ContactForm = () => {
 
       <Button
         type='submit'
-        label='Send'
+        label={isSubmitting ? 'Sending...' : 'Send'}
         disabled={isSubmitting || !recaptchaToken}
       />
-      {isSubmitSuccessful && <p>Thank you for your message!</p>}
+
+      {submitSuccess && (
+        <SuccessMessage>
+          ✓ Thank you! Your message has been sent.
+        </SuccessMessage>
+      )}
+      {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
     </StyledForm>
   )
 }
@@ -162,8 +148,9 @@ const StyledForm = styled.form`
     }
   }
 
-  span {
-    color: red;
+  textarea {
+    resize: vertical;
+    min-height: 100px;
   }
 
   @media ${devices.tablet} {
@@ -194,10 +181,25 @@ const RecaptchaContainer = styled.div`
   }
 `
 
+const ErrorText = styled.span`
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+`
+
 const ErrorMessage = styled.div`
   color: red;
   font-size: 0.9rem;
   margin-top: 0.5rem;
   text-align: center;
   font-family: 'Raleway', sans-serif;
+`
+
+const SuccessMessage = styled.div`
+  color: var(--primary-green-dark);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
 `
