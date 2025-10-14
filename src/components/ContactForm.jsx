@@ -14,7 +14,7 @@ export const ContactForm = () => {
     isSubmitting,
     submitSuccess,
     submitError,
-    onSubmit,
+    sendEmail,
     formRef
   } = useEmailForm()
 
@@ -26,24 +26,16 @@ export const ContactForm = () => {
     onRecaptchaChange,
     onRecaptchaError,
     onRecaptchaExpired,
-    resetRecaptcha,
-    setRecaptchaError
+    resetRecaptcha
   } = useRecaptcha()
 
-  const handleFormSubmit = async (data) => {
-    if (!recaptchaToken) {
-      setRecaptchaError('Please complete the reCAPTCHA verification.')
-      return
-    }
-
-    const success = await onSubmit(data, recaptchaToken)
-    if (success) {
-      resetRecaptcha()
-    }
+  const onSubmit = async () => {
+    const success = await sendEmail(recaptchaToken)
+    if (success) resetRecaptcha()
   }
 
   return (
-    <StyledForm ref={formRef} onSubmit={handleSubmit(handleFormSubmit)}>
+    <StyledForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
       <InputRow>
         <label htmlFor='name'>Name</label>
         <input
@@ -60,9 +52,7 @@ export const ContactForm = () => {
           id='email'
           name='reply_to'
           type='email'
-          {...register('reply_to', {
-            required: 'Email is required'
-          })}
+          {...register('reply_to', { required: 'Email is required' })}
         />
         {errors.reply_to && <ErrorText>{errors.reply_to.message}</ErrorText>}
       </InputRow>
@@ -91,9 +81,7 @@ export const ContactForm = () => {
           {recaptchaError && <ErrorMessage>{recaptchaError}</ErrorMessage>}
         </RecaptchaContainer>
       ) : (
-        <ErrorMessage>
-          reCAPTCHA not configured. Please check your environment variables.
-        </ErrorMessage>
+        <ErrorMessage>reCAPTCHA not configured.</ErrorMessage>
       )}
 
       <Button
@@ -103,9 +91,7 @@ export const ContactForm = () => {
       />
 
       {submitSuccess && (
-        <SuccessMessage>
-          ✓ Thank you! Your message has been sent.
-        </SuccessMessage>
+        <SuccessMessage>✓ Message sent successfully!</SuccessMessage>
       )}
       {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
     </StyledForm>
