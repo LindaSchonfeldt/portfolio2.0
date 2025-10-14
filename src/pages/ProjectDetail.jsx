@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi'
+import { FiExternalLink, FiGithub } from 'react-icons/fi'
+import { IoIosArrowBack } from 'react-icons/io'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -45,7 +46,7 @@ const ProjectDetail = () => {
       >
         <SectionContainer>
           <BackLink to='/projects'>
-            <FiArrowLeft /> Back to Projects
+            <IoIosArrowBack /> Back to Projects
           </BackLink>
 
           <ProjectHero>
@@ -86,6 +87,23 @@ const ProjectDetail = () => {
 
           <ContentGrid>
             <MainContent>
+              {/* Mobile/Tablet: Show Role and Client before Overview */}
+              <MobileMetaSection>
+                {project.role && (
+                  <MetaCard>
+                    <h3>Role</h3>
+                    <p>{project.role}</p>
+                  </MetaCard>
+                )}
+
+                {project.client && (
+                  <MetaCard>
+                    <h3>Client</h3>
+                    <p>{project.client}</p>
+                  </MetaCard>
+                )}
+              </MobileMetaSection>
+
               {project.fullDescription && (
                 <Section>
                   <h2>Overview</h2>
@@ -181,17 +199,11 @@ const BackLink = styled(Link)`
 `
 
 const ProjectHero = styled.div`
-  text-align: center;
   margin-bottom: 3rem;
 `
 
 const ProjectTitle = styled.h1`
-  font-size: 2rem;
   margin-bottom: 1rem;
-
-  @media ${devices.tablet} {
-    font-size: 4rem;
-  }
 `
 
 const ProjectMeta = styled.div`
@@ -235,15 +247,46 @@ const HeroImage = styled.img`
 
 const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 3rem;
 
-  @media ${devices.tablet} {
-    grid-template-columns: 1fr;
+  @media ${devices.laptop} {
+    grid-template-columns: 2fr 1fr;
   }
 `
 
 const MainContent = styled.div``
+
+const MobileMetaSection = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media ${devices.tablet} {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media ${devices.laptop} {
+    display: none;
+  }
+`
+
+const MetaCard = styled.div`
+  background: var(--background-light);
+  border-radius: 8px;
+
+  h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-green-dark);
+    font-size: 1.5rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+`
 
 const Section = styled.section`
   margin-bottom: 3rem;
@@ -275,7 +318,13 @@ const GalleryImage = styled.img`
   }
 `
 
-const Sidebar = styled.aside``
+const Sidebar = styled.aside`
+  display: none;
+
+  @media ${devices.laptop} {
+    display: block;
+  }
+`
 
 const SidebarSection = styled.div`
   margin-bottom: 2rem;
