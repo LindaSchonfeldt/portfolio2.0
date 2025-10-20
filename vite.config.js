@@ -1,19 +1,8 @@
 import react from '@vitejs/plugin-react'
-import process from 'process'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [
-    react({
-      // Disable React DevTools in production
-      babel: {
-        plugins:
-          process.env.NODE_ENV === 'production'
-            ? [['transform-react-remove-prop-types', { removeImport: true }]]
-            : []
-      }
-    })
-  ],
+  plugins: [react()],
   build: {
     minify: 'terser',
     terserOptions: {
@@ -50,7 +39,6 @@ export default defineConfig({
             if (id.includes('emailjs')) {
               return 'email-vendor'
             }
-            // All other node_modules
             return 'vendor'
           }
         }
