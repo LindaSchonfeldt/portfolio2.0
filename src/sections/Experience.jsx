@@ -32,7 +32,7 @@ export const Experience = () => {
               <FaBriefcase />
             </TimelineIcon>
             <TimelineContent>
-              <TimelinePeriod>Sep 2025 - Present</TimelinePeriod>
+              <TimelinePeriod>Sept - Oct 2025</TimelinePeriod>
               <TimelineTitle>Frontend Developer Intern</TimelineTitle>
               <TimelineInstitution>FIXMEAPP</TimelineInstitution>
               <TimelineDescription>
