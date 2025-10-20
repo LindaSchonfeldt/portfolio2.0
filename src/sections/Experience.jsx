@@ -32,6 +32,27 @@ export const Experience = () => {
               <FaBriefcase />
             </TimelineIcon>
             <TimelineContent>
+              <TimelinePeriod>Nov 2024 - Present</TimelinePeriod>
+              <TimelineTitle>UX/UI Designer / Frontend Developer</TimelineTitle>
+              <TimelineInstitution>Sampler</TimelineInstitution>
+              <TimelineDescription>
+                Designing and developing a marketing game and a client-facing
+                web portal. Working with React and modern JavaScript to create
+                engaging user experiences that connect brands with consumers
+                through gamified sampling.
+              </TimelineDescription>
+            </TimelineContent>
+          </TimelineItem>
+
+          <TimelineItem
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <TimelineIcon>
+              <FaBriefcase />
+            </TimelineIcon>
+            <TimelineContent>
               <TimelinePeriod>Sept - Oct 2025</TimelinePeriod>
               <TimelineTitle>Frontend Developer Intern</TimelineTitle>
               <TimelineInstitution>FIXMEAPP</TimelineInstitution>
@@ -60,27 +81,6 @@ export const Experience = () => {
                 Intensive 32-week bootcamp focused on modern web development
                 technologies. Built multiple projects using React, Node.js, and
                 other frontend technologies.
-              </TimelineDescription>
-            </TimelineContent>
-          </TimelineItem>
-
-          <TimelineItem
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <TimelineIcon>
-              <FaBriefcase />
-            </TimelineIcon>
-            <TimelineContent>
-              <TimelinePeriod>Nov 2024 - Present</TimelinePeriod>
-              <TimelineTitle>UX/UI Designer / Frontend Developer</TimelineTitle>
-              <TimelineInstitution>Sampler</TimelineInstitution>
-              <TimelineDescription>
-                Designing and developing a marketing game and a client-facing
-                web portal. Working with React and modern JavaScript to create
-                engaging user experiences that connect brands with consumers
-                through gamified sampling.
               </TimelineDescription>
             </TimelineContent>
           </TimelineItem>
