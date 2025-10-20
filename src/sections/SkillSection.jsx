@@ -2,15 +2,12 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import styled from 'styled-components'
 
+import skillsData from '../data/content.json'
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
-import skillsData from '../data/content.json'
 
 export const SkillSection = () => {
-  // Create a ref for the section
   const sectionRef = useRef(null)
-
-  // Check if section is in view (with some margin to trigger slightly before it's fully visible)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
 
   return (
@@ -20,33 +17,29 @@ export const SkillSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          as={SkillStyles}
         >
-          <SkillStyles>
-            <h2>Skills</h2>
-            <div className='skillContainer'>
-              {skillsData.skills.map((skillGroup) => (
-                <div
-                  className={`skillList ${skillGroup.category.toLowerCase()}`}
-                  key={skillGroup.category}
-                >
-                  <h3>{skillGroup.category}</h3>
-                  <ul>
-                    {skillGroup.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </SkillStyles>
+          <h2>Skills</h2>
+          <div className='skillContainer'>
+            {skillsData.skills.map((skillGroup) => (
+              <div
+                className={`skillList ${skillGroup.category.toLowerCase()}`}
+                key={skillGroup.category}
+              >
+                <h3>{skillGroup.category}</h3>
+                <ul>
+                  {skillGroup.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </MotionSkillsContent>
       </ContentContainer>
     </StyledSkillsSection>
   )
 }
 
-// Create a styled version of SectionContainer
 const StyledSkillsSection = styled.section`
   ${fullBleed}
   background-color: var(--background-green);
@@ -72,7 +65,6 @@ const ContentContainer = styled.div`
   }
 `
 
-// Style the inner content
 const SkillStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,7 +88,7 @@ const SkillStyles = styled.div`
     list-style: none;
     padding: 0;
     margin: 0;
-    flex-grow: 1; /* Allow list to fill available space */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -112,12 +104,10 @@ const SkillStyles = styled.div`
     color: var(--primary-green-dark);
   }
 
-  /* Mobile spacing between sections (without dividers) */
   .skillList:not(:last-child) {
     margin-bottom: var(--gap-sm);
   }
 
-  /* Container for all skill lists */
   .skillContainer {
     display: flex;
     flex-direction: column;
@@ -125,15 +115,14 @@ const SkillStyles = styled.div`
     width: 100%;
   }
 
-  /* Tablet layout */
   @media ${devices.tablet} {
     .skillContainer {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: 
-        "code design"
-        "toolbox more"
-        "upcoming .";
+      grid-template-areas:
+        'code design'
+        'toolbox more'
+        'upcoming .';
       gap: var(--gap-sm);
       justify-content: center;
       align-items: stretch;
@@ -149,7 +138,6 @@ const SkillStyles = styled.div`
       min-height: 200px;
     }
 
-    /* Target skill sections by their class names */
     .skillList.code {
       grid-area: code;
     }
@@ -169,21 +157,16 @@ const SkillStyles = styled.div`
     .skillList.upcoming {
       grid-area: upcoming;
     }
-
-    .divider {
-      display: none; /* Hide dividers on tablet */
-    }
   }
 
-  /* Desktop layout */
   @media ${devices.laptop} {
     .skillContainer {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      grid-template-areas: "code design toolbox more upcoming";
+      grid-template-areas: 'code design toolbox more upcoming';
       gap: 2.5rem;
       justify-content: space-between;
-      align-items: stretch; /* Make all columns equal height */
+      align-items: stretch;
     }
 
     .skillList {
@@ -204,14 +187,12 @@ const SkillStyles = styled.div`
       list-style: none;
       padding: 0;
       margin: 0;
-      flex-grow: 1; /* Allow list to fill available space */
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
     }
   }
-  }
 `
 
-// Motion component for animating the skill section content
 const MotionSkillsContent = motion(SkillStyles)
