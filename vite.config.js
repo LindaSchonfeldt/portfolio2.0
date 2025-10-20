@@ -8,46 +8,27 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info']
-      },
-      mangle: {
-        safari10: true
+        drop_debugger: true
       }
     },
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // Split vendor chunks for better caching
-          if (id.includes('node_modules')) {
-            if (
-              id.includes('react') ||
-              id.includes('react-dom') ||
-              id.includes('react-router')
-            ) {
-              return 'react-vendor'
-            }
-            if (id.includes('styled-components')) {
-              return 'styled-vendor'
-            }
-            if (id.includes('framer-motion')) {
-              return 'framer-vendor'
-            }
-            if (id.includes('react-icons')) {
-              return 'icons-vendor'
-            }
-            if (id.includes('emailjs')) {
-              return 'email-vendor'
-            }
-            return 'vendor'
-          }
+        manualChunks: {
+          // Keep all React packages together in ONE chunk
+          'react-vendor': [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            'react-router',
+            'react-hook-form',
+            'zustand'
+          ],
+          styled: ['styled-components'],
+          motion: ['framer-motion'],
+          icons: ['react-icons'],
+          email: ['@emailjs/browser', 'validator']
         }
       }
-    },
-    chunkSizeWarningLimit: 1000,
-    cssCodeSplit: true
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom']
+    }
   }
 })
