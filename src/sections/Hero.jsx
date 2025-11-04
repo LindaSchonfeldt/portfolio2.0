@@ -61,7 +61,7 @@ export const Hero = () => {
               variant='primary'
               label={'Download CV'}
               className='heroButton'
-              url='/cv.pdf'
+              url='/linda.schonfeldt_cv.pdf'
               aria-label='Download CV'
             />
           </ButtonWrapper>
