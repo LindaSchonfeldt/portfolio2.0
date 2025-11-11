@@ -9,8 +9,8 @@
       "description": "A clean, user-friendly website for Billig Bokföring, a Swedish bookkeeping service targeting businesses and freelancers. The site emphasizes clarity and ease of navigation, providing essential information about services, pricing, and contact options.",
       "categories": ["UI/UX", "Frontend"],
       "technologies": ["React", "Vite", "Chakra UI"],
-      "netlify": "https://billig-bokforing.se/",
-      "github": "https://github.com/LindaSchonfeldt/billig-bokforing",
+      "netlify": "https://billigbokforing.se/",
+      "github": "https://github.com/LindaSchonfeldt/accounting-website",
       "size": "large",
       "hasDetail": false
     },
