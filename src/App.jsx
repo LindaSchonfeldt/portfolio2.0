@@ -8,7 +8,7 @@ import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
 import ScrollToTop from './components/ScrollToTop'
-import { Footer } from './sections/Footer'
+import { Footer } from './components/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 import { preloadRoute } from './utils/routePreloader'
 

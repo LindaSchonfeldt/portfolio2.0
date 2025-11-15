@@ -1,11 +1,11 @@
 import { IoMail } from 'react-icons/io5'
 import styled from 'styled-components'
 
-import ResponsiveImage from '../components/ResponsiveImage'
-import { Logo } from '../components/Logo'
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
-import { SocialLinks } from '../components/SocialLinks'
+import { Logo } from './Logo'
+import ResponsiveImage from './ResponsiveImage'
+import { SocialLinks } from './SocialLinks'
 
 export const Footer = () => {
   return (
@@ -22,12 +22,7 @@ export const Footer = () => {
         <FooterContent>
           <InfoContainer>
             <h2>Let's talk!</h2>
-            <a
-              href='mailto:linda.schonfeldt@gmail.com'
-              aria-label='Email me'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
               <IoMail size={32} color='var(--accent-orange)' />
             </a>
             <br />
