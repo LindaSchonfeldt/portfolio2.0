@@ -2,13 +2,13 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Footer } from './components/Footer'
 import { HamburgerMenu } from './components/HamburgerMenu'
 import Intro from './components/Intro'
 import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
 import ScrollToTop from './components/ScrollToTop'
-import { Footer } from './components/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 import { preloadRoute } from './utils/routePreloader'
 
@@ -110,7 +110,12 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <AppContent />
     </BrowserRouter>
   )

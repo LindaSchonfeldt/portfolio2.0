@@ -23,7 +23,7 @@ export const Footer = () => {
           <InfoContainer>
             <h2>Let's talk!</h2>
             <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
-              <IoMail size={32} color='var(--accent-orange)' />
+              <MailIcon size={32} />
             </a>
             <br />
             &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
@@ -164,4 +164,8 @@ const BottomSocials = styled.div`
   @media ${devices.tablet} {
     justify-content: center;
   }
+`
+
+const MailIcon = styled(IoMail)`
+  color: var(--accent-orange);
 `

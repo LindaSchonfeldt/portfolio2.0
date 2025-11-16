@@ -5,6 +5,7 @@ export const colors = css`
   --primary-green-dark: #2c3e2f;
   --accent-orange: #ff9900;
   --accent-red: #7e101d;
+  --accent-red-dark: #5c0b15;
   --background-light: #fff;
   --background-green: #c7d9c4;
   --background-dark: #2c3e2f;

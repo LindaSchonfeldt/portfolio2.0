@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
-import { useRoutePreloader } from '../utils/routePreloader'
 import { preloadProjectImages } from '../utils/preloadImages'
+import { useRoutePreloader } from '../utils/routePreloader'
 
 export const Nav = () => {
   // Use the nav store for global state
@@ -35,7 +35,7 @@ export const Nav = () => {
             About
           </StyledNavLink>
           {expandedItem === 'about' && (
-            <SectionLinks>
+            <SectionLinks $hasSections={pageSections.about.length > 0}>
               {pageSections.about.map((section, index) => (
                 <SectionItem key={index}>
                   <SectionLink
@@ -70,7 +70,7 @@ export const Nav = () => {
             Projects
           </StyledNavLink>
           {expandedItem === 'projects' && (
-            <SectionLinks>
+            <SectionLinks $hasSections={pageSections.projects.length > 0}>
               {pageSections.projects.map((section, index) => (
                 <SectionItem key={index}>
                   <SectionLink
@@ -96,7 +96,7 @@ export const Nav = () => {
             Contact
           </StyledNavLink>
           {expandedItem === 'contact' && (
-            <SectionLinks>
+            <SectionLinks $hasSections={pageSections.contact.length > 0}>
               {pageSections.contact.map((section, index) => (
                 <SectionItem key={index}>
                   <SectionLink
@@ -160,6 +160,7 @@ const StyledNavLink = styled(NavLink)`
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
+  border-bottom: 4px solid var(--accent-red-dark);
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 
@@ -183,7 +184,7 @@ const SectionLinks = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  margin-top: 0.25rem;
+  margin-top: ${(props) => (props.$hasSections ? '0.25rem' : '0')};
   width: 100%;
   align-items: flex-end;
 `
