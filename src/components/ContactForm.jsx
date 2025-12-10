@@ -84,6 +84,13 @@ export const ContactForm = () => {
         <ErrorMessage>reCAPTCHA not configured.</ErrorMessage>
       )}
 
+      {/* Ensure EmailJS gets the token when using sendForm */}
+      <input
+        type='hidden'
+        name='g-recaptcha-response'
+        value={recaptchaToken || ''}
+      />
+
       <Button
         type='submit'
         label={isSubmitting ? 'Sending...' : 'Send'}
