@@ -159,7 +159,7 @@ const SkillsContent = styled(motion.div)`
       display: flex;
       flex-wrap: wrap;
       gap: 0.3rem;
-      padding: 0.8rem 2rem;
+      padding: 2rem 2rem;
     }
 
     .tag {
