@@ -35,11 +35,6 @@ export const SkillSection = () => {
               return (
                 <div className='skillCard' key={skillGroup.category}>
                   <div className='cardHeader'>
-                    {IconComponent && (
-                      <div className='iconBox'>
-                        <IconComponent size={24} />
-                      </div>
-                    )}
                     <h3>{skillGroup.category}</h3>
                   </div>
                   <div className='skillTags'>
@@ -120,15 +115,11 @@ const SkillsContent = styled(motion.div)`
 
   .skillCard {
     background: var(--background-light);
-    padding: 2rem;
+    padding: 0;
     transition: all 0.2s ease;
+    border-radius: 4px;
 
     &:hover {
-      .iconBox {
-        background: var(--accent-red-dark);
-        color: white;
-      }
-
       .tag {
         background-color: var(--primary-green-dark);
       }
@@ -138,8 +129,10 @@ const SkillsContent = styled(motion.div)`
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      margin-bottom: 0;
+      background: var(--primary-green-dark);
     }
 
     .iconBox {
@@ -155,7 +148,7 @@ const SkillsContent = styled(motion.div)`
     }
 
     h3 {
-      color: var(--primary-green-dark);
+      color: white;
       margin: 0;
       font-size: 1.35rem;
       font-weight: 600;
@@ -166,6 +159,7 @@ const SkillsContent = styled(motion.div)`
       display: flex;
       flex-wrap: wrap;
       gap: 0.3rem;
+      padding: 0.8rem 2rem;
     }
 
     .tag {

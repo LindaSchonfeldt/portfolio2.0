@@ -5,7 +5,6 @@ import { Experience } from '../sections/Experience'
 import { Hero } from '../sections/Hero'
 import { Services } from '../sections/Services.tsx'
 import { SkillSection } from '../sections/SkillSection'
-import { SkillSectionDemo } from '../sections/examples/SkillSectionDemo'
 
 const Home = () => {
   return (
