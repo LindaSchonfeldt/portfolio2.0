@@ -32,6 +32,11 @@
         "React",
         "Node.js",
         "Styled Components",
+        "Chakra UI",
+        "TailwindCSS",
+        "Zustand",
+        "Vite",
+        "APIs/REST",
         "MongoDB/Mongoose"
       ]
     },
@@ -69,7 +74,7 @@
     },
     {
       "category": "Upcoming",
-      "items": ["TypeScript", "TailwindCSS"]
+      "items": ["TypeScript"]
     }
   ]
 }

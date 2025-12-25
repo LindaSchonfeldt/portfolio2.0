@@ -1,13 +1,13 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FaCode, FaPalette, FaPlus, FaRocket, FaToolbox } from 'react-icons/fa'
 import styled from 'styled-components'
+import { FaCode, FaPalette, FaToolbox, FaPlus, FaRocket } from 'react-icons/fa'
 
-import skillsData from '../data/content.json'
-import devices from '../styles/devices'
-import { fullBleed } from '../styles/spacing'
+import skillsData from '../../data/content.json'
+import devices from '../../styles/devices'
+import { fullBleed } from '../../styles/spacing'
 
-// Icon mapping for skill categories
+// Icon mapping for categories
 const iconMap = {
   Code: FaCode,
   Design: FaPalette,
@@ -16,40 +16,63 @@ const iconMap = {
   Upcoming: FaRocket
 }
 
-export const SkillSection = () => {
+/**
+ * Sharp, Clean Design - Inspired by Projects page
+ * No rounded corners, black rectangular tags, minimal shadows
+ */
+export const SkillSectionSharp = () => {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
 
   return (
     <StyledSkillsSection id='skills' ref={sectionRef}>
       <ContentContainer>
-        <SkillsContent
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <h2>Skills</h2>
+        <SkillsContent>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            Skills
+          </motion.h2>
           <div className='gridContainer'>
-            {skillsData.skills.map((skillGroup) => {
+            {skillsData.skills.map((skillGroup, index) => {
               const IconComponent = iconMap[skillGroup.category]
               return (
-                <div className='skillCard' key={skillGroup.category}>
+                <motion.div
+                  className='skillCard'
+                  key={skillGroup.category}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
                   <div className='cardHeader'>
                     {IconComponent && (
-                      <div className='iconBox'>
+                      <motion.div
+                        className='iconBox'
+                        initial={{ scale: 0 }}
+                        animate={isInView ? { scale: 1 } : { scale: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                      >
                         <IconComponent size={24} />
-                      </div>
+                      </motion.div>
                     )}
                     <h3>{skillGroup.category}</h3>
                   </div>
                   <div className='skillTags'>
-                    {skillGroup.items.map((item) => (
-                      <span key={item} className='tag'>
+                    {skillGroup.items.map((item, itemIndex) => (
+                      <motion.span
+                        key={item}
+                        className='tag'
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 + itemIndex * 0.03 }}
+                      >
                         {item}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )
             })}
           </div>
@@ -84,7 +107,7 @@ const ContentContainer = styled.div`
   }
 `
 
-const SkillsContent = styled(motion.div)`
+const SkillsContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,15 +145,19 @@ const SkillsContent = styled(motion.div)`
     background: var(--background-light);
     padding: 2rem;
     transition: all 0.2s ease;
+    border: 1px solid transparent;
 
     &:hover {
+      border-color: var(--primary-green-dark);
+      transform: translateY(-4px);
+
       .iconBox {
-        background: var(--accent-red-dark);
+        background: var(--accent-orange);
         color: white;
       }
 
       .tag {
-        background-color: var(--primary-green-dark);
+        transform: translateY(-1px);
       }
     }
 
@@ -140,6 +167,7 @@ const SkillsContent = styled(motion.div)`
       gap: 1rem;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-green-dark);
     }
 
     .iconBox {
@@ -172,7 +200,7 @@ const SkillsContent = styled(motion.div)`
       display: inline-block;
       background-color: black;
       color: var(--text-light);
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 500;
       font-family: 'Raleway', sans-serif;
       padding: 0.2rem 0.3rem;
@@ -186,3 +214,5 @@ const SkillsContent = styled(motion.div)`
     }
   }
 `
+
+export default SkillSectionSharp
