@@ -118,11 +118,6 @@ const SkillsContent = styled(motion.div)`
     padding: 0;
     transition: all 0.2s ease;
     border-radius: 4px;
-
-    &:hover {
-      .tag {
-        background-color: var(--primary-green-dark);
-      }
     }
 
     .cardHeader {
@@ -133,18 +128,6 @@ const SkillsContent = styled(motion.div)`
       padding: 1.5rem 2rem;
       margin-bottom: 0;
       background: var(--primary-green-dark);
-    }
-
-    .iconBox {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-green-dark);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
     }
 
     h3 {
@@ -164,8 +147,7 @@ const SkillsContent = styled(motion.div)`
 
     .tag {
       display: inline-block;
-      background-color: black;
-      color: var(--text-light);
+      color: var(--text-dark);
       font-size: 1rem;
       font-weight: 500;
       font-family: 'Raleway', sans-serif;
@@ -173,9 +155,6 @@ const SkillsContent = styled(motion.div)`
       margin-bottom: 0.2rem;
       transition: all 0.15s ease;
 
-      &:hover {
-        background-color: var(--primary-green-dark);
-        transform: translateY(-1px);
       }
     }
   }
