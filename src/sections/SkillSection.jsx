@@ -154,8 +154,7 @@ const SkillsContent = styled(motion.div)`
       padding: 0.2rem 0.3rem;
       margin-bottom: 0.2rem;
       transition: all 0.15s ease;
-
-      }
+    }
     }
   }
 `
