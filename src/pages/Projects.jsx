@@ -22,7 +22,7 @@ const Projects = () => {
         <SectionContainer id='projects'>
           <h1>Projects</h1>
           <ProjectGrid>
-            {projectsData.code.map((project, idx) => (
+            {projectsData.projects.map((project, idx) => (
               <ProjectCard
                 key={project.id || idx}
                 project={project}

@@ -7,7 +7,9 @@ import projectsData from '../data/projects.json'
  * @returns {Object} Project data or null if not found
  */
 export function useProjectCaseStudy(projectId) {
-  const project = projectsData.code.find((p) => p.id === parseInt(projectId))
+  const project = projectsData.projects.find(
+    (p) => p.id === parseInt(projectId)
+  )
 
   if (!project || !project.hasDetail) {
     return null
@@ -21,7 +23,7 @@ export function useProjectCaseStudy(projectId) {
  * @returns {Array} Array of projects that have hasDetail: true
  */
 export function useCaseStudyProjects() {
-  return projectsData.code.filter((p) => p.hasDetail === true)
+  return projectsData.projects.filter((p) => p.hasDetail === true)
 }
 
 /**

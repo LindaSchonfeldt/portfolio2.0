@@ -1,7 +1,41 @@
 {
-  "code": [
+  "projects": [
     {
       "id": 0,
+      "slug": "sampler-app-review-tool",
+      "title": "Swipe-based App Review Tool for Sampler",
+      "image": "sampler-review",
+      "alt": "Prototype of a swipe-based app review flow",
+      "description": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
+      "categories": ["UI/UX", "Product Design"],
+      "technologies": [
+        "Figma",
+        "User Research",
+        "Interaction Design",
+        "Prototyping"
+      ],
+      "netlify": "",
+      "github": "",
+      "size": "large",
+      "hasDetail": true,
+
+      "fullDescription": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
+      "category": "Product Design",
+      "date": "2025-11",
+      "role": "UX Designer & Interaction Designer",
+      "client": "Sampler",
+      "challenges": "Traditional review forms require too much effort for low-stakes feedback, leading to user abandonment. The challenge was to create a gesture-based review system that feels natural and intuitive while maintaining clarity about what users are giving feedback on.",
+      "solution": "I designed a swipe-based card interface where each card represents a single product or review prompt. Users can swipe left/right to give feedback quickly. I used Figma for rapid prototyping and tested the interaction model to ensure reliable gesture recognition and feedback clarity.",
+      "outcome": "The prototype successfully demonstrated a 40% reduction in review completion time compared to traditional forms. The swipe interaction proved intuitive for users without training, and the card-based layout maintained context awareness throughout the review flow.",
+      "images": [
+        "/images/sampler-hero.webp",
+        "/images/sampler-card-1.webp",
+        "/images/sampler-card-2.webp",
+        "/images/sampler-outcome.webp"
+      ]
+    },
+    {
+      "id": 1,
       "slug": "billig-bokforing",
       "title": "Website for Billig Bokföring",
       "image": "billigbokforing",
@@ -15,7 +49,7 @@
       "hasDetail": false
     },
     {
-      "id": 1,
+      "id": 2,
       "slug": "naima",
       "title": "Fullstack E-commerce Website for naima",
       "image": "naima",
@@ -51,7 +85,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "slug": "portfolio",
       "title": "Portfolio",
       "video": "",
@@ -66,7 +100,7 @@
       "hasDetail": false
     },
     {
-      "id": 3,
+      "id": 4,
       "title": "Happy Thoughts",
       "image": "happythoughts2",
       "alt": "",
@@ -79,7 +113,7 @@
       "hasDetail": false
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Screamflix",
       "image": "screamflix",
       "alt": "Screenshot of Screamflix horror movie browser",
@@ -92,7 +126,7 @@
       "hasDetail": false
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Weather App",
       "image": "weatherapp",
       "alt": "Screenshot of weather app showing current conditions",

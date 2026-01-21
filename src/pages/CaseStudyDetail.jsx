@@ -6,7 +6,7 @@ import SectionContainer from '../components/SectionContainer'
 import { fullBleed } from '../styles/spacing'
 
 // Example case studies data - you can import from your caseStudies.json
-const goFishCase = {
+const samplerReviewCase = {
   title: 'GoFish – Low-friction Product Reviews',
   subtitle: 'Designing a swipe-based review flow to reduce user effort',
   role: 'UX Designer & Frontend Developer',
@@ -67,7 +67,7 @@ export default function CaseStudyDetail() {
       transition={{ duration: 0.5 }}
     >
       <SectionContainer>
-        <CaseStudyPage {...goFishCase} />
+        <CaseStudyPage {...samplerReviewCase} />
 
         <CaseInsight>
           Swipe gestures reduce friction, but must be paired with clear

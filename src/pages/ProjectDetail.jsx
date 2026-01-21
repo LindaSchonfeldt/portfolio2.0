@@ -10,7 +10,7 @@ import devices from '../styles/devices'
 
 const ProjectDetail = () => {
   const { projectId } = useParams()
-  const project = projectsData.code.find((p) => p.slug === projectId)
+  const project = projectsData.projects.find((p) => p.slug === projectId)
 
   if (!project) {
     return (
