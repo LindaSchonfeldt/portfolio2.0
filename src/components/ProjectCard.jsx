@@ -81,7 +81,7 @@ export const ProjectCard = ({
       <ImageOverlay>
         <ViewProjectButton $disabled={isLinkDisabled}>
           {!project.hasDetail ? (
-            <>🚧 No Details Available</>
+            <></>
           ) : isUnderConstruction ? (
             <>🚧 Under Construction</>
           ) : (
@@ -108,6 +108,9 @@ export const ProjectCard = ({
 
         <TextContainer>
           <CategoryContainer>
+            {project.hasDetail && (
+              <CaseStudyBadge>📚 Case Study</CaseStudyBadge>
+            )}
             {project.categories &&
               project.categories.map((cat, index) => (
                 <Tag variant='category' key={index} text={cat} />
@@ -117,6 +120,11 @@ export const ProjectCard = ({
           <StyledReadMore text={project.description} maxLength={150} />
           <LinkContainer>
             <ButtonGroup actions={actions} />
+            {project.hasDetail && !isUnderConstruction && (
+              <CaseStudyButton to={`/projects/${project.id}/case-study`}>
+                Case Study →
+              </CaseStudyButton>
+            )}
           </LinkContainer>
           <StackContainer>
             {project.stack &&
@@ -354,11 +362,54 @@ const LinkContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  gap: 0.75rem;
   width: 100%;
   margin-top: auto;
 
   @media ${devices.tablet} {
     flex-direction: row;
     justify-content: flex-start;
+  }
+`
+
+const CaseStudyBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--primary-green-dark);
+  color: var(--text-light);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`
+
+const CaseStudyButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 140px;
+
+  &:hover {
+    background: var(--primary-green-dark);
+    transform: translateY(-2px);
+  }
+
+  @media ${devices.tablet} {
+    margin-left: auto;
   }
 `
