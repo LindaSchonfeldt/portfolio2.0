@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link, useParams } from 'react-router-dom'
