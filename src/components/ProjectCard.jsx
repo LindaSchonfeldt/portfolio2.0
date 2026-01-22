@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import siteConfig from '../data/siteConfig.json'
+import { buttonBase } from '../styles/mixins'
 import devices from '../styles/devices'
 import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
@@ -121,8 +122,10 @@ export const ProjectCard = ({
           <LinkContainer>
             <ButtonGroup actions={actions} />
             {project.hasDetail && !isUnderConstruction && (
-              <CaseStudyButton to={`/projects/${project.id}/case-study`}>
-                Case Study →
+              <CaseStudyButton
+                to={`/projects/${project.slug || project.id}/case-study`}
+              >
+                Case Study
               </CaseStudyButton>
             )}
           </LinkContainer>
@@ -141,13 +144,19 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  gap: 0.5rem;
   height: 100%;
   margin: 0 auto 0.5rem auto;
   box-sizing: border-box;
   padding: 0;
-
-  @media ${devices.tablet} {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
     margin: 0 auto 2rem auto;
   }
 
@@ -232,7 +241,9 @@ const ImageOverlay = styled.div`
 const ViewProjectButton = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  width: 100%;
   padding: 1rem 2rem;
   background: ${({ $disabled }) =>
     $disabled ? 'var(--text-secondary)' : 'var(--accent-orange)'};
@@ -240,11 +251,12 @@ const ViewProjectButton = styled.div`
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
-  border-radius: 8px;
+  border-radius: 0;
   transition: transform 0.2s ease;
   pointer-events: auto;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ $disabled }) => ($disabled ? '0.7' : '1')};
+  box-sizing: border-box;
 
   svg {
     transition: transform 0.2s ease;
@@ -267,6 +279,7 @@ const ImageWrapper = styled.div`
   &:hover {
     ${ImageOverlay} {
       opacity: 1;
+      pointer-events: auto;
     }
   }
 `
@@ -316,6 +329,8 @@ const TextContainer = styled.div`
   justify-content: flex-start;
   padding: 20px 0;
   flex: 1;
+  height: 100%;
+  gap: 0.75rem;
   box-sizing: border-box;
 
   @media ${devices.tablet} {
@@ -362,13 +377,17 @@ const LinkContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.75rem;
+  gap: 0.5rem;
   width: 100%;
   margin-top: auto;
+  padding-top: 0.5rem;
 
   @media ${devices.tablet} {
     flex-direction: row;
     justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 `
 
@@ -390,26 +409,22 @@ const CaseStudyBadge = styled.span`
 `
 
 const CaseStudyButton = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  background: var(--accent-orange);
+  ${buttonBase}
+  min-width: 120px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  background-color: var(--primary-green-dark);
   color: var(--text-light);
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  border-color: var(--primary-green-dark);
   white-space: nowrap;
-  min-width: 140px;
 
   &:hover {
-    background: var(--primary-green-dark);
-    transform: translateY(-2px);
+    background-color: var(--primary-green);
+    opacity: 0.9;
   }
 
   @media ${devices.tablet} {
-    margin-left: auto;
+    margin-bottom: 0;
+    width: 100%;
   }
 `

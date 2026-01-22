@@ -2,8 +2,8 @@
   "projects": [
     {
       "id": 0,
-      "slug": "sampler-app-review-tool",
-      "title": "Swipe-based App Review Tool for Sampler",
+      "slug": "app-review-tool",
+      "title": "Swipe-based App Review Tool",
       "image": "sampler-review",
       "alt": "Prototype of a swipe-based app review flow",
       "description": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
@@ -16,6 +16,7 @@
       ],
       "netlify": "",
       "github": "",
+      "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=35%3A871&node-id=43-129&viewport=889%2C-17%2C0.52&t=gJDoXlsznqvzlZGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A129",
       "size": "large",
       "hasDetail": true,
 
@@ -38,14 +39,14 @@
       "id": 1,
       "slug": "billig-bokforing",
       "title": "Website for Billig Bokföring",
-      "image": "billigbokforing.webp",
+      "image": "billigbokforing",
       "alt": "",
       "description": "A clean, user-friendly website for Billig Bokföring, a Swedish bookkeeping service targeting businesses and freelancers. The site emphasizes clarity and ease of navigation, providing essential information about services, pricing, and contact options.",
       "categories": ["UI/UX", "Frontend"],
       "technologies": ["React", "Vite", "Chakra UI"],
       "netlify": "https://billigbokforing.se/",
       "github": "https://github.com/LindaSchonfeldt/accounting-website",
-      "size": "large",
+      "size": "medium",
       "hasDetail": false
     },
     {
@@ -66,7 +67,7 @@
       ],
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/naima-website",
-      "size": "large",
+      "size": "medium",
       "hasDetail": true,
 
       "fullDescription": "Detailed multi-paragraph description for the project detail page. A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",

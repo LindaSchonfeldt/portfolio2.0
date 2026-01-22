@@ -28,9 +28,9 @@ const StyledButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 0.5rem;
 
-  @media ${devices.tablet} {
-    flex-direction: row;
-    gap: 0.5rem;
+  > * {
+    width: 100%;
   }
 `

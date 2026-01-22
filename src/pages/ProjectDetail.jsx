@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link, useParams } from 'react-router-dom'
@@ -8,9 +9,25 @@ import SectionContainer from '../components/SectionContainer'
 import projectsData from '../data/projects.json'
 import devices from '../styles/devices'
 
+const MotionDiv = motion.div
+
 const ProjectDetail = () => {
   const { projectId } = useParams()
   const project = projectsData.projects.find((p) => p.slug === projectId)
+  const prototypeEmbedUrl = (() => {
+    if (!project?.prototype) return null
+    const url = project.prototype
+
+    if (url.includes('embed.figma.com') || url.includes('figma.com/embed')) {
+      return url
+    }
+
+    if (url.includes('figma.com')) {
+      return `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(url)}`
+    }
+
+    return url
+  })()
 
   if (!project) {
     return (
@@ -38,7 +55,7 @@ const ProjectDetail = () => {
         description={project.fullDescription || project.description}
       />
 
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -77,11 +94,34 @@ const ProjectDetail = () => {
                   <FiExternalLink /> Live Demo
                 </ProjectLink>
               )}
+              {project.prototype && (
+                <ProjectLink
+                  href={project.prototype}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  $secondary
+                >
+                  <FiExternalLink /> Prototype
+                </ProjectLink>
+              )}
             </ProjectLinks>
           </ProjectHero>
 
           {project.image && (
             <HeroImage src={project.image} alt={project.title} />
+          )}
+
+          {prototypeEmbedUrl && (
+            <PrototypeEmbed>
+              <PrototypeHeader>Prototype</PrototypeHeader>
+              <PrototypeFrame
+                title={`${project.title} prototype`}
+                src={prototypeEmbedUrl}
+                allow='clipboard-write; fullscreen'
+                allowFullScreen
+                loading='lazy'
+              />
+            </PrototypeEmbed>
           )}
 
           <ContentGrid>
@@ -175,7 +215,7 @@ const ProjectDetail = () => {
             </Sidebar>
           </ContentGrid>
         </SectionContainer>
-      </motion.div>
+      </MotionDiv>
     </>
   )
 }
@@ -225,14 +265,21 @@ const ProjectLink = styled.a`
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: var(--primary-green-dark);
-  color: white;
+  background: ${({ $secondary }) =>
+    $secondary ? '#ffffff' : 'var(--primary-green-dark)'};
+  color: ${({ $secondary }) =>
+    $secondary ? 'var(--primary-green-dark)' : '#ffffff'};
+  border: 2px solid
+    ${({ $secondary }) =>
+      $secondary ? 'var(--primary-green-dark)' : 'transparent'};
   text-decoration: none;
   border-radius: 8px;
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background: var(--accent-orange);
+    background: ${({ $secondary }) =>
+      $secondary ? 'var(--primary-green-dark)' : 'var(--accent-orange)'};
+    color: white;
   }
 `
 
@@ -242,6 +289,27 @@ const HeroImage = styled.img`
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 3rem;
+`
+
+const PrototypeEmbed = styled.div`
+  margin: 2rem 0 3rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--background-light);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+`
+
+const PrototypeHeader = styled.div`
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: var(--primary-green-dark);
+`
+
+const PrototypeFrame = styled.iframe`
+  width: 100%;
+  height: clamp(420px, 65vw, 860px);
+  border: 0;
+  background: #0f172a;
 `
 
 const ContentGrid = styled.div`

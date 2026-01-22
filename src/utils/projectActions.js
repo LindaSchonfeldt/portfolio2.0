@@ -15,5 +15,12 @@ export const getProjectActions = (project) => {
       variant: 'primary'
     })
   }
+  if (project.prototype) {
+    actions.push({
+      label: 'Prototype',
+      url: project.prototype,
+      variant: 'secondary'
+    })
+  }
   return actions
 }
