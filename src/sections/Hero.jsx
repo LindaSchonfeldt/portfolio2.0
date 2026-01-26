@@ -35,24 +35,24 @@ export const Hero = () => {
         </h2>
         <div className='heroText'>
           <p>
-            With a background in service and interaction design, I'm passionate
-            about building technology that truly understands user needs and
-            creates meaningful impact.
+            I design and build user-centered web experiences, combining
+            interaction design with frontend development to create products that
+            are clear, usable, and meaningful.
           </p>
           <p>
-            What drives me is the{' '}
+            My work is driven by a{' '}
             <Emphasize delay>desire to bring clarity to complexity.</Emphasize>{' '}
-            I love organizing — whether it's structuring information for better
-            usability, designing intuitive user flows, mapping out a product
-            roadmap, or learning to write cleaner, more maintainable code.
-            Turning chaos into something clear, purposeful, and human-centered
-            is where I thrive.
+            I enjoy organizing systems—whether that means structuring
+            information for better usability, designing intuitive user flows,
+            shaping product direction, or writing cleaner, more maintainable
+            code. Turning complexity into solutions that feel purposeful and
+            human-centered is where I do my best work.
           </p>
           <p>
             I'm especially drawn to{' '}
-            <Emphasize delay>mission-driven teams</Emphasize> that lead with
-            empathy, value curiosity, and care deeply about building thoughtful,
-            empowering products.
+            <Emphasize delay>mission-driven teams</Emphasize> that value
+            empathy, curiosity, and thoughtful problem-solving, and that care
+            deeply about building products that genuinely support people.
           </p>
         </div>
         <ActionWrapper>

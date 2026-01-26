@@ -266,7 +266,7 @@ const ImageWrapper = styled.div`
       return 'var(--media-height-tablet, 220px)'
     }};
     flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 55%'
+      if ($size === 'large') return '0 1 80%'
       if ($size === 'small') return '0 0 180px'
       return '1 1 auto'
     }};
@@ -278,7 +278,7 @@ const ImageWrapper = styled.div`
       return 'var(--media-height-desktop, 300px)'
     }};
     flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 55%'
+      if ($size === 'large') return '0 1 80%'
       if ($size === 'small') return '0 0 240px'
       return '1 1 auto'
     }};
