@@ -41,11 +41,11 @@ const ResponsiveImage = ({
     if (!img) return
 
     const loadImage = () => {
-      // If eager loading, load immediately
-      if (eager) {
-        const dataSrc = img.getAttribute('data-src')
-        const dataSrcSet = img.getAttribute('data-srcset')
+      const dataSrc = img.getAttribute('data-src')
+      const dataSrcSet = img.getAttribute('data-srcset')
 
+      // If eager loading or if src is not set, load immediately
+      if (eager || !img.src || img.src === window.location.href) {
         if (dataSrc) img.src = dataSrc
         if (dataSrcSet) img.srcset = dataSrcSet
 
@@ -56,14 +56,18 @@ const ResponsiveImage = ({
           if (dataSrcSet) source.srcset = dataSrcSet
         })
 
-        // Set loaded when image loads
-        img.onload = () => setIsLoaded(true)
-        img.onerror = () => {
-          console.error('Failed to load image:', dataSrc)
-          setIsLoaded(true) // Show placeholder
+        // Set loaded when image loads or immediately if already cached
+        if (img.complete && img.naturalHeight !== 0) {
+          setIsLoaded(true)
+        } else {
+          img.onload = () => setIsLoaded(true)
+          img.onerror = () => {
+            console.error('Failed to load image:', dataSrc)
+            setIsLoaded(true) // Show placeholder
+          }
         }
 
-        return
+        if (eager) return
       }
 
       // Lazy loading with IntersectionObserver

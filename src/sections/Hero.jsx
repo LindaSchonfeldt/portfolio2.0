@@ -58,11 +58,18 @@ export const Hero = () => {
         <ActionWrapper>
           <ButtonWrapper>
             <Button
-              variant='primary'
+              variant='secondary'
               label={'Download CV'}
               className='heroButton'
               url='/linda.schonfeldt_cv.pdf'
               aria-label='Download CV'
+            />
+            <Button
+              variant='primary'
+              label={'Contact Me'}
+              className=''
+              url='/contact'
+              aria-label='Contact Me'
             />
           </ButtonWrapper>
           <Suspense fallback={<div style={{ height: '40px' }} />}>
@@ -120,12 +127,14 @@ const HeroContent = styled.div`
 `
 
 const ButtonWrapper = styled.div`
-  display: inline-block;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 2rem;
 
   a,
   button {
-    width: 100%;
+    width: auto;
   }
 
   @media ${devices.mobileL} {
