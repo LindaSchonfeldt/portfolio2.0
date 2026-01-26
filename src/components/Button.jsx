@@ -11,12 +11,16 @@ export const Button = ({
 }) => {
   // If url is provided, render as a link
   if (url) {
+    // Check if it's a PDF download
+    const isPDF = url.toLowerCase().endsWith('.pdf')
+    
     return (
       <StyledButton
         as='a'
         href={url}
         target='_blank'
         rel='noopener noreferrer'
+        download={isPDF ? true : undefined}
         $variant={variant}
         {...props}
       >

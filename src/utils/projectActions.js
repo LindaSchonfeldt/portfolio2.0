@@ -22,5 +22,12 @@ export const getProjectActions = (project) => {
       variant: 'secondary'
     })
   }
+  if (project.pdf) {
+    actions.push({
+      label: 'Download PDF',
+      url: project.pdf,
+      variant: 'secondary'
+    })
+  }
   return actions
 }

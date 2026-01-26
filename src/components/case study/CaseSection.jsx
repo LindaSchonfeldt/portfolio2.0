@@ -28,14 +28,15 @@ export function CaseSection({ eyebrow, title, body, image, embed }) {
 const SectionStyled = styled.section`
   display: flex;
   flex-direction: column;
-  gap: var(--gap-md);
+  gap: var(--gap-md) 0;
   margin-bottom: var(--section-gap);
   scroll-margin-top: 100px;
 `
 
 const Eyebrow = styled.span`
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--primary-green-dark);

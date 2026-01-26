@@ -2,7 +2,7 @@
   "_comment": "Configuration for pages under construction",
   "underConstruction": {
     "_comment": "Array of project IDs that are under construction",
-    "projectIds": [0],
+    "projectIds": [],
     "_note": "Projects with these IDs will show 'under construction' message instead of full detail page"
   },
   "caseStudies": {

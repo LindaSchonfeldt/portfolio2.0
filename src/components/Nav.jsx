@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { Info, FolderGit2, Mail } from 'lucide-react'
 
 import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
@@ -32,7 +33,10 @@ export const Nav = () => {
             $expanded={expandedItem === 'about'}
             {...preloadOnHover('home')}
           >
-            About
+            <IconWrapper>
+              <Info size={24} />
+            </IconWrapper>
+            <TextLabel>About</TextLabel>
           </StyledNavLink>
           {expandedItem === 'about' && (
             <SectionLinks $hasSections={pageSections.about.length > 0}>
@@ -67,7 +71,10 @@ export const Nav = () => {
             onMouseEnter={preloadProjectImages}
             {...preloadOnHover('projects')}
           >
-            Projects
+            <IconWrapper>
+              <FolderGit2 size={24} />
+            </IconWrapper>
+            <TextLabel>Projects</TextLabel>
           </StyledNavLink>
           {expandedItem === 'projects' && (
             <SectionLinks $hasSections={pageSections.projects.length > 0}>
@@ -93,7 +100,10 @@ export const Nav = () => {
             $expanded={expandedItem === 'contact'}
             {...preloadOnHover('contact')}
           >
-            Contact
+            <IconWrapper>
+              <Mail size={24} />
+            </IconWrapper>
+            <TextLabel>Contact</TextLabel>
           </StyledNavLink>
           {expandedItem === 'contact' && (
             <SectionLinks $hasSections={pageSections.contact.length > 0}>
@@ -123,9 +133,8 @@ const NavContainer = styled.nav`
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 20%;
+    top: 25%;
     right: 0;
-    transform: translateY(-50%);
     z-index: 1000;
   }
 `
@@ -133,6 +142,7 @@ const NavContainer = styled.nav`
 const NavLinks = styled.ul`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   list-style: none;
 `
 
@@ -148,6 +158,7 @@ const StyledNavLink = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
   background-color: var(--accent-red);
   border-color: var(--accent-red);
@@ -155,21 +166,23 @@ const StyledNavLink = styled(NavLink)`
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   padding: 1rem;
-  width: 110px;
-  height: 60px;
+  width: 60px;
+  height: 50px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
   border-bottom: 4px solid var(--accent-red-dark);
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
+  overflow: hidden;
+  white-space: nowrap;
 
   &:hover {
-    width: 120px;
+    width: 80px;
   }
 
   &.active {
-    background-color: var(--accent-red);
+    width: 80px;
   }
 
   ${(props) =>
@@ -177,6 +190,42 @@ const StyledNavLink = styled(NavLink)`
     `
     width: 120px;
   `}
+
+  @media ${devices.desktop} {
+    width: 110px;
+
+    &:hover {
+      width: 120px;
+    }
+
+    &.active {
+      width: 110px;
+    }
+
+    ${(props) =>
+      props.$expanded &&
+      `
+      width: 110px;
+    `}
+  }
+
+  @media ${devices.laptopL} {
+    width: 110px;
+
+    &:hover {
+      width: 120px;
+    }
+
+    &.active {
+      width: 110px;
+    }
+
+    ${(props) =>
+      props.$expanded &&
+      `
+      width: 110px;
+    `}
+  }
 `
 
 const SectionLinks = styled.ul`
@@ -217,5 +266,32 @@ const SectionLink = styled(Link)`
     color: var(--text-main);
     text-decoration: underline;
     font-weight: 500;
+  }
+`
+
+const IconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  @media ${devices.desktop} {
+    display: none;
+  }
+
+  @media ${devices.laptopL} {
+    display: none;
+  }
+`
+
+const TextLabel = styled.span`
+  display: none;
+
+  @media ${devices.desktop} {
+    display: inline;
+  }
+
+  @media ${devices.laptopL} {
+    display: inline;
   }
 `

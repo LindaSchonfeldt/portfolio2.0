@@ -8,6 +8,13 @@ import SectionContainer from '../components/SectionContainer'
 import projectsData from '../data/projects.json'
 
 const Projects = () => {
+  // Debug: Check if PDF field exists in the imported data
+  const darkPatternsProject = projectsData.projects.find(
+    (p) => p.slug === 'exploitation-by-design'
+  )
+  console.log('Dark Patterns from JSON:', darkPatternsProject)
+  console.log('Has PDF in JSON?', darkPatternsProject?.pdf)
+
   return (
     <>
       <Meta

@@ -4,19 +4,21 @@ import devices from '../styles/devices'
 
 const SectionContainer = styled.div`
   width: 100%;
-  padding: var(--section-padding);
+  padding: 4rem 1rem;
   box-sizing: border-box;
 
   @media ${devices.tablet} {
-    /* Tablet-specific styling - padding is handled via CSS variables */
+    padding: 4rem 1.5rem;
   }
 
   @media ${devices.laptop} {
-    margin: 0;
+    padding: 4rem 6rem 4rem 6rem;
+    padding-right: 4rem;
   }
 
   @media ${devices.desktop} {
-    margin: 0 1rem;
+    padding: 6rem 12rem 6rem 12rem;
+    padding-right: 10rem;
   }
 `
 

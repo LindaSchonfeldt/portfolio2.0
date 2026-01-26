@@ -1,4 +1,3 @@
-import { MdArrowForwardIos } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -14,9 +13,9 @@ import ResponsiveVideo from './ResponsiveVideo'
 import { Tag } from './Tag'
 
 const IMAGE_HEIGHTS = {
-  small: { mobile: 180, desktop: 240 },
-  medium: { mobile: 200, desktop: 300 },
-  large: { mobile: 240, desktop: 360 }
+  small: { mobile: 140, tablet: 180, desktop: 240 },
+  medium: { mobile: 160, tablet: 220, desktop: 300 },
+  large: { mobile: 200, tablet: 280, desktop: 360 }
 }
 
 const getSizeStyles = ($size) => {
@@ -42,6 +41,16 @@ export const ProjectCard = ({
   // Get actions array using helper
   const actions = getProjectActions(project)
 
+  // Debug: log actions for "Exploitation by Design" project
+  if (project.slug === 'exploitation-by-design') {
+    console.log('Dark Patterns Project:', project)
+    console.log('Has github:', project.github)
+    console.log('Has netlify:', project.netlify)
+    console.log('Has prototype:', project.prototype)
+    console.log('Has pdf:', project.pdf)
+    console.log('Generated Actions:', actions)
+  }
+
   // Generate media paths using helper
   const imagePath = project.image ? getMediaPath(`${project.image}.png`) : null
   const videoWebm = project.video
@@ -57,14 +66,10 @@ export const ProjectCard = ({
   // Determine whether to show video or image
   const hasVideo = project.video && (videoWebm || videoMp4)
 
-  // Check if project is under construction (only matters if hasDetail is true)
+  // Check if project is under construction
   const isUnderConstruction =
     project.hasDetail &&
     siteConfig.underConstruction.projectIds.includes(project.id)
-
-  // Determine if the link should be clickable
-  // Link is disabled if: no detail page OR under construction
-  const isLinkDisabled = !project.hasDetail || isUnderConstruction
 
   // Render media content
   const mediaContent = (
@@ -97,39 +102,16 @@ export const ProjectCard = ({
           />
         )}
       </MediaWrapper>
-      <ImageOverlay>
-        <ViewProjectButton $disabled={isLinkDisabled}>
-          {!project.hasDetail ? (
-            <></>
-          ) : isUnderConstruction ? (
-            <>🚧 Under Construction</>
-          ) : (
-            <>
-              View Project <MdArrowForwardIos />
-            </>
-          )}
-        </ViewProjectButton>
-      </ImageOverlay>
     </ImageContainer>
   )
 
   return (
     <CardContainer $size={size} $fullRow={fullRow}>
       <CardContent $size={size}>
-        {/* Conditionally render Link or div based on isLinkDisabled */}
-        {isLinkDisabled ? (
-          <ImageWrapper $size={size}>{mediaContent}</ImageWrapper>
-        ) : (
-          <ImageLink
-            to={`/projects/${project.slug || project.id}`}
-            $size={size}
-          >
-            {mediaContent}
-          </ImageLink>
-        )}
+        <ImageWrapper $size={size}>{mediaContent}</ImageWrapper>
 
         <TextContainer $size={size}>
-          <div>
+          <ContentWrapper>
             <CategoryContainer>
               {project.hasDetail && (
                 <CaseStudyBadge>📚 Case Study</CaseStudyBadge>
@@ -143,7 +125,7 @@ export const ProjectCard = ({
             <StyledReadMore
               text={project.description}
               maxHeight={
-                size === 'large' ? '6em' : size === 'medium' ? '4.5em' : '3.6em'
+                size === 'large' ? '6em' : size === 'medium' ? '4.5em' : '6.5em'
               }
             />
             <StackContainer>
@@ -152,7 +134,7 @@ export const ProjectCard = ({
                   <Tag key={index} text={tag} />
                 ))}
             </StackContainer>
-          </div>
+          </ContentWrapper>
           <LinkContainer $size={size}>
             <ButtonGroup actions={actions} />
             {project.hasDetail && !isUnderConstruction && (
@@ -171,9 +153,11 @@ export const ProjectCard = ({
 
 const CardContainer = styled.article`
   ${({ $size }) => {
-    const { mobile, desktop } = IMAGE_HEIGHTS[$size] || IMAGE_HEIGHTS.medium
+    const { mobile, tablet, desktop } =
+      IMAGE_HEIGHTS[$size] || IMAGE_HEIGHTS.medium
     return `
       --media-height-mobile: ${mobile}px;
+      --media-height-tablet: ${tablet}px;
       --media-height-desktop: ${desktop}px;
     `
   }}
@@ -192,6 +176,11 @@ const CardContainer = styled.article`
   @media ${devices.tablet} {
     margin: 0 auto 2rem auto;
     align-items: stretch;
+    min-height: ${({ $size }) => {
+      if ($size === 'small') return '380px'
+      if ($size === 'medium') return '500px'
+      return 'auto'
+    }};
   }
 
   ${({ $size }) => getSizeStyles($size)}
@@ -263,120 +252,40 @@ const MediaWrapper = styled.div`
   }
 `
 
-const ImageOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(13, 69, 58, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-  pointer-events: none;
-`
-
-const ViewProjectButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: ${({ $disabled }) =>
-    $disabled ? 'var(--text-secondary)' : 'var(--accent-orange)'};
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  border-radius: 0;
-  transition: transform 0.2s ease;
-  pointer-events: auto;
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-  opacity: ${({ $disabled }) => ($disabled ? '0.7' : '1')};
-  box-sizing: border-box;
-
-  svg {
-    transition: transform 0.2s ease;
-  }
-`
-
 const ImageWrapper = styled.div`
   display: block;
   width: 100%;
   height: ${({ $size }) =>
-    $size === 'small' ? '240px' : 'var(--media-height-mobile, 180px)'};
+    $size === 'small' ? '140px' : 'var(--media-height-mobile, 160px)'};
   position: relative;
   cursor: default;
 
   @media ${devices.tablet} {
+    height: ${({ $size }) => {
+      if ($size === 'large' || $size === 'small') return '100%'
+      return 'var(--media-height-tablet, 220px)'
+    }};
     flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 45%'
+      if ($size === 'large') return '0 1 55%'
+      if ($size === 'small') return '0 0 180px'
+      return '1 1 auto'
+    }};
+  }
+
+  @media ${devices.laptop} {
+    height: ${({ $size }) => {
+      if ($size === 'large' || $size === 'small') return '100%'
+      return 'var(--media-height-desktop, 300px)'
+    }};
+    flex: ${({ $size }) => {
+      if ($size === 'large') return '0 1 55%'
       if ($size === 'small') return '0 0 240px'
       return '1 1 auto'
     }};
-    height: ${({ $size }) => {
-      if ($size === 'large') return '100%'
-      if ($size === 'small') return '100%'
-      return 'var(--media-height-desktop, 250px)'
-    }};
     min-height: ${({ $size }) => {
-      if ($size === 'large') return '100%'
-      if ($size === 'small') return '100%'
-      return 'var(--media-height-desktop, 250px)'
+      if ($size === 'large' || $size === 'small') return '100%'
+      return 'var(--media-height-desktop, 300px)'
     }};
-  }
-
-  &:hover {
-    ${ImageOverlay} {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-`
-
-const ImageLink = styled(Link)`
-  display: block;
-  width: 100%;
-  height: ${({ $size }) =>
-    $size === 'small' ? '240px' : 'var(--media-height-mobile, 180px)'};
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-
-  @media ${devices.tablet} {
-    flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 45%'
-      if ($size === 'small') return '0 0 240px'
-      return '1 1 auto'
-    }};
-    height: ${({ $size }) => {
-      if ($size === 'large') return '100%'
-      if ($size === 'small') return '100%'
-      return 'var(--media-height-desktop, 250px)'
-    }};
-    min-height: ${({ $size }) => {
-      if ($size === 'large') return '100%'
-      if ($size === 'small') return '100%'
-      return 'var(--media-height-desktop, 250px)'
-    }};
-  }
-
-  &:hover {
-    ${ImageOverlay} {
-      opacity: 1;
-    }
-
-    ${ViewProjectButton} {
-      transform: scale(1.05);
-
-      svg {
-        transform: translateX(5px);
-      }
-    }
   }
 `
 
@@ -389,27 +298,28 @@ const StyledImage = styled.img`
   display: block;
 `
 
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 0.5rem;
+`
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: ${({ $size }) =>
-    $size === 'small' ? 'flex-start' : 'space-between'};
+  justify-content: flex-start;
   padding: 0;
   flex: 1 1 auto;
-  min-height: ${({ $size }) => ($size === 'small' ? 'auto' : '100%')};
+  min-height: 0;
   gap: 0.75rem;
   box-sizing: border-box;
 
   @media ${devices.tablet} {
     padding: 0;
-    flex: ${({ $size }) => ($size === 'large' ? '1.4 1 55%' : '1 1 auto')};
-    min-height: ${({ $size }) => {
-      if ($size === 'small') return 'auto'
-      if ($size === 'medium') return 'auto'
-      return '100%'
-    }};
-    justify-content: space-between;
+    flex: ${({ $size }) => ($size === 'large' ? '1 1 auto' : '1 1 auto')};
+    min-height: 0;
   }
 `
 
@@ -454,7 +364,7 @@ const LinkContainer = styled.div`
   gap: 0.5rem;
   width: 100%;
   padding-top: 0.5rem;
-  margin-top: ${({ $size }) => ($size === 'small' ? '0' : 'auto')};
+  margin-top: auto;
 
   @media ${devices.tablet} {
     flex-direction: row;

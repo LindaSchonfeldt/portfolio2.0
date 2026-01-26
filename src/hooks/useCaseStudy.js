@@ -3,12 +3,15 @@ import projectsData from '../data/projects.json'
 
 /**
  * Hook to get project details and check if it has case study details
- * @param {number} projectId - The project ID
+ * @param {string|number} projectIdOrSlug - The project ID or slug
  * @returns {Object} Project data or null if not found
  */
-export function useProjectCaseStudy(projectId) {
+export function useProjectCaseStudy(projectIdOrSlug) {
   const project = projectsData.projects.find(
-    (p) => p.id === parseInt(projectId)
+    (p) =>
+      p.slug === projectIdOrSlug ||
+      p.id === parseInt(projectIdOrSlug) ||
+      p.id.toString() === projectIdOrSlug
   )
 
   if (!project || !project.hasDetail) {

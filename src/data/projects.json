@@ -37,6 +37,44 @@
     },
     {
       "id": 1,
+      "slug": "exploitation-by-design",
+      "title": "Exploitation by Design",
+      "image": "dark_patterns_hero",
+      "alt": "Research-based case study on dark patterns in social media interfaces",
+      "description": "A research-driven UX case study investigating how dark patterns in social media mobile applications manipulate user behavior and undermine user autonomy. Download the full thesis in Swedish.",
+      "categories": ["UX Research", "Ethical Design", "UI/UX"],
+      "technologies": [
+        "UX Research",
+        "Thematic Analysis",
+        "Interface Auditing",
+        "Dark Pattern Ontologies"
+      ],
+      "netlify": "",
+      "github": "",
+      "prototype": "",
+      "pdf": "/pdfs/exploitation-by-design(SE).pdf",
+      "size": "large",
+      "hasDetail": true,
+
+      "fullDescription": "An in-depth UX research project examining the prevalence of dark patterns in popular social media mobile applications. The study analyzes how interface design is used to steer user behavior, capture attention, and exploit psychological vulnerabilities, often at the expense of user autonomy.",
+
+      "category": "UX Research",
+      "date": "2024-05",
+      "role": "UX Researcher & Interaction Designer",
+      "client": "Bachelor Thesis",
+      "challenges": "Social media platforms are deeply embedded in everyday life, yet their interfaces often employ manipulative design strategies that users are unaware of. The challenge was to systematically identify and categorize dark patterns across multiple platforms, while translating academic research into insights relevant for design practice.",
+      "solution": "I conducted a structured interface audit of nine widely used social media mobile applications. Interactions were documented through screen recordings and analyzed using thematic analysis, guided by an established dark pattern ontology. The findings were synthesized into higher-level design strategies illustrating how user autonomy is undermined.",
+      "outcome": "The study identified 34 unique dark patterns, 13 of which were newly defined. The results highlight recurring design strategies such as obstruction, forced action, and social engineering. The project demonstrates how persuasive design techniques can shift from supporting user goals to exploiting attention, behavior, and psychological vulnerability.",
+
+      "images": [
+        "/images/dark-patterns-hero.webp",
+        "/images/dark-patterns-framework.webp",
+        "/images/dark-patterns-examples.webp"
+      ]
+    },
+
+    {
+      "id": 2,
       "slug": "billig-bokforing",
       "title": "Website for Billig Bokföring",
       "image": "billigbokforing",
@@ -50,7 +88,7 @@
       "hasDetail": false
     },
     {
-      "id": 2,
+      "id": 3,
       "slug": "naima",
       "title": "Fullstack E-commerce Website for naima",
       "image": "naima",
@@ -86,7 +124,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 4,
       "slug": "portfolio",
       "title": "Portfolio",
       "video": "",
@@ -101,7 +139,7 @@
       "hasDetail": false
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Happy Thoughts",
       "image": "happythoughts2",
       "alt": "",
@@ -114,7 +152,7 @@
       "hasDetail": false
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Screamflix",
       "image": "screamflix",
       "alt": "Screenshot of Screamflix horror movie browser",
@@ -127,7 +165,7 @@
       "hasDetail": false
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Weather App",
       "image": "weatherapp",
       "alt": "Screenshot of weather app showing current conditions",
