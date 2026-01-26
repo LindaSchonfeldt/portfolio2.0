@@ -57,19 +57,26 @@ export function useFormatProjectToCaseStudy(project) {
 
   const generateSections = useCallback((proj) => {
     const sections = []
+    const titles = proj.sectionTitles || {}
+    const defaultTitles = {
+      problem: 'The Problem',
+      approach: 'Our Approach',
+      results: 'Results & Impact',
+      reflection: 'Reflection'
+    }
 
     if (proj.challenges) {
       sections.push({
-        eyebrow: 'Challenge',
-        title: 'The Problem',
+        eyebrow: 'Context',
+        title: titles.problem || defaultTitles.problem,
         body: [proj.challenges]
       })
     }
 
     if (proj.solution) {
       sections.push({
-        eyebrow: 'Solution',
-        title: 'Our Approach',
+        eyebrow: 'Approach',
+        title: titles.approach || defaultTitles.approach,
         body: [proj.solution]
       })
     }
@@ -77,7 +84,7 @@ export function useFormatProjectToCaseStudy(project) {
     if (proj.images && proj.images.length > 1) {
       proj.images.slice(1).forEach((image, index) => {
         sections.push({
-          eyebrow: `Screenshot ${index + 1}`,
+          eyebrow: `Example ${index + 1}`,
           title: proj.title,
           image: image
         })
@@ -87,8 +94,16 @@ export function useFormatProjectToCaseStudy(project) {
     if (proj.outcome) {
       sections.push({
         eyebrow: 'Outcome',
-        title: 'Results & Impact',
+        title: titles.results || defaultTitles.results,
         body: [proj.outcome]
+      })
+    }
+
+    if (proj.reflection) {
+      sections.push({
+        eyebrow: 'Reflection',
+        title: titles.reflection || defaultTitles.reflection,
+        body: [proj.reflection]
       })
     }
 

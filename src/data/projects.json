@@ -28,6 +28,13 @@
       "challenges": "Traditional review forms require too much effort for low-stakes feedback, leading to user abandonment. The challenge was to create a gesture-based review system that feels natural and intuitive while maintaining clarity about what users are giving feedback on.",
       "solution": "I designed a swipe-based card interface where each card represents a single product or review prompt. Users can swipe left/right to give feedback quickly. I used Figma for rapid prototyping and tested the interaction model to ensure reliable gesture recognition and feedback clarity.",
       "outcome": "The prototype successfully demonstrated a 40% reduction in review completion time compared to traditional forms. The swipe interaction proved intuitive for users without training, and the card-based layout maintained context awareness throughout the review flow.",
+      "reflection": "This project taught me how powerful gesture-based interactions can be when designed thoughtfully. The key takeaway was that reducing friction doesn't mean reducing clarity—both can be achieved simultaneously through careful iteration and user testing.",
+      "sectionTitles": {
+        "problem": "The Problem",
+        "approach": "Our Approach",
+        "results": "Results & Impact",
+        "reflection": "Reflection"
+      },
       "images": [
         "/images/sampler-hero.webp",
         "/images/sampler-card-1.webp",
@@ -65,7 +72,13 @@
       "challenges": "Social media platforms are deeply embedded in everyday life, yet their interfaces often employ manipulative design strategies that users are unaware of. The challenge was to systematically identify and categorize dark patterns across multiple platforms, while translating academic research into insights relevant for design practice.",
       "solution": "I conducted a structured interface audit of nine widely used social media mobile applications. Interactions were documented through screen recordings and analyzed using thematic analysis, guided by an established dark pattern ontology. The findings were synthesized into higher-level design strategies illustrating how user autonomy is undermined.",
       "outcome": "The study identified 34 unique dark patterns, 13 of which were newly defined. The results highlight recurring design strategies such as obstruction, forced action, and social engineering. The project demonstrates how persuasive design techniques can shift from supporting user goals to exploiting attention, behavior, and psychological vulnerability.",
-
+      "reflection": "This research deepened my understanding of how design decisions compound over time. It reinforced my commitment to ethical design practices and the importance of questioning design patterns that might serve business goals at the expense of user autonomy.",
+      "sectionTitles": {
+        "problem": "The Problem",
+        "approach": "Research Approach",
+        "results": "Identifying Dark Pattern Strategies",
+        "reflection": "How User Autonomy Is Undermined"
+      },
       "images": [
         "/images/dark-patterns-hero.webp",
         "/images/dark-patterns-framework.webp",

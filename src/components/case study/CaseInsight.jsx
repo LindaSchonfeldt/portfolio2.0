@@ -13,5 +13,6 @@ const InsightBox = styled.aside`
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text-main);
+  font-family: 'Raleway', sans-serif;
   font-style: italic;
 `
