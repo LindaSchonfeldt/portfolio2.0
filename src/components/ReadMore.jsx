@@ -1,16 +1,25 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 
-export const ReadMore = ({ text, maxLength = 150, className }) => {
+export const ReadMore = ({ text, maxHeight = '4.5em', className }) => {
   const [expanded, setExpanded] = useState(false)
-  const isLong = text.length > maxLength
-  const displayText =
-    expanded || !isLong ? text : text.slice(0, maxLength) + '...'
+  const [needsTruncation, setNeedsTruncation] = useState(false)
+  const textRef = useRef(null)
+
+  useEffect(() => {
+    if (textRef.current) {
+      const isOverflowing =
+        textRef.current.scrollHeight > textRef.current.clientHeight
+      setNeedsTruncation(isOverflowing)
+    }
+  }, [text, maxHeight])
 
   return (
-    <div className={className}>
-      <p>{displayText}</p>
-      {isLong && (
+    <Container className={className}>
+      <TextContent ref={textRef} $expanded={expanded} $maxHeight={maxHeight}>
+        {text}
+      </TextContent>
+      {needsTruncation && (
         <StyledLink
           as='span'
           onClick={() => setExpanded(!expanded)}
@@ -20,9 +29,23 @@ export const ReadMore = ({ text, maxLength = 150, className }) => {
           {expanded ? 'Show Less' : 'Read More'}
         </StyledLink>
       )}
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`
+
+const TextContent = styled.p`
+  margin: 0;
+  max-height: ${({ $expanded, $maxHeight }) =>
+    $expanded ? 'none' : $maxHeight};
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+`
 
 const StyledLink = styled.a`
   color: var(--primary-green-dark);
@@ -34,6 +57,8 @@ const StyledLink = styled.a`
   border: none;
   padding: 0;
   display: inline-block;
+  align-self: flex-start;
+
   &:hover {
     text-decoration: underline;
     color: var(--accent-orange);

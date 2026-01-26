@@ -68,7 +68,7 @@
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/naima-website",
       "size": "medium",
-      "hasDetail": true,
+      "hasDetail": false,
 
       "fullDescription": "Detailed multi-paragraph description for the project detail page. A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
       "category": "Web Development",
@@ -97,7 +97,7 @@
       "technologies": ["React", "Vite", "Styled Components", "Zustand"],
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/portfolio2.0",
-      "size": "medium",
+      "size": "small",
       "hasDetail": false
     },
     {

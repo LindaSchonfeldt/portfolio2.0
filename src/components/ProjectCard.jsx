@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import siteConfig from '../data/siteConfig.json'
-import { buttonBase } from '../styles/mixins'
 import devices from '../styles/devices'
+import { buttonBase } from '../styles/mixins'
 import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
 import { ButtonGroup } from './ButtonGroup'
@@ -12,6 +12,24 @@ import { ReadMore } from './ReadMore'
 import ResponsiveImage from './ResponsiveImage'
 import ResponsiveVideo from './ResponsiveVideo'
 import { Tag } from './Tag'
+
+const IMAGE_HEIGHTS = {
+  small: { mobile: 180, desktop: 240 },
+  medium: { mobile: 200, desktop: 300 },
+  large: { mobile: 240, desktop: 360 }
+}
+
+const getSizeStyles = ($size) => {
+  if ($size === 'large') {
+    return `
+      @media ${devices.tablet} {
+        grid-column: span 2;
+      }
+    `
+  }
+
+  return ''
+}
 
 export const ProjectCard = ({
   project,
@@ -96,30 +114,46 @@ export const ProjectCard = ({
   )
 
   return (
-    <CardContainer size={size} $fullRow={fullRow}>
-      <CardContent>
+    <CardContainer $size={size} $fullRow={fullRow}>
+      <CardContent $size={size}>
         {/* Conditionally render Link or div based on isLinkDisabled */}
         {isLinkDisabled ? (
-          <ImageWrapper>{mediaContent}</ImageWrapper>
+          <ImageWrapper $size={size}>{mediaContent}</ImageWrapper>
         ) : (
-          <ImageLink to={`/projects/${project.slug || project.id}`}>
+          <ImageLink
+            to={`/projects/${project.slug || project.id}`}
+            $size={size}
+          >
             {mediaContent}
           </ImageLink>
         )}
 
-        <TextContainer>
-          <CategoryContainer>
-            {project.hasDetail && (
-              <CaseStudyBadge>📚 Case Study</CaseStudyBadge>
-            )}
-            {project.categories &&
-              project.categories.map((cat, index) => (
-                <Tag variant='category' key={index} text={cat} />
-              ))}
-          </CategoryContainer>
-          <StyledTitle>{project.title}</StyledTitle>
-          <StyledReadMore text={project.description} maxLength={150} />
-          <LinkContainer>
+        <TextContainer $size={size}>
+          <div>
+            <CategoryContainer>
+              {project.hasDetail && (
+                <CaseStudyBadge>📚 Case Study</CaseStudyBadge>
+              )}
+              {project.categories &&
+                project.categories.map((cat, index) => (
+                  <Tag variant='category' key={index} text={cat} />
+                ))}
+            </CategoryContainer>
+            <StyledTitle>{project.title}</StyledTitle>
+            <StyledReadMore
+              text={project.description}
+              maxHeight={
+                size === 'large' ? '6em' : size === 'medium' ? '4.5em' : '3.6em'
+              }
+            />
+            <StackContainer>
+              {project.stack &&
+                project.stack.map((tag, index) => (
+                  <Tag key={index} text={tag} />
+                ))}
+            </StackContainer>
+          </div>
+          <LinkContainer $size={size}>
             <ButtonGroup actions={actions} />
             {project.hasDetail && !isUnderConstruction && (
               <CaseStudyButton
@@ -129,37 +163,38 @@ export const ProjectCard = ({
               </CaseStudyButton>
             )}
           </LinkContainer>
-          <StackContainer>
-            {project.stack &&
-              project.stack.map((tag, index) => <Tag key={index} text={tag} />)}
-          </StackContainer>
         </TextContainer>
       </CardContent>
     </CardContainer>
   )
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.article`
+  ${({ $size }) => {
+    const { mobile, desktop } = IMAGE_HEIGHTS[$size] || IMAGE_HEIGHTS.medium
+    return `
+      --media-height-mobile: ${mobile}px;
+      --media-height-desktop: ${desktop}px;
+    `
+  }}
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 0.5rem;
-  height: 100%;
+  height: auto;
   margin: 0 auto 0.5rem auto;
   box-sizing: border-box;
   padding: 0;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+  width: 100%;
+
+  @media ${devices.tablet} {
     margin: 0 auto 2rem auto;
+    align-items: stretch;
   }
 
+  ${({ $size }) => getSizeStyles($size)}
   ${({ $fullRow }) => $fullRow && 'grid-column: 1 / -1;'}
 `
 
@@ -174,8 +209,14 @@ const CardContent = styled.div`
   flex: 1;
 
   @media ${devices.tablet} {
-    flex-direction: row;
-    margin-bottom: 20px;
+    flex-direction: ${({ $size }) => ($size === 'medium' ? 'column' : 'row')};
+    margin-bottom: ${({ $size }) => ($size === 'large' ? '20px' : '0')};
+    column-gap: 1.5rem;
+    min-height: ${({ $size }) => {
+      if ($size === 'small') return '380px'
+      if ($size === 'medium') return '500px'
+      return 'auto'
+    }};
   }
 `
 
@@ -266,14 +307,27 @@ const ViewProjectButton = styled.div`
 const ImageWrapper = styled.div`
   display: block;
   width: 100%;
-  height: 180px;
+  height: ${({ $size }) =>
+    $size === 'small' ? '240px' : 'var(--media-height-mobile, 180px)'};
   position: relative;
   cursor: default;
 
   @media ${devices.tablet} {
-    flex: 1;
-    height: 100%;
-    min-height: 250px;
+    flex: ${({ $size }) => {
+      if ($size === 'large') return '0 1 45%'
+      if ($size === 'small') return '0 0 240px'
+      return '1 1 auto'
+    }};
+    height: ${({ $size }) => {
+      if ($size === 'large') return '100%'
+      if ($size === 'small') return '100%'
+      return 'var(--media-height-desktop, 250px)'
+    }};
+    min-height: ${({ $size }) => {
+      if ($size === 'large') return '100%'
+      if ($size === 'small') return '100%'
+      return 'var(--media-height-desktop, 250px)'
+    }};
   }
 
   &:hover {
@@ -287,15 +341,28 @@ const ImageWrapper = styled.div`
 const ImageLink = styled(Link)`
   display: block;
   width: 100%;
-  height: 180px;
+  height: ${({ $size }) =>
+    $size === 'small' ? '240px' : 'var(--media-height-mobile, 180px)'};
   text-decoration: none;
   cursor: pointer;
   position: relative;
 
   @media ${devices.tablet} {
-    flex: 1;
-    height: 100%;
-    min-height: 250px;
+    flex: ${({ $size }) => {
+      if ($size === 'large') return '0 1 45%'
+      if ($size === 'small') return '0 0 240px'
+      return '1 1 auto'
+    }};
+    height: ${({ $size }) => {
+      if ($size === 'large') return '100%'
+      if ($size === 'small') return '100%'
+      return 'var(--media-height-desktop, 250px)'
+    }};
+    min-height: ${({ $size }) => {
+      if ($size === 'large') return '100%'
+      if ($size === 'small') return '100%'
+      return 'var(--media-height-desktop, 250px)'
+    }};
   }
 
   &:hover {
@@ -326,16 +393,23 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding: 20px 0;
-  flex: 1;
-  height: 100%;
+  justify-content: ${({ $size }) =>
+    $size === 'small' ? 'flex-start' : 'space-between'};
+  padding: 0;
+  flex: 1 1 auto;
+  min-height: ${({ $size }) => ($size === 'small' ? 'auto' : '100%')};
   gap: 0.75rem;
   box-sizing: border-box;
 
   @media ${devices.tablet} {
-    padding: 0 20px;
-    height: 100%;
+    padding: 0;
+    flex: ${({ $size }) => ($size === 'large' ? '1.4 1 55%' : '1 1 auto')};
+    min-height: ${({ $size }) => {
+      if ($size === 'small') return 'auto'
+      if ($size === 'medium') return 'auto'
+      return '100%'
+    }};
+    justify-content: space-between;
   }
 `
 
@@ -379,11 +453,12 @@ const LinkContainer = styled.div`
   justify-content: flex-start;
   gap: 0.5rem;
   width: 100%;
-  margin-top: auto;
   padding-top: 0.5rem;
+  margin-top: ${({ $size }) => ($size === 'small' ? '0' : 'auto')};
 
   @media ${devices.tablet} {
     flex-direction: row;
+    margin-top: auto;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 0.5rem;

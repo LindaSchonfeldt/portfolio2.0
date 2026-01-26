@@ -14,8 +14,8 @@ export const ProjectGrid = styled.div`
   @media ${devices.tablet} {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    justify-items: flex-start;
-    align-items: stretch;
+    justify-items: stretch;
+    align-items: start;
     grid-auto-flow: dense;
   }
 `
