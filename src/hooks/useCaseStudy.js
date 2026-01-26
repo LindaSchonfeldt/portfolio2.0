@@ -62,6 +62,7 @@ export function useFormatProjectToCaseStudy(project) {
       problem: 'The Problem',
       approach: 'Our Approach',
       results: 'Results & Impact',
+      prototype: 'Prototype',
       reflection: 'Reflection'
     }
 
@@ -78,6 +79,14 @@ export function useFormatProjectToCaseStudy(project) {
         eyebrow: 'Approach',
         title: titles.approach || defaultTitles.approach,
         body: [proj.solution]
+      })
+    }
+
+    if (proj.prototypeEmbed || proj.prototype) {
+      sections.push({
+        eyebrow: 'Prototype',
+        title: titles.prototype || defaultTitles.prototype,
+        embed: proj.prototypeEmbed || proj.prototype
       })
     }
 

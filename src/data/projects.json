@@ -17,6 +17,7 @@
       "netlify": "",
       "github": "",
       "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=35%3A871&node-id=43-129&viewport=889%2C-17%2C0.52&t=gJDoXlsznqvzlZGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A129",
+      "prototypeEmbed": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=35%3A871&node-id=43-129&viewport=889%2C-17%2C0.52&t=qPExX0CYgniNJNap-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A129",
       "size": "large",
       "hasDetail": true,
 
@@ -33,6 +34,7 @@
         "problem": "The Problem",
         "approach": "Our Approach",
         "results": "Results & Impact",
+        "prototype": "Try the Prototype",
         "reflection": "Reflection"
       },
       "images": [
