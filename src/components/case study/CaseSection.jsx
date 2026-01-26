@@ -1,6 +1,20 @@
 import styled from 'styled-components'
+import { Button } from '../Button'
 
-export function CaseSection({ eyebrow, title, body, image, embed }) {
+export function CaseSection({
+  eyebrow,
+  title,
+  body,
+  image,
+  embed,
+  ctaLabel,
+  ctaUrl
+}) {
+  // Normalize figma prototype URLs to the embeddable format for better sizing/controls
+  const embedUrl = embed?.includes('figma.com/proto')
+    ? `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(embed)}`
+    : embed
+
   return (
     <SectionStyled>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
@@ -16,10 +30,16 @@ export function CaseSection({ eyebrow, title, body, image, embed }) {
 
       {image && <SectionImage src={image} alt={title} />}
 
-      {embed && (
+      {embedUrl && (
         <EmbedContainer>
-          <iframe src={embed} title={title} loading='lazy' />
+          <iframe src={embedUrl} title={title} loading='lazy' allowFullScreen />
         </EmbedContainer>
+      )}
+
+      {ctaLabel && ctaUrl && (
+        <Actions>
+          <Button label={ctaLabel} url={ctaUrl} variant='secondary' />
+        </Actions>
       )}
     </SectionStyled>
   )
@@ -72,19 +92,23 @@ const SectionImage = styled.img`
 const EmbedContainer = styled.div`
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
   border-radius: 8px;
   margin-top: var(--gap-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  aspect-ratio: 10 / 16;
+  min-height: 60vh;
+  max-height: 90vh;
 
   iframe {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     border: none;
   }
+`
+
+const Actions = styled.div`
+  margin-top: var(--gap-sm);
 `

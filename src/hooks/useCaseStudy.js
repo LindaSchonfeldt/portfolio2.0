@@ -35,6 +35,11 @@ export function useCaseStudyProjects() {
  * @returns {Object} Case study formatted data
  */
 export function useFormatProjectToCaseStudy(project) {
+  const toArray = (value) => {
+    if (!value) return []
+    return Array.isArray(value) ? value : [value]
+  }
+
   const formatDate = useCallback((dateString) => {
     if (!dateString) return 'Recent'
     const [year, month] = dateString.split('-')
@@ -60,7 +65,7 @@ export function useFormatProjectToCaseStudy(project) {
     const titles = proj.sectionTitles || {}
     const defaultTitles = {
       problem: 'The Problem',
-      approach: 'Our Approach',
+      approach: 'Approach',
       results: 'Results & Impact',
       prototype: 'Prototype',
       reflection: 'Reflection'
@@ -70,23 +75,27 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Context',
         title: titles.problem || defaultTitles.problem,
-        body: [proj.challenges]
+        body: toArray(proj.challenges)
       })
     }
 
-    if (proj.solution) {
+    if (proj.approach) {
       sections.push({
         eyebrow: 'Approach',
         title: titles.approach || defaultTitles.approach,
-        body: [proj.solution]
+        body: toArray(proj.solution)
       })
     }
 
     if (proj.prototypeEmbed || proj.prototype) {
+      const prototypeBody = toArray(proj.prototypeBody)
       sections.push({
         eyebrow: 'Prototype',
         title: titles.prototype || defaultTitles.prototype,
-        embed: proj.prototypeEmbed || proj.prototype
+        embed: proj.prototypeEmbed || proj.prototype,
+        body: prototypeBody.length ? prototypeBody : undefined,
+        ctaLabel: proj.prototypeCtaLabel || 'Open in Figma',
+        ctaUrl: proj.prototype || proj.prototypeEmbed
       })
     }
 
@@ -104,7 +113,7 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Outcome',
         title: titles.results || defaultTitles.results,
-        body: [proj.outcome]
+        body: toArray(proj.outcome)
       })
     }
 
@@ -112,7 +121,7 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Reflection',
         title: titles.reflection || defaultTitles.reflection,
-        body: [proj.reflection]
+        body: toArray(proj.reflection)
       })
     }
 

@@ -26,16 +26,17 @@
       "date": "2025-11",
       "role": "UX Designer & Interaction Designer",
       "client": "Sampler",
-      "challenges": "Traditional review forms require too much effort for low-stakes feedback, leading to user abandonment. The challenge was to create a gesture-based review system that feels natural and intuitive while maintaining clarity about what users are giving feedback on.",
-      "solution": "I designed a swipe-based card interface where each card represents a single product or review prompt. Users can swipe left/right to give feedback quickly. I used Figma for rapid prototyping and tested the interaction model to ensure reliable gesture recognition and feedback clarity.",
+      "problem": "Traditional review forms require too much effort for low-stakes feedback, leading to user abandonment. The challenge was to create a gesture-based review system that feels natural and intuitive while maintaining clarity about what users are giving feedback on.",
+      "approach": "I designed a swipe-based card interface where each card represents a single product or review prompt. Users can swipe left/right to give feedback quickly. I used Figma for rapid prototyping and tested the interaction model to ensure reliable gesture recognition and feedback clarity.",
       "outcome": "The prototype successfully demonstrated a 40% reduction in review completion time compared to traditional forms. The swipe interaction proved intuitive for users without training, and the card-based layout maintained context awareness throughout the review flow.",
+      "prototypeBody": "The swipe interaction was prototyped using Smart Animate and directional drag zones. Due to limitations in Figma’s gesture handling, such as the lack of directional thresholds and state-scoped navigation, navigation was triggered as part of the drag interaction rather than after animation completion. This approach ensured reliable feedback and a consistent experience during testing.",
       "reflection": "This project taught me how powerful gesture-based interactions can be when designed thoughtfully. The key takeaway was that reducing friction doesn't mean reducing clarity—both can be achieved simultaneously through careful iteration and user testing.",
       "sectionTitles": {
         "problem": "The Problem",
-        "approach": "Our Approach",
+        "approach": "Approach",
         "results": "Results & Impact",
-        "prototype": "Try the Prototype",
-        "reflection": "Reflection"
+        "prototype": "Swipe-Based Interaction Model",
+        "reflection": "What I Learned"
       },
       "images": [
         "/images/sampler-hero.webp",
