@@ -61,6 +61,14 @@ export const ProjectCard = ({
     project.hasDetail &&
     siteConfig.underConstruction.projectIds.includes(project.id)
 
+  // Calculate sizes attribute based on card size for responsive images
+  const imageSizes =
+    size === 'large'
+      ? '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw'
+      : size === 'small'
+        ? '(max-width: 640px) 100vw, (max-width: 1024px) 240px, 280px'
+        : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px'
+
   // Render media content
   const mediaContent = (
     <ImageContainer>
@@ -83,6 +91,7 @@ export const ProjectCard = ({
             fallbackSrc={imagePath}
             alt={project.alt || `${project.title} project screenshot`}
             className='project-image'
+            sizes={imageSizes}
             eager={eager}
           />
         ) : (

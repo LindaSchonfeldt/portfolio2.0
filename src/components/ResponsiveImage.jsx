@@ -6,7 +6,7 @@ const ResponsiveImage = ({
   alt,
   className,
   style,
-  sizes = '(max-width: 768px) 400px, (max-width: 1200px) 800px, 1200px',
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
   eager = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -14,14 +14,15 @@ const ResponsiveImage = ({
   const pictureRef = useRef(null)
 
   // Generate srcset for both WebP and fallback
-  // Include all sizes, browser will ignore missing ones and use available alternatives
-  const webpSrcSet = webpSrc
-    ? `${webpSrc.replace(/\.(webp|png|jpg)$/, '-small.webp')} 400w, ${webpSrc.replace(/\.(webp|png|jpg)$/, '-medium.webp')} 800w, ${webpSrc} 1200w`
-    : ''
+  // Remove any existing extension to get base path, then generate all variants
+  const generateSrcSet = (src, extension) => {
+    if (!src) return ''
+    const basePath = src.replace(/\.(webp|png|jpg|jpeg)$/, '')
+    return `${basePath}-small.${extension} 400w, ${basePath}-medium.${extension} 800w, ${basePath}.${extension} 1200w`
+  }
 
-  const fallbackSrcSet = fallbackSrc
-    ? `${fallbackSrc.replace(/\.(webp|png|jpg)$/, '-small.png')} 400w, ${fallbackSrc.replace(/\.(webp|png|jpg)$/, '-medium.png')} 800w, ${fallbackSrc} 1200w`
-    : ''
+  const webpSrcSet = webpSrc ? generateSrcSet(webpSrc, 'webp') : ''
+  const fallbackSrcSet = fallbackSrc ? generateSrcSet(fallbackSrc, 'png') : ''
 
   useEffect(() => {
     const picture = pictureRef.current
