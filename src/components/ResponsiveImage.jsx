@@ -10,27 +10,17 @@ const ResponsiveImage = ({
   eager = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [imageError, setImageError] = useState(false)
   const pictureRef = useRef(null)
 
   // Generate srcset for both WebP and fallback
+  // Include all sizes, browser will ignore missing ones and use available alternatives
   const webpSrcSet = webpSrc
-    ? `${webpSrc.replace(
-        /\.(webp|png|jpg)$/,
-        '-small.webp'
-      )} 400w, ${webpSrc.replace(
-        /\.(webp|png|jpg)$/,
-        '-medium.webp'
-      )} 800w, ${webpSrc} 1200w`
+    ? `${webpSrc.replace(/\.(webp|png|jpg)$/, '-small.webp')} 400w, ${webpSrc.replace(/\.(webp|png|jpg)$/, '-medium.webp')} 800w, ${webpSrc} 1200w`
     : ''
 
   const fallbackSrcSet = fallbackSrc
-    ? `${fallbackSrc.replace(
-        /\.(webp|png|jpg)$/,
-        '-small.png'
-      )} 400w, ${fallbackSrc.replace(
-        /\.(webp|png|jpg)$/,
-        '-medium.png'
-      )} 800w, ${fallbackSrc} 1200w`
+    ? `${fallbackSrc.replace(/\.(webp|png|jpg)$/, '-small.png')} 400w, ${fallbackSrc.replace(/\.(webp|png|jpg)$/, '-medium.png')} 800w, ${fallbackSrc} 1200w`
     : ''
 
   useEffect(() => {
@@ -61,8 +51,14 @@ const ResponsiveImage = ({
           setIsLoaded(true)
         } else {
           img.onload = () => setIsLoaded(true)
-          img.onerror = () => {
-            console.error('Failed to load image:', dataSrc)
+          img.onerror = (e) => {
+            console.error('Failed to load image:', dataSrc, e)
+            // Try fallback without srcset if srcset failed
+            if (dataSrcSet && dataSrc) {
+              img.removeAttribute('srcset')
+              img.src = dataSrc
+            }
+            setImageError(true)
             setIsLoaded(true) // Show placeholder
           }
         }
@@ -89,8 +85,14 @@ const ResponsiveImage = ({
               })
 
               img.onload = () => setIsLoaded(true)
-              img.onerror = () => {
-                console.error('Failed to load image:', dataSrc)
+              img.onerror = (e) => {
+                console.error('Failed to load image:', dataSrc, e)
+                // Try fallback without srcset if srcset failed
+                if (dataSrcSet && dataSrc) {
+                  img.removeAttribute('srcset')
+                  img.src = dataSrc
+                }
+                setImageError(true)
                 setIsLoaded(true)
               }
 

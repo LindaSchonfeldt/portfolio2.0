@@ -41,16 +41,6 @@ export const ProjectCard = ({
   // Get actions array using helper
   const actions = getProjectActions(project)
 
-  // Debug: log actions for "Exploitation by Design" project
-  if (project.slug === 'exploitation-by-design') {
-    console.log('Dark Patterns Project:', project)
-    console.log('Has github:', project.github)
-    console.log('Has netlify:', project.netlify)
-    console.log('Has prototype:', project.prototype)
-    console.log('Has pdf:', project.pdf)
-    console.log('Generated Actions:', actions)
-  }
-
   // Generate media paths using helper
   const imagePath = project.image ? getMediaPath(`${project.image}.png`) : null
   const videoWebm = project.video

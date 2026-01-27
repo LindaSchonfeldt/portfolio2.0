@@ -4,7 +4,7 @@
       "id": 0,
       "slug": "app-review-tool",
       "title": "Swipe-based App Review Tool",
-      "image": "sampler-review",
+      "image": "review_tool_hero",
       "alt": "Prototype of a swipe-based app review flow",
       "description": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
       "categories": ["UI/UX", "Product Design"],
@@ -39,8 +39,7 @@
         "reflection": "What I Learned"
       },
       "images": [
-        "/images/sampler-hero.webp",
-        "/images/sampler-card-1.webp",
+        "/images/review_tool_flow.webp",
         "/images/sampler-card-2.webp",
         "/images/sampler-outcome.webp"
       ]
