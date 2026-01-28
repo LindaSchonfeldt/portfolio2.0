@@ -71,19 +71,29 @@ export function useFormatProjectToCaseStudy(project) {
       reflection: 'Reflection'
     }
 
-    if (proj.challenges) {
+    if (proj.challenges || proj.problem) {
+      const problemData = proj.problem || proj.challenges
+      const isObject =
+        typeof problemData === 'object' && !Array.isArray(problemData)
       sections.push({
         eyebrow: 'Context',
         title: titles.problem || defaultTitles.problem,
-        body: toArray(proj.challenges)
+        body: toArray(isObject ? problemData.text : problemData),
+        image: isObject ? problemData.image : undefined,
+        alt: isObject ? problemData.alt : undefined
       })
     }
 
-    if (proj.approach) {
+    if (proj.approach || proj.solution) {
+      const approachData = proj.approach || proj.solution
+      const isObject =
+        typeof approachData === 'object' && !Array.isArray(approachData)
       sections.push({
         eyebrow: 'Approach',
         title: titles.approach || defaultTitles.approach,
-        body: toArray(proj.solution)
+        body: toArray(isObject ? approachData.text : approachData),
+        image: isObject ? approachData.image : undefined,
+        alt: isObject ? approachData.alt : undefined
       })
     }
 
@@ -99,8 +109,13 @@ export function useFormatProjectToCaseStudy(project) {
       })
     }
 
-    if (proj.images && proj.images.length > 1) {
-      proj.images.slice(1).forEach((image, index) => {
+    if (proj.images && proj.images.length > 0) {
+      // If project has explicit heroImage, use all images for sections
+      // Otherwise, skip first image (it's used as hero)
+      const startIndex = proj.heroImage ? 0 : 1
+      const imagesToProcess = proj.images.slice(startIndex)
+
+      imagesToProcess.forEach((image, index) => {
         // Support both string paths and image objects
         const isImageObject = typeof image === 'object' && image !== null
         sections.push({

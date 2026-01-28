@@ -41,19 +41,18 @@
         "reflection": "What I Learned"
       },
       "images": [
-        "/images/review_tool_flow.webp",
         {
           "eyebrow": "Interaction Design",
           "title": "Card-Based Review Flow",
           "description": "The swipe-based interface presents one product at a time, reducing cognitive load and allowing users to focus on providing thoughtful feedback without distraction.",
-          "src": "/images/sampler-card-2.webp",
+          "src": "/images/review_tool_flow.webp",
           "alt": "Mobile interface showing card-based review interaction with swipe gestures"
         },
         {
           "eyebrow": "Impact & Results",
           "title": "Measurable Improvements",
           "description": "User testing demonstrated a 40% reduction in review completion time compared to traditional forms. The gesture-based approach proved intuitive even for first-time users, eliminating the need for onboarding tutorials.",
-          "src": "/images/sampler-outcome.webp",
+          "src": "/images/review-outcome.webp",
           "alt": "Results showing performance metrics and user feedback from testing"
         }
       ]
