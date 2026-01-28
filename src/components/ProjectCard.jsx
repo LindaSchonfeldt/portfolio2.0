@@ -53,6 +53,15 @@ export const ProjectCard = ({
     ? getMediaPath(`${project.videoPoster}.png`)
     : imagePath
 
+  // Debug logging
+  if (imagePath) {
+    console.log(`[${project.title}] Image path:`, imagePath)
+    console.log(
+      `[${project.title}] WebP path:`,
+      imagePath.replace(/\.png$/, '.webp')
+    )
+  }
+
   // Determine whether to show video or image
   const hasVideo = project.video && (videoWebm || videoMp4)
 
@@ -62,12 +71,13 @@ export const ProjectCard = ({
     siteConfig.underConstruction.projectIds.includes(project.id)
 
   // Calculate sizes attribute based on card size for responsive images
+  // Tell browser the actual rendered width so it picks the right image variant
   const imageSizes =
     size === 'large'
-      ? '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 60vw'
+      ? '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px'
       : size === 'small'
-        ? '(max-width: 640px) 100vw, (max-width: 1024px) 240px, 280px'
-        : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px'
+        ? '(max-width: 640px) 100vw, (max-width: 1024px) 400px, 400px'
+        : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px'
 
   // Render media content
   const mediaContent = (
@@ -261,30 +271,35 @@ const ImageWrapper = styled.div`
 
   @media ${devices.tablet} {
     height: ${({ $size }) => {
-      if ($size === 'large' || $size === 'small') return '100%'
+      if ($size === 'large') return 'auto'
+      if ($size === 'small') return '380px'
       return 'var(--media-height-tablet, 220px)'
     }};
     flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 80%'
+      if ($size === 'large') return '0 0 50%'
       if ($size === 'small') return '0 0 180px'
       return '1 1 auto'
     }};
+    align-self: ${({ $size }) => ($size === 'large' ? 'stretch' : 'auto')};
   }
 
   @media ${devices.laptop} {
     height: ${({ $size }) => {
-      if ($size === 'large' || $size === 'small') return '100%'
+      if ($size === 'large') return 'auto'
+      if ($size === 'small') return '380px'
       return 'var(--media-height-desktop, 300px)'
     }};
     flex: ${({ $size }) => {
-      if ($size === 'large') return '0 1 80%'
+      if ($size === 'large') return '0 0 50%'
       if ($size === 'small') return '0 0 240px'
       return '1 1 auto'
     }};
     min-height: ${({ $size }) => {
-      if ($size === 'large' || $size === 'small') return '100%'
+      if ($size === 'large') return 'auto'
+      if ($size === 'small') return '380px'
       return 'var(--media-height-desktop, 300px)'
     }};
+    align-self: ${({ $size }) => ($size === 'large' ? 'stretch' : 'auto')};
   }
 `
 

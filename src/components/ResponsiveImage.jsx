@@ -35,8 +35,15 @@ const ResponsiveImage = ({
       const dataSrc = img.getAttribute('data-src')
       const dataSrcSet = img.getAttribute('data-srcset')
 
-      // If eager loading or if src is not set, load immediately
-      if (eager || !img.src || img.src === window.location.href) {
+      console.log('ResponsiveImage loading:', {
+        dataSrc,
+        dataSrcSet,
+        sizes,
+        currentSrc: img.currentSrc
+      })
+
+      // Force immediate loading for all images
+      if (true) {
         if (dataSrc) img.src = dataSrc
         if (dataSrcSet) img.srcset = dataSrcSet
 
@@ -51,9 +58,13 @@ const ResponsiveImage = ({
         if (img.complete && img.naturalHeight !== 0) {
           setIsLoaded(true)
         } else {
-          img.onload = () => setIsLoaded(true)
+          img.onload = () => {
+            console.log('Image loaded successfully:', img.currentSrc)
+            setIsLoaded(true)
+          }
           img.onerror = (e) => {
-            console.error('Failed to load image:', dataSrc, e)
+            console.error('Failed to load image:', dataSrc, 'Error:', e)
+            console.error('Attempted currentSrc:', img.currentSrc)
             // Try fallback without srcset if srcset failed
             if (dataSrcSet && dataSrc) {
               img.removeAttribute('srcset')
@@ -113,7 +124,13 @@ const ResponsiveImage = ({
   }, [eager])
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}
+    >
       {!isLoaded && (
         <div
           style={{
