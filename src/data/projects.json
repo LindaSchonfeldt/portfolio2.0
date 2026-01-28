@@ -5,6 +5,8 @@
       "slug": "app-review-tool",
       "title": "Swipe-based App Review Tool",
       "image": "review_tool_hero",
+      "heroImage": "review_tool_hero",
+      "heroAlt": "Mobile prototype showing swipe-based review interface with product card and gesture indicators",
       "alt": "Prototype of a swipe-based app review flow",
       "description": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
       "categories": ["UI/UX", "Product Design"],
@@ -40,8 +42,20 @@
       },
       "images": [
         "/images/review_tool_flow.webp",
-        "/images/sampler-card-2.webp",
-        "/images/sampler-outcome.webp"
+        {
+          "eyebrow": "Interaction Design",
+          "title": "Card-Based Review Flow",
+          "description": "The swipe-based interface presents one product at a time, reducing cognitive load and allowing users to focus on providing thoughtful feedback without distraction.",
+          "src": "/images/sampler-card-2.webp",
+          "alt": "Mobile interface showing card-based review interaction with swipe gestures"
+        },
+        {
+          "eyebrow": "Impact & Results",
+          "title": "Measurable Improvements",
+          "description": "User testing demonstrated a 40% reduction in review completion time compared to traditional forms. The gesture-based approach proved intuitive even for first-time users, eliminating the need for onboarding tutorials.",
+          "src": "/images/sampler-outcome.webp",
+          "alt": "Results showing performance metrics and user feedback from testing"
+        }
       ]
     },
     {
@@ -49,6 +63,7 @@
       "slug": "exploitation-by-design",
       "title": "Exploitation by Design",
       "image": "dark_patterns_hero",
+      "heroAlt": "Research visualization showing categorized dark patterns identified in social media interfaces",
       "alt": "Research-based case study on dark patterns in social media interfaces",
       "description": "A research-driven UX case study investigating how dark patterns in social media mobile applications manipulate user behavior and undermine user autonomy. Download the full thesis in Swedish.",
       "categories": ["UX Research", "Ethical Design", "UI/UX"],
@@ -83,8 +98,20 @@
       },
       "images": [
         "/images/dark-patterns-hero.webp",
-        "/images/dark-patterns-framework.webp",
-        "/images/dark-patterns-examples.webp"
+        {
+          "eyebrow": "Research Framework",
+          "title": "Dark Pattern Taxonomy",
+          "description": "The research framework categorizes manipulative design patterns into distinct strategies such as obstruction, forced action, social engineering, and interface interference. This systematic approach enabled consistent identification across platforms.",
+          "src": "/images/dark-patterns-framework.webp",
+          "alt": "Diagram showing the taxonomy and classification framework for dark patterns"
+        },
+        {
+          "eyebrow": "Documented Examples",
+          "title": "Real-World Dark Patterns",
+          "description": "Screen recordings from nine major social media platforms revealed 34 distinct dark patterns, including 13 newly identified techniques. Examples ranged from hidden unsubscribe options to manipulative notification patterns and forced engagement loops.",
+          "src": "/images/dark-patterns-examples.webp",
+          "alt": "Collection of documented dark pattern examples from social media applications"
+        }
       ]
     },
 

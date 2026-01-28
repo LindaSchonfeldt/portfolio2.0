@@ -101,10 +101,17 @@ export function useFormatProjectToCaseStudy(project) {
 
     if (proj.images && proj.images.length > 1) {
       proj.images.slice(1).forEach((image, index) => {
+        // Support both string paths and image objects
+        const isImageObject = typeof image === 'object' && image !== null
         sections.push({
-          eyebrow: `Example ${index + 1}`,
-          title: proj.title,
-          image: image
+          eyebrow: isImageObject ? image.eyebrow : `Example ${index + 1}`,
+          title: isImageObject ? image.title || proj.title : proj.title,
+          body:
+            isImageObject && image.description
+              ? toArray(image.description)
+              : undefined,
+          image: isImageObject ? image.src : image,
+          alt: isImageObject ? image.alt : proj.title
         })
       })
     }
@@ -144,7 +151,10 @@ export function useFormatProjectToCaseStudy(project) {
     role: project.role || 'Developer',
     timeline: formatDate(project.date),
     tools: project.technologies || [],
-    heroImage: project.images?.[0] || `/images/${project.image}.webp`,
+    heroImage: project.heroImage
+      ? `/images/${project.heroImage}.webp`
+      : project.images?.[0] || `/images/${project.image}.webp`,
+    heroAlt: project.heroAlt || project.alt,
     sections: generateSections(project),
     challenges: project.challenges
   }

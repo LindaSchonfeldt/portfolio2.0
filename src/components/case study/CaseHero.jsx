@@ -7,7 +7,8 @@ export function CaseHero({
   role,
   timeline,
   tools,
-  heroImage
+  heroImage,
+  heroAlt
 }) {
   return (
     <HeaderStyled>
@@ -28,7 +29,9 @@ export function CaseHero({
         </MetaList>
       </MetaContainer>
 
-      {heroImage && <HeroImage src={heroImage} alt={`${title} hero`} />}
+      {heroImage && (
+        <HeroImage src={heroImage} alt={heroAlt || `${title} hero image`} />
+      )}
     </HeaderStyled>
   )
 }
@@ -90,8 +93,8 @@ const MetaList = styled.ul`
 
 const HeroImage = styled.img`
   width: 100%;
+  height: 400px;
   border-radius: 8px;
   object-fit: cover;
-  max-height: 400px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `

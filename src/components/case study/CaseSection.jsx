@@ -6,6 +6,7 @@ export function CaseSection({
   title,
   body,
   image,
+  alt,
   embed,
   ctaLabel,
   ctaUrl
@@ -28,7 +29,7 @@ export function CaseSection({
         </ContentBody>
       )}
 
-      {image && <SectionImage src={image} alt={title} />}
+      {image && <SectionImage src={image} alt={alt || title} />}
 
       {embedUrl && (
         <EmbedContainer>

@@ -9,6 +9,7 @@ export default function CaseStudyPage({
   timeline,
   tools,
   heroImage,
+  heroAlt,
   sections
 }) {
   return (
@@ -20,6 +21,7 @@ export default function CaseStudyPage({
         timeline={timeline}
         tools={tools}
         heroImage={heroImage}
+        heroAlt={heroAlt}
       />
 
       {sections.map((section, index) => (
