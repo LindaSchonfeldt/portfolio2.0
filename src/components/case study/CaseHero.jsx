@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import devices from '../../styles/devices'
 
 export function CaseHero({
@@ -94,7 +95,6 @@ const MetaList = styled.ul`
 const HeroImage = styled.img`
   width: 100%;
   height: 400px;
-  border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `

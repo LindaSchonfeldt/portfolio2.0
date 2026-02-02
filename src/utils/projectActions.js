@@ -1,5 +1,5 @@
 // Helper to generate actions array for project links
-export const getProjectActions = (project) => {
+export const getProjectActions = (project, isUnderConstruction = false) => {
   const actions = []
   if (project.github) {
     actions.push({
@@ -19,7 +19,8 @@ export const getProjectActions = (project) => {
     actions.push({
       label: 'Prototype',
       url: project.prototype,
-      variant: 'secondary'
+      variant: 'secondary',
+      disabled: isUnderConstruction
     })
   }
   if (project.pdf) {

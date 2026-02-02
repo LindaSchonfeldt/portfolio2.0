@@ -38,8 +38,13 @@ export const ProjectCard = ({
 }) => {
   if (!project) return null
 
+  // Check if project is under construction
+  const isUnderConstruction =
+    project.hasDetail &&
+    siteConfig.underConstruction.projectIds.includes(project.id)
+
   // Get actions array using helper
-  const actions = getProjectActions(project)
+  const actions = getProjectActions(project, isUnderConstruction)
 
   // Generate media paths using helper
   // Default to tree.svg if no image is specified
@@ -68,11 +73,6 @@ export const ProjectCard = ({
   // Determine whether to show video or image
   const hasVideo = project.video && (videoWebm || videoMp4)
 
-  // Check if project is under construction
-  const isUnderConstruction =
-    project.hasDetail &&
-    siteConfig.underConstruction.projectIds.includes(project.id)
-
   // Calculate sizes attribute based on card size for responsive images
   // Tell browser the actual rendered width so it picks the right image variant
   const imageSizes =
@@ -85,6 +85,11 @@ export const ProjectCard = ({
   // Render media content
   const mediaContent = (
     <ImageContainer>
+      {isUnderConstruction && (
+        <UnderConstructionBanner>
+          <BannerText>🚧 Under Construction</BannerText>
+        </UnderConstructionBanner>
+      )}
       <MediaWrapper>
         {hasVideo ? (
           <ResponsiveVideo
@@ -156,9 +161,18 @@ export const ProjectCard = ({
           </ContentWrapper>
           <LinkContainer $size={size}>
             <ButtonGroup actions={actions} />
-            {project.hasDetail && !isUnderConstruction && (
+            {project.hasDetail && (
               <CaseStudyButton
-                to={`/projects/${project.slug || project.id}/case-study`}
+                as={isUnderConstruction ? 'button' : Link}
+                to={
+                  isUnderConstruction
+                    ? undefined
+                    : `/projects/${project.slug || project.id}/case-study`
+                }
+                $disabled={isUnderConstruction}
+                onClick={
+                  isUnderConstruction ? (e) => e.preventDefault() : undefined
+                }
               >
                 Case Study
               </CaseStudyButton>
@@ -236,6 +250,37 @@ const ImageContainer = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+`
+
+const UnderConstructionBanner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  z-index: 10;
+  background: rgba(255, 179, 71, 0.95);
+  padding: 0.75rem 2rem;
+  border: 3px solid var(--text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+
+  @media ${devices.tablet} {
+    padding: 1rem 3rem;
+  }
+`
+
+const BannerText = styled.span`
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+  white-space: nowrap;
+
+  @media ${devices.tablet} {
+    font-size: 1.25rem;
+  }
 `
 
 const MediaWrapper = styled.div`
@@ -436,4 +481,22 @@ const CaseStudyButton = styled(Link)`
     margin-bottom: 0;
     width: 100%;
   }
+
+  /* Disabled state */
+  ${({ $disabled }) =>
+    $disabled &&
+    `
+      background-color: #e0e0e0;
+      color: #9e9e9e;
+      border-color: #bdbdbd;
+      cursor: not-allowed;
+      opacity: 0.6;
+      pointer-events: none;
+
+      &:hover {
+        background-color: #e0e0e0;
+        color: #9e9e9e;
+        opacity: 0.6;
+      }
+    `}
 `

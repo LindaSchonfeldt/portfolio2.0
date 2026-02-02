@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { Button } from '../Button'
 
 export function CaseSection({
@@ -84,7 +85,6 @@ const ContentBody = styled.div`
 
 const SectionImage = styled.img`
   width: 100%;
-  border-radius: 8px;
   object-fit: cover;
   margin-top: var(--gap-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

@@ -2,6 +2,70 @@
   "projects": [
     {
       "id": 0,
+      "slug": "din-psykolog-onboarding",
+      "title": "Lowering the Threshold to Psychological Care",
+      "image": "din_psykolog",
+      "heroImage": "din_psykolog_hero",
+      "heroAlt": "Calm onboarding screen for a digital mental health service with symptom-first copy and low-intensity imagery",
+      "alt": "Prototype of a symptom-first onboarding flow for a mental health service",
+      "description": "A symptom-first onboarding concept designed to reduce cognitive and emotional barriers when seeking psychological support. The flow prioritizes lived experience, reversibility, and responsibility-shifting to help users take the first step without pressure.",
+      "categories": ["UX Design", "Healthtech", "Product Design"],
+      "technologies": [
+        "Figma",
+        "UX Writing",
+        "Interaction Design",
+        "Prototyping"
+      ],
+      "netlify": "",
+      "github": "",
+      "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=153%3A170&node-id=167-308&p=f&viewport=-226%2C1050%2C0.49&t=z13NIgzPO3dNnTAR-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=167%3A351",
+      "prototypeEmbed": "",
+      "size": "large",
+      "hasDetail": true,
+
+      "fullDescription": "This speculative redesign explores how the first interaction with a digital mental health service can be made less demanding without compromising safety or ethical responsibility. The concept focuses on lowering the psychological cost of starting by allowing users to begin with their experience rather than formal choices or identity verification.",
+      "category": "UX Design",
+      "date": "2026-01",
+      "role": "UX Designer & Interaction Designer",
+      "client": "Din Psykolog (Concept)",
+
+      "problem": "In the existing onboarding flow, users are asked to make person-based and identity-related decisions early in the journey. Clinical terminology, early authentication, and copy that implies commitment increase cognitive and emotional load at a moment when users may already feel uncertain or vulnerable.",
+
+      "approach": "I designed a symptom-first onboarding flow where users begin by describing what resonates with their experience using everyday language rather than diagnostic labels. Responsibility is intentionally shifted to the system through automatic matching, while autonomy is preserved through reversible choices and optional preferences. Strong authentication is introduced only when it becomes functionally meaningful.",
+
+      "outcome": "The proposed flow lowers the perceived barrier to entry, creates continuity between steps, and reframes authentication as protection rather than commitment. Each step is designed to feel possible rather than binding, increasing the likelihood that users continue once they have started.",
+
+      "prototypeBody": "The flow consists of four key stages: symptom recognition, matching logic, optional preference refinement, and identity verification. Copy and visual design work together to normalize uncertainty, avoid self-diagnosis, and clearly separate exploration from commitment.",
+
+      "reflection": "This case deepened my understanding of emotional UX and responsibility distribution in sensitive domains. Small decisions in copy, sequencing, and visual intensity can significantly influence whether users feel safe enough to proceed. Designing for mental health requires not just clarity, but restraint.",
+
+      "sectionTitles": {
+        "problem": "The Challenge",
+        "approach": "Design Strategy",
+        "results": "Outcome & Impact",
+        "prototype": "Onboarding Flow",
+        "reflection": "What This Taught Me"
+      },
+
+      "images": [
+        {
+          "eyebrow": "Onboarding",
+          "title": "Symptom-First Entry Point",
+          "description": "Users start by recognizing their experience in everyday language, reducing the need for self-diagnosis and lowering cognitive load.",
+          "src": "/images/din-psykolog-step-1.webp",
+          "alt": "Symptom selection screen using non-clinical language"
+        },
+        {
+          "eyebrow": "Decision Design",
+          "title": "Matching Without Pressure",
+          "description": "Automatic matching is presented as the primary path, while manual selection and ‘no preference’ remain valid alternatives.",
+          "src": "/images/din-psykolog-step-2.webp",
+          "alt": "Psychologist matching screen with low-pressure options"
+        }
+      ]
+    },
+    {
+      "id": 1,
       "slug": "app-review-tool",
       "title": "Swipe-based App Review Tool",
       "image": "review_tool_hero",
@@ -58,7 +122,7 @@
       ]
     },
     {
-      "id": 1,
+      "id": 2,
       "slug": "exploitation-by-design",
       "title": "Exploitation by Design",
       "image": "dark_patterns_hero",
@@ -76,7 +140,7 @@
       "github": "",
       "prototype": "",
       "pdf": "/pdfs/exploitation-by-design(SE).pdf",
-      "size": "large",
+      "size": "medium",
       "hasDetail": true,
 
       "fullDescription": "An in-depth UX research project examining the prevalence of dark patterns in popular social media mobile applications. The study analyzes how interface design is used to steer user behavior, capture attention, and exploit psychological vulnerabilities, often at the expense of user autonomy.",
@@ -115,7 +179,7 @@
     },
 
     {
-      "id": 2,
+      "id": 3,
       "slug": "billig-bokforing",
       "title": "Website for Billig Bokföring",
       "image": "billigbokforing",
@@ -129,7 +193,7 @@
       "hasDetail": false
     },
     {
-      "id": 3,
+      "id": 4,
       "slug": "naima",
       "title": "Fullstack E-commerce Website for naima",
       "image": "naima",
@@ -165,7 +229,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "slug": "portfolio",
       "title": "Portfolio",
       "image": "tree",
@@ -179,7 +243,7 @@
       "hasDetail": false
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Happy Thoughts",
       "image": "happythoughts2",
       "alt": "",
@@ -192,7 +256,7 @@
       "hasDetail": false
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Screamflix",
       "image": "screamflix",
       "alt": "Screenshot of Screamflix horror movie browser",
@@ -205,7 +269,7 @@
       "hasDetail": false
     },
     {
-      "id": 7,
+      "id": 8,
       "title": "Weather App",
       "image": "weatherapp",
       "alt": "Screenshot of weather app showing current conditions",

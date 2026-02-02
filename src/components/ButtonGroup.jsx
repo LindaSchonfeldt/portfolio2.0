@@ -18,6 +18,7 @@ export const ButtonGroup = ({ actions }) => {
           type={action.type}
           onClick={action.onClick}
           variant={action.variant || (action.url ? 'link' : 'button')}
+          disabled={action.disabled}
         />
       ))}
     </StyledButtonGroup>
