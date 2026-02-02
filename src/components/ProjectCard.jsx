@@ -42,7 +42,10 @@ export const ProjectCard = ({
   const actions = getProjectActions(project)
 
   // Generate media paths using helper
-  const imagePath = project.image ? getMediaPath(`${project.image}.png`) : null
+  // Default to tree.svg if no image is specified
+  const imageName = project.image || 'tree'
+  const imageExt = imageName === 'tree' ? '.svg' : '.png'
+  const imagePath = getMediaPath(`${imageName}${imageExt}`)
   const videoWebm = project.video
     ? getMediaPath(`${project.video}.webm`, 'videos')
     : null
@@ -96,14 +99,21 @@ export const ProjectCard = ({
             eager={eager}
           />
         ) : imagePath ? (
-          <ResponsiveImage
-            webpSrc={imagePath.replace(/\.png$/, '.webp')}
-            fallbackSrc={imagePath}
-            alt={project.alt || `${project.title} project screenshot`}
-            className='project-image'
-            sizes={imageSizes}
-            eager={eager}
-          />
+          imagePath.endsWith('.svg') ? (
+            <StyledImage
+              src={imagePath}
+              alt={project.alt || `${project.title} project screenshot`}
+            />
+          ) : (
+            <ResponsiveImage
+              webpSrc={imagePath.replace(/\.png$/, '.webp')}
+              fallbackSrc={imagePath}
+              alt={project.alt || `${project.title} project screenshot`}
+              className='project-image'
+              sizes={imageSizes}
+              eager={eager}
+            />
+          )
         ) : (
           <StyledImage
             src={new URL('../assets/tree.svg', import.meta.url).href}
