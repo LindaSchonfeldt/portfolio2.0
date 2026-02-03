@@ -108,16 +108,14 @@
         {
           "eyebrow": "Interaction Design",
           "title": "Card-Based Review Flow",
-          "description": "The swipe-based interface presents one product at a time, reducing cognitive load and allowing users to focus on providing thoughtful feedback without distraction.",
+          "description": "Each card presents a single review prompt, allowing users to focus on one decision at a time. By limiting visible choices, the interface reduces cognitive load and makes it easier to give quick, confident feedback through swipe gestures.",
           "src": "/images/review_tool_flow.webp",
-          "alt": "Mobile interface showing card-based review interaction with swipe gestures"
+          "alt": "Mobile interface showing a card-based review flow with swipe gestures"
         },
         {
           "eyebrow": "Impact & Results",
           "title": "Measurable Improvements",
-          "description": "User testing demonstrated a 40% reduction in review completion time compared to traditional forms. The gesture-based approach proved intuitive even for first-time users, eliminating the need for onboarding tutorials.",
-          "src": "/images/review-outcome.webp",
-          "alt": "Results showing performance metrics and user feedback from testing"
+          "description": "User testing demonstrated a 40% reduction in review completion time compared to traditional forms. The gesture-based approach proved intuitive even for first-time users, eliminating the need for onboarding tutorials."
         }
       ]
     },
@@ -210,7 +208,7 @@
       ],
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/naima-website",
-      "size": "medium",
+      "size": "small",
       "hasDetail": false,
 
       "fullDescription": "Detailed multi-paragraph description for the project detail page. A modern, accessible fullstack web application for Naima, a Swedish superfood fika brand. The site combines brand storytelling with e-commerce functionality, featuring an interactive retailer map, wholesale partner dashboard, and comprehensive product showcase.",
