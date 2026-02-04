@@ -10,7 +10,8 @@ export function CaseSection({
   alt,
   embed,
   ctaLabel,
-  ctaUrl
+  ctaUrl,
+  isDisclaimer
 }) {
   // Normalize figma prototype URLs to the embeddable format for better sizing/controls
   const embedUrl = embed?.includes('figma.com/proto')
@@ -18,12 +19,12 @@ export function CaseSection({
     : embed
 
   return (
-    <SectionStyled>
+    <SectionStyled $isDisclaimer={isDisclaimer}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       {title && <SectionTitle>{title}</SectionTitle>}
 
       {body && (
-        <ContentBody>
+        <ContentBody $isDisclaimer={isDisclaimer}>
           {body.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
@@ -53,6 +54,15 @@ const SectionStyled = styled.section`
   gap: var(--gap-md) 0;
   margin-bottom: var(--section-gap);
   scroll-margin-top: 100px;
+
+  ${(props) =>
+    props.$isDisclaimer &&
+    `
+    padding: 1.5rem;
+    background: var(--background-light);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-green-dark);
+  `}
 `
 
 const Eyebrow = styled.span`
@@ -80,6 +90,9 @@ const ContentBody = styled.div`
     line-height: 1.8;
     color: var(--text-main);
     margin: 0;
+    ${(props) =>
+      props.$isDisclaimer &&
+      'font-style: italic; font-size: 0.95rem; opacity: 0.85;'}
   }
 `
 

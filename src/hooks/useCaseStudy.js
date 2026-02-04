@@ -65,6 +65,7 @@ export function useFormatProjectToCaseStudy(project) {
     const titles = proj.sectionTitles || {}
     const defaultTitles = {
       problem: 'The Problem',
+      insight: 'Key Insight',
       approach: 'Approach',
       results: 'Results & Impact',
       prototype: 'Prototype',
@@ -81,6 +82,19 @@ export function useFormatProjectToCaseStudy(project) {
         body: toArray(isObject ? problemData.text : problemData),
         image: isObject ? problemData.image : undefined,
         alt: isObject ? problemData.alt : undefined
+      })
+    }
+
+    if (proj.insight) {
+      const insightData = proj.insight
+      const isObject =
+        typeof insightData === 'object' && !Array.isArray(insightData)
+      sections.push({
+        eyebrow: 'Analysis',
+        title: titles.insight || defaultTitles.insight,
+        body: toArray(isObject ? insightData.text : insightData),
+        image: isObject ? insightData.image : undefined,
+        alt: isObject ? insightData.alt : undefined
       })
     }
 
@@ -144,6 +158,15 @@ export function useFormatProjectToCaseStudy(project) {
         eyebrow: 'Reflection',
         title: titles.reflection || defaultTitles.reflection,
         body: toArray(proj.reflection)
+      })
+    }
+
+    if (proj.disclaimer) {
+      sections.push({
+        eyebrow: 'Disclaimer',
+        title: 'Note',
+        body: toArray(proj.disclaimer),
+        isDisclaimer: true
       })
     }
 

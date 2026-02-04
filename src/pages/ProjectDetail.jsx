@@ -150,24 +150,51 @@ const ProjectDetail = () => {
                 </Section>
               )}
 
-              {project.challenges && (
+              {/* Problem */}
+              {(project.problem || project.challenges) && (
                 <Section>
-                  <h2>Challenge</h2>
-                  <p>{project.challenges}</p>
+                  <h2>{project.sectionTitles?.problem || 'Challenge'}</h2>
+                  <p>{project.problem || project.challenges}</p>
                 </Section>
               )}
 
-              {project.solution && (
+              {/* Insight */}
+              {project.insight && (
                 <Section>
-                  <h2>Solution</h2>
-                  <p>{project.solution}</p>
+                  <h2>{project.sectionTitles?.insight || 'Key Insight'}</h2>
+                  <p>{project.insight}</p>
                 </Section>
               )}
 
+              {/* Approach */}
+              {(project.approach || project.solution) && (
+                <Section>
+                  <h2>{project.sectionTitles?.approach || 'Solution'}</h2>
+                  <p>{project.approach || project.solution}</p>
+                </Section>
+              )}
+
+              {/* Outcome */}
               {project.outcome && (
                 <Section>
-                  <h2>Outcome</h2>
+                  <h2>{project.sectionTitles?.results || 'Outcome'}</h2>
                   <p>{project.outcome}</p>
+                </Section>
+              )}
+
+              {/* Prototype */}
+              {project.prototypeBody && (
+                <Section>
+                  <h2>{project.sectionTitles?.prototype || 'Prototype'}</h2>
+                  <p>{project.prototypeBody}</p>
+                </Section>
+              )}
+
+              {/* Reflection */}
+              {project.reflection && (
+                <Section>
+                  <h2>{project.sectionTitles?.reflection || 'Reflection'}</h2>
+                  <p>{project.reflection}</p>
                 </Section>
               )}
 

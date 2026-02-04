@@ -5,7 +5,7 @@
       "slug": "din-psykolog-onboarding",
       "title": "Lowering the Threshold to Psychological Care",
       "image": "din_psykolog",
-      "heroImage": "din_psykolog_hero",
+      "heroImage": "din_psykolog",
       "heroAlt": "Calm onboarding screen for a digital mental health service with symptom-first copy and low-intensity imagery",
       "alt": "Prototype of a symptom-first onboarding flow for a mental health service",
       "description": "A symptom-first onboarding concept designed to reduce cognitive and emotional barriers when seeking psychological support. The flow prioritizes lived experience, reversibility, and responsibility-shifting to help users take the first step without pressure.",
@@ -29,18 +29,27 @@
       "role": "UX Designer & Interaction Designer",
       "client": "Din Psykolog (Concept)",
 
-      "problem": "In the existing onboarding flow, users are asked to make person-based and identity-related decisions early in the journey. Clinical terminology, early authentication, and copy that implies commitment increase cognitive and emotional load at a moment when users may already feel uncertain or vulnerable.",
+      "problem": "Early in the onboarding journey, users are required to make person-based and identity-related decisions. Clinical terminology, early authentication, and copy that implies commitment increase cognitive and emotional load at a moment when users may already feel uncertain or vulnerable.",
 
-      "approach": "I designed a symptom-first onboarding flow where users begin by describing what resonates with their experience using everyday language rather than diagnostic labels. Responsibility is intentionally shifted to the system through automatic matching, while autonomy is preserved through reversible choices and optional preferences. Strong authentication is introduced only when it becomes functionally meaningful.",
+      "insight": {
+        "text": "Needs-based guidance is introduced only after users are asked to choose a psychologist and appointment time. This sequencing places a high cognitive burden on users at an early and vulnerable stage. By the time recommendations appear, users have already been exposed to personal profiles and availability pressure. Reversing this order—introducing guidance before choice—allows recommendations to feel proactive rather than corrective.",
+        "image": "/images/din_psykolog_flow.webp",
+        "alt": "Visualization of the original onboarding flow highlighting high-pressure decision points early in the process"
+      },
 
-      "outcome": "The proposed flow lowers the perceived barrier to entry, creates continuity between steps, and reframes authentication as protection rather than commitment. Each step is designed to feel possible rather than binding, increasing the likelihood that users continue once they have started.",
+      "approach": "In response to this insight, I designed a symptom-first onboarding flow where users begin by describing what resonates with their experience using everyday language rather than diagnostic labels. Responsibility is intentionally shifted to the system through automatic matching, while autonomy is preserved through reversible choices and optional preferences. Strong authentication is introduced only when it becomes functionally meaningful.",
+
+      "outcome": "The proposed flow lowers the perceived barrier to entry, creates continuity between steps, and reframes authentication as protection rather than commitment. By reducing early decision pressure, the experience increases the likelihood that users continue once they have started.",
 
       "prototypeBody": "The flow consists of four key stages: symptom recognition, matching logic, optional preference refinement, and identity verification. Copy and visual design work together to normalize uncertainty, avoid self-diagnosis, and clearly separate exploration from commitment.",
+
+      "disclaimer": "All names, images, and examples shown in the prototype are fictional and used for illustrative purposes only.",
 
       "reflection": "This case deepened my understanding of emotional UX and responsibility distribution in sensitive domains. Small decisions in copy, sequencing, and visual intensity can significantly influence whether users feel safe enough to proceed. Designing for mental health requires not just clarity, but restraint.",
 
       "sectionTitles": {
         "problem": "The Challenge",
+        "insight": "Key Insight: Guidance Before Choice",
         "approach": "Design Strategy",
         "results": "Outcome & Impact",
         "prototype": "Onboarding Flow",
@@ -52,7 +61,7 @@
           "eyebrow": "Onboarding",
           "title": "Symptom-First Entry Point",
           "description": "Users start by recognizing their experience in everyday language, reducing the need for self-diagnosis and lowering cognitive load.",
-          "src": "/images/din-psykolog-step-1.webp",
+          "src": "/images/din_psykolog_symptoms.webp",
           "alt": "Symptom selection screen using non-clinical language"
         },
         {
@@ -243,7 +252,7 @@
     {
       "id": 6,
       "title": "Happy Thoughts",
-      "image": "happythoughts2",
+      "image": "happy_thoughts",
       "alt": "",
       "description": "A feel-good full-stack app where users can share positive thoughts and like each other’s messages. Built with React and Vite on the frontend, and Node.js with Express and MongoDB on the backend. The app features dynamic updates via a REST API, responsive design, and real-time message interaction.",
       "categories": ["Fullstack"],
