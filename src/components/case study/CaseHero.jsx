@@ -1,6 +1,8 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 
 import devices from '../../styles/devices'
+import { ImageLightbox } from '../ImageLightbox'
 
 export function CaseHero({
   title,
@@ -11,6 +13,8 @@ export function CaseHero({
   heroImage,
   heroAlt
 }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
   return (
     <HeaderStyled>
       <MetaContainer>
@@ -31,7 +35,20 @@ export function CaseHero({
       </MetaContainer>
 
       {heroImage && (
-        <HeroImage src={heroImage} alt={heroAlt || `${title} hero image`} />
+        <>
+          <HeroImage 
+            src={heroImage} 
+            alt={heroAlt || `${title} hero image`}
+            onClick={() => setLightboxOpen(true)}
+          />
+          {lightboxOpen && (
+            <ImageLightbox
+              src={heroImage}
+              alt={heroAlt || `${title} hero image`}
+              onClose={() => setLightboxOpen(false)}
+            />
+          )}
+        </>
       )}
     </HeaderStyled>
   )
@@ -97,4 +114,11 @@ const HeroImage = styled.img`
   height: 400px;
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 `

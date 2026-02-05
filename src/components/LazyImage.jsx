@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const LazyImage = ({ src, alt, className, style }) => {
+const LazyImage = ({ src, alt, className, style, onClick, clickable = false }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const imgRef = useRef(null)
 
@@ -39,9 +39,11 @@ const LazyImage = ({ src, alt, className, style }) => {
       data-src={src}
       alt={alt}
       className={`${className} ${isLoaded ? 'loaded' : 'loading'}`}
+      onClick={onClick}
       style={{
         opacity: isLoaded ? 1 : 0,
         transition: 'opacity 0.3s',
+        cursor: clickable ? 'zoom-in' : 'default',
         ...style
       }}
     />

@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../Button'
+import { ImageLightbox } from '../ImageLightbox'
 
 export function CaseSection({
   eyebrow,
@@ -13,6 +15,8 @@ export function CaseSection({
   ctaUrl,
   isDisclaimer
 }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
   // Normalize figma prototype URLs to the embeddable format for better sizing/controls
   const embedUrl = embed?.includes('figma.com/proto')
     ? `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(embed)}`
@@ -31,7 +35,13 @@ export function CaseSection({
         </ContentBody>
       )}
 
-      {image && <SectionImage src={image} alt={alt || title} />}
+      {image && (
+        <SectionImage
+          src={image}
+          alt={alt || title}
+          onClick={() => setLightboxOpen(true)}
+        />
+      )}
 
       {embedUrl && (
         <EmbedContainer>
@@ -43,6 +53,14 @@ export function CaseSection({
         <Actions>
           <Button label={ctaLabel} url={ctaUrl} variant='secondary' />
         </Actions>
+      )}
+
+      {lightboxOpen && (
+        <ImageLightbox
+          src={image}
+          alt={alt || title}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
     </SectionStyled>
   )
@@ -101,6 +119,15 @@ const SectionImage = styled.img`
   object-fit: cover;
   margin-top: var(--gap-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: zoom-in;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 `
 
 const EmbedContainer = styled.div`

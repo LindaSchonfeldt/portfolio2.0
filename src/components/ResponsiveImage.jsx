@@ -7,7 +7,9 @@ const ResponsiveImage = ({
   className,
   style,
   sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
-  eager = false
+  eager = false,
+  onClick,
+  clickable = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
@@ -130,6 +132,7 @@ const ResponsiveImage = ({
         width: '100%',
         height: '100%'
       }}
+      onClick={onClick}
     >
       {!isLoaded && (
         <div
@@ -173,7 +176,8 @@ const ResponsiveImage = ({
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            display: 'block'
+            display: 'block',
+            cursor: clickable ? 'zoom-in' : 'default'
           }}
         />
       </picture>

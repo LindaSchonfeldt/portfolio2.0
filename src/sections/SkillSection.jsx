@@ -16,6 +16,15 @@ const iconMap = {
   Upcoming: FaRocket
 }
 
+// Blob images for skill cards (place files in public/images/skills)
+const blobImages = [
+  '/images/skills/blob_1.png',
+  '/images/skills/blob_2.png',
+  '/images/skills/blob_3.png',
+  '/images/skills/blob_4.png',
+  '/images/skills/blob_5.png'
+]
+
 export const SkillSection = () => {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
@@ -30,10 +39,18 @@ export const SkillSection = () => {
         >
           <h2>Skills</h2>
           <div className='gridContainer'>
-            {skillsData.skills.map((skillGroup) => {
+            {skillsData.skills.map((skillGroup, index) => {
               const IconComponent = iconMap[skillGroup.category]
+              const blobImage =
+                blobImages[index % blobImages.length] || blobImages[0]
               return (
-                <div className='skillCard' key={skillGroup.category}>
+                <div
+                  className='skillCard'
+                  key={skillGroup.category}
+                  style={{
+                    backgroundImage: `url(${blobImage})`
+                  }}
+                >
                   <div className='cardHeader'>
                     <h3>{skillGroup.category}</h3>
                   </div>
@@ -114,47 +131,56 @@ const SkillsContent = styled(motion.div)`
   }
 
   .skillCard {
-    background: var(--background-light);
-    padding: 0;
-    transition: all 0.2s ease;
+    background-color: transparent;
+    padding: 1rem;
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
     border-radius: 4px;
-    }
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15));
+  }
 
-    .cardHeader {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-      padding: 1.5rem 2rem;
-      margin-bottom: 0;
-      background: var(--primary-green-dark);
-    }
+  .skillCard:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+  }
 
-    h3 {
-      color: white;
-      margin: 0;
-      font-size: 1.35rem;
-      font-weight: 600;
-      flex: 1;
-    }
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.75rem 1.25rem 0.75rem 3.5rem;
+    margin-bottom: 0;
+    background: transparent;
+  }
 
-    .skillTags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      padding: 2rem 2rem;
-    }
+  h3 {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    flex: 1;
+  }
 
-    .tag {
-      display: inline-block;
-      color: var(--text-dark);
-      font-size: 1rem;
-      font-weight: 500;
-      font-family: 'Raleway', sans-serif;
-      padding: 0.2rem 0.3rem;
-      margin-bottom: 0.2rem;
-      transition: all 0.15s ease;
-    }
-    }
+  .skillTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    padding: 1rem 1.25rem 1.5rem 3.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    padding: 0.2rem 0.3rem;
+    margin-bottom: 0.2rem;
+    transition: all 0.15s ease;
   }
 `

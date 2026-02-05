@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const inputDir = path.join(__dirname, '../src/assets')
-const outputDir = path.join(__dirname, '../public/images') // Changed to public/images
+const outputDir = path.join(__dirname, '../public/images')
 
 // Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
