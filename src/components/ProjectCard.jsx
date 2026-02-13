@@ -167,7 +167,7 @@ export const ProjectCard = ({
                 to={
                   isUnderConstruction
                     ? undefined
-                    : `/projects/${project.slug || project.id}/case-study`
+                    : `/projects/${project.slug || project.id}`
                 }
                 $disabled={isUnderConstruction}
                 onClick={

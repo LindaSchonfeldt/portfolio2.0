@@ -187,6 +187,7 @@ export function useFormatProjectToCaseStudy(project) {
     title: project.title,
     subtitle: project.fullDescription || project.description,
     role: project.role || 'Developer',
+    client: project.client,
     timeline: formatDate(project.date),
     tools: project.technologies || [],
     heroImage: project.heroImage

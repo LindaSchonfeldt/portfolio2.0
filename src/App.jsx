@@ -94,7 +94,7 @@ function AppContent() {
                 <Route path='/' element={<Home />} />
                 <Route path='/projects' element={<Projects />} />
                 <Route
-                  path='/projects/:projectId/case-study'
+                  path='/projects/:projectId'
                   element={<ProjectCaseStudy />}
                 />
                 <Route path='/contact' element={<Contact />} />

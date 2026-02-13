@@ -8,6 +8,7 @@ export function CaseHero({
   title,
   subtitle,
   role,
+  client,
   timeline,
   tools,
   heroImage,
@@ -25,6 +26,11 @@ export function CaseHero({
           <li>
             <strong>Role:</strong> {role}
           </li>
+          {client && (
+            <li>
+              <strong>Client:</strong> {client}
+            </li>
+          )}
           <li>
             <strong>Timeline:</strong> {timeline}
           </li>
@@ -36,8 +42,8 @@ export function CaseHero({
 
       {heroImage && (
         <>
-          <HeroImage 
-            src={heroImage} 
+          <HeroImage
+            src={heroImage}
             alt={heroAlt || `${title} hero image`}
             onClick={() => setLightboxOpen(true)}
           />
@@ -115,7 +121,9 @@ const HeroImage = styled.img`
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: zoom-in;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     transform: scale(1.01);

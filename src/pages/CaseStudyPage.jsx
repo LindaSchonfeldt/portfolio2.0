@@ -6,6 +6,7 @@ export default function CaseStudyPage({
   title,
   subtitle,
   role,
+  client,
   timeline,
   tools,
   heroImage,
@@ -18,6 +19,7 @@ export default function CaseStudyPage({
         title={title}
         subtitle={subtitle}
         role={role}
+        client={client}
         timeline={timeline}
         tools={tools}
         heroImage={heroImage}
