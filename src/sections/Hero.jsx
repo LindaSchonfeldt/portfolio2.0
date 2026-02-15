@@ -53,9 +53,9 @@ export const Hero = () => {
           <p>
             I'm especially drawn to mission-driven teams that value empathy,
             curiosity, and thoughtful problem-solving, and that care deeply
-            about{' '}
+            about building{' '}
             <HighlightText>
-              building products that genuinely support people.
+              products that genuinely support people.
             </HighlightText>
           </p>
         </div>

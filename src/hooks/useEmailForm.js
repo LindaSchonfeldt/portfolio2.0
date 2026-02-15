@@ -7,6 +7,23 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
+const getEmailErrorMessage = (error) => {
+  const errorText = (error?.text || '').toLowerCase()
+
+  if (errorText.includes('recaptcha: invalid-keys')) {
+    return 'Email service reCAPTCHA keys are invalid. Update reCAPTCHA Site Key + Secret Key in your EmailJS account settings and ensure they match your current Google reCAPTCHA v2 keys.'
+  }
+
+  if (errorText.includes('recaptcha')) {
+    return 'reCAPTCHA verification failed in EmailJS. Confirm your EmailJS reCAPTCHA keys and allowed domains are configured correctly.'
+  }
+
+  return (
+    error?.text ||
+    'Failed to send message. Please verify your EmailJS template fields and try again.'
+  )
+}
+
 export const useEmailForm = () => {
   const {
     register,
@@ -57,10 +74,7 @@ export const useEmailForm = () => {
         text: error?.text,
         message: error?.message
       })
-      setSubmitError(
-        error?.text ||
-          'Failed to send message. Please verify your EmailJS template fields and try again.'
-      )
+      setSubmitError(getEmailErrorMessage(error))
       return false
     }
   }
