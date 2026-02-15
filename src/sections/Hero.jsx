@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
-import { Emphasize } from '../components/Emphasize'
+import { HighlightText } from '../components/HighlightText'
 import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
 import devices from '../styles/devices'
@@ -41,7 +41,9 @@ export const Hero = () => {
           </p>
           <p>
             My work is driven by a{' '}
-            <Emphasize delay>desire to bring clarity to complexity.</Emphasize>{' '}
+            <HighlightText>
+              desire to bring clarity to complexity.
+            </HighlightText>{' '}
             I enjoy organizing systems—whether that means structuring
             information for better usability, designing intuitive user flows,
             shaping product direction, or writing cleaner, more maintainable
@@ -49,10 +51,12 @@ export const Hero = () => {
             human-centered is where I do my best work.
           </p>
           <p>
-            I'm especially drawn to{' '}
-            <Emphasize delay>mission-driven teams</Emphasize> that value
-            empathy, curiosity, and thoughtful problem-solving, and that care
-            deeply about building products that genuinely support people.
+            I'm especially drawn to mission-driven teams that value empathy,
+            curiosity, and thoughtful problem-solving, and that care deeply
+            about{' '}
+            <HighlightText>
+              building products that genuinely support people.
+            </HighlightText>
           </p>
         </div>
         <ActionWrapper>

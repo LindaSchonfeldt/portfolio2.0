@@ -8,7 +8,7 @@
       "heroImage": "din_psykolog",
       "heroAlt": "Calm onboarding screen for a digital mental health service with symptom-first copy and low-intensity imagery",
       "alt": "Prototype of a symptom-first onboarding flow for a mental health service",
-      "description": "A redesigned onboarding flow for a digital mental health service aimed at reducing early drop-off in a vulnerable context. By reordering decisions, replacing diagnostic labels with experience-based language, and delaying commitment signals, the concept lowers cognitive and emotional friction without compromising security or clinical responsibility.",
+      "description": "A redesigned onboarding flow for a digital mental health service aimed at reducing early drop-off in a vulnerable context. By restructuring decision sequencing, replacing diagnostic labels with experience-based language, and delaying commitment signals, the concept lowers cognitive and emotional friction without compromising security or clinical responsibility.",
       "categories": ["UX Design", "Healthtech", "Product Design"],
       "technologies": [
         "Figma",
@@ -19,35 +19,34 @@
       ],
       "netlify": "",
       "github": "",
-      "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=153%3A170&node-id=167-308&p=f&viewport=-226%2C1050%2C0.49&t=z13NIgzPO3dNnTAR-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=167%3A351",
-      "prototypeEmbed": "",
+      "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=153%3A170&node-id=167-351&viewport=-78%2C341%2C0.15&t=SactXKraH9ezekwn-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=167%3A351",
       "size": "large",
       "hasDetail": true,
 
-      "fullDescription": "This speculative redesign explores how the first interaction with a digital mental health service can better support users at a moment of uncertainty. The concept focuses on lowering the psychological cost of starting by sequencing decisions more intentionally, shifting responsibility from user to system, and separating exploration from commitment.",
+      "fullDescription": "This speculative redesign explores how the first interaction with a digital mental health service can better support users at a moment of uncertainty.\n\nThe concept focuses on lowering the psychological cost of starting by intentionally sequencing decisions, shifting responsibility from user to system, and clearly separating exploration from commitment.",
 
       "category": "UX Design",
       "date": "2026-01",
       "role": "UX Designer & Interaction Designer",
       "client": "Din Psykolog (Concept)",
 
-      "problem": "In the original onboarding journey, users were asked to choose a psychologist, select a time, and authenticate early in the process. Clinical terminology and commitment-signaling copy increased cognitive and emotional load at a stage where users may already feel vulnerable. The flow placed responsibility for high-stakes decisions on the user before sufficient clarity or confidence had been established.",
+      "problem": "In the original onboarding journey, users were asked to choose a psychologist, select a time, and authenticate early in the process.\n\nClinical terminology and commitment-signaling copy increased cognitive and emotional load at a stage where users may already feel vulnerable.\n\nThe flow required high-stakes decisions before sufficient clarity or confidence had been established, placing disproportionate responsibility on the user at the very moment support was needed.",
 
       "insight": {
-        "text": "In mental health contexts, the greatest barrier is often not access to care, but initiating action. When high-commitment decisions precede need clarification, users experience increased decision anxiety and drop-off. In the original flow, strong authentication with BankID was introduced early, signaling identity verification and implicit commitment before users had clarified their needs. This amplified perceived responsibility at a vulnerable moment. Guidance that appears after choice functions reactively rather than preventively. Introducing guidance before choice — and postponing authentication until booking becomes imminent — allows the system to absorb uncertainty instead of amplifying it.",
+        "text": "Access to mental health services is often a structural challenge. Digital care aims to reduce that barrier. Yet even when services are available, the psychological cost of initiating care can remain high.\n\nIn moments of emotional uncertainty, users are not only evaluating options — they are evaluating themselves. When high-commitment actions precede need clarification, the system unintentionally transfers responsibility to the user. This increases decision anxiety and contributes to drop-off.\n\nIn the original flow, strong authentication with BankID was introduced before users had clarified their needs. Identity verification signaled formality and commitment at a moment when users were still exploring.\n\nGuidance appeared after choices were made, functioning reactively rather than preventively.\n\nBy introducing guidance before choice — and postponing authentication until booking becomes imminent — the system absorbs uncertainty instead of amplifying it.",
         "image": "/images/din_psykolog_flow.webp",
         "alt": "Visualization of the original onboarding flow highlighting high-pressure decision points and early authentication"
       },
 
-      "approach": "The onboarding was redesigned around three structural principles: guidance before choice, experience-based language, and delayed commitment. The flow begins with experience recognition rather than diagnostic labels, allowing users to identify what resonates with their lived experience. Optional preference input follows and intentionally informs the matching logic before providers are displayed. By positioning preferences before matching, recommendations are filtered proactively rather than adjusted retroactively, ensuring that system guidance feels tailored rather than corrective. Users are not asked to evaluate psychologists before sufficient context has been established. Strong authentication is introduced only when booking becomes imminent, clearly separating identity verification from commitment to care.",
+      "approach": "The onboarding was redesigned around three structural principles: guidance before choice, experience-based language, and delayed commitment.\n\nThe flow begins with experience recognition rather than diagnostic labels, allowing users to identify what resonates with their lived experience without forcing premature self-definition.\n\nOptional preference input intentionally informs the matching logic before providers are displayed. By positioning preferences before matching, recommendations are filtered proactively rather than adjusted retroactively, ensuring that system guidance feels considered rather than corrective.\n\nUsers are not asked to evaluate psychologists before sufficient context has been established. Strong authentication is introduced only when booking becomes imminent, clearly separating identity verification from commitment to care.",
 
-      "outcome": "The redesigned flow lowers the perceived barrier to entry, creates clearer continuity between steps, and redistributes responsibility from user to system. Authentication is reframed as protection rather than obligation, and symptom selection supports recognition instead of self-diagnosis. Together, these changes reduce early friction while maintaining clinical integrity and security standards.",
+      "outcome": "The redesigned flow lowers the perceived barrier to entry, creates stronger continuity between steps, and redistributes responsibility from user to system.\n\nAuthentication is reframed as protection rather than obligation, and symptom selection supports recognition instead of self-diagnosis.\n\nTogether, these structural adjustments reduce early friction while maintaining clinical integrity and security standards.",
 
-      "prototypeBody": "The flow consists of four key stages: symptom recognition, system-assisted matching, optional preference refinement, and identity verification. Each stage is intentionally progressive, introducing higher-commitment actions only after clarity has increased. Microcopy normalizes uncertainty, choices are reversible, and visual intensity is intentionally restrained to support emotional safety.",
+      "prototypeBody": "The flow consists of four progressive stages: symptom recognition, system-assisted matching, optional preference refinement, and identity verification.\n\nEach stage introduces higher-commitment actions only after clarity has increased.\n\nMicrocopy normalizes uncertainty, choices are reversible, and visual intensity is intentionally restrained to support emotional safety.",
 
       "disclaimer": "All names, images, and examples shown in the prototype are fictional and used for illustrative purposes only.",
 
-      "reflection": "This case reinforced that friction is not neutral in vulnerable contexts. The order of decisions directly influences whether users feel supported or overwhelmed. Designing for mental health requires careful sequencing, restrained language, and clear boundaries between exploration and commitment. Small structural changes can significantly shift how safe and capable users feel at the moment of starting.",
+      "reflection": "This case reinforced that friction is not neutral in vulnerable contexts.\n\nThe order of decisions directly influences whether users feel supported or overwhelmed. Designing for mental health requires intentional sequencing, restrained language, and clear boundaries between exploration and commitment.\n\nSmall structural adjustments can significantly shift how safe and capable users feel at the moment of starting.",
 
       "sectionTitles": {
         "problem": "The Challenge",
@@ -69,7 +68,7 @@
         {
           "eyebrow": "Decision Design",
           "title": "Guidance Before Choice",
-          "description": "System-led matching is introduced before manual provider selection, redistributing responsibility and reducing early decision anxiety. Optional refinements are placed inside accordions to signal that they are secondary and not required. This progressive disclosure keeps the primary path lightweight while preserving user autonomy.",
+          "description": "System-led matching is introduced before manual provider selection, redistributing responsibility and reducing early decision anxiety.\n\nOptional refinements are placed inside accordions to signal that they are secondary and not required. This progressive disclosure keeps the primary path lightweight while preserving user autonomy.",
           "src": "/images/din_psykolog_matching.webp",
           "alt": "Psychologist matching screen with optional refinements placed inside accordion sections"
         }

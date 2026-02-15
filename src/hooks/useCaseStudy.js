@@ -35,9 +35,28 @@ export function useCaseStudyProjects() {
  * @returns {Object} Case study formatted data
  */
 export function useFormatProjectToCaseStudy(project) {
+  const splitParagraphs = (text) =>
+    text
+      .split(/\n\s*\n+/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean)
+
   const toArray = (value) => {
     if (!value) return []
-    return Array.isArray(value) ? value : [value]
+
+    if (typeof value === 'string') {
+      return splitParagraphs(value)
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .flatMap((item) =>
+          typeof item === 'string' ? splitParagraphs(item) : [item]
+        )
+        .filter(Boolean)
+    }
+
+    return [value]
   }
 
   const formatDate = useCallback((dateString) => {
