@@ -1,5 +1,5 @@
 import emailjs from '@emailjs/browser'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import validator from 'validator'
 
@@ -17,11 +17,15 @@ export const useEmailForm = () => {
 
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState(null)
-  const formRef = useRef(null)
 
-  const sendEmail = async (recaptchaToken) => {
+  const sendEmail = async (formData, recaptchaToken) => {
     setSubmitError(null)
     setSubmitSuccess(false)
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setSubmitError('Email service is not configured correctly.')
+      return false
+    }
 
     if (!recaptchaToken) {
       setSubmitError('Please complete the reCAPTCHA verification.')
@@ -29,10 +33,17 @@ export const useEmailForm = () => {
     }
 
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
-        publicKey: PUBLIC_KEY,
-        'g-recaptcha-response': recaptchaToken
-      })
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          ...formData,
+          'g-recaptcha-response': recaptchaToken
+        },
+        {
+          publicKey: PUBLIC_KEY
+        }
+      )
 
       reset()
       setSubmitSuccess(true)
@@ -41,8 +52,15 @@ export const useEmailForm = () => {
 
       return true
     } catch (error) {
-      console.error('EmailJS error:', error)
-      setSubmitError(error.text || 'Failed to send message. Please try again.')
+      console.error('EmailJS error:', {
+        status: error?.status,
+        text: error?.text,
+        message: error?.message
+      })
+      setSubmitError(
+        error?.text ||
+          'Failed to send message. Please verify your EmailJS template fields and try again.'
+      )
       return false
     }
   }
@@ -65,7 +83,6 @@ export const useEmailForm = () => {
     isSubmitting,
     submitSuccess,
     submitError,
-    sendEmail,
-    formRef
+    sendEmail
   }
 }

@@ -180,5 +180,5 @@ const LogoWrapper = styled.div`
 `
 
 // Motion components for animations
-const MotionLogoWrapper = motion(LogoWrapper)
-const MotionHeroContent = motion(HeroContent)
+const MotionLogoWrapper = motion.create(LogoWrapper)
+const MotionHeroContent = motion.create(HeroContent)

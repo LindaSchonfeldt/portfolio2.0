@@ -2,9 +2,11 @@ import { onCLS, onINP, onFCP, onLCP, onTTFB } from 'web-vitals'
 
 // Only run in production
 const isProduction = import.meta.env.PROD
+const shouldLogVitals =
+  import.meta.env.DEV && import.meta.env.VITE_DEBUG_WEB_VITALS === 'true'
 
 const sendToAnalytics = ({ name, value, id }) => {
-  if (!isProduction) {
+  if (!isProduction && shouldLogVitals) {
     console.log(`Web Vital: ${name}`, { value, id })
     return
   }
@@ -20,7 +22,7 @@ const sendToAnalytics = ({ name, value, id }) => {
 }
 
 export const initWebVitals = () => {
-  if (!isProduction) {
+  if (!isProduction && shouldLogVitals) {
     console.log('Web Vitals monitoring enabled for development')
   }
 

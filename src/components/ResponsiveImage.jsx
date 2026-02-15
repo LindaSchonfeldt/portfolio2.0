@@ -12,7 +12,6 @@ const ResponsiveImage = ({
   clickable = false
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [imageError, setImageError] = useState(false)
   const pictureRef = useRef(null)
 
   // Generate srcset for both WebP and fallback
@@ -37,15 +36,7 @@ const ResponsiveImage = ({
       const dataSrc = img.getAttribute('data-src')
       const dataSrcSet = img.getAttribute('data-srcset')
 
-      console.log('ResponsiveImage loading:', {
-        dataSrc,
-        dataSrcSet,
-        sizes,
-        currentSrc: img.currentSrc
-      })
-
-      // Force immediate loading for all images
-      if (true) {
+      if (eager) {
         if (dataSrc) img.src = dataSrc
         if (dataSrcSet) img.srcset = dataSrcSet
 
@@ -61,23 +52,20 @@ const ResponsiveImage = ({
           setIsLoaded(true)
         } else {
           img.onload = () => {
-            console.log('Image loaded successfully:', img.currentSrc)
             setIsLoaded(true)
           }
           img.onerror = (e) => {
             console.error('Failed to load image:', dataSrc, 'Error:', e)
-            console.error('Attempted currentSrc:', img.currentSrc)
             // Try fallback without srcset if srcset failed
             if (dataSrcSet && dataSrc) {
               img.removeAttribute('srcset')
               img.src = dataSrc
             }
-            setImageError(true)
             setIsLoaded(true) // Show placeholder
           }
         }
 
-        if (eager) return
+        return
       }
 
       // Lazy loading with IntersectionObserver
@@ -106,7 +94,6 @@ const ResponsiveImage = ({
                   img.removeAttribute('srcset')
                   img.src = dataSrc
                 }
-                setImageError(true)
                 setIsLoaded(true)
               }
 

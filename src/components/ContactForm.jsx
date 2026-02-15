@@ -14,8 +14,7 @@ export const ContactForm = () => {
     isSubmitting,
     submitSuccess,
     submitError,
-    sendEmail,
-    formRef
+    sendEmail
   } = useEmailForm()
 
   const {
@@ -29,13 +28,13 @@ export const ContactForm = () => {
     resetRecaptcha
   } = useRecaptcha()
 
-  const onSubmit = async () => {
-    const success = await sendEmail(recaptchaToken)
+  const onSubmit = async (formData) => {
+    const success = await sendEmail(formData, recaptchaToken)
     if (success) resetRecaptcha()
   }
 
   return (
-    <StyledForm ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <InputRow>
         <label htmlFor='name'>Name</label>
         <input
@@ -83,13 +82,6 @@ export const ContactForm = () => {
       ) : (
         <ErrorMessage>reCAPTCHA not configured.</ErrorMessage>
       )}
-
-      {/* Ensure EmailJS gets the token when using sendForm */}
-      <input
-        type='hidden'
-        name='g-recaptcha-response'
-        value={recaptchaToken || ''}
-      />
 
       <Button
         type='submit'
