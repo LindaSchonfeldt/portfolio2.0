@@ -8,7 +8,8 @@
       "heroImage": "din_psykolog",
       "heroAlt": "Calm onboarding screen for a digital mental health service with symptom-first copy and low-intensity imagery",
       "alt": "Prototype of a symptom-first onboarding flow for a mental health service",
-      "description": "A redesigned onboarding flow for a digital mental health service aimed at reducing early drop-off in a vulnerable context. By restructuring decision sequencing, introducing a guided matching choice after experience recognition, replacing diagnostic labels with experience-based language, and delaying commitment signals, the concept lowers cognitive and emotional friction without compromising security or clinical responsibility.",
+      "description": "Self-initiated conceptual redesign of Din Psykolog’s onboarding experience. The project explores how early decision sequencing influences perceived safety in a vulnerable context. By introducing experience-based language, guided matching before comparison, and delayed commitment signals, the concept reduces cognitive and emotional friction while maintaining security and clinical integrity.",
+
       "categories": ["UX Design", "Healthtech", "Product Design"],
       "technologies": [
         "Figma",
@@ -28,7 +29,7 @@
       "category": "UX Design",
       "date": "2026-02",
       "role": "UX Designer & Interaction Designer",
-      "client": "Din Psykolog (Concept)",
+      "client": "Din Psykolog (Self-initiated Concept)",
 
       "problem": "In the original onboarding journey, users were asked to choose a psychologist, select a time, and authenticate early in the process.\n\nClinical terminology and commitment-signaling copy increased cognitive and emotional load at a stage where users may already feel vulnerable.\n\nThe system assumed that users were ready to evaluate providers before sufficient clarity or reassurance had been established. This increased perceived responsibility at an early stage, amplifying decision anxiety in an already vulnerable moment.",
 
