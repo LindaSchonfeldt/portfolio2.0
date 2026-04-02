@@ -11,7 +11,7 @@ const Home = () => {
     <>
       <Meta
         title='Home | Linda Schönfeldt Portfolio'
-        description="Welcome to Linda Schönfeldt's portfolio. Frontend developer and designer."
+        description="Welcome to Linda Schönfeldt's portfolio. Frontend developer with a background in interaction design."
       />
       <HomeContainer>
         <Hero />
