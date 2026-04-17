@@ -8,11 +8,10 @@ A modern, performance-optimized portfolio showcasing web development and UX desi
 
 This portfolio demonstrates expertise in modern web development through:
 
-- **Performance First**: Lighthouse score 90+ with optimized LCP, TBT, and CLS
 - **Responsive Design**: Mobile-first approach with fluid layouts
-- **Accessibility**: WCAG compliant with 100/100 accessibility score
+- **Accessibility**: WCAG compliant with semantic HTML and aria attributes
 - **Modern Stack**: React 18, Vite, Styled Components
-- **Animation**: Smooth Framer Motion animations with minimal performance impact
+- **Loading Screen**: Custom animated loading screen with real-time progress tied to chunk loading
 
 ## 🏗️ Architecture
 
@@ -33,14 +32,12 @@ This portfolio demonstrates expertise in modern web development through:
 
 **Animations:**
 
-- Framer Motion for smooth transitions
-- Intersection Observer for scroll-triggered animations
+- Framer Motion used in loading screen only (removed from hero for performance)
 - RequestIdleCallback for non-blocking operations
 
 **State Management:**
 
-- Zustand for lightweight global state
-- React Context for specific features
+- Zustand for lightweight global state (hamburger menu)
 
 **Forms & Validation:**
 
@@ -84,14 +81,13 @@ portfolio2.0/
 │   ├── pages/            # Route pages (lazy loaded)
 │   │   ├── Home.jsx
 │   │   ├── Projects.jsx
+│   │   ├── ProjectCaseStudy.jsx
 │   │   └── Contact.jsx
 │   ├── sections/         # Page sections
 │   │   ├── Hero.jsx
-│   │   ├── Experience.jsx
-│   │   ├── SkillSection.jsx
-│   │   └── Footer.jsx
+│   │   └── SkillSection.jsx
 │   ├── stores/           # Zustand stores
-│   │   └── useNavStore.js
+│   │   └── useMenuStore.js
 │   ├── styles/           # Global styles and utilities
 │   │   ├── GlobalStyle.js
 │   │   ├── devices.js    # Breakpoints
@@ -129,6 +125,7 @@ portfolio2.0/
 - Component-based splitting (ContactForm, SocialLinks)
 - Vendor chunking (React, Router, Styled Components, Framer Motion)
 - Manual chunk strategy for optimal caching
+- Home chunk preloaded during loading screen to eliminate Suspense fallback
 
 **Bundle Optimization:**
 
@@ -158,7 +155,8 @@ mobileM: '375px'
 mobileL: '425px'
 tablet: '768px'
 laptop: '1024px'
-desktop: '1440px'
+laptopL: '1440px'
+desktop: '2560px'
 ```
 
 **CSS Variables:**
@@ -296,11 +294,11 @@ The build process handles the rest!
 Edit CSS variables in `src/styles/GlobalStyle.js`:
 
 ```javascript
---primary-green-dark: #2d5f4e
---primary-green: #3a7a5f
---accent-orange: #ffb347
---background-light: #f5f5f5
---text-primary: #333
+--primary-green-dark: #2c3e2f
+--primary-green: #c7d9c4
+--accent-orange: #ff9900
+--background-light: #fff
+--text-main: #333
 ```
 
 ### Breakpoints
@@ -313,19 +311,14 @@ Adjust in `src/styles/spacing.js`
 
 ## 📊 Performance Metrics
 
-**Lighthouse Scores:**
+> **Note on performance score:** The site intentionally uses a full-screen loading screen on first visit that delays FCP and LCP by ~2.75s. This is a deliberate design choice and directly lowers the Lighthouse performance score (currently ~40-55). All other optimizations (code splitting, preloading, lazy loading) are in place — the loading screen is the primary trade-off.
 
-- Performance: 90+
-- Accessibility: 100
+**Lighthouse Scores (approximate):**
+
+- Performance: ~40–55 (impacted by loading screen)
+- Accessibility: 95+
 - Best Practices: 100
 - SEO: 100
-
-**Core Web Vitals:**
-
-- LCP: 0.8s (Excellent)
-- FCP: 0.5s (Excellent)
-- TBT: <300ms (Good)
-- CLS: 0 (Perfect)
 
 ## 🔧 Configuration
 

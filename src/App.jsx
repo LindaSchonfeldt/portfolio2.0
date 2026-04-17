@@ -14,7 +14,6 @@ import { preloadRoute } from './utils/routePreloader'
 // Lazy loaded components
 const About = lazy(() => import('./pages/About'))
 const Projects = lazy(() => import('./pages/Projects'))
-// const ProjectDetail = lazy(() => import('./pages/ProjectDetail')) // Kept for future reference
 const ProjectCaseStudy = lazy(() => import('./pages/ProjectCaseStudy'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Home = lazy(() => import('./pages/Home'))

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
-import { Logo } from './Logo'
 import ResponsiveImage from './ResponsiveImage'
 import { SocialLinks } from './SocialLinks'
 
@@ -23,17 +22,18 @@ export const Footer = () => {
           <InfoContainer>
             <h2>Let's talk!</h2>
             <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
-              <MailIcon size={32} />
+              <MailIcon size={42} />
             </a>
             <br />
-            &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
-            reserved.
           </InfoContainer>
-          <Logo size='large' alt='' className='footer-logo' />
         </FooterContent>
         <BottomSocials>
           <SocialLinks />
         </BottomSocials>
+        <Copyright>
+          &copy; {new Date().getFullYear()} Linda Schönfeldt. All rights
+          reserved.
+        </Copyright>
       </ContentContainer>
     </StyledFooter>
   )
@@ -50,19 +50,10 @@ const StyledFooter = styled.footer`
   box-sizing: border-box;
 
   background: linear-gradient(
-      to bottom,
-      rgba(13, 69, 58, 0.95),
-      rgba(13, 69, 58, 0.98)
-    ),
-    url('/images/footer.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  border-top: 2px solid var(--primary-green-dark);
-
-  @media (max-width: 768px) {
-    background-attachment: scroll;
-  }
+    to bottom,
+    rgba(13, 69, 58, 0.95),
+    rgba(13, 69, 58, 0.98)
+  );
 `
 
 const ContentContainer = styled.div`
@@ -164,6 +155,15 @@ const BottomSocials = styled.div`
   @media ${devices.tablet} {
     justify-content: center;
   }
+`
+
+const Copyright = styled.p`
+  color: var(--text-light);
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: left;
+  padding: 0 var(--gap-md) 1rem;
+  margin: 0;
 `
 
 const MailIcon = styled(IoMail)`

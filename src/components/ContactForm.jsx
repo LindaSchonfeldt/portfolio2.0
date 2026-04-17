@@ -40,6 +40,7 @@ export const ContactForm = () => {
         <input
           id='name'
           name='from_name'
+          autoComplete='name'
           {...register('from_name', { required: 'Name is required' })}
         />
         {errors.from_name && <ErrorText>{errors.from_name.message}</ErrorText>}
@@ -51,6 +52,7 @@ export const ContactForm = () => {
           id='email'
           name='reply_to'
           type='email'
+          autoComplete='email'
           {...register('reply_to', { required: 'Email is required' })}
         />
         {errors.reply_to && <ErrorText>{errors.reply_to.message}</ErrorText>}
@@ -87,10 +89,18 @@ export const ContactForm = () => {
         type='submit'
         label={isSubmitting ? 'Sending...' : 'Send'}
         disabled={isSubmitting || !recaptchaToken}
+        aria-describedby={!recaptchaToken ? 'recaptcha-hint' : undefined}
       />
+      {!recaptchaToken && (
+        <span id='recaptcha-hint' className='visually-hidden'>
+          Please complete the reCAPTCHA before submitting.
+        </span>
+      )}
 
       {submitSuccess && (
-        <SuccessMessage>✓ Message sent successfully!</SuccessMessage>
+        <SuccessMessage>
+          <span aria-hidden='true'>✓ </span>Message sent successfully!
+        </SuccessMessage>
       )}
       {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
     </StyledForm>
@@ -112,16 +122,15 @@ const StyledForm = styled.form`
   input,
   textarea {
     padding: 0.5rem;
-    border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 1rem;
     font-family: 'Raleway', sans-serif;
     transition: border-color 0.2s ease-in-out;
 
     &:focus {
-      outline: none;
+      outline: 2px solid var(--primary-green-dark);
+      outline-offset: 2px;
       border-color: var(--primary-green-dark);
-      box-shadow: 0 0 0 2px rgba(44, 62, 47, 0.2);
     }
 
     &:active {
@@ -170,6 +179,7 @@ const ErrorText = styled.span`
   color: red;
   font-size: 0.85rem;
   margin-top: 0.25rem;
+  font-family: 'Raleway', sans-serif;
 `
 
 const ErrorMessage = styled.div`
@@ -177,7 +187,6 @@ const ErrorMessage = styled.div`
   font-size: 0.9rem;
   margin-top: 0.5rem;
   text-align: center;
-  font-family: 'Raleway', sans-serif;
 `
 
 const SuccessMessage = styled.div`

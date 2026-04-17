@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
@@ -52,7 +51,6 @@ export const Hero = () => {
               aria-label='Contact Me'
             />
           </ButtonWrapper>
-          <Suspense fallback={<div style={{ height: '40px' }} />}></Suspense>
         </ActionWrapper>
       </HeroContent>
     </SectionContainer>
@@ -155,8 +153,3 @@ const ActionWrapper = styled.div`
   }
 `
 
-const LogoWrapper = styled.div`
-  align-self: flex-start;
-  transform-origin: left center;
-  display: inline-block;
-`
