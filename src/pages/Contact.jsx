@@ -4,7 +4,6 @@ import { lazy, Suspense, useState } from 'react'
 import { FiCopy } from 'react-icons/fi'
 import styled from 'styled-components'
 
-import LoadingFallback from '../components/LoadingFallback'
 import Meta from '../components/Meta'
 import SectionContainer from '../components/SectionContainer'
 
@@ -54,7 +53,7 @@ const Contact = () => {
             </CopyIcon>
             {copied && <CopiedText>Copied!</CopiedText>}
           </EmailRow>
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={null}>
             <ContactForm />
           </Suspense>
         </SectionContainer>

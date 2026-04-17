@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
+import ResponsiveImage from '../components/ResponsiveImage'
 import SectionContainer from '../components/SectionContainer'
 import { TagGroup } from '../components/TagGroup'
 import devices from '../styles/devices'
@@ -8,57 +9,108 @@ import devices from '../styles/devices'
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <HeroContent>
-        <h3 className='heroPreTitle'>Hi, I'm Linda</h3>
-        <h1 className='heroTitle'>Frontend Developer</h1>
-        <h2 className='heroSubtitle'>
-          with a background in Interaction Design
-        </h2>
-        <div className='heroText'>
-          <p>
-            I'm particularly drawn to healthtech and products where what you
-            build genuinely matters to the person using it. I moved into
-            development because I didn't want to stop at the design — I wanted
-            to be the one who actually builds it. A background in interaction
-            design means I think in user needs and flows before I think in
-            components and code.
-          </p>
-        </div>
-        <TagGroup
-          tags={[
-            'React',
-            'JavaScript',
-            'HTML/CSS',
-            'TailwindCSS',
-            'Figma',
-            'REST APIs'
-          ]}
-        />
-        <ActionWrapper>
-          <ButtonWrapper>
-            <Button
-              variant='secondary'
-              label={'Download CV'}
-              className='heroButton'
-              url='/linda.schonfeldt_cv.pdf'
-              aria-label='Download CV'
-            />
-            <Button
-              variant='primary'
-              label={'Contact Me'}
-              className=''
-              url='/contact'
-              aria-label='Contact Me'
-            />
-          </ButtonWrapper>
-        </ActionWrapper>
-      </HeroContent>
+      <HeroLayout>
+        <HeroContent>
+          <h3 className='heroPreTitle'>Hi, I'm Linda</h3>
+          <h1 className='heroTitle'>Frontend Developer</h1>
+          <h2 className='heroSubtitle'>
+            with a background in Interaction Design
+          </h2>
+          <div className='heroText'>
+            <p>
+              I'm particularly drawn to healthtech and products where what you
+              build genuinely matters to the person using it. I moved into
+              development because I didn't want to stop at the design — I wanted
+              to be the one who actually builds it. A background in interaction
+              design means I think in user needs and flows before I think in
+              components and code.
+            </p>
+          </div>
+          <TagGroup
+            tags={[
+              'React',
+              'JavaScript',
+              'HTML/CSS',
+              'TailwindCSS',
+              'Figma',
+              'REST APIs'
+            ]}
+          />
+          <ActionWrapper>
+            <ButtonWrapper>
+              <Button
+                variant='secondary'
+                label={'Download CV'}
+                className='heroButton'
+                url='/linda.schonfeldt_cv.pdf'
+                aria-label='Download CV'
+              />
+              <Button
+                variant='primary'
+                label={'Contact Me'}
+                className=''
+                url='/contact'
+                aria-label='Contact Me'
+              />
+            </ButtonWrapper>
+          </ActionWrapper>
+        </HeroContent>
+        <PhotoWrapper>
+          <ResponsiveImage
+            webpSrc='/images/linda.webp'
+            fallbackSrc='/images/linda.png'
+            alt='Linda Schönfeldt'
+            eager={true}
+          />
+        </PhotoWrapper>
+      </HeroLayout>
     </SectionContainer>
   )
 }
 
+const HeroLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  align-items: center;
+
+  @media ${devices.tablet} {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+`
+
+const PhotoWrapper = styled.div`
+  display: none;
+
+  @media ${devices.tablet} {
+    display: block;
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: auto;
+
+    img,
+    picture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+    }
+  }
+
+  @media ${devices.laptop} {
+    width: 320px;
+    height: 320px;
+  }
+`
+
 const HeroContent = styled.div`
-  max-width: 800px;
   width: 100%;
   text-align: left;
 
@@ -115,18 +167,6 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 0.7rem;
-
-  a,
-  button {
-    width: auto;
-  }
-
-  @media ${devices.mobileL} {
-    a,
-    button {
-      width: auto;
-    }
-  }
 `
 
 const ActionWrapper = styled.div`

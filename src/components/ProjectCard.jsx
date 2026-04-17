@@ -427,22 +427,14 @@ const StyledReadMore = styled(ReadMore)`
 
 const LinkContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
   padding-top: 0.5rem;
   margin-top: auto;
-
-  @media ${devices.tablet} {
-    flex-direction: row;
-    margin-top: auto;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
 `
 
 const CaseStudyBadge = styled.span`
@@ -466,7 +458,6 @@ const CaseStudyButton = styled(Link)`
   ${buttonBase}
   min-width: 120px;
   margin-bottom: 0.5rem;
-  width: 100%;
   background-color: var(--primary-green-dark);
   color: var(--text-light);
   border-color: var(--primary-green-dark);
@@ -479,7 +470,6 @@ const CaseStudyButton = styled(Link)`
 
   @media ${devices.tablet} {
     margin-bottom: 0;
-    width: 100%;
   }
 
   /* Disabled state */
