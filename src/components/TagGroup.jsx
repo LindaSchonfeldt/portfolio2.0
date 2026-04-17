@@ -7,7 +7,7 @@ export const TagGroup = ({ tags }) => {
   return (
     <TagContainer>
       {tags.map((tag, index) => (
-        <Tag key={index}>{tag}</Tag>
+        <Tag key={index} text={tag} />
       ))}
     </TagContainer>
   )

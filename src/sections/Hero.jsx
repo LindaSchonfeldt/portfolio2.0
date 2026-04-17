@@ -1,47 +1,40 @@
-import { motion } from 'framer-motion'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
-import { Logo } from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
+import { TagGroup } from '../components/TagGroup'
 import devices from '../styles/devices'
-
-// Lazy load non-critical components
-const SocialLinks = lazy(() =>
-  import('../components/SocialLinks').then((m) => ({ default: m.SocialLinks }))
-)
 
 export const Hero = () => {
   return (
     <SectionContainer id='introduction'>
-      <MotionLogoWrapper
-        initial={{ scale: 2.5, opacity: 0.7 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-      >
-        <Logo size='small' alt='' />
-      </MotionLogoWrapper>
-      <MotionHeroContent
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-      >
-        <h3 className='heroPreTitle'>I am Linda Schönfeldt</h3>
+      <HeroContent>
+        <h3 className='heroPreTitle'>Hi, I'm Linda</h3>
         <h1 className='heroTitle'>Frontend Developer</h1>
         <h2 className='heroSubtitle'>
           with a background in Interaction Design
         </h2>
         <div className='heroText'>
           <p>
-            I moved into development because I didn't want to stop at the
-            design, I wanted to be the one who actually builds it. A background
-            in interaction design means I think in user needs and flows before I
-            think in components and code. I'm particularly drawn to healthtech
-            and products where what you build genuinely matters to the person
-            using it.
+            I'm particularly drawn to healthtech and products where what you
+            build genuinely matters to the person using it. I moved into
+            development because I didn't want to stop at the design — I wanted
+            to be the one who actually builds it. A background in interaction
+            design means I think in user needs and flows before I think in
+            components and code.
           </p>
         </div>
+        <TagGroup
+          tags={[
+            'React',
+            'JavaScript',
+            'HTML/CSS',
+            'TailwindCSS',
+            'Figma',
+            'REST APIs'
+          ]}
+        />
         <ActionWrapper>
           <ButtonWrapper>
             <Button
@@ -59,11 +52,9 @@ export const Hero = () => {
               aria-label='Contact Me'
             />
           </ButtonWrapper>
-          <Suspense fallback={<div style={{ height: '40px' }} />}>
-            <SocialLinks />
-          </Suspense>
+          <Suspense fallback={<div style={{ height: '40px' }} />}></Suspense>
         </ActionWrapper>
-      </MotionHeroContent>
+      </HeroContent>
     </SectionContainer>
   )
 }
@@ -125,7 +116,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 0.7rem;
 
   a,
   button {
@@ -169,7 +160,3 @@ const LogoWrapper = styled.div`
   transform-origin: left center;
   display: inline-block;
 `
-
-// Motion components for animations
-const MotionLogoWrapper = motion.create(LogoWrapper)
-const MotionHeroContent = motion.create(HeroContent)

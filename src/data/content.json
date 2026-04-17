@@ -30,6 +30,7 @@
         "CSS3",
         "JavaScript ES6",
         "React",
+        "TypeScript",
         "Node.js",
         "Styled Components",
         "Chakra UI",
@@ -71,10 +72,6 @@
         "Concept Development",
         "Agile Methodology"
       ]
-    },
-    {
-      "category": "Upcoming",
-      "items": ["TypeScript"]
     }
   ]
 }

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { Button } from '../components/Button.jsx'
-import devices from '../styles/devices'
 
 export const ButtonGroup = ({ actions }) => {
   if (!actions || actions.length === 0) {

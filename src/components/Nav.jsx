@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
 import { preloadProjectImages } from '../utils/preloadImages'
 import { useRoutePreloader } from '../utils/routePreloader'
+import { Logo } from './Logo'
 
 export const Nav = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -17,66 +17,25 @@ export const Nav = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Use the nav store for global state
-  const expandedItem = useNavStore((state) => state.expandedItem)
-  const toggleExpanded = useNavStore((state) => state.toggleExpanded)
-
-  // Route preloader for better performance
   const { preloadOnHover } = useRoutePreloader()
-
-  // Define sections for each page
-  const pageSections = {
-    about: ['Introduction', 'Skills', 'Contact'],
-    projects: [],
-    contact: []
-  }
 
   return (
     <NavContainer $scrolled={scrolled}>
+      <LogoLink to='/'>
+        <Logo size='small' alt='Linda Schönfeldt' />
+      </LogoLink>
       <NavLinks>
         <NavItem>
-          <StyledNavLink
-            to='/'
-            $primary
-            onClick={() => toggleExpanded('about')}
-            $expanded={expandedItem === 'about'}
-            {...preloadOnHover('home')}
-          >
+          <StyledNavLink to='/' {...preloadOnHover('home')}>
             <IconWrapper>
               <Info size={24} />
             </IconWrapper>
             <TextLabel>About</TextLabel>
           </StyledNavLink>
-          {expandedItem === 'about' && (
-            <SectionLinks $hasSections={pageSections.about.length > 0}>
-              {pageSections.about.map((section, index) => (
-                <SectionItem key={index}>
-                  <SectionLink
-                    to={`/#${section.toLowerCase().replace(/\s+/g, '-')}`}
-                    onClick={(e) => {
-                      // Prevent default to handle scroll with JS
-                      e.preventDefault()
-                      const target = document.getElementById(
-                        section.toLowerCase().replace(/\s+/g, '-')
-                      )
-                      if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' })
-                      }
-                    }}
-                  >
-                    {section}
-                  </SectionLink>
-                </SectionItem>
-              ))}
-            </SectionLinks>
-          )}
         </NavItem>
         <NavItem>
           <StyledNavLink
-            to={'/projects'}
-            $primary
-            onClick={() => toggleExpanded('projects')}
-            $expanded={expandedItem === 'projects'}
+            to='/projects'
             onMouseEnter={preloadProjectImages}
             {...preloadOnHover('projects')}
           >
@@ -85,50 +44,14 @@ export const Nav = () => {
             </IconWrapper>
             <TextLabel>Projects</TextLabel>
           </StyledNavLink>
-          {expandedItem === 'projects' && (
-            <SectionLinks $hasSections={pageSections.projects.length > 0}>
-              {pageSections.projects.map((section, index) => (
-                <SectionItem key={index}>
-                  <SectionLink
-                    to={`/projects#${section
-                      .toLowerCase()
-                      .replace(/\s+/g, '-')}`}
-                  >
-                    {section}
-                  </SectionLink>
-                </SectionItem>
-              ))}
-            </SectionLinks>
-          )}
         </NavItem>
         <NavItem>
-          <StyledNavLink
-            to='/contact'
-            $primary
-            onClick={() => toggleExpanded('contact')}
-            $expanded={expandedItem === 'contact'}
-            {...preloadOnHover('contact')}
-          >
+          <StyledNavLink to='/contact' {...preloadOnHover('contact')}>
             <IconWrapper>
               <Mail size={24} />
             </IconWrapper>
             <TextLabel>Contact</TextLabel>
           </StyledNavLink>
-          {expandedItem === 'contact' && (
-            <SectionLinks $hasSections={pageSections.contact.length > 0}>
-              {pageSections.contact.map((section, index) => (
-                <SectionItem key={index}>
-                  <SectionLink
-                    to={`/contact#${section
-                      .toLowerCase()
-                      .replace(/\s+/g, '-')}`}
-                  >
-                    {section}
-                  </SectionLink>
-                </SectionItem>
-              ))}
-            </SectionLinks>
-          )}
         </NavItem>
       </NavLinks>
     </NavContainer>
@@ -142,10 +65,11 @@ const NavContainer = styled.nav`
     display: flex;
     flex-direction: row;
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
     right: 0;
     width: 100%;
+    padding: 0 4rem 0 6rem;
     z-index: 1000;
     transition:
       background 0.3s ease,
@@ -159,6 +83,17 @@ const NavContainer = styled.nav`
       -webkit-backdrop-filter: blur(12px);
     `}
   }
+
+  @media ${devices.desktop} {
+    padding: 0 10rem 0 12rem;
+  }
+`
+
+const LogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 1rem 0;
 `
 
 const NavLinks = styled.ul`
@@ -184,6 +119,7 @@ const StyledNavLink = styled(NavLink)`
   gap: 0.5rem;
   text-decoration: none;
   color: var(--primary-green-dark);
+  font-size: 0.9rem;
   font-weight: 600;
   padding: 1rem;
   text-align: center;
@@ -240,47 +176,6 @@ const StyledNavLink = styled(NavLink)`
       `
       width: 110px;
     `}
-  }
-`
-
-const SectionLinks = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  margin-top: ${(props) => (props.$hasSections ? '0.25rem' : '0')};
-  width: 100%;
-  align-items: flex-end;
-`
-
-const SectionItem = styled.li`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-`
-
-const SectionLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 400;
-  font-size: 0.8rem;
-  padding: 0.3rem;
-  width: auto;
-  text-align: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    color: var(--text-main);
-    width: 95px;
-  }
-
-  &:active {
-    color: var(--text-main);
-    text-decoration: underline;
-    font-weight: 500;
   }
 `
 
