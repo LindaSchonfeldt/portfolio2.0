@@ -42,7 +42,7 @@ export const buttonBase = css`
   font-size: 1rem;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 0px;
   border: 2px solid transparent;
   text-align: center;
   text-decoration: none;
@@ -54,7 +54,7 @@ export const buttonBase = css`
 // Common card styles
 export const cardBase = css`
   background: var(--background-light);
-  border-radius: 8px;
+  border-radius: 0px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;

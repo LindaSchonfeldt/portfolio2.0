@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Footer } from './components/Footer'
 import { HamburgerMenu } from './components/HamburgerMenu'
-import Intro from './components/Intro'
+import LoadingScreen from './components/LoadingScreen'
 import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
@@ -31,12 +31,12 @@ const AppContainer = styled.div`
 function AppContent() {
   // Disable intro animation for better performance
   // Set to true to enable the intro animation
-  const [showIntro, setShowIntro] = useState(false)
+  const [showIntro, setShowIntro] = useState(true)
   const location = useLocation()
   const isHome = location.pathname === '/'
-  const introPlayed = useRef(true) // Start as true to skip intro
+  const introPlayed = useRef(false)
 
-  // Only show intro if on home and it hasn't played yet
+  // Only show loading screen on home, first visit only
   const shouldShowIntro = showIntro && isHome && !introPlayed.current
 
   const handleIntroComplete = () => {
@@ -83,7 +83,7 @@ function AppContent() {
       <GlobalStyle />
       <AppContainer>
         {shouldShowIntro ? (
-          <Intro onComplete={handleIntroComplete} />
+          <LoadingScreen onComplete={handleIntroComplete} />
         ) : (
           <>
             <ScrollToTop />
