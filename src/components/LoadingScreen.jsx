@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { preloadRoute } from '../utils/routePreloader'
+
 const SLIDE_IN_MS = 1400
 const HOLD_MS = 350
 const SLIDE_UP_MS = 900
@@ -11,24 +13,60 @@ const LoadingScreen = ({ onComplete }) => {
   const [phase, setPhase] = useState('slideIn')
 
   useEffect(() => {
-    const start = performance.now()
     let rafId
+    let cancelled = false
+    let finished = false
+    let homeLoaded = false
+    let fastCountDone = false
 
-    const updatePct = (now) => {
-      const elapsed = now - start
-      const p = Math.min(elapsed / SLIDE_IN_MS, 1)
-      setPercentage(Math.round(p * 100))
-      if (p < 1) rafId = requestAnimationFrame(updatePct)
+    preloadRoute('home').then(() => {
+      homeLoaded = true
+      if (fastCountDone) finish()
+    })
+
+    const finish = () => {
+      if (cancelled || finished) return
+      finished = true
+      cancelAnimationFrame(rafId)
+      setPercentage(100)
+      setTimeout(() => {
+        if (!cancelled) {
+          setPhase('slideUp')
+          setTimeout(onComplete, SLIDE_UP_MS + 100)
+        }
+      }, HOLD_MS)
     }
-    rafId = requestAnimationFrame(updatePct)
 
-    const slideUpTimer = setTimeout(() => setPhase('slideUp'), SLIDE_IN_MS + HOLD_MS)
-    const completeTimer = setTimeout(onComplete, SLIDE_IN_MS + HOLD_MS + SLIDE_UP_MS + 100)
+    // Phase 1: fast count 0→90 over SLIDE_IN_MS
+    const fastStart = performance.now()
+    const fastCount = (now) => {
+      if (cancelled) return
+      const p = Math.min((now - fastStart) / SLIDE_IN_MS, 1)
+      setPercentage(Math.round(p * 90))
+      if (p < 1) {
+        rafId = requestAnimationFrame(fastCount)
+        return
+      }
+      fastCountDone = true
+      if (homeLoaded) {
+        finish()
+      } else {
+        // Phase 2: slow crawl 90→99 while waiting for chunk
+        const slowStart = performance.now()
+        const slowCount = (now) => {
+          if (cancelled || finished) return
+          const p = Math.min((now - slowStart) / 10000, 1)
+          setPercentage(90 + Math.round(p * 9))
+          rafId = requestAnimationFrame(slowCount)
+        }
+        rafId = requestAnimationFrame(slowCount)
+      }
+    }
+    rafId = requestAnimationFrame(fastCount)
 
     return () => {
+      cancelled = true
       cancelAnimationFrame(rafId)
-      clearTimeout(slideUpTimer)
-      clearTimeout(completeTimer)
     }
   }, [onComplete])
 

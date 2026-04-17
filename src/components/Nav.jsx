@@ -1,6 +1,7 @@
+import { FolderGit2, Info, Mail } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { Info, FolderGit2, Mail } from 'lucide-react'
 
 import { useNavStore } from '../stores/useNavStore'
 import devices from '../styles/devices'
@@ -8,6 +9,14 @@ import { preloadProjectImages } from '../utils/preloadImages'
 import { useRoutePreloader } from '../utils/routePreloader'
 
 export const Nav = () => {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   // Use the nav store for global state
   const expandedItem = useNavStore((state) => state.expandedItem)
   const toggleExpanded = useNavStore((state) => state.toggleExpanded)
@@ -17,13 +26,13 @@ export const Nav = () => {
 
   // Define sections for each page
   const pageSections = {
-    about: ['Introduction', 'Skills', 'Experience'],
+    about: ['Introduction', 'Skills', 'Contact'],
     projects: [],
     contact: []
   }
 
   return (
-    <NavContainer>
+    <NavContainer $scrolled={scrolled}>
       <NavLinks>
         <NavItem>
           <StyledNavLink
@@ -131,24 +140,38 @@ const NavContainer = styled.nav`
 
   @media ${devices.laptop} {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     position: fixed;
-    top: 25%;
+    top: 0px;
+    left: 0;
     right: 0;
+    width: 100%;
     z-index: 1000;
+    transition:
+      background 0.3s ease,
+      backdrop-filter 0.3s ease;
+
+    ${({ $scrolled }) =>
+      $scrolled &&
+      `
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    `}
   }
 `
 
 const NavLinks = styled.ul`
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
   list-style: none;
 `
 
 const NavItem = styled.li`
   position: relative;
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -160,29 +183,21 @@ const StyledNavLink = styled(NavLink)`
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  background-color: var(--accent-red);
-  border-color: var(--accent-red);
-  color: white;
-  font-family: 'Raleway', sans-serif;
+  color: var(--primary-green-dark);
   font-weight: 600;
   padding: 1rem;
-  width: 60px;
-  height: 50px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
-  border-bottom: 4px solid var(--accent-red-dark);
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
   overflow: hidden;
   white-space: nowrap;
 
   &:hover {
-    width: 80px;
+    gap: 0.75rem;
   }
 
   &.active {
-    width: 80px;
+    gap: 0.75rem;
   }
 
   ${(props) =>

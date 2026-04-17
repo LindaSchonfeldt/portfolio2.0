@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { Footer } from './components/Footer'
 import { HamburgerMenu } from './components/HamburgerMenu'
 import LoadingScreen from './components/LoadingScreen'
-import LoadingFallback from './components/LoadingFallback'
 import { Nav } from './components/Nav'
 import PerformanceMonitor from './components/PerformanceMonitor'
 import ScrollToTop from './components/ScrollToTop'
@@ -82,28 +81,25 @@ function AppContent() {
     <>
       <GlobalStyle />
       <AppContainer>
-        {shouldShowIntro ? (
+        {shouldShowIntro && (
           <LoadingScreen onComplete={handleIntroComplete} />
-        ) : (
-          <>
-            <ScrollToTop />
-            <Nav />
-            <HamburgerMenu />
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/projects' element={<Projects />} />
-                <Route
-                  path='/projects/:projectId'
-                  element={<ProjectCaseStudy />}
-                />
-                <Route path='/contact' element={<Contact />} />
-              </Routes>
-              <Footer />
-              <PerformanceMonitor />
-            </Suspense>
-          </>
         )}
+        <ScrollToTop />
+        <Nav />
+        <HamburgerMenu />
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/projects' element={<Projects />} />
+            <Route
+              path='/projects/:projectId'
+              element={<ProjectCaseStudy />}
+            />
+            <Route path='/contact' element={<Contact />} />
+          </Routes>
+          <Footer />
+          <PerformanceMonitor />
+        </Suspense>
       </AppContainer>
     </>
   )
