@@ -11,7 +11,7 @@ export const Footer = () => {
       <ContentContainer>
         <FooterContent>
           <InfoContainer>
-            <h2>Let's talk!</h2>
+            <FooterTitle>Let's talk!</FooterTitle>
             <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
               <MailIcon size={42} />
             </a>
@@ -86,6 +86,21 @@ const FooterContent = styled.div`
     .footer-logo {
       display: block;
     }
+  }
+`
+const FooterTitle = styled.h2`
+  font-family: 'Jost', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+
+  @media ${devices.tablet} {
+    font-size: 2rem;
+  }
+
+  @media ${devices.laptop} {
+    font-size: 2.5rem;
   }
 `
 

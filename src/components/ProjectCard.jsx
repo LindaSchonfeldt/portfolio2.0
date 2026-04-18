@@ -427,10 +427,8 @@ const StyledReadMore = styled(ReadMore)`
 
 const LinkContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
   padding-top: 0.5rem;

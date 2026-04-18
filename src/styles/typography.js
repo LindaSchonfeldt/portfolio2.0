@@ -13,6 +13,7 @@ export const typography = css`
     font-weight: 600;
     line-height: 1;
     margin-bottom: 1rem;
+    color: var(--primary-green-dark);
 
     @media ${devices.tablet} {
       font-size: 3.5rem;
@@ -27,6 +28,7 @@ export const typography = css`
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
+    color: var(--primary-green-dark);
 
     @media ${devices.tablet} {
       font-size: 2.5rem;

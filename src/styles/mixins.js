@@ -37,7 +37,8 @@ export const focusStyles = css`
 
 // Common button base styles
 export const buttonBase = css`
-  display: inline-block;
+  display: block;
+  width: 100%;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-family: 'Raleway', sans-serif;

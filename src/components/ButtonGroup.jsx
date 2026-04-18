@@ -27,6 +27,6 @@ export const ButtonGroup = ({ actions }) => {
 const StyledButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
   gap: 0.5rem;
 `
