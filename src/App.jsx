@@ -24,6 +24,11 @@ const AppContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   position: relative;
+  padding-top: 40px;
+
+  @media (min-width: 1024px) {
+    padding-top: 0;
+  }
 `
 
 function AppContent() {
@@ -80,9 +85,7 @@ function AppContent() {
     <>
       <GlobalStyle />
       <AppContainer>
-        {shouldShowIntro && (
-          <LoadingScreen onComplete={handleIntroComplete} />
-        )}
+        {shouldShowIntro && <LoadingScreen onComplete={handleIntroComplete} />}
         <ScrollToTop />
         <Nav />
         <HamburgerMenu />
@@ -90,10 +93,7 @@ function AppContent() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/projects' element={<Projects />} />
-            <Route
-              path='/projects/:projectId'
-              element={<ProjectCaseStudy />}
-            />
+            <Route path='/projects/:projectId' element={<ProjectCaseStudy />} />
             <Route path='/contact' element={<Contact />} />
           </Routes>
           <Footer />

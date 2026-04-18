@@ -1,4 +1,3 @@
-import { FolderGit2, Info, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -23,13 +22,11 @@ export const Nav = () => {
     <NavContainer $scrolled={scrolled}>
       <LogoLink to='/'>
         <Logo size='small' alt='Linda Schönfeldt' />
+        <LogoName>Linda Schönfeldt</LogoName>
       </LogoLink>
       <NavLinks>
         <NavItem>
           <StyledNavLink to='/' {...preloadOnHover('home')}>
-            <IconWrapper>
-              <Info size={24} />
-            </IconWrapper>
             <TextLabel>About</TextLabel>
           </StyledNavLink>
         </NavItem>
@@ -39,17 +36,11 @@ export const Nav = () => {
             onMouseEnter={preloadProjectImages}
             {...preloadOnHover('projects')}
           >
-            <IconWrapper>
-              <FolderGit2 size={24} />
-            </IconWrapper>
             <TextLabel>Projects</TextLabel>
           </StyledNavLink>
         </NavItem>
         <NavItem>
           <StyledNavLink to='/contact' {...preloadOnHover('contact')}>
-            <IconWrapper>
-              <Mail size={24} />
-            </IconWrapper>
             <TextLabel>Contact</TextLabel>
           </StyledNavLink>
         </NavItem>
@@ -91,9 +82,21 @@ const NavContainer = styled.nav`
 
 const LogoLink = styled(Link)`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  gap: 0.6rem;
   flex-shrink: 0;
   padding: 1rem 0;
+  text-decoration: none;
+`
+
+const LogoName = styled.span`
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-green-dark);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1;
 `
 
 const NavLinks = styled.ul`
@@ -176,32 +179,5 @@ const StyledNavLink = styled(NavLink)`
       `
       width: 110px;
     `}
-  }
-`
-
-const IconWrapper = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  @media ${devices.desktop} {
-    display: none;
-  }
-
-  @media ${devices.laptopL} {
-    display: none;
-  }
-`
-
-const TextLabel = styled.span`
-  display: none;
-
-  @media ${devices.desktop} {
-    display: inline;
-  }
-
-  @media ${devices.laptopL} {
-    display: inline;
   }
 `

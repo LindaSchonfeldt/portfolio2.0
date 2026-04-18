@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 import { fullBleed } from '../styles/spacing'
-import ResponsiveImage from './ResponsiveImage'
 import { SocialLinks } from './SocialLinks'
 
 export const Footer = () => {

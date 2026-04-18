@@ -11,7 +11,6 @@ export const Hero = () => {
     <SectionContainer id='introduction'>
       <HeroLayout>
         <HeroContent>
-          <h3 className='heroPreTitle'>Hi, I'm Linda</h3>
           <h1 className='heroTitle'>Frontend Developer</h1>
           <h2 className='heroSubtitle'>
             with a background in Interaction Design
@@ -120,12 +119,6 @@ const HeroContent = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  .heroPreTitle {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
   .heroTitle {
     color: var(--primary-green-dark);
     font-size: 3.7rem;
@@ -192,4 +185,3 @@ const ActionWrapper = styled.div`
     }
   }
 `
-

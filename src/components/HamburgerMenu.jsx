@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useMenuStore } from '../stores/useMenuStore'
 import devices from '../styles/devices.js'
+import { Logo } from './Logo'
+import { SocialLinks } from './SocialLinks'
 
 // Import styling CSS variables
 import '../styles/colors.js'
@@ -18,6 +20,14 @@ export const HamburgerMenu = () => {
   const isOpen = useMenuStore((s) => s.isOpen)
   const toggleMenu = useMenuStore((s) => s.toggleMenu)
   const closeMenu = useMenuStore((s) => s.closeMenu)
+
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const location = useLocation()
   const buttonRef = useRef(null)
@@ -91,18 +101,24 @@ export const HamburgerMenu = () => {
 
   return (
     <>
-      <HamburgerButton
-        ref={buttonRef}
-        onClick={toggleMenu}
-        type='button'
-        aria-expanded={isOpen}
-        aria-controls={menuId}
-        aria-label='Toggle menu'
-      >
-        <Bar $isOpen={isOpen} />
-        <Bar $isOpen={isOpen} />
-        <Bar $isOpen={isOpen} />
-      </HamburgerButton>
+      <MobileHeader $scrolled={scrolled}>
+        <LogoLink to='/'>
+          <Logo size='small' alt='Linda Schönfeldt' />
+          <LogoName>Linda Schönfeldt</LogoName>
+        </LogoLink>
+        <HamburgerButton
+          ref={buttonRef}
+          onClick={toggleMenu}
+          type='button'
+          aria-expanded={isOpen}
+          aria-controls={menuId}
+          aria-label='Toggle menu'
+        >
+          <Bar $isOpen={isOpen} />
+          <Bar $isOpen={isOpen} />
+          <Bar $isOpen={isOpen} />
+        </HamburgerButton>
+      </MobileHeader>
 
       <AnimatePresence>
         {isOpen && (
@@ -155,6 +171,9 @@ export const HamburgerMenu = () => {
               >
                 Contact
               </NavLink>
+              <BottomSocial>
+                <SocialLinks />
+              </BottomSocial>
             </Menu>
           </Portal>
         )}
@@ -170,7 +189,10 @@ const Bar = styled.span`
   background: var(--text-main);
   margin: 4px 0;
   border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s, background-color 0.2s;
+  transition:
+    transform 0.3s,
+    opacity 0.3s,
+    background-color 0.2s;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -196,6 +218,51 @@ const Bar = styled.span`
   }
 `
 
+const MobileHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 6000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0 1.5rem;
+  height: 60px;
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease;
+
+  ${({ $scrolled }) =>
+    $scrolled &&
+    `
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  `}
+
+  @media ${devices.laptop} {
+    display: none;
+  }
+`
+
+const LogoLink = styled(Link)`
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  text-decoration: none;
+`
+
+const LogoName = styled.span`
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-green-dark);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1;
+`
+
 const HamburgerButton = styled.button`
   z-index: 6000;
   display: flex;
@@ -208,20 +275,11 @@ const HamburgerButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
-  position: absolute;
-  right: var(--gap-xs);
+  position: relative;
 
   &:focus-visible {
     outline: 2px solid var(--accent-orange);
     outline-offset: 2px;
-  }
-
-  @media ${devices.tablet} {
-    right: var(--gap-md);
-  }
-
-  @media ${devices.laptop} {
-    display: none;
   }
 `
 
@@ -240,7 +298,7 @@ const Menu = styled(motion.nav)`
   top: 60px;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 80px);
+  height: calc(100dvh - 60px);
   background: var(--background-light);
   z-index: 9998;
   display: flex;
@@ -268,4 +326,9 @@ const NavLink = styled(MotionLink)`
   &:focus-visible {
     color: var(--accent-orange);
   }
+`
+
+const BottomSocial = styled.div`
+  margin-top: auto;
+  align-self: flex-end;
 `
