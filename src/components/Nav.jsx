@@ -115,6 +115,10 @@ const NavItem = styled.li`
   align-items: flex-end;
 `
 
+const TextLabel = styled.span`
+  display: inline;
+`
+
 const StyledNavLink = styled(NavLink)`
   display: flex;
   justify-content: center;
