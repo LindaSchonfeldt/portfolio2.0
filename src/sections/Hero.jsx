@@ -160,6 +160,10 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 0.7rem;
+
+  button, a {
+    width: auto;
+  }
 `
 
 const ActionWrapper = styled.div`
