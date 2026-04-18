@@ -1,4 +1,4 @@
-import { IoMail } from 'react-icons/io5'
+import { AiOutlineMail } from 'react-icons/ai'
 import styled from 'styled-components'
 
 import devices from '../styles/devices'
@@ -13,7 +13,7 @@ export const Footer = () => {
           <InfoContainer>
             <FooterTitle>Let's talk!</FooterTitle>
             <a href='mailto:linda.schonfeldt@gmail.com' aria-label='Email me'>
-              <MailIcon size={42} />
+              <MailIcon size={54} />
             </a>
             <br />
           </InfoContainer>
@@ -143,6 +143,6 @@ const Copyright = styled.p`
   margin: 1rem 0 0;
 `
 
-const MailIcon = styled(IoMail)`
+const MailIcon = styled(AiOutlineMail)`
   color: var(--accent-orange);
 `

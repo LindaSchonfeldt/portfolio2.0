@@ -1,4 +1,7 @@
-import { FaDribbble, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
+import { LiaLinkedinIn } from 'react-icons/lia'
+import { ImInstagram } from 'react-icons/im'
+
 import styled from 'styled-components'
 
 export const SocialLinks = () => {
@@ -6,6 +9,17 @@ export const SocialLinks = () => {
     <StyledSocialLinks>
       <h2 className='visuallyHidden'>Connect With Me</h2>
       <ul className='socialIcons'>
+        {/* Instagram */}
+        <li>
+          <a
+            href='https://www.instagram.com/linda.schonfeldt/'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='Visit my Instagram'
+          >
+            <ImInstagram className='socialIcon' size={22} />
+          </a>
+        </li>
         {/* LinkedIn */}
         <li>
           <a
@@ -14,7 +28,7 @@ export const SocialLinks = () => {
             rel='noopener noreferrer'
             aria-label='Visit my LinkedIn profile'
           >
-            <FaLinkedin className='socialIcon' size={28} />
+            <LiaLinkedinIn className='socialIcon' size={28} />
           </a>
         </li>
 
@@ -26,31 +40,7 @@ export const SocialLinks = () => {
             rel='noopener noreferrer'
             aria-label='Visit my GitHub'
           >
-            <FaGithub className='socialIcon' size={28} />
-          </a>
-        </li>
-
-        {/* Dribbble */}
-        <li>
-          <a
-            href='https://dribbble.com/lindaschonfeldt'
-            target='_blank'
-            rel='noopener noreferrer'
-            aria-label='Visit my Dribble'
-          >
-            <FaDribbble className='socialIcon' size={28} />
-          </a>
-        </li>
-
-        {/* Instagram */}
-        <li>
-          <a
-            href='https://www.instagram.com/linda.schonfeldt/'
-            target='_blank'
-            rel='noopener noreferrer'
-            aria-label='Visit my Instagram'
-          >
-            <FaInstagram className='socialIcon' size={28} />
+            <FaGithub className='socialIcon' size={26} />
           </a>
         </li>
       </ul>
@@ -68,6 +58,7 @@ const StyledSocialLinks = styled.nav`
     gap: var(--gap-md);
     list-style: none;
     width: 100%;
+    align-items: center;
   }
 
   .socialIcons a {

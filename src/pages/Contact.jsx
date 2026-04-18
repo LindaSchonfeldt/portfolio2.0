@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import { lazy, Suspense, useState } from 'react'
-import { FiCopy } from 'react-icons/fi'
 import styled from 'styled-components'
+import { RiFileCopyLine } from 'react-icons/ri'
 
 import Meta from '../components/Meta'
 import SectionContainer from '../components/SectionContainer'
@@ -49,7 +49,7 @@ const Contact = () => {
               tabIndex={0}
               role='button'
             >
-              <FiCopy />
+              <RiFileCopyLine />
             </CopyIcon>
             {copied && <CopiedText>Copied!</CopiedText>}
           </EmailRow>
