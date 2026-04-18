@@ -27,7 +27,7 @@ const AppContainer = styled.div`
   padding-top: 40px;
 
   @media (min-width: 1024px) {
-    padding-top: 0;
+    padding-top: 40px;
   }
 `
 
@@ -47,36 +47,27 @@ function AppContent() {
     introPlayed.current = true
   }
 
-  // Preload routes when app loads for better navigation performance
+  // Preload the current route immediately, then others on idle
   useEffect(() => {
-    // Preload the most commonly visited pages using requestIdleCallback for better performance
+    preloadRoute(location.pathname === '/' ? 'home' : location.pathname === '/projects' ? 'projects' : 'contact')
+
+    const preloadOthers = () => {
+      if (location.pathname === '/') {
+        preloadRoute('projects')
+        preloadRoute('contact')
+      } else if (location.pathname === '/projects') {
+        preloadRoute('home')
+        preloadRoute('contact')
+      } else {
+        preloadRoute('home')
+        preloadRoute('projects')
+      }
+    }
+
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        if (location.pathname === '/') {
-          preloadRoute('projects')
-          preloadRoute('contact')
-        } else if (location.pathname === '/projects') {
-          preloadRoute('home')
-          preloadRoute('contact')
-        } else if (location.pathname === '/contact') {
-          preloadRoute('home')
-          preloadRoute('projects')
-        }
-      })
+      requestIdleCallback(preloadOthers)
     } else {
-      // Fallback with reduced delay
-      const timer = setTimeout(() => {
-        if (location.pathname === '/') {
-          preloadRoute('projects')
-          preloadRoute('contact')
-        } else if (location.pathname === '/projects') {
-          preloadRoute('home')
-          preloadRoute('contact')
-        } else if (location.pathname === '/contact') {
-          preloadRoute('home')
-          preloadRoute('projects')
-        }
-      }, 500)
+      const timer = setTimeout(preloadOthers, 500)
       return () => clearTimeout(timer)
     }
   }, [location.pathname])

@@ -43,18 +43,22 @@ const StyledFooter = styled.footer`
 `
 
 const ContentContainer = styled.div`
-  max-width: 1200px;
-  margin: 3rem auto;
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 4rem 1rem;
+  box-sizing: border-box;
+
+  @media ${devices.tablet} {
+    padding: 8rem 1.5rem;
+  }
 
   @media ${devices.laptop} {
-    max-width: 1200px;
+    padding: 12rem 6rem;
   }
 
   @media ${devices.desktop} {
-    max-width: 1400px;
+    padding: 12rem 12rem;
   }
 `
 
@@ -66,9 +70,6 @@ const FooterContent = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem var(--gap-md) 0;
   box-sizing: border-box;
   text-align: flex-start;
   font-family: 'Raleway', sans-serif;
@@ -114,14 +115,9 @@ const BottomSocials = styled.div`
   position: relative;
   z-index: 1;
   margin-top: 2rem;
-  padding: 1rem var(--gap-md) 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
-
-  @media ${devices.tablet} {
-    justify-content: center;
-  }
 `
 
 const Copyright = styled.p`
@@ -129,8 +125,7 @@ const Copyright = styled.p`
   font-size: 0.75rem;
   opacity: 0.6;
   text-align: left;
-  padding: 0 var(--gap-md) 1rem;
-  margin: 0;
+  margin: 1rem 0 0;
 `
 
 const MailIcon = styled(IoMail)`
