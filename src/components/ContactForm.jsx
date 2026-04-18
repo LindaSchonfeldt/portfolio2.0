@@ -36,10 +36,10 @@ export const ContactForm = () => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <InputRow>
-        <label htmlFor='name'>Name</label>
         <input
           id='name'
           name='from_name'
+          placeholder='Name'
           autoComplete='name'
           {...register('from_name', { required: 'Name is required' })}
         />
@@ -47,11 +47,11 @@ export const ContactForm = () => {
       </InputRow>
 
       <InputRow>
-        <label htmlFor='email'>Email</label>
         <input
           id='email'
           name='reply_to'
           type='email'
+          placeholder='Email'
           autoComplete='email'
           {...register('reply_to', { required: 'Email is required' })}
         />
@@ -59,11 +59,15 @@ export const ContactForm = () => {
       </InputRow>
 
       <InputRow>
-        <label htmlFor='message'>Message</label>
         <textarea
           id='message'
           name='message'
-          rows={5}
+          placeholder='Message'
+          rows={2}
+          onInput={e => {
+            e.target.style.height = 'auto'
+            e.target.style.height = e.target.scrollHeight + 'px'
+          }}
           {...register('message', { required: 'Message is required' })}
         />
         {errors.message && <ErrorText>{errors.message.message}</ErrorText>}
@@ -113,38 +117,29 @@ const StyledForm = styled.form`
   gap: 1rem;
   width: 100%;
 
-  label {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-
   input,
   textarea {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
+    padding: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
     font-size: 1rem;
     font-family: 'Raleway', sans-serif;
     transition: border-color 0.2s ease-in-out;
 
     &:focus {
-      outline: 2px solid var(--primary-green-dark);
-      outline-offset: 2px;
-      border-color: var(--primary-green-dark);
-    }
-
-    &:active {
-      border-color: var(--primary-green-dark);
+      outline: none;
+      border-bottom: 2px solid var(--primary-green-dark);
     }
 
     &:hover {
-      border-color: var(--primary-green);
+      border-bottom-color: var(--primary-green);
     }
   }
 
   textarea {
-    resize: vertical;
-    min-height: 100px;
+    resize: none;
+    overflow: hidden;
   }
 
   @media ${devices.tablet} {

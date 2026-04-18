@@ -9,14 +9,6 @@ import { SocialLinks } from './SocialLinks'
 export const Footer = () => {
   return (
     <StyledFooter>
-      <FooterBackground>
-        <ResponsiveImage
-          webpSrc='/images/footer.webp'
-          fallbackSrc='/images/footer.jpg'
-          alt='Footer background'
-          eager={true}
-        />
-      </FooterBackground>
       <ContentContainer>
         <FooterContent>
           <InfoContainer>
@@ -48,12 +40,7 @@ const StyledFooter = styled.footer`
   padding: 0;
   overflow: hidden;
   box-sizing: border-box;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(13, 69, 58, 0.95),
-    rgba(13, 69, 58, 0.98)
-  );
+  background-color: var(--primary-green-dark);
 `
 
 const ContentContainer = styled.div`
@@ -69,25 +56,6 @@ const ContentContainer = styled.div`
 
   @media ${devices.desktop} {
     max-width: 1400px;
-  }
-`
-
-const FooterBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.2;
-  z-index: 1;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
   }
 `
 

@@ -16,13 +16,12 @@ const iconMap = {
   Upcoming: FaRocket
 }
 
-// Blob images for skill cards (place files in public/images/skills)
-const blobImages = [
-  '/images/skills/blob_1.png',
-  '/images/skills/blob_2.png',
-  '/images/skills/blob_3.png',
-  '/images/skills/blob_4.png',
-  '/images/skills/blob_5.png'
+const blobShapes = [
+  '55% 45% 40% 60% / 50% 45% 55% 50%',
+  '45% 55% 60% 40% / 55% 50% 45% 50%',
+  '50% 50% 55% 45% / 45% 55% 50% 55%',
+  '60% 40% 45% 55% / 50% 55% 45% 50%',
+  '45% 55% 50% 50% / 55% 45% 55% 45%',
 ]
 
 export const SkillSection = () => {
@@ -41,15 +40,12 @@ export const SkillSection = () => {
           <div className='gridContainer'>
             {skillsData.skills.map((skillGroup, index) => {
               const IconComponent = iconMap[skillGroup.category]
-              const blobImage =
-                blobImages[index % blobImages.length] || blobImages[0]
+              const blobShape = blobShapes[index % blobShapes.length]
               return (
                 <div
                   className='skillCard'
                   key={skillGroup.category}
-                  style={{
-                    backgroundImage: `url(${blobImage})`
-                  }}
+                  style={{ borderRadius: blobShape }}
                 >
                   <div className='cardHeader'>
                     <h3>{skillGroup.category}</h3>
@@ -131,21 +127,17 @@ const SkillsContent = styled(motion.div)`
   }
 
   .skillCard {
-    background-color: transparent;
+    background-color: var(--primary-green-dark);
     padding: 1rem;
     transition:
       transform 0.2s ease,
-      filter 0.2s ease;
-    border-radius: 4px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15));
+      box-shadow 0.2s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
   }
 
   .skillCard:hover {
     transform: scale(1.04);
-    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
   }
 
   .cardHeader {
@@ -153,7 +145,7 @@ const SkillsContent = styled(motion.div)`
     align-items: center;
     gap: 1rem;
     width: 100%;
-    padding: 0.75rem 1.25rem 0.75rem 3.5rem;
+    padding: 2.5rem 2rem 0.5rem 3rem;
     margin-bottom: 0;
     background: transparent;
   }
@@ -170,7 +162,7 @@ const SkillsContent = styled(motion.div)`
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
-    padding: 1rem 1.25rem 1.5rem 3.5rem;
+    padding: 0.5rem 2rem 2.5rem 3rem;
   }
 
   .tag {

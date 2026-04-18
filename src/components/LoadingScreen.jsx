@@ -13,6 +13,13 @@ const LoadingScreen = ({ onComplete }) => {
   const [phase, setPhase] = useState('slideIn')
 
   useEffect(() => {
+    const splash = document.getElementById('splash')
+    if (!splash) return
+    const timer = setTimeout(() => { splash.style.display = 'none' }, SLIDE_IN_MS)
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
     let rafId
     let cancelled = false
     let finished = false
@@ -97,7 +104,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   pointer-events: none;
 `
