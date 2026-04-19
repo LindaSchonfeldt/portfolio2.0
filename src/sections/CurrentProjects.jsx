@@ -1,0 +1,53 @@
+import styled from 'styled-components'
+import { fullBleed } from '../styles/spacing'
+import { Button } from '../components/Button'
+import { ProjectCard } from '../components/ProjectCard'
+import projectsData from '../data/projects.json'
+
+const currentProjects = projectsData.projects.filter((p) => p.current)
+
+export const CurrentProjects = () => {
+  return (
+    <SectionContainer id='currentProjects'>
+      <ContentContainer>
+        <h2>What I'm Building</h2>
+        <ProjectContainer>
+          {currentProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} size={project.size} showCurrentBadge={false} />
+          ))}
+        </ProjectContainer>
+        <Button
+          variant='primary'
+          label={'View all projects'}
+          className=''
+          url='/projects'
+          aria-label='View all projects'
+        />
+      </ContentContainer>
+    </SectionContainer>
+  )
+}
+
+const SectionContainer = styled.section`
+  ${fullBleed}
+  box-sizing: border-box;
+  padding: var(--section-padding);
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  align-items: flex-start;
+`
+
+const ProjectContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+`

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import Meta from '../components/Meta'
-import { Hero, Skills } from '../sections'
+import { Hero, Skills, CurrentProjects } from '../sections'
 
 const Home = () => {
   return (
@@ -13,6 +13,7 @@ const Home = () => {
       <HomeContainer>
         <Hero />
         <Skills />
+        <CurrentProjects />
       </HomeContainer>
     </>
   )

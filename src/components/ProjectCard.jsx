@@ -34,9 +34,12 @@ export const ProjectCard = ({
   project,
   size = 'medium',
   fullRow,
-  eager = false
+  eager = false,
+  showCurrentBadge = true
 }) => {
   if (!project) return null
+
+  const isLargeLayout = size === 'large' || !!fullRow
 
   // Check if project is under construction
   const isUnderConstruction =
@@ -137,6 +140,11 @@ export const ProjectCard = ({
         <TextContainer $size={size}>
           <ContentWrapper>
             <CategoryContainer>
+              {project.current && showCurrentBadge && (
+                <CurrentlyBuildingBadge>
+                  Currently Building
+                </CurrentlyBuildingBadge>
+              )}
               {project.hasDetail && (
                 <CaseStudyBadge>📚 Case Study</CaseStudyBadge>
               )}
@@ -159,8 +167,8 @@ export const ProjectCard = ({
                 ))}
             </StackContainer>
           </ContentWrapper>
-          <LinkContainer $size={size}>
-            <ButtonGroup actions={actions} />
+          <LinkContainer $size={size} $large={isLargeLayout}>
+            <ButtonGroup actions={actions} row={isLargeLayout} />
             {project.hasDetail && (
               <CaseStudyButton
                 as={isUnderConstruction ? 'button' : Link}
@@ -170,6 +178,7 @@ export const ProjectCard = ({
                     : `/projects/${project.slug || project.id}`
                 }
                 $disabled={isUnderConstruction}
+                style={isLargeLayout ? { width: 'auto', marginBottom: 0 } : undefined}
                 onClick={
                   isUnderConstruction ? (e) => e.preventDefault() : undefined
                 }
@@ -427,12 +436,29 @@ const StyledReadMore = styled(ReadMore)`
 
 const LinkContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: ${({ $large }) => ($large ? 'row' : 'column')};
+  align-items: ${({ $large }) => ($large ? 'center' : 'flex-start')};
+  flex-wrap: wrap;
   gap: 0.5rem;
   width: 100%;
   padding-top: 0.5rem;
   margin-top: auto;
+`
+
+const CurrentlyBuildingBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  background: var(--accent-red);
+  color: var(--text-light);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 const CaseStudyBadge = styled.span`

@@ -1,6 +1,27 @@
 {
   "projects": [
     {
+      "id": 5,
+      "slug": "paired",
+      "title": "Paired Couples App",
+      "image": "paired",
+      "alt": "Paired Couples App — a social app concept",
+      "description": "A shared space for two. Paired gives couples a private home base with a joint calendar, shared lists, and a personal feed. Built from scratch with React, Supabase, and Tailwind CSS — currently in active development.",
+      "categories": ["UI/UX", "Frontend", "Product Design"],
+      "technologies": [
+        "React",
+        "Supabase",
+        "TailwindCSS",
+        "React Router",
+        "Vite"
+      ],
+      "netlify": "",
+      "github": "https://github.com/LindaSchonfeldt/paired-couples-app",
+      "size": "medium",
+      "hasDetail": true,
+      "current": true
+    },
+    {
       "id": 0,
       "slug": "din-psykolog-onboarding",
       "title": "Lowering the Threshold to Psychological Care",
@@ -241,7 +262,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 7,
       "slug": "portfolio",
       "title": "Portfolio",
       "image": "tree",
@@ -255,7 +276,7 @@
       "hasDetail": false
     },
     {
-      "id": 6,
+      "id": 8,
       "title": "Happy Thoughts",
       "image": "happy_thoughts",
       "alt": "",
@@ -268,7 +289,7 @@
       "hasDetail": false
     },
     {
-      "id": 7,
+      "id": 9,
       "title": "Screamflix",
       "image": "screamflix",
       "alt": "Screenshot of Screamflix horror movie browser",
@@ -281,7 +302,7 @@
       "hasDetail": false
     },
     {
-      "id": 8,
+      "id": 10,
       "title": "Weather App",
       "image": "weatherapp",
       "alt": "Screenshot of weather app showing current conditions",

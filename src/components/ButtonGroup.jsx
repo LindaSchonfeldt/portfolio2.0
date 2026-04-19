@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 import { Button } from '../components/Button.jsx'
 
-export const ButtonGroup = ({ actions }) => {
+export const ButtonGroup = ({ actions, row = false }) => {
   if (!actions || actions.length === 0) {
     return null
   }
 
   return (
-    <StyledButtonGroup>
+    <StyledButtonGroup $row={row}>
       {actions.map((action, index) => (
         <Button
           key={index}
@@ -18,6 +18,7 @@ export const ButtonGroup = ({ actions }) => {
           onClick={action.onClick}
           variant={action.variant || (action.url ? 'link' : 'button')}
           disabled={action.disabled}
+          style={row ? { width: 'auto', marginBottom: 0 } : undefined}
         />
       ))}
     </StyledButtonGroup>
@@ -26,7 +27,16 @@ export const ButtonGroup = ({ actions }) => {
 
 const StyledButtonGroup = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  flex-direction: ${({ $row }) => ($row ? 'row' : 'column')};
+  flex-wrap: wrap;
+  width: ${({ $row }) => ($row ? 'auto' : '100%')};
   gap: 0.5rem;
+
+  ${({ $row }) =>
+    $row &&
+    `
+    & > * {
+      width: auto;
+    }
+  `}
 `
