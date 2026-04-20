@@ -7,7 +7,7 @@ import styled from 'styled-components'
 export const SocialLinks = () => {
   return (
     <StyledSocialLinks>
-      <h2 className='visuallyHidden'>Connect With Me</h2>
+      <h2 className='visually-hidden'>Connect With Me</h2>
       <ul className='socialIcons'>
         {/* Instagram */}
         <li>

@@ -25,6 +25,7 @@ export const Button = ({
         download={isPDF && !disabled ? true : undefined}
         $variant={variant}
         $disabled={disabled}
+        aria-disabled={disabled || undefined}
         onClick={disabled ? (e) => e.preventDefault() : undefined}
         {...props}
       >

@@ -179,6 +179,8 @@ export const ProjectCard = ({
                 }
                 $disabled={isUnderConstruction}
                 $large={isLargeLayout}
+                aria-disabled={isUnderConstruction || undefined}
+                aria-label={isUnderConstruction ? 'Case Study – coming soon' : 'View case study'}
                 onClick={
                   isUnderConstruction ? (e) => e.preventDefault() : undefined
                 }
@@ -498,8 +500,7 @@ const CaseStudyButton = styled(Link)`
 
   @media ${devices.tablet} {
     margin-bottom: 0;
-    width: auto;
-    ${({ $large }) => $large && 'flex: 1;'}
+    ${({ $large }) => $large && 'width: auto; flex: 1;'}
   }
 
   /* Disabled state */

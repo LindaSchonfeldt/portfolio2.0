@@ -90,17 +90,17 @@ const FooterContent = styled.div`
 `
 const FooterTitle = styled.h2`
   font-family: 'Jost', sans-serif;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-light);
 
   @media ${devices.tablet} {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 
   @media ${devices.laptop} {
-    font-size: 2.5rem;
+    font-size: 4rem;
   }
 `
 
