@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import devices from '../styles/devices'
 
-const SectionContainer = styled.div`
+export const SectionContainer = styled.div`
   width: 100%;
   padding: 4rem 1rem;
   box-sizing: border-box;
@@ -22,4 +22,3 @@ const SectionContainer = styled.div`
   }
 `
 
-export default SectionContainer

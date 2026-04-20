@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-function Meta({ title, description, image }) {
+export function Meta({ title, description, image }) {
   useEffect(() => {
     // Update document title
     if (title) {
@@ -55,4 +55,3 @@ function Meta({ title, description, image }) {
   return null
 }
 
-export default Meta

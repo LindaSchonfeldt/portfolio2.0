@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { fullBleed } from '../styles/spacing'
-import { Button } from '../components/Button'
-import { ProjectCard } from '../components/ProjectCard'
+import { Button, ProjectCard } from '../components'
 import projectsData from '../data/projects.json'
 
 const currentProjects = projectsData.projects.filter((p) => p.current)
@@ -13,11 +12,17 @@ export const CurrentProjects = () => {
         <h2>What I'm Building</h2>
         <ProjectContainer>
           {currentProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} size={project.size} showCurrentBadge={false} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              size={project.size}
+              showCurrentBadge={false}
+              fullRow={true}
+            />
           ))}
         </ProjectContainer>
         <Button
-          variant='primary'
+          variant='secondary'
           label={'View all projects'}
           className=''
           url='/projects'

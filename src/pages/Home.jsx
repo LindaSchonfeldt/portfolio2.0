@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Meta from '../components/Meta'
+import { Meta } from '../components'
 import { Hero, Skills, CurrentProjects } from '../sections'
 
 const Home = () => {

@@ -8,8 +8,8 @@ import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
 import { ButtonGroup } from './ButtonGroup'
 import { ReadMore } from './ReadMore'
-import ResponsiveImage from './ResponsiveImage'
-import ResponsiveVideo from './ResponsiveVideo'
+import { ResponsiveImage } from './ResponsiveImage'
+import { ResponsiveVideo } from './ResponsiveVideo'
 import { Tag } from './Tag'
 
 const IMAGE_HEIGHTS = {

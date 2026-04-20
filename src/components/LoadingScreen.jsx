@@ -8,7 +8,7 @@ const SLIDE_IN_MS = 1400
 const HOLD_MS = 350
 const SLIDE_UP_MS = 900
 
-const LoadingScreen = ({ onComplete }) => {
+export const LoadingScreen = ({ onComplete }) => {
   const [percentage, setPercentage] = useState(0)
   const [phase, setPhase] = useState('slideIn')
 
@@ -131,4 +131,3 @@ const PercentageText = styled.span`
   line-height: 1;
 `
 
-export default LoadingScreen

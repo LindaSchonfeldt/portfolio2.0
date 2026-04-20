@@ -1,10 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
-import Meta from '../components/Meta'
-import { ProjectCard } from '../components/ProjectCard'
-import { ProjectGrid } from '../components/ProjectGrid'
-import SectionContainer from '../components/SectionContainer'
+import { Meta, ProjectCard, ProjectGrid, SectionContainer } from '../components'
 import projectsData from '../data/projects.json'
 
 const Projects = () => {

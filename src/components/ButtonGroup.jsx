@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Button } from '../components/Button.jsx'
+import { Button } from './Button'
 import devices from '../styles/devices'
 
 export const ButtonGroup = ({ actions, row = false }) => {

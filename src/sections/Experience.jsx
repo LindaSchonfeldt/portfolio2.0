@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa'
 import styled from 'styled-components'
 
-import SectionContainer from '../components/SectionContainer'
+import { SectionContainer } from '../components'
 import devices from '../styles/devices'
 
 export const Experience = () => {

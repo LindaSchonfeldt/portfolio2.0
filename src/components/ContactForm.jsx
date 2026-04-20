@@ -1,8 +1,7 @@
 import ReCAPTCHA from 'react-google-recaptcha'
 import styled from 'styled-components'
 
-import { useEmailForm } from '../hooks/useEmailForm'
-import { useRecaptcha } from '../hooks/useRecaptcha'
+import { useEmailForm, useRecaptcha } from '../hooks'
 import devices from '../styles/devices'
 import { Button } from './Button'
 

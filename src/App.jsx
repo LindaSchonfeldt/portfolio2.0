@@ -2,12 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Footer } from './components/Footer'
-import { HamburgerMenu } from './components/HamburgerMenu'
-import LoadingScreen from './components/LoadingScreen'
-import { Nav } from './components/Nav'
-import PerformanceMonitor from './components/PerformanceMonitor'
-import ScrollToTop from './components/ScrollToTop'
+import { Footer, HamburgerMenu, LoadingScreen, Nav, PerformanceMonitor, ScrollToTop } from './components'
 import GlobalStyle from './styles/GlobalStyle'
 import { preloadRoute } from './utils/routePreloader'
 

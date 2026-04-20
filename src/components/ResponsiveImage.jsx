@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const ResponsiveImage = ({
+export const ResponsiveImage = ({
   webpSrc,
   fallbackSrc,
   alt,
@@ -184,4 +184,3 @@ const ResponsiveImage = ({
   )
 }
 
-export default ResponsiveImage

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const ResponsiveVideo = ({
+export const ResponsiveVideo = ({
   webmSrc,
   mp4Src,
   posterSrc,
@@ -148,4 +148,3 @@ const ResponsiveVideo = ({
   )
 }
 
-export default ResponsiveVideo

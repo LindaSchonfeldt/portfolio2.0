@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const LazyImage = ({ src, alt, className, style, onClick, clickable = false }) => {
+export const LazyImage = ({ src, alt, className, style, onClick, clickable = false }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const imgRef = useRef(null)
 
@@ -50,4 +50,3 @@ const LazyImage = ({ src, alt, className, style, onClick, clickable = false }) =
   )
 }
 
-export default LazyImage

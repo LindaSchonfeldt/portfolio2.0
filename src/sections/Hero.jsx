@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 
-import { Button } from '../components/Button'
-import ResponsiveImage from '../components/ResponsiveImage'
-import SectionContainer from '../components/SectionContainer'
-import { TagGroup } from '../components/TagGroup'
+import { Button, ResponsiveImage, SectionContainer, TagGroup } from '../components'
 import devices from '../styles/devices'
 
 export const Hero = () => {
@@ -113,6 +110,14 @@ const HeroContent = styled.div`
   width: 100%;
   text-align: left;
 
+  @media ${devices.laptop} {
+    width: 50%;
+  }
+
+  @media ${devices.laptopL} {
+    width: 60%;
+  }
+
   p {
     font-size: 1rem;
     line-height: 1.6;
@@ -150,7 +155,7 @@ const HeroContent = styled.div`
     }
 
     @media ${devices.laptop} {
-      width: 70%;
+      width: 100%;
     }
   }
 `
@@ -160,9 +165,12 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 0.7rem;
+  width: 100%;
 
-  button, a {
-    width: auto;
+  button,
+  a {
+    flex: 1;
+    margin-bottom: 0;
   }
 `
 

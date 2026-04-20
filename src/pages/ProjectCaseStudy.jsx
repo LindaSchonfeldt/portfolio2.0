@@ -2,15 +2,9 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import CaseStudyPage from './CaseStudyPage'
-import { CaseInsight } from '../components/case study/CaseInsight'
-import SectionContainer from '../components/SectionContainer'
-import Meta from '../components/Meta'
-import { Button } from '../components/Button'
+import { Button, CaseInsight, Meta, SectionContainer } from '../components'
 import { fullBleed } from '../styles/spacing'
-import {
-  useProjectCaseStudy,
-  useFormatProjectToCaseStudy
-} from '../hooks/useCaseStudy'
+import { useProjectCaseStudy, useFormatProjectToCaseStudy } from '../hooks'
 import devices from '../styles/devices'
 
 export default function ProjectCaseStudy() {

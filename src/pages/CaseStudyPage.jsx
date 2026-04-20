@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { CaseHero } from '../components/case study/CaseHero'
-import { CaseSection } from '../components/case study/CaseSection'
+import { CaseHero, CaseSection } from '../components'
 
 export default function CaseStudyPage({
   title,

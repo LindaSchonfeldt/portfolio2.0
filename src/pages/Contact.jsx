@@ -1,18 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
-import { lazy, Suspense, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { RiFileCopyLine } from 'react-icons/ri'
 
-import Meta from '../components/Meta'
-import SectionContainer from '../components/SectionContainer'
-
-// Lazy load the ContactForm to reduce initial bundle size
-const ContactForm = lazy(() =>
-  import('../components/ContactForm').then((module) => ({
-    default: module.ContactForm
-  }))
-)
+import { ContactForm, Meta, SectionContainer } from '../components'
 
 const Contact = () => {
   const [copied, setCopied] = useState(false)
@@ -53,9 +45,7 @@ const Contact = () => {
             </CopyIcon>
             {copied && <CopiedText>Copied!</CopiedText>}
           </EmailRow>
-          <Suspense fallback={null}>
-            <ContactForm />
-          </Suspense>
+          <ContactForm />
         </SectionContainer>
       </motion.div>
     </>

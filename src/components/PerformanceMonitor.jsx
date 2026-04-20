@@ -4,7 +4,7 @@ import styled from 'styled-components'
 // Only show in development mode
 const isDev = import.meta.env.DEV
 
-const PerformanceMonitor = () => {
+export const PerformanceMonitor = () => {
   const [stats, setStats] = useState({
     fps: 0,
     memory: 0,
@@ -127,4 +127,3 @@ const Value = styled.span`
   }
 `
 
-export default PerformanceMonitor
