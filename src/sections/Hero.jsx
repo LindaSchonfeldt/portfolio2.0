@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
-import { Button, ResponsiveImage, SectionContainer, TagGroup } from '../components'
+import {
+  Button,
+  ResponsiveImage,
+  SectionContainer,
+  TagGroup
+} from '../components'
 import devices from '../styles/devices'
 
 export const Hero = () => {
@@ -38,7 +43,7 @@ export const Hero = () => {
                 variant='secondary'
                 label={'Download CV'}
                 className='heroButton'
-                url='/linda.schonfeldt_cv.pdf'
+                url='/pdfs/linda.schonfeldt_cv.pdf'
                 aria-label='Download CV'
               />
               <Button
