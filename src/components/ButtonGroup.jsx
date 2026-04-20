@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Button } from '../components/Button.jsx'
+import devices from '../styles/devices'
 
 export const ButtonGroup = ({ actions, row = false }) => {
   if (!actions || actions.length === 0) {
@@ -18,7 +19,6 @@ export const ButtonGroup = ({ actions, row = false }) => {
           onClick={action.onClick}
           variant={action.variant || (action.url ? 'link' : 'button')}
           disabled={action.disabled}
-          style={row ? { width: 'auto', marginBottom: 0 } : undefined}
         />
       ))}
     </StyledButtonGroup>
@@ -27,16 +27,22 @@ export const ButtonGroup = ({ actions, row = false }) => {
 
 const StyledButtonGroup = styled.div`
   display: flex;
-  flex-direction: ${({ $row }) => ($row ? 'row' : 'column')};
+  flex-direction: column;
   flex-wrap: wrap;
-  width: ${({ $row }) => ($row ? 'auto' : '100%')};
+  width: 100%;
   gap: 0.5rem;
 
-  ${({ $row }) =>
-    $row &&
-    `
-    & > * {
-      width: auto;
-    }
-  `}
+  @media ${devices.tablet} {
+    flex-direction: ${({ $row }) => ($row ? 'row' : 'column')};
+    width: 100%;
+
+    ${({ $row }) => $row && `
+      flex: 1;
+      & > * {
+        flex: 1;
+        width: auto;
+        margin-bottom: 0;
+      }
+    `}
+  }
 `

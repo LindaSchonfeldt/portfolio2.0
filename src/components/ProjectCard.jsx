@@ -178,7 +178,7 @@ export const ProjectCard = ({
                     : `/projects/${project.slug || project.id}`
                 }
                 $disabled={isUnderConstruction}
-                style={isLargeLayout ? { width: 'auto', marginBottom: 0 } : undefined}
+                $large={isLargeLayout}
                 onClick={
                   isUnderConstruction ? (e) => e.preventDefault() : undefined
                 }
@@ -436,13 +436,17 @@ const StyledReadMore = styled(ReadMore)`
 
 const LinkContainer = styled.div`
   display: flex;
-  flex-direction: ${({ $large }) => ($large ? 'row' : 'column')};
-  align-items: ${({ $large }) => ($large ? 'center' : 'flex-start')};
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
   width: 100%;
   padding-top: 0.5rem;
   margin-top: auto;
+
+  @media ${devices.tablet} {
+    flex-direction: ${({ $large }) => ($large ? 'row' : 'column')};
+    align-items: ${({ $large }) => ($large ? 'center' : 'flex-start')};
+  }
 `
 
 const CurrentlyBuildingBadge = styled.span`
@@ -494,6 +498,8 @@ const CaseStudyButton = styled(Link)`
 
   @media ${devices.tablet} {
     margin-bottom: 0;
+    width: auto;
+    ${({ $large }) => $large && 'flex: 1;'}
   }
 
   /* Disabled state */

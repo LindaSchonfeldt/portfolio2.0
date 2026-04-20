@@ -7,7 +7,7 @@
       "image": "paired",
       "alt": "Paired Couples App — a social app concept",
       "description": "A shared space for two. Paired gives couples a private home base with a joint calendar, shared lists, and a personal feed. Built from scratch with React, Supabase, and Tailwind CSS — currently in active development.",
-      "categories": ["UI/UX", "Frontend", "Product Design"],
+      "categories": ["Frontend", "Full Stack"],
       "technologies": [
         "React",
         "Supabase",
