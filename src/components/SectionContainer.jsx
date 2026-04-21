@@ -7,6 +7,10 @@ export const SectionContainer = styled.div`
   padding: 4rem 1rem;
   box-sizing: border-box;
 
+  @media ${devices.mobileL} {
+    padding: 4rem 1.5rem;
+  }
+
   @media ${devices.tablet} {
     padding: 4rem 1.5rem;
   }
@@ -16,9 +20,13 @@ export const SectionContainer = styled.div`
     padding-right: 4rem;
   }
 
+  @media ${devices.laptopL} {
+    padding: 4rem 12rem 4rem 12rem;
+    padding-right: 10rem;
+  }
+
   @media ${devices.desktop} {
     padding: 6rem 12rem 6rem 12rem;
     padding-right: 10rem;
   }
 `
-

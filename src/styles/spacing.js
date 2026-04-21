@@ -4,29 +4,17 @@ import devices from './devices'
 
 export const spacing = css`
   :root {
-    --section-padding: 4rem 2rem;
-    --section-gap: 4rem;
+    --section-padding: 4rem 1rem;
+    --section-gap: 2rem;
     --gap-xs: 0.5rem;
     --gap-sm: 1rem;
     --gap-md: 2rem;
     --gap-lg: 4rem;
   }
 
-  @media ${devices.mobileS} {
-    :root {
-      --section-padding: 4rem 1rem;
-      --section-gap: 2rem;
-    }
-  }
-  @media ${devices.mobileM} {
-    :root {
-      --section-padding: 4rem 1rem;
-      --section-gap: 2rem;
-    }
-  }
   @media ${devices.mobileL} {
     :root {
-      --section-padding: 4rem 1rem;
+      --section-padding: 4rem 1.5rem;
       --section-gap: 2rem;
     }
   }

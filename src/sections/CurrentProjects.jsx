@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { fullBleed } from '../styles/spacing'
-import { Button, ProjectCard } from '../components'
+
+import { Button, ProjectCard, SectionContainer } from '../components'
 import projectsData from '../data/projects.json'
 
 const currentProjects = projectsData.projects.filter((p) => p.current)
@@ -32,12 +32,6 @@ export const CurrentProjects = () => {
     </SectionContainer>
   )
 }
-
-const SectionContainer = styled.section`
-  ${fullBleed}
-  box-sizing: border-box;
-  padding: var(--section-padding);
-`
 
 const ContentContainer = styled.div`
   display: flex;

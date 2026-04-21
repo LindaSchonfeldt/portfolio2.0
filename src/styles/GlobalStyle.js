@@ -40,6 +40,11 @@ const GlobalStyle = createGlobalStyle`
 
   ${spacing}
   ${typography}
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 `
 
 export default GlobalStyle

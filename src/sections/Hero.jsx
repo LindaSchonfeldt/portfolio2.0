@@ -1,16 +1,11 @@
 import styled from 'styled-components'
 
-import {
-  Button,
-  ResponsiveImage,
-  SectionContainer,
-  TagGroup
-} from '../components'
+import { Button, ResponsiveImage, TagGroup } from '../components'
 import devices from '../styles/devices'
 
 export const Hero = () => {
   return (
-    <SectionContainer id='introduction'>
+    <HeroSection id='introduction'>
       <HeroLayout>
         <HeroContent>
           <h1 className='heroTitle'>Frontend Developer</h1>
@@ -65,9 +60,32 @@ export const Hero = () => {
           />
         </PhotoWrapper>
       </HeroLayout>
-    </SectionContainer>
+    </HeroSection>
   )
 }
+
+const HeroSection = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+
+  @media ${devices.mobileL} {
+    padding: 5rem 1.5rem;
+  }
+
+  @media ${devices.tablet} {
+    padding: 6rem 2rem;
+  }
+
+  @media ${devices.laptop} {
+    padding: 8rem 5.5rem;
+  }
+
+  @media ${devices.laptopL} {
+    padding: 8rem 12rem;
+  }
+`
 
 const HeroLayout = styled.div`
   display: flex;

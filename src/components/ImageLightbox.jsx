@@ -54,15 +54,6 @@ const LightboxOverlay = styled.div`
   z-index: 9999;
   cursor: zoom-out;
   animation: fadeIn 0.2s ease-in;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `
 
 const LightboxContent = styled.div`
@@ -78,7 +69,7 @@ const CloseButton = styled.button`
   right: 0;
   background: transparent;
   border: none;
-  color: white;
+  color: black;
   cursor: pointer;
   padding: 8px;
   display: flex;
