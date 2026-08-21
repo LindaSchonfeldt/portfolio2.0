@@ -22,7 +22,7 @@ export const CurrentProjects = () => {
           ))}
         </ProjectContainer>
         <Button
-          variant='secondary'
+          variant='tertiary'
           label={'View all projects'}
           className=''
           url='/projects'

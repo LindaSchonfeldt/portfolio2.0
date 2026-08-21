@@ -81,6 +81,20 @@ const StyledButton = styled.button`
       }
     `}
 
+  /* Tertiary variant */
+  ${({ $variant }) =>
+    $variant === 'tertiary' &&
+    `
+      background-color: transparent;
+      color: var(--primary-green-dark);
+      border-color: transparent;
+
+      &:hover {
+        color: var(--primary-green);
+        text-decoration: underline;
+      }
+    `}
+
   /* Disabled state */
   ${({ $disabled }) =>
     $disabled &&
