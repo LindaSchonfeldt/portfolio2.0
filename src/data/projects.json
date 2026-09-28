@@ -213,14 +213,14 @@
 
     {
       "id": 3,
-      "slug": "billig-bokforing",
-      "title": "Website for Billig Bokföring",
-      "image": "billigbokforing",
-      "alt": "",
-      "description": "A clean, user-friendly website for Billig Bokföring, a Swedish bookkeeping service targeting businesses and freelancers. The site emphasizes clarity and ease of navigation, providing essential information about services, pricing, and contact options.",
+      "slug": "bookkeeping-website",
+      "title": "Website for a Bookkeeping Service",
+      "image": "bookkeeping",
+      "alt": "Website for a Swedish bookkeeping service",
+      "description": "A clean, user-friendly website for a Swedish bookkeeping service targeting businesses and freelancers. The site emphasizes clarity and ease of navigation, providing essential information about services, pricing, and contact options. The site is no longer in use and has been anonymized.",
       "categories": ["UI/UX", "Frontend"],
       "technologies": ["React", "Vite", "Chakra UI"],
-      "netlify": "https://billigbokforing.se/",
+      "netlify": "https://enkel-bokforing.netlify.app/",
       "github": "https://github.com/LindaSchonfeldt/accounting-website",
       "size": "medium",
       "hasDetail": false
