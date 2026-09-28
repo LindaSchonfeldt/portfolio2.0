@@ -4,7 +4,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { RiFileCopyLine } from 'react-icons/ri'
 
-import { ContactForm, Meta, SectionContainer } from '../components'
+import { Meta, SectionContainer } from '../components'
 
 const Contact = () => {
   const [copied, setCopied] = useState(false)
@@ -34,7 +34,7 @@ const Contact = () => {
             through thoughtful design and development.
           </p>
           <EmailRow>
-            <span>{email}</span>
+            <a href={`mailto:${email}`}>{email}</a>
             <CopyIcon
               onClick={handleCopy}
               title='Copy email'
@@ -45,7 +45,7 @@ const Contact = () => {
             </CopyIcon>
             {copied && <CopiedText>Copied!</CopiedText>}
           </EmailRow>
-          <ContactForm />
+          {/* ContactForm hidden until reCAPTCHA works, re-add <ContactForm /> here */}
         </SectionContainer>
       </motion.div>
     </>
@@ -62,8 +62,14 @@ const EmailRow = styled.div`
   font-family: 'Jost', sans-serif;
   font-size: 1rem;
   color: var(--text-secondary);
-  span {
-    cursor: pointer;
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--primary-green-dark);
+    }
   }
 `
 
