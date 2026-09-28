@@ -271,6 +271,7 @@ Improvements I want to make. Check off when done.
 - [ ] Fix reCAPTCHA, then re-enable the contact form in `src/pages/Contact.jsx` (currently hidden)
 - [ ] README links to a LICENSE file that doesn't exist: add one or remove the link
 - [ ] Fix the contact form's reCAPTCHA v2 integration (currently not working)
+- [ ]
 
 ### Content
 
