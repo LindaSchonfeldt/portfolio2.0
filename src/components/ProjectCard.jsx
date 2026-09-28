@@ -7,7 +7,6 @@ import { buttonBase } from '../styles/mixins'
 import { getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
 import { ButtonGroup } from './ButtonGroup'
-import { ReadMore } from './ReadMore'
 import { ResponsiveImage } from './ResponsiveImage'
 import { ResponsiveVideo } from './ResponsiveVideo'
 import { Tag } from './Tag'
@@ -132,6 +131,34 @@ export const ProjectCard = ({
     </ImageContainer>
   )
 
+  const links = (
+    <LinkContainer $size={size} $large={isLargeLayout}>
+      <ButtonGroup actions={actions} row={isLargeLayout} />
+      {project.hasDetail && (
+        <CaseStudyButton
+          as={isUnderConstruction ? 'button' : Link}
+          to={
+            isUnderConstruction
+              ? undefined
+              : `/projects/${project.slug || project.id}`
+          }
+          $disabled={isUnderConstruction}
+          $large={isLargeLayout}
+          aria-disabled={isUnderConstruction || undefined}
+          aria-label={isUnderConstruction ? 'Case Study – coming soon' : 'View case study'}
+          onClick={
+            isUnderConstruction ? (e) => e.preventDefault() : undefined
+          }
+        >
+          Case Study
+        </CaseStudyButton>
+      )}
+    </LinkContainer>
+  )
+
+  // Small cards place the buttons below image + text so they span the full card
+  const isSmall = size === 'small'
+
   return (
     <CardContainer $size={size} $fullRow={fullRow}>
       <CardContent $size={size}>
@@ -154,12 +181,7 @@ export const ProjectCard = ({
                 ))}
             </CategoryContainer>
             <StyledTitle>{project.title}</StyledTitle>
-            <StyledReadMore
-              text={project.description}
-              maxHeight={
-                size === 'large' ? '6em' : size === 'medium' ? '4.5em' : '6.5em'
-              }
-            />
+            <StyledDescription>{project.description}</StyledDescription>
             <StackContainer>
               {project.stack &&
                 project.stack.map((tag, index) => (
@@ -167,30 +189,10 @@ export const ProjectCard = ({
                 ))}
             </StackContainer>
           </ContentWrapper>
-          <LinkContainer $size={size} $large={isLargeLayout}>
-            <ButtonGroup actions={actions} row={isLargeLayout} />
-            {project.hasDetail && (
-              <CaseStudyButton
-                as={isUnderConstruction ? 'button' : Link}
-                to={
-                  isUnderConstruction
-                    ? undefined
-                    : `/projects/${project.slug || project.id}`
-                }
-                $disabled={isUnderConstruction}
-                $large={isLargeLayout}
-                aria-disabled={isUnderConstruction || undefined}
-                aria-label={isUnderConstruction ? 'Case Study – coming soon' : 'View case study'}
-                onClick={
-                  isUnderConstruction ? (e) => e.preventDefault() : undefined
-                }
-              >
-                Case Study
-              </CaseStudyButton>
-            )}
-          </LinkContainer>
+          {!isSmall && links}
         </TextContainer>
       </CardContent>
+      {isSmall && links}
     </CardContainer>
   )
 }
@@ -242,7 +244,7 @@ const CardContent = styled.div`
   flex: 1;
 
   @media ${devices.tablet} {
-    flex-direction: ${({ $size }) => ($size === 'medium' ? 'column' : 'row')};
+    flex-direction: ${({ $size }) => ($size === 'large' ? 'row' : 'column')};
     margin-bottom: ${({ $size }) => ($size === 'large' ? '20px' : '0')};
     column-gap: 1.5rem;
     min-height: ${({ $size }) => {
@@ -250,6 +252,11 @@ const CardContent = styled.div`
       if ($size === 'medium') return '500px'
       return 'auto'
     }};
+  }
+
+  /* Small cards go side by side only on wide screens */
+  @media ${devices.laptopL} {
+    ${({ $size }) => $size === 'small' && 'flex-direction: row;'}
   }
 `
 
@@ -336,36 +343,33 @@ const ImageWrapper = styled.div`
   cursor: default;
 
   @media ${devices.tablet} {
-    height: ${({ $size }) => {
-      if ($size === 'large') return 'auto'
-      if ($size === 'small') return '380px'
-      return 'var(--media-height-tablet, 220px)'
-    }};
+    height: ${({ $size }) =>
+      $size === 'large' ? 'auto' : 'var(--media-height-tablet, 220px)'};
     flex: ${({ $size }) => {
       if ($size === 'large') return '0 0 50%'
-      if ($size === 'small') return '0 0 180px'
+      if ($size === 'small') return '0 0 auto'
       return '1 1 auto'
     }};
     align-self: ${({ $size }) => ($size === 'large' ? 'stretch' : 'auto')};
   }
 
   @media ${devices.laptop} {
-    height: ${({ $size }) => {
-      if ($size === 'large') return 'auto'
-      if ($size === 'small') return '380px'
-      return 'var(--media-height-desktop, 300px)'
-    }};
-    flex: ${({ $size }) => {
-      if ($size === 'large') return '0 0 50%'
-      if ($size === 'small') return '0 0 240px'
-      return '1 1 auto'
-    }};
-    min-height: ${({ $size }) => {
-      if ($size === 'large') return 'auto'
-      if ($size === 'small') return '380px'
-      return 'var(--media-height-desktop, 300px)'
-    }};
+    height: ${({ $size }) =>
+      $size === 'large' ? 'auto' : 'var(--media-height-desktop, 300px)'};
+    min-height: ${({ $size }) =>
+      $size === 'large' ? 'auto' : 'var(--media-height-desktop, 300px)'};
     align-self: ${({ $size }) => ($size === 'large' ? 'stretch' : 'auto')};
+  }
+
+  /* Small cards: image beside text on wide screens */
+  @media ${devices.laptopL} {
+    ${({ $size }) =>
+      $size === 'small' &&
+      `
+        height: 380px;
+        min-height: 380px;
+        flex: 0 0 240px;
+      `}
   }
 `
 
@@ -427,9 +431,8 @@ const StyledTitle = styled.h3`
   width: 100%;
 `
 
-const StyledReadMore = styled(ReadMore)`
-  margin-bottom: 1.5rem;
-  display: block;
+const StyledDescription = styled.p`
+  margin: 0 0 1.5rem 0;
 
   @media ${devices.tablet} {
     margin-bottom: 1rem;

@@ -17,7 +17,7 @@ export const ProjectGrid = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     justify-items: stretch;
-    align-items: start;
+    align-items: stretch;
     grid-auto-flow: dense;
   }
 
