@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 import { Meta } from '../components'
-import { Hero, Skills, CurrentProjects } from '../sections'
+import { CurrentProjects, Hero, Skills } from '../sections'
 
 const Home = () => {
   return (
     <>
       <Meta
         title='Home | Linda Schönfeldt Portfolio'
-        description="Welcome to Linda Schönfeldt's portfolio. Frontend developer with a background in interaction design."
+        description="Welcome to Linda Schönfeldt's portfolio. Frontend Developer with a background in Interaction Design."
       />
       <HomeContainer>
         <Hero />
