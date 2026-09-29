@@ -26,7 +26,7 @@ export const Nav = () => {
       </LogoLink>
       <NavLinks>
         <NavItem>
-          <StyledNavLink to='/' {...preloadOnHover('home')}>
+          <StyledNavLink to='/about' {...preloadOnHover('about')}>
             <TextLabel>About</TextLabel>
           </StyledNavLink>
         </NavItem>

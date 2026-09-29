@@ -151,6 +151,15 @@ export const HamburgerMenu = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
+                Home
+              </NavLink>
+              <NavLink
+                to='/about'
+                onClick={handleClose}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 About
               </NavLink>
               <NavLink
@@ -158,7 +167,7 @@ export const HamburgerMenu = () => {
                 onClick={handleClose}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
               >
                 Projects
               </NavLink>
@@ -167,7 +176,7 @@ export const HamburgerMenu = () => {
                 onClick={handleClose}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.4 }}
               >
                 Contact
               </NavLink>

@@ -11,6 +11,9 @@ export const preloadRoute = (routeName) => {
 
   let promise
   switch (routeName) {
+    case 'about':
+      promise = import('../pages/About')
+      break
     case 'projects':
       promise = import('../pages/Projects')
       break

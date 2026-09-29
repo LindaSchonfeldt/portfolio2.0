@@ -2,7 +2,14 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Footer, HamburgerMenu, LoadingScreen, Nav, PerformanceMonitor, ScrollToTop } from './components'
+import {
+  Footer,
+  HamburgerMenu,
+  LoadingScreen,
+  Nav,
+  PerformanceMonitor,
+  ScrollToTop
+} from './components'
 import GlobalStyle from './styles/GlobalStyle'
 import { preloadRoute } from './utils/routePreloader'
 
@@ -44,7 +51,13 @@ function AppContent() {
 
   // Preload the current route immediately, then others on idle
   useEffect(() => {
-    preloadRoute(location.pathname === '/' ? 'home' : location.pathname === '/projects' ? 'projects' : 'contact')
+    preloadRoute(
+      location.pathname === '/'
+        ? 'home'
+        : location.pathname === '/projects'
+          ? 'projects'
+          : 'contact'
+    )
 
     const preloadOthers = () => {
       if (location.pathname === '/') {
@@ -78,6 +91,7 @@ function AppContent() {
         <Suspense fallback={null}>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
             <Route path='/projects' element={<Projects />} />
             <Route path='/projects/:projectId' element={<ProjectCaseStudy />} />
             <Route path='/contact' element={<Contact />} />
