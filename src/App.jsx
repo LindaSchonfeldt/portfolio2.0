@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Footer, HamburgerMenu, LoadingScreen, Nav, PerformanceMonitor, ScrollToTop } from './components'
 import GlobalStyle from './styles/GlobalStyle'
-import { preloadRoute } from './utils/routePreloader'
+import { getRouteName, mainRoutes, preloadRoute } from './utils/routePreloader'
 
 // Lazy loaded components
 const About = lazy(() => import('./pages/About'))
@@ -44,23 +44,18 @@ function AppContent() {
 
   // Preload the current route immediately, then others on idle
   useEffect(() => {
-    preloadRoute(location.pathname === '/' ? 'home' : location.pathname === '/projects' ? 'projects' : 'contact')
+    const currentRoute = getRouteName(location.pathname)
+    if (currentRoute) preloadRoute(currentRoute)
 
     const preloadOthers = () => {
-      if (location.pathname === '/') {
-        preloadRoute('projects')
-        preloadRoute('contact')
-      } else if (location.pathname === '/projects') {
-        preloadRoute('home')
-        preloadRoute('contact')
-      } else {
-        preloadRoute('home')
-        preloadRoute('projects')
-      }
+      mainRoutes
+        .filter((route) => route !== currentRoute)
+        .forEach(preloadRoute)
     }
 
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(preloadOthers)
+      const id = requestIdleCallback(preloadOthers)
+      return () => cancelIdleCallback(id)
     } else {
       const timer = setTimeout(preloadOthers, 500)
       return () => clearTimeout(timer)
@@ -80,6 +75,7 @@ function AppContent() {
             <Route path='/' element={<Home />} />
             <Route path='/projects' element={<Projects />} />
             <Route path='/projects/:projectId' element={<ProjectCaseStudy />} />
+            <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
           </Routes>
           <Footer />
