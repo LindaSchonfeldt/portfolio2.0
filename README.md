@@ -277,7 +277,7 @@ Improvements I want to make. Check off when done.
 
 - [ ] Add a real image for Paired (currently uses `tree.svg`)
 - [ ] Add About page + content
-- [ ]
+- [ ] Add a Swedish translation option (currently English only)
 
 ### Design & UX
 
