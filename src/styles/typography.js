@@ -52,6 +52,15 @@ export const typography = css`
     margin-bottom: 1rem;
   }
 
+  p.lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+
+    @media ${devices.laptop} {
+      font-size: 1.35rem;
+    }
+  }
+
   a {
     font-family: 'Raleway', sans-serif;
     font-size: 1rem;

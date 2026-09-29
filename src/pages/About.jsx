@@ -1,6 +1,9 @@
-import { Meta, SectionContainer } from '../components'
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
+import styled from 'styled-components'
+
+import { Meta, SectionContainer } from '../components'
+import devices from '../styles/devices'
 
 const About = () => {
   return (
@@ -15,8 +18,61 @@ const About = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <SectionContainer id='about'>
-          <h2>About</h2>
-          <p>Coming soon...</p>
+          <StyledText>
+            <h2>About</h2>
+            <p className='lead'>
+              I'm Linda, and I build things with a purpose, as a frontend
+              developer with a background in interaction design. I grew up in
+              Skellefteå, and after almost 20 years in Stockholm, I'm still a
+              "norrlänning" at heart. People sometimes tell me I seem calm. I
+              like to think that's the north in me.
+            </p>
+            <h3>Why I design the way I do</h3>
+            <p>
+              I've always been curious about how people think, feel and make
+              decisions. Studying cognitive science, I was fascinated by memory
+              and by the mental templates we carry for how things are supposed
+              to look and work. Most of all, I was drawn to how we're influenced
+              without noticing it. That became the focus of my bachelor's thesis
+              in Interaction Design, on how dark patterns in social media apps
+              undermine user autonomy. It taught me that design is an ethical
+              responsibility: if we can shape people's behavior without them
+              noticing, we'd better use that to help them.
+            </p>
+            <h3>Why healthtech</h3>
+            <p>
+              My interest in healthtech isn't only professional. I know from my
+              own life how hard it can be to ask for help: not knowing where to
+              turn, whether you'll be taken seriously, or if it's even worth
+              trying. When I needed support, there weren't many digital options.
+              Today there are, and I think lowering that threshold is one of the
+              most meaningful things technology can do. That's what I explored
+              in my case study on Din Psykolog's onboarding, and it's why I want
+              to work within mental health and women's health. When someone
+              opens an app on a hard day, I want it to feel calm, clear and
+              kind. Getting there means never assuming I know what users need,
+              which is why I care so much about user interviews and testing.
+            </p>
+            <h3>What I'm looking for</h3>
+            <p>
+              I'm looking for a small, close-knit team where decisions don't
+              have to pass through several layers, where we iterate quickly and
+              I get real ownership of what I build. During my internship at
+              Univid I loved having that kind of ownership, and I also learned
+              how much I value guidance: code reviews, feedback and time to try
+              new things. Most of all, I want to work somewhere that puts users
+              before short-term profit, and thinks long term about what digital
+              health products do to the people who use them.
+            </p>
+            <h3>Outside of work</h3>
+            <p>
+              Outside of work, I'm happiest when I'm creating or organizing
+              something. I garden, knit and crochet, and nothing satisfies me
+              quite like turning a mess into a space where everything has its
+              place (I may own a few too many storage boxes). I love walking and
+              hiking in nature, and I'm dreaming of having a dog again.
+            </p>
+          </StyledText>
         </SectionContainer>
       </motion.div>
     </>
@@ -24,3 +80,19 @@ const About = () => {
 }
 
 export default About
+
+const StyledText = styled.div`
+  max-width: 65ch;
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  p:not(.lead) {
+    line-height: 1.7;
+
+    @media ${devices.laptop} {
+      font-size: 1.125rem;
+    }
+  }
+`
