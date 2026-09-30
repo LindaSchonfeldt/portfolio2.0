@@ -135,7 +135,8 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Prototype',
         title: titles.prototype || defaultTitles.prototype,
-        embed: proj.prototypeEmbed || proj.prototype,
+        // An empty prototypeEmbed disables the embed and leaves only the link
+        embed: proj.prototypeEmbed ?? proj.prototype,
         body: prototypeBody.length ? prototypeBody : undefined,
         ctaLabel: proj.prototypeCtaLabel || 'Open in Figma',
         ctaUrl: proj.prototype || proj.prototypeEmbed

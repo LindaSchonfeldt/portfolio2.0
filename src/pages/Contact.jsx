@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import styled from 'styled-components'
 import { RiFileCopyLine } from 'react-icons/ri'
+import styled from 'styled-components'
 
-import { Meta, SectionContainer } from '../components'
+import { Button, Meta, SectionContainer } from '../components'
+import devices from '../styles/devices'
 
 const Contact = () => {
   const [copied, setCopied] = useState(false)
@@ -28,23 +29,38 @@ const Contact = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <SectionContainer id='contact'>
-          <h1>Contact</h1>
-          <p>
-            Have a project in mind? I'd love to help bring your ideas to life
-            through thoughtful design and development.
-          </p>
-          <EmailRow>
-            <a href={`mailto:${email}`}>{email}</a>
-            <CopyIcon
-              onClick={handleCopy}
-              title='Copy email'
-              tabIndex={0}
-              role='button'
-            >
-              <RiFileCopyLine />
-            </CopyIcon>
-            {copied && <CopiedText>Copied!</CopiedText>}
-          </EmailRow>
+          <StyledText>
+            <h1>Contact</h1>
+            <p>
+              I'm looking for a frontend role close to design, ideally within
+              healthtech, mental health or women's health, in Stockholm or
+              remote. If you're building something that matters to the people
+              who use it, I'd love to hear from you.
+            </p>
+            <p>
+              Just want to chat about a product, an idea or UX in healthcare?
+              That's welcome too.
+            </p>
+            <EmailRow>
+              <a href={`mailto:${email}`}>{email}</a>
+              <CopyIcon
+                onClick={handleCopy}
+                title='Copy email'
+                tabIndex={0}
+                role='button'
+              >
+                <RiFileCopyLine />
+              </CopyIcon>
+              {copied && <CopiedText>Copied!</CopiedText>}
+            </EmailRow>
+            <Button
+              variant='secondary'
+              label={'Download CV'}
+              className='heroButton'
+              url='/pdfs/linda.schonfeldt_cv.pdf'
+              aria-label='Download CV'
+            />
+          </StyledText>
           {/* ContactForm hidden until reCAPTCHA works, re-add <ContactForm /> here */}
         </SectionContainer>
       </motion.div>
@@ -54,11 +70,27 @@ const Contact = () => {
 
 export default Contact
 
+const StyledText = styled.div`
+  max-width: 65ch;
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  p:not(.lead) {
+    line-height: 1.7;
+
+    @media ${devices.laptop} {
+      font-size: 1.125rem;
+    }
+  }
+`
+
 const EmailRow = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-family: 'Jost', sans-serif;
   font-size: 1rem;
   color: var(--text-secondary);

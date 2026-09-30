@@ -1,7 +1,5 @@
 import { FaGithub } from 'react-icons/fa'
 import { LiaLinkedinIn } from 'react-icons/lia'
-import { ImInstagram } from 'react-icons/im'
-
 import styled from 'styled-components'
 
 export const SocialLinks = () => {
@@ -9,17 +7,6 @@ export const SocialLinks = () => {
     <StyledSocialLinks>
       <h2 className='visually-hidden'>Connect With Me</h2>
       <ul className='socialIcons'>
-        {/* Instagram */}
-        <li>
-          <a
-            href='https://www.instagram.com/linda.schonfeldt/'
-            target='_blank'
-            rel='noopener noreferrer'
-            aria-label='Visit my Instagram'
-          >
-            <ImInstagram className='socialIcon' size={22} />
-          </a>
-        </li>
         {/* LinkedIn */}
         <li>
           <a
