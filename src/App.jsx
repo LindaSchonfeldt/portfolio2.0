@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -27,20 +27,14 @@ const AppContainer = styled.div`
 `
 
 function AppContent() {
-  // Disable intro animation for better performance
-  // Set to true to enable the intro animation
-  const [showIntro, setShowIntro] = useState(true)
+  // Only show loading screen when the site is opened on home,
+  // never when navigating to home later
+  const [showIntro, setShowIntro] = useState(
+    () => window.location.pathname === '/'
+  )
   const location = useLocation()
-  const isHome = location.pathname === '/'
-  const introPlayed = useRef(false)
 
-  // Only show loading screen on home, first visit only
-  const shouldShowIntro = showIntro && isHome && !introPlayed.current
-
-  const handleIntroComplete = () => {
-    setShowIntro(false)
-    introPlayed.current = true
-  }
+  const handleIntroComplete = useCallback(() => setShowIntro(false), [])
 
   // Preload the current route immediately, then others on idle
   useEffect(() => {
@@ -66,7 +60,7 @@ function AppContent() {
     <>
       <GlobalStyle />
       <AppContainer>
-        {shouldShowIntro && <LoadingScreen onComplete={handleIntroComplete} />}
+        {showIntro && <LoadingScreen onComplete={handleIntroComplete} />}
         <ScrollToTop />
         <Nav />
         <HamburgerMenu />
