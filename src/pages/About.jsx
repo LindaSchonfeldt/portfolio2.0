@@ -19,15 +19,15 @@ const About = () => {
       >
         <SectionContainer id='about'>
           <StyledText>
-            <h2>About</h2>
+            <h1>About</h1>
             <p className='lead'>
               I'm Linda, and I build things with a purpose, as a frontend
               developer with a background in interaction design. I grew up in
-              Skellefteå, and after almost 20 years in Stockholm, I'm still a
-              "norrlänning" at heart. People sometimes tell me I seem calm. I
-              like to think that's the north in me.
+              the north of Sweden, and after almost 20 years in Stockholm, I'm
+              still a "norrlänning" at heart. People sometimes tell me I seem
+              calm. I like to think that's the north in me.
             </p>
-            <h3>Why I design the way I do</h3>
+            <h2>Why I design the way I do</h2>
             <p>
               I've always been curious about how people think, feel and make
               decisions. Studying cognitive science, I was fascinated by memory
@@ -39,7 +39,7 @@ const About = () => {
               responsibility: if we can shape people's behavior without them
               noticing, we'd better use that to help them.
             </p>
-            <h3>Why healthtech</h3>
+            <h2>Why healthtech</h2>
             <p>
               My interest in healthtech isn't only professional. I know from my
               own life how hard it can be to ask for help: not knowing where to
@@ -53,18 +53,22 @@ const About = () => {
               kind. Getting there means never assuming I know what users need,
               which is why I care so much about user interviews and testing.
             </p>
-            <h3>What I'm looking for</h3>
+            <h2>What I'm looking for</h2>
             <p>
-              I'm looking for a small, close-knit team where decisions don't
-              have to pass through several layers, where we iterate quickly and
-              I get real ownership of what I build. During my internship at
-              Univid I loved having that kind of ownership, and I also learned
-              how much I value guidance: code reviews, feedback and time to try
-              new things. Most of all, I want to work somewhere that puts users
+              I'm looking for a frontend role close to design: building
+              interfaces in React and TypeScript while ideally also taking part
+              in user interviews, prototyping and conversations about flows.
+              Over time, I'd love to grow into design systems, where structure
+              and user experience meet. I thrive in small, close-knit teams
+              where decisions don't have to pass through several layers, where
+              we iterate quickly and I get real ownership of what I build.
+              During my internship at Univid I loved having that kind of
+              ownership, and I learned how much I value having time to try new
+              things. Most of all, I want to work somewhere that puts users
               before short-term profit, and thinks long term about what digital
               health products do to the people who use them.
             </p>
-            <h3>Outside of work</h3>
+            <h2>Outside of work</h2>
             <p>
               Outside of work, I'm happiest when I'm creating or organizing
               something. I garden, knit and crochet, and nothing satisfies me
@@ -83,6 +87,16 @@ export default About
 
 const StyledText = styled.div`
   max-width: 65ch;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    size: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
 
   p {
     margin-bottom: 1.5rem;

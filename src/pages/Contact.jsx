@@ -28,7 +28,7 @@ const Contact = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <SectionContainer id='contact'>
-          <h2>Contact</h2>
+          <h1>Contact</h1>
           <p>
             Have a project in mind? I'd love to help bring your ideas to life
             through thoughtful design and development.

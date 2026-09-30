@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+
 import devices from './devices'
 
 export const typography = css`
@@ -9,25 +10,10 @@ export const typography = css`
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
     line-height: 1;
     margin-bottom: 1rem;
-    color: var(--primary-green-dark);
-
-    @media ${devices.tablet} {
-      font-size: 3.5rem;
-    }
-
-    @media ${devices.laptop} {
-      font-size: 4rem;
-    }
-  }
-
-  h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
     color: var(--primary-green-dark);
 
     @media ${devices.tablet} {
@@ -39,8 +25,23 @@ export const typography = css`
     }
   }
 
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--primary-green-dark);
+
+    @media ${devices.tablet} {
+      font-size: 1.75rem;
+    }
+
+    @media ${devices.laptop} {
+      font-size: 2.5rem;
+    }
+  }
+
   h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
   }
