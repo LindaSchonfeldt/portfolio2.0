@@ -88,16 +88,6 @@ export default About
 const StyledText = styled.div`
   max-width: 65ch;
 
-  h1 {
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    size: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
   p {
     margin-bottom: 1.5rem;
   }
