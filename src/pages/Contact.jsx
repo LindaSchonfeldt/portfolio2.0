@@ -21,7 +21,7 @@ const Contact = () => {
     <>
       <Meta
         title='Contact | Linda Schönfeldt Portfolio'
-        description='Get in touch with Linda Schönfeldt for web development and design inquiries.'
+        description='Get in touch with Linda Schönfeldt, a UX-minded frontend developer in Stockholm open to frontend roles in healthtech and beyond.'
       />
       <motion.div
         initial={{ opacity: 0, y: 40 }}

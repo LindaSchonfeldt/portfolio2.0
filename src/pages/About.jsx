@@ -10,7 +10,7 @@ const About = () => {
     <>
       <Meta
         title='About | Linda Schönfeldt Portfolio'
-        description='Learn more about Linda Schönfeldt, a frontend developer with a background in interaction design.'
+        description='Linda Schönfeldt is a UX-minded frontend developer in Stockholm, driven by purpose and a pull toward healthtech and mental health.'
       />
       <motion.div
         initial={{ opacity: 0, y: 40 }}

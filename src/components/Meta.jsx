@@ -18,7 +18,7 @@ export function Meta({ title, description, image }) {
     }
     metaDescription.content =
       description ||
-      'Linda Schönfeldt portfolio website showcasing UX & frontend development skills'
+      'Linda Schönfeldt portfolio website showcasing frontend development & UX skills'
 
     // Update or create og:title
     let ogTitle = document.querySelector('meta[property="og:title"]')
@@ -54,4 +54,3 @@ export function Meta({ title, description, image }) {
 
   return null
 }
-
