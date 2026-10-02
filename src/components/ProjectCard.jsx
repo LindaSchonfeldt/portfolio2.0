@@ -66,15 +66,6 @@ export const ProjectCard = ({
     ? getMediaPath(`${project.videoPoster}.png`)
     : imagePath
 
-  // Debug logging
-  if (imagePath) {
-    console.log(`[${project.title}] Image path:`, imagePath)
-    console.log(
-      `[${project.title}] WebP path:`,
-      imagePath.replace(/\.png$/, '.webp')
-    )
-  }
-
   // Determine whether to show video or image
   const hasVideo = project.video && (videoWebm || videoMp4)
 

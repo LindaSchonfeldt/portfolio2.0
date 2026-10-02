@@ -12,9 +12,9 @@ const Projects = () => {
         description="Explore Linda Schönfeldt's frontend projects in React and TypeScript, and UX case studies with a focus on healthtech and ethical design."
       />
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        initial={{ y: 16 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <SectionContainer id='projects'>
           <h1>Projects</h1>
@@ -24,7 +24,7 @@ const Projects = () => {
                 key={project.id || idx}
                 project={project}
                 size={project.size || 'medium'}
-                eager={true}
+                eager={idx < 3}
               />
             ))}
           </ProjectGrid>
