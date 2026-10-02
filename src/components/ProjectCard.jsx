@@ -14,10 +14,13 @@ import { Tag } from './Tag'
 const IMAGE_HEIGHTS = {
   small: { mobile: 140, tablet: 180, desktop: 240 },
   medium: { mobile: 160, tablet: 220, desktop: 300 },
-  large: { mobile: 200, tablet: 280, desktop: 360 }
+  large: { mobile: 200, tablet: 280, desktop: 360 },
+  'x-large': { mobile: 160, tablet: 220, desktop: 300 }
 }
 
 const getSizeStyles = ($size) => {
+  if ($size === 'x-large') return 'grid-column: 1 / -1;'
+
   if ($size === 'large') {
     return `
       @media ${devices.tablet} {
@@ -38,7 +41,7 @@ export const ProjectCard = ({
 }) => {
   if (!project) return null
 
-  const isLargeLayout = size === 'large' || !!fullRow
+  const isLargeLayout = size === 'large' || size === 'x-large' || !!fullRow
 
   // Check if project is under construction
   const isUnderConstruction =
@@ -78,7 +81,7 @@ export const ProjectCard = ({
   // Calculate sizes attribute based on card size for responsive images
   // Tell browser the actual rendered width so it picks the right image variant
   const imageSizes =
-    size === 'large'
+    size === 'large' || size === 'x-large'
       ? '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px'
       : size === 'small'
         ? '(max-width: 640px) 100vw, (max-width: 1024px) 400px, 400px'
@@ -224,7 +227,7 @@ const CardContainer = styled.article`
     align-items: stretch;
     min-height: ${({ $size }) => {
       if ($size === 'small') return '380px'
-      if ($size === 'medium') return '500px'
+      if ($size === 'medium' || $size === 'x-large') return '500px'
       return 'auto'
     }};
   }
@@ -249,7 +252,7 @@ const CardContent = styled.div`
     column-gap: 1.5rem;
     min-height: ${({ $size }) => {
       if ($size === 'small') return '380px'
-      if ($size === 'medium') return '500px'
+      if ($size === 'medium' || $size === 'x-large') return '500px'
       return 'auto'
     }};
   }

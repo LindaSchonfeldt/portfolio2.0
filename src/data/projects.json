@@ -1,27 +1,6 @@
 {
   "projects": [
     {
-      "id": 5,
-      "slug": "paired",
-      "title": "Paired Couples App",
-      "image": "tree",
-      "alt": "Paired Couples App — a social app concept",
-      "description": "A shared space for two. Paired gives couples a private home base with a joint calendar, shared lists, and a personal feed. Built from scratch with React, Supabase, and Tailwind CSS — currently in active development.",
-      "categories": ["Frontend", "Full Stack"],
-      "technologies": [
-        "React",
-        "Supabase",
-        "TailwindCSS",
-        "React Router",
-        "Vite"
-      ],
-      "netlify": "",
-      "github": "https://github.com/LindaSchonfeldt/paired-couples-app",
-      "size": "medium",
-      "hasDetail": true,
-      "current": true
-    },
-    {
       "id": 0,
       "slug": "din-psykolog-onboarding",
       "title": "Lowering the Threshold to Psychological Care",
@@ -45,7 +24,7 @@
       "github": "",
       "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=153%3A170&node-id=418-337&viewport=-78%2C341%2C0.15&t=sFcMwvs9MMDuNheQ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=418%3A337",
 
-      "size": "large",
+      "size": "x-large",
       "hasDetail": true,
 
       "fullDescription": "This is a self-initiated conceptual redesign exploring alternative structural decisions within an existing digital mental health service.\n\nRather than focusing on interface polish, the project examines how decision sequencing, language, and commitment timing influence perceived safety and responsibility in vulnerable contexts.",
@@ -100,6 +79,28 @@
       ]
     },
     {
+      "id": 5,
+      "slug": "paired",
+      "title": "Paired Couples App",
+      "image": "tree",
+      "alt": "Paired Couples App — a social app concept",
+      "description": "A shared space for two. Paired gives couples a private home base with a joint calendar, shared lists, and a personal feed. Built from scratch with React, Supabase, and Tailwind CSS — currently in active development.",
+      "categories": ["Frontend", "Full Stack", "UX Design"],
+      "technologies": [
+        "React",
+        "Supabase",
+        "TailwindCSS",
+        "React Router",
+        "Vite"
+      ],
+      "netlify": "",
+      "github": "https://github.com/LindaSchonfeldt/paired-couples-app",
+      "size": "medium",
+      "hasDetail": true,
+      "current": true
+    },
+
+    {
       "id": 1,
       "slug": "app-review-tool",
       "title": "Swipe-based App Review Tool",
@@ -119,7 +120,7 @@
       "github": "",
       "prototype": "https://www.figma.com/proto/wGLoRcqxIqhjahDrw5gvJh/Case-studies?page-id=35%3A871&node-id=43-129&viewport=889%2C-17%2C0.52&t=gJDoXlsznqvzlZGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=43%3A129",
       "prototypeEmbed": "",
-      "size": "large",
+      "size": "medium",
       "hasDetail": true,
 
       "fullDescription": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",

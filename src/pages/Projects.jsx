@@ -24,7 +24,6 @@ const Projects = () => {
                 key={project.id || idx}
                 project={project}
                 size={project.size || 'medium'}
-                fullRow={idx === 0}
                 eager={true}
               />
             ))}
