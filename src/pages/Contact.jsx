@@ -24,9 +24,9 @@ const Contact = () => {
         description='Get in touch with Linda Schönfeldt, a UX-minded frontend developer in Stockholm open to frontend roles in healthtech and beyond.'
       />
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        initial={{ y: 16 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <SectionContainer id='contact'>
           <StyledText>

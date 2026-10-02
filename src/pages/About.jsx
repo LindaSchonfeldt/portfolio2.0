@@ -13,9 +13,9 @@ const About = () => {
         description='Linda Schönfeldt is a UX-minded frontend developer in Stockholm, driven by purpose and a pull toward healthtech and mental health.'
       />
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        initial={{ y: 16 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <SectionContainer id='about'>
           <StyledText>

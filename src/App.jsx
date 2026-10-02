@@ -26,15 +26,37 @@ const AppContainer = styled.div`
   }
 `
 
+// sessionStorage can throw (private mode, blocked storage), so fail open
+const INTRO_KEY = 'introSeen'
+
+const hasSeenIntro = () => {
+  try {
+    return sessionStorage.getItem(INTRO_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+const markIntroSeen = () => {
+  try {
+    sessionStorage.setItem(INTRO_KEY, '1')
+  } catch {
+    // ignore
+  }
+}
+
 function AppContent() {
-  // Only show loading screen when the site is opened on home,
-  // never when navigating to home later
+  // Only show loading screen when the site is opened on home, once per
+  // session, never when navigating to home later
   const [showIntro, setShowIntro] = useState(
-    () => window.location.pathname === '/'
+    () => window.location.pathname === '/' && !hasSeenIntro()
   )
   const location = useLocation()
 
-  const handleIntroComplete = useCallback(() => setShowIntro(false), [])
+  const handleIntroComplete = useCallback(() => {
+    markIntroSeen()
+    setShowIntro(false)
+  }, [])
 
   // Preload the current route immediately, then others on idle
   useEffect(() => {
