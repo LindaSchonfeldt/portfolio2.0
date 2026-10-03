@@ -18,7 +18,7 @@ export function Meta({ title, description, image }) {
     }
     metaDescription.content =
       description ||
-      'Linda Schönfeldt portfolio website showcasing frontend development & UX skills'
+      'Linda Schönfeldt is a UX-minded frontend developer in Stockholm, building accessible, user-focused interfaces in React and TypeScript.'
 
     // Update or create og:title
     let ogTitle = document.querySelector('meta[property="og:title"]')
@@ -38,7 +38,9 @@ export function Meta({ title, description, image }) {
       ogDescription.setAttribute('property', 'og:description')
       document.head.appendChild(ogDescription)
     }
-    ogDescription.content = description || 'Linda Schönfeldt portfolio website'
+    ogDescription.content =
+      description ||
+      'Linda Schönfeldt is a UX-minded frontend developer in Stockholm, building accessible, user-focused interfaces in React and TypeScript.'
 
     // Update or create og:image if provided
     if (image) {

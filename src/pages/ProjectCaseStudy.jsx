@@ -33,6 +33,7 @@ export default function ProjectCaseStudy() {
       <Meta
         title={`${project.title} - Case Study | Linda Schönfeldt Portfolio`}
         description={
+          project.metaDescription ||
           project.description ||
           project.fullDescription ||
           `Case study for ${project.title}`

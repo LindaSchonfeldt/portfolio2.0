@@ -10,6 +10,7 @@
       "alt": "Prototype of a symptom-first onboarding flow for a mental health service",
 
       "description": "Self-initiated conceptual redesign of Din Psykolog’s onboarding experience, exploring how decision sequencing shapes perceived safety in vulnerable moments. Through experience-based language, guided matching, and delayed commitment signals, the concept lowers early friction while preserving security and clinical integrity.",
+      "metaDescription": "A self-initiated redesign of Din Psykolog's onboarding that lowers the threshold to psychological care through guided matching and delayed commitment.",
 
       "categories": ["UX Design", "Healthtech", "Product Design"],
       "technologies": [
@@ -85,6 +86,7 @@
       "image": "tree",
       "alt": "Paired Couples App — a social app concept",
       "description": "A shared space for two. Paired gives couples a private home base with a joint calendar, shared lists, and a personal feed. Built from scratch with React, Supabase, and Tailwind CSS — currently in active development.",
+      "metaDescription": "Paired is a couples app with a shared calendar, lists and a private feed, built from scratch with React, Supabase and Tailwind CSS.",
       "categories": ["Frontend", "Full Stack", "UX Design"],
       "technologies": [
         "React",
@@ -109,6 +111,7 @@
       "heroAlt": "Mobile prototype showing swipe-based review interface with product card and gesture indicators",
       "alt": "Prototype of a swipe-based app review flow",
       "description": "A low-friction review flow designed to help users give quick, intuitive feedback through swipe interactions. The concept explores how gesture-based input can reduce review fatigue while maintaining clarity and engagement.",
+      "metaDescription": "A swipe-based review flow that cut review completion time by 40% in user testing, making app feedback quick and intuitive.",
       "categories": ["UI/UX", "Product Design"],
       "technologies": [
         "Figma",
@@ -163,6 +166,7 @@
       "heroAlt": "Research visualization showing categorized dark patterns identified in social media interfaces",
       "alt": "Research-based case study on dark patterns in social media interfaces",
       "description": "A research-driven UX case study investigating how dark patterns in social media mobile applications manipulate user behavior and undermine user autonomy. Download the full thesis in Swedish.",
+      "metaDescription": "A UX research study of nine social media apps that identified 34 dark patterns, 13 newly defined, and how they undermine user autonomy.",
       "categories": ["UX Research", "Ethical Design", "UI/UX"],
       "technologies": [
         "UX Research",

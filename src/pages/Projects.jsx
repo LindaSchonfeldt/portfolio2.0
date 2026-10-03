@@ -9,7 +9,7 @@ const Projects = () => {
     <>
       <Meta
         title='Projects | Linda Schönfeldt Portfolio'
-        description="Explore Linda Schönfeldt's frontend projects in React and TypeScript, and UX case studies with a focus on healthtech and ethical design."
+        description='Linda Schönfeldt is a frontend developer in Stockholm. Explore React and TypeScript projects focused on accessibility, design systems and user-centered interfaces.'
       />
       <motion.div
         initial={{ y: 16 }}
