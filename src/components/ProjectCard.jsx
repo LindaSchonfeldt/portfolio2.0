@@ -176,8 +176,7 @@ export const ProjectCard = ({
             </CategoryContainer>
             <StyledTitle>{project.title}</StyledTitle>
             <StyledDescription>{project.description}</StyledDescription>
-            // Decide whether to show the tech stack tags based on the project
-            data
+            // Hidden tech stack tags for now, can be re-enabled if needed
             {/* <StackContainer>
               {project.technologies &&
                 project.technologies.map((tag, index) => (
