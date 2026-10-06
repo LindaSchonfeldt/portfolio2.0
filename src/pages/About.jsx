@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { Meta, SectionContainer } from '../components'
+import { Experience } from '../sections'
 import devices from '../styles/devices'
 
 const About = () => {
@@ -77,6 +78,9 @@ const About = () => {
               hiking in nature, and I'm dreaming of having a dog again.
             </p>
           </StyledText>
+        </SectionContainer>
+        <SectionContainer id='cv'>
+          <Experience />
         </SectionContainer>
       </motion.div>
     </>
