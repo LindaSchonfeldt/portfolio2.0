@@ -288,7 +288,7 @@ Improvements I want to make. Check off when done.
 
 ### Bugs
 
-- [ ] Tech stack tags never render on project cards: `ProjectCard` reads `project.stack`, but `projects.json` uses `technologies`
+- [x] Tech stack tags never render on project cards: `ProjectCard` reads `project.stack`, but `projects.json` uses `technologies`
 - [x] Remove debug `console.log`s for image paths in `ProjectCard.jsx`
 - [ ] Fix the contact form's reCAPTCHA v2 integration, then re-enable the form in `src/pages/Contact.jsx` (currently hidden)
 - [x] README links to a LICENSE file that doesn't exist: add one or remove the link
@@ -302,7 +302,7 @@ Improvements I want to make. Check off when done.
 
 ### Design & UX
 
-- [ ]
+- [ ] Decide what to do with the tech stack tags on project cards (currently hidden)
 - [ ]
 - [ ]
 

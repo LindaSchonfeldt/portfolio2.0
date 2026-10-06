@@ -139,10 +139,10 @@ export const ProjectCard = ({
           $disabled={isUnderConstruction}
           $large={isLargeLayout}
           aria-disabled={isUnderConstruction || undefined}
-          aria-label={isUnderConstruction ? 'Case Study – coming soon' : 'View case study'}
-          onClick={
-            isUnderConstruction ? (e) => e.preventDefault() : undefined
+          aria-label={
+            isUnderConstruction ? 'Case Study – coming soon' : 'View case study'
           }
+          onClick={isUnderConstruction ? (e) => e.preventDefault() : undefined}
         >
           Case Study
         </CaseStudyButton>
@@ -176,12 +176,14 @@ export const ProjectCard = ({
             </CategoryContainer>
             <StyledTitle>{project.title}</StyledTitle>
             <StyledDescription>{project.description}</StyledDescription>
-            <StackContainer>
-              {project.stack &&
-                project.stack.map((tag, index) => (
+            // Decide whether to show the tech stack tags based on the project
+            data
+            {/* <StackContainer>
+              {project.technologies &&
+                project.technologies.map((tag, index) => (
                   <Tag key={index} text={tag} />
                 ))}
-            </StackContainer>
+            </StackContainer> */}
           </ContentWrapper>
           {!isSmall && links}
         </TextContainer>
