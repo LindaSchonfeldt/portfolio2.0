@@ -50,7 +50,7 @@ export default function ProjectCaseStudy() {
           {project.pdf && (
             <PDFDownloadSection>
               <Button
-                label='📄 Download PDF'
+                label='Download PDF'
                 url={project.pdf}
                 variant='primary'
               />

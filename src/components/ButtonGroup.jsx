@@ -36,9 +36,11 @@ const StyledButtonGroup = styled.div`
     flex-direction: ${({ $row }) => ($row ? 'row' : 'column')};
     width: 100%;
 
+    /* && raises specificity so this beats the Button's own margin-bottom
+       regardless of stylesheet order (which can shift after hot reload) */
     ${({ $row }) => $row && `
       flex: 1;
-      & > * {
+      && > * {
         flex: 1;
         width: auto;
         margin-bottom: 0;

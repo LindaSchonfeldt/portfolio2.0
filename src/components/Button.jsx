@@ -1,3 +1,5 @@
+import { LuDownload, LuSquareArrowOutUpRight } from 'react-icons/lu'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { buttonBase } from '../styles/mixins'
@@ -11,12 +13,34 @@ export const Button = ({
   type = 'button',
   onClick,
   disabled = false,
+  newTab,
   ...props
 }) => {
+  const isPDF = url?.toLowerCase().endsWith('.pdf')
+  const isExternal = /^https?:\/\//i.test(url ?? '')
+  // Only external links open in a new tab by default, and they always
+  // signal it with an icon so the behaviour is never a surprise
+  const opensNewTab = Boolean(url) && !isPDF && (newTab ?? isExternal)
+  // PDFs are downloaded, so mark those with a download icon instead
+  const isDownload = isPDF && !disabled
+  // Icon-only buttons already are their icon, so skip the visual hints there
+  const showNewTabIcon = opensNewTab && !iconOnly
+  const showDownloadIcon = isDownload && !iconOnly
+
   const content = (
     <>
       {Icon && <Icon aria-hidden='true' />}
       {!iconOnly && label}
+      {showNewTabIcon && (
+        <>
+          <LuSquareArrowOutUpRight
+            aria-hidden='true'
+            className='trailingIcon'
+          />
+          <span className='visually-hidden'>(opens in new tab)</span>
+        </>
+      )}
+      {showDownloadIcon && <LuDownload aria-hidden='true' className='trailingIcon' />}
     </>
   )
 
@@ -24,26 +48,49 @@ export const Button = ({
   // aria-label and a tooltip instead of being rendered as text
   const iconOnlyProps = iconOnly ? { 'aria-label': label, title: label } : {}
 
+  // aria-label overrides the hidden text above, so repeat the hint there
+  const ariaLabel = iconOnlyProps['aria-label'] ?? props['aria-label']
+  const newTabProps =
+    opensNewTab && ariaLabel
+      ? { 'aria-label': `${ariaLabel} (opens in new tab)` }
+      : {}
+
+  // Internal routes go through the router so they stay in the same tab
+  // without a full page reload
+  if (url && url.startsWith('/') && !isPDF && !disabled) {
+    return (
+      <StyledButton
+        as={Link}
+        to={url}
+        $variant={variant}
+        $hasIcon={Boolean(Icon)}
+        $iconOnly={iconOnly}
+        {...iconOnlyProps}
+        {...props}
+      >
+        {content}
+      </StyledButton>
+    )
+  }
+
   // If url is provided, render as a link
   if (url) {
-    // Check if it's a PDF download
-    const isPDF = url.toLowerCase().endsWith('.pdf')
-
     return (
       <StyledButton
         as='a'
         href={disabled ? undefined : url}
-        target='_blank'
-        rel='noopener noreferrer'
+        target={opensNewTab ? '_blank' : undefined}
+        rel={opensNewTab ? 'noopener noreferrer' : undefined}
         download={isPDF && !disabled ? true : undefined}
         $variant={variant}
         $disabled={disabled}
-        $hasIcon={Boolean(Icon)}
+        $hasIcon={Boolean(Icon) || showNewTabIcon || showDownloadIcon}
         $iconOnly={iconOnly}
         aria-disabled={disabled || undefined}
         onClick={disabled ? (e) => e.preventDefault() : undefined}
         {...iconOnlyProps}
         {...props}
+        {...newTabProps}
       >
         {content}
       </StyledButton>
@@ -86,6 +133,13 @@ const StyledButton = styled.button`
         width: 1em;
         height: 1em;
         flex-shrink: 0;
+      }
+
+      /* New-tab / download hint is secondary to the label */
+      svg.trailingIcon {
+        width: 0.85em;
+        height: 0.85em;
+        margin-left: -0.15rem;
       }
     `}
 

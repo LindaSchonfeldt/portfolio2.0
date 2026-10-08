@@ -30,6 +30,19 @@ export const TimelineTrail = ({ trail, progress }) => {
       </defs>
       <TrailGround d={trail.d} />
       <TrailSteps d={trail.d} mask={`url(#${maskId})`} />
+
+      {/* Scenes at each end of the trail, positioned with (0, 0) at the
+          trail's endpoint */}
+      {trail.start && (
+        <g transform={`translate(${trail.start.x} ${trail.start.y})`}>
+          {/* TODO: forest where the trail begins */}
+        </g>
+      )}
+      {trail.end && (
+        <g transform={`translate(${trail.end.x} ${trail.end.y})`}>
+          {/* TODO: something fun where the trail ends */}
+        </g>
+      )}
     </Trail>
   )
 }

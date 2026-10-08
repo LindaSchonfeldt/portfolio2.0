@@ -2,9 +2,10 @@ import { useScroll, useSpring } from 'framer-motion'
 import { useLayoutEffect, useRef, useState } from 'react'
 
 // Winding trail through the icon centers: an S-curve between each pair,
-// plus a lead-in from the top and a tail out to the bottom of the list
+// plus a lead-in from the top and a tail out to the bottom of the list.
+// Also returns the trail's start and end points for the scenes there.
 const buildTrailPath = (points, height) => {
-  if (points.length === 0) return ''
+  if (points.length === 0) return { d: '', start: null, end: null }
 
   const first = points[0]
   const last = points[points.length - 1]
@@ -16,11 +17,13 @@ const buildTrailPath = (points, height) => {
     return `C ${a.x} ${a.y + dy}, ${b.x} ${b.y - dy}, ${b.x} ${b.y}`
   }
 
-  return [
+  const d = [
     `M ${start.x} ${start.y}`,
     ...[start, ...points].slice(0, -1).map((a, i) => curve(a, points[i])),
     curve(last, end)
   ].join(' ')
+
+  return { d, start, end }
 }
 
 // Measures the timeline icons and returns the trail path through them,
@@ -28,7 +31,13 @@ const buildTrailPath = (points, height) => {
 export const useTrailPath = () => {
   const listRef = useRef(null)
   const iconRefs = useRef([])
-  const [trail, setTrail] = useState({ width: 0, height: 0, d: '' })
+  const [trail, setTrail] = useState({
+    width: 0,
+    height: 0,
+    d: '',
+    start: null,
+    end: null
+  })
 
   // Re-measure icon positions whenever the list resizes (expanding cards,
   // window resizes). offset* ignores transforms, so entrance animations
@@ -46,7 +55,7 @@ export const useTrailPath = () => {
       setTrail({
         width: list.offsetWidth,
         height: list.offsetHeight,
-        d: buildTrailPath(points, list.offsetHeight)
+        ...buildTrailPath(points, list.offsetHeight)
       })
     }
 

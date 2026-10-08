@@ -171,9 +171,10 @@ export const skills = [
   }
 ]
 
-// All entries in one list, newest first, for a combined timeline
+// All entries in one list, oldest first, so the timeline trail walks
+// forward in time
 export const timeline = [
   ...experience,
   ...education,
   ...additionalExperience
-].sort((a, b) => b.start.localeCompare(a.start))
+].sort((a, b) => a.start.localeCompare(b.start))

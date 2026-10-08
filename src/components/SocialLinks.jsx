@@ -13,7 +13,7 @@ export const SocialLinks = () => {
             href='https://www.linkedin.com/in/linda-sch%C3%B6nfeldt/'
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='Visit my LinkedIn profile'
+            aria-label='Visit my LinkedIn profile (opens in new tab)'
           >
             <LiaLinkedinIn className='socialIcon' size={28} />
           </a>
@@ -25,7 +25,7 @@ export const SocialLinks = () => {
             href='https://github.com/LindaSchonfeldt'
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='Visit my GitHub'
+            aria-label='Visit my GitHub (opens in new tab)'
           >
             <FaGithub className='socialIcon' size={26} />
           </a>

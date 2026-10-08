@@ -36,10 +36,10 @@ export const Hero = () => {
             <ButtonWrapper>
               <Button
                 variant='secondary'
-                label={'Download CV'}
+                label={'Read more'}
                 className='heroButton'
-                url='/pdfs/linda.schonfeldt_cv.pdf'
-                aria-label='Download CV'
+                url='/about'
+                aria-label='Read more'
               />
               <Button
                 variant='primary'

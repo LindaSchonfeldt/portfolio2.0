@@ -1,16 +1,15 @@
 import { useState } from 'react'
-import { LuDownload } from 'react-icons/lu'
 import styled from 'styled-components'
 
 import { Button } from '../../components'
 import { cvPdf, timeline } from '../../data/cv'
-import devices from '../../styles/devices'
 import { TimelineEntry } from './TimelineEntry'
 import { TimelineTrail } from './TimelineTrail'
 import { useTrailPath } from './useTrailPath'
 
 export const Experience = () => {
-  const [openId, setOpenId] = useState(timeline[0]?.id)
+  // Timeline runs oldest first, so open the most recent entry
+  const [openId, setOpenId] = useState(timeline.at(-1)?.id)
   const { listRef, registerIcon, trail, progress } = useTrailPath()
 
   const toggle = (id) => setOpenId((current) => (current === id ? null : id))
@@ -19,13 +18,8 @@ export const Experience = () => {
     <ExperienceContent>
       <Header>
         <h2>Experience & Education</h2>
-        <DownloadButton
-          label='Download CV (PDF)'
-          icon={LuDownload}
-          url={cvPdf}
-          variant='icon'
-          iconOnly
-        />
+        {/* PDF links get a download icon from Button automatically */}
+        <DownloadButton label='Download CV' url={cvPdf} variant='secondary' />
       </Header>
 
       <Timeline ref={listRef}>
@@ -55,9 +49,8 @@ const ExperienceContent = styled.div`
 
 const Header = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
   margin-bottom: 2.5rem;
 
@@ -66,26 +59,19 @@ const Header = styled.div`
   }
 `
 
-// Icon follows the h2 font sizes in styles/typography.js
+// Sized to its label instead of the full-width button default
 const DownloadButton = styled(Button)`
   && {
-    padding: 0;
+    width: auto;
     margin: 0;
-    font-size: 1.5rem;
-
-    @media ${devices.tablet} {
-      font-size: 1.75rem;
-    }
-
-    @media ${devices.laptop} {
-      font-size: 2.5rem;
-    }
   }
 `
 
+// Vertical padding gives the trail room to lead in and out, where the
+// start and end scenes sit
 const Timeline = styled.ol`
   position: relative;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 3rem 0;
 `
