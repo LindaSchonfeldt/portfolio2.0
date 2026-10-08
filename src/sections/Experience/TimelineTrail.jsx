@@ -2,6 +2,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useId } from 'react'
 import styled from 'styled-components'
 
+import forestUrl from '../../assets/forest.png'
+
+// forest.png is 563 × 340, shown small. The trail starts at the foot of the
+// front-left tree (at 100, 270 in the image), scaled to the same size.
+const FOREST = { width: 113, height: 68, anchorX: 20, anchorY: 54 }
+
 export const TimelineTrail = ({ trail, progress }) => {
   const maskId = useId()
   const reduceMotion = useReducedMotion()
@@ -35,7 +41,13 @@ export const TimelineTrail = ({ trail, progress }) => {
           trail's endpoint */}
       {trail.start && (
         <g transform={`translate(${trail.start.x} ${trail.start.y})`}>
-          {/* TODO: forest where the trail begins */}
+          <image
+            href={forestUrl}
+            x={-FOREST.anchorX}
+            y={-FOREST.anchorY}
+            width={FOREST.width}
+            height={FOREST.height}
+          />
         </g>
       )}
       {trail.end && (

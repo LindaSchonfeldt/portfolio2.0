@@ -68,10 +68,11 @@ const DownloadButton = styled(Button)`
 `
 
 // Vertical padding gives the trail room to lead in and out, where the
-// start and end scenes sit
+// start and end scenes sit. The top margin leaves room for the forest,
+// which rises above the trail's starting point.
 const Timeline = styled.ol`
   position: relative;
   list-style: none;
-  margin: 0;
+  margin: 1.5rem 0 0;
   padding: 3rem 0;
 `
