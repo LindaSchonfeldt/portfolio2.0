@@ -7,6 +7,14 @@ import { TimelineEntry } from './TimelineEntry'
 import { TimelineTrail } from './TimelineTrail'
 import { useTrailPath } from './useTrailPath'
 
+// Position of each entry among the main-trail entries (side entries don't
+// count), used for the trail's zigzag
+const trailIndexes = timeline.map((entry, index) =>
+  entry.branch
+    ? null
+    : timeline.slice(0, index).filter((prev) => !prev.branch).length
+)
+
 export const Experience = () => {
   // Timeline runs oldest first, so open the most recent entry
   const [openId, setOpenId] = useState(timeline.at(-1)?.id)
@@ -29,7 +37,7 @@ export const Experience = () => {
           <TimelineEntry
             key={entry.id}
             entry={entry}
-            index={index}
+            trailIndex={trailIndexes[index]}
             isOpen={openId === entry.id}
             onToggle={() => toggle(entry.id)}
             iconRef={registerIcon(index)}

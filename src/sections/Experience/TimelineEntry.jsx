@@ -19,19 +19,34 @@ const typeIcons = {
   other: FaSeedling
 }
 
-export const TimelineEntry = ({ entry, index, isOpen, onToggle, iconRef }) => {
+// trailIndex counts main-trail entries only, so the zigzag keeps its rhythm
+// past side entries
+export const TimelineEntry = ({
+  entry,
+  trailIndex,
+  isOpen,
+  onToggle,
+  iconRef
+}) => {
   const reduceMotion = useReducedMotion()
   const Icon = typeIcons[entry.type] ?? FaBriefcase
   const detailsId = `cv-details-${entry.id}`
 
   return (
     <TimelineItem
+      $branch={entry.branch}
       initial={reduceMotion ? false : { opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <TimelineIcon ref={iconRef} $active={isOpen} $offset={index % 2 === 1}>
+      <TimelineIcon
+        ref={iconRef}
+        data-branch={Boolean(entry.branch)}
+        $active={isOpen}
+        $branch={entry.branch}
+        $offset={trailIndex % 2 === 1}
+      >
         <Icon aria-hidden='true' />
       </TimelineIcon>
 
@@ -74,24 +89,28 @@ export const TimelineEntry = ({ entry, index, isOpen, onToggle, iconRef }) => {
   )
 }
 
+// Side entries (branch) are pushed right, off the main trail
 const TimelineItem = styled(motion.li)`
   position: relative;
   margin-bottom: 2rem;
-  padding-left: 3.5rem;
+  padding-left: ${({ $branch }) => ($branch ? '6rem' : '3.5rem')};
 
   &:last-child {
     margin-bottom: 0;
   }
 
   @media ${devices.tablet} {
-    padding-left: 6rem;
+    padding-left: ${({ $branch }) => ($branch ? '9rem' : '6rem')};
   }
 `
+
+const iconLeft = ({ $branch, $offset }, branchLeft, offsetLeft) =>
+  $branch ? branchLeft : $offset ? offsetLeft : '0'
 
 const TimelineIcon = styled.div`
   position: absolute;
   z-index: 1;
-  left: ${({ $offset }) => ($offset ? '14px' : '0')};
+  left: ${(props) => iconLeft(props, '48px', '14px')};
   top: 1rem;
   width: 32px;
   height: 32px;
@@ -109,7 +128,7 @@ const TimelineIcon = styled.div`
     color 0.2s ease;
 
   @media ${devices.tablet} {
-    left: ${({ $offset }) => ($offset ? '44px' : '0')};
+    left: ${(props) => iconLeft(props, '92px', '44px')};
     width: 40px;
     height: 40px;
     font-size: 18px;

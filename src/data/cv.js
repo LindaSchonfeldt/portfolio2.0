@@ -84,10 +84,12 @@ export const education = [
   }
 ]
 
+// `branch: true` puts an entry on a side trail off the main timeline trail
 export const additionalExperience = [
   {
     id: 'olssons',
     type: 'other',
+    branch: true,
     role: 'Gardener',
     organization: 'Olssons Trädgårdstjänst',
     location: 'Stockholm',
@@ -101,6 +103,7 @@ export const additionalExperience = [
   {
     id: 'mind',
     type: 'volunteer',
+    branch: true,
     role: 'Volunteer',
     organization: 'Mind',
     location: 'Remote',

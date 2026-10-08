@@ -1,5 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { useId } from 'react'
+import { motion, useReducedMotion, useTransform } from 'framer-motion'
+import { useId, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import forestUrl from '../../assets/forest.png'
@@ -10,6 +10,7 @@ const FOREST = { width: 113, height: 68, anchorX: 20, anchorY: 54 }
 
 export const TimelineTrail = ({ trail, progress }) => {
   const maskId = useId()
+  const mainRef = useRef(null)
   const reduceMotion = useReducedMotion()
 
   return (
@@ -34,7 +35,18 @@ export const TimelineTrail = ({ trail, progress }) => {
           />
         </mask>
       </defs>
-      <TrailGround d={trail.d} />
+      {/* Side trails first, so the main trail covers the forks */}
+      {trail.branches.map((branch, index) => (
+        <BranchTrail
+          key={index}
+          d={branch.d}
+          leadD={branch.leadD}
+          mainRef={mainRef}
+          mainD={trail.d}
+          progress={progress}
+        />
+      ))}
+      <TrailGround ref={mainRef} d={trail.d} />
       <TrailSteps d={trail.d} mask={`url(#${maskId})`} />
 
       {/* Scenes at each end of the trail, positioned with (0, 0) at the
@@ -56,6 +68,51 @@ export const TimelineTrail = ({ trail, progress }) => {
         </g>
       )}
     </Trail>
+  )
+}
+
+// A short side trail off the main one. Its footsteps follow the main
+// trail's scroll progress: they start once the main trail has been drawn
+// up to the fork, and walk out at the same pace.
+const BranchTrail = ({ d, leadD, mainRef, mainD, progress }) => {
+  const maskId = useId()
+  const leadRef = useRef(null)
+  const branchRef = useRef(null)
+  const reduceMotion = useReducedMotion()
+  const [lengths, setLengths] = useState(null)
+
+  useLayoutEffect(() => {
+    if (!mainRef.current || !leadRef.current || !branchRef.current) return
+    setLengths({
+      main: mainRef.current.getTotalLength(),
+      lead: leadRef.current.getTotalLength(),
+      branch: branchRef.current.getTotalLength()
+    })
+  }, [d, leadD, mainD, mainRef])
+
+  // How far past the fork the main trail's drawing has reached, as a
+  // fraction of this side trail
+  const reveal = useTransform(progress, (p) => {
+    if (!lengths?.branch) return 0
+    const past = p * lengths.main - lengths.lead
+    return Math.min(Math.max(past / lengths.branch, 0), 1)
+  })
+
+  return (
+    <g>
+      <defs>
+        <mask id={maskId} maskUnits='userSpaceOnUse'>
+          <TrailReveal
+            d={d}
+            style={{ pathLength: reduceMotion ? 1 : reveal }}
+          />
+        </mask>
+      </defs>
+      {/* Main trail up to the fork, only measured, never shown */}
+      <path ref={leadRef} d={leadD} fill='none' stroke='none' />
+      <BranchGround ref={branchRef} d={d} />
+      <TrailSteps d={d} mask={`url(#${maskId})`} />
+    </g>
   )
 }
 
@@ -81,6 +138,11 @@ const TrailGround = styled.path`
   stroke-width: 12;
   stroke-linecap: round;
   opacity: 0.5;
+`
+
+// Side trails are narrower, less trodden paths
+const BranchGround = styled(TrailGround)`
+  stroke-width: 8;
 `
 
 // Footsteps along the path, revealed by the scroll-driven mask
