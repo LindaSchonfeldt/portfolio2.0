@@ -86,6 +86,8 @@ export function useFormatProjectToCaseStudy(project) {
       problem: 'The Problem',
       insight: 'Key Insight',
       approach: 'Approach',
+      contentAsData: 'Content as Data',
+      designSystem: 'Design System',
       results: 'Results & Impact',
       prototype: 'Prototype',
       reflection: 'Reflection'
@@ -127,6 +129,24 @@ export function useFormatProjectToCaseStudy(project) {
         body: toArray(isObject ? approachData.text : approachData),
         image: isObject ? approachData.image : undefined,
         alt: isObject ? approachData.alt : undefined
+      })
+    }
+
+    if (proj.contentAsData) {
+      sections.push({
+        eyebrow: 'Architecture',
+        title: titles.contentAsData || defaultTitles.contentAsData,
+        body: toArray(proj.contentAsData),
+        showcase: 'contentAsData'
+      })
+    }
+
+    if (proj.designSystem) {
+      sections.push({
+        eyebrow: 'Foundations',
+        title: titles.designSystem || defaultTitles.designSystem,
+        body: toArray(proj.designSystem),
+        showcase: 'designSystem'
       })
     }
 

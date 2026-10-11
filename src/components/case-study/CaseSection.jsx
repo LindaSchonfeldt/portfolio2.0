@@ -3,6 +3,14 @@ import styled from 'styled-components'
 
 import { Button } from '../Button'
 import { ImageLightbox } from '../ImageLightbox'
+import { ContentAsDataShowcase } from './ContentAsDataShowcase'
+import { DesignSystemShowcase } from './DesignSystemShowcase'
+
+// Live components a section can render below its text, keyed by name in the data
+const showcases = {
+  contentAsData: ContentAsDataShowcase,
+  designSystem: DesignSystemShowcase
+}
 
 export function CaseSection({
   eyebrow,
@@ -13,9 +21,11 @@ export function CaseSection({
   embed,
   ctaLabel,
   ctaUrl,
+  showcase,
   isDisclaimer
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const Showcase = showcases[showcase]
 
   // Normalize figma prototype URLs to the embeddable format for better sizing/controls
   const embedUrl = embed?.includes('figma.com/proto')
@@ -34,6 +44,8 @@ export function CaseSection({
           ))}
         </ContentBody>
       )}
+
+      {Showcase && <Showcase />}
 
       {image && (
         <SectionImage

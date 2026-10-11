@@ -278,7 +278,37 @@
       "netlify": "",
       "github": "https://github.com/LindaSchonfeldt/portfolio2.0",
       "size": "small",
-      "hasDetail": false
+      "hasDetail": true,
+
+      "fullDescription": "The second version of my portfolio, designed and built from scratch with React, Vite and Styled Components. Beyond presenting my work, the site is a project in itself: a place to make, test and document frontend decisions about architecture, performance and accessibility.",
+      "metaDescription": "How I designed and built my portfolio with React and Vite: a data-driven content model, a performance sprint, and the trade-offs behind the loading screen.",
+
+      "category": "Frontend Development",
+      "date": "2025-09",
+      "role": "Frontend Developer & Designer",
+      "client": "Personal project",
+
+      "problem": "[DRAFT: Describe what wasn't working with the first portfolio and what you wanted version 2.0 to achieve.]\n\nA portfolio has two jobs that pull in different directions. It should feel personal and considered, but it also needs to load fast and stay easy to update as projects come and go.\n\nI wanted a site where adding a project or a case study meant editing data, not rewriting components, and where performance was something I measured rather than assumed.",
+
+      "insight": "Performance is a design decision, not only a technical one.\n\nThe site opens with a full-screen loading screen. It sets the tone, but it delays first paint by roughly 2.75 seconds and lowers the Lighthouse performance score to around 40–55. Every other optimization on the site is in place, so the loading screen is the one deliberate cost.\n\nSo I made the wait do real work. While the animation plays, the code for the home page downloads in the background. The counter runs quickly to 90%, then slows to a crawl until that code has arrived, and only reaches 100% when the page is ready to render. The number on screen reflects actual progress, not a timer. Before any JavaScript has loaded, a static splash screen in the HTML covers the gap, so there is never a blank page.\n\nRather than removing it, I limited where it costs the most: it now runs once per session, and page transitions no longer fade in, so moving around the site after the first visit feels instant.",
+
+      "approach": "A performance sprint. Routes are code-split and lazy loaded, and vendor libraries are split into separate chunks. An image script generates WebP versions in three sizes, served through srcset with a shimmer placeholder. Fonts load asynchronously, and Framer Motion was removed from the hero to reduce the JavaScript that blocks the largest paint.\n\nPages that load before you click. Splitting the code means each page is downloaded separately, which could make navigation feel slower. To avoid that, the page you land on loads first, and the other main pages load in the background as soon as the browser is idle. Hovering over or focusing a link in the navigation starts the download immediately, so even on a slow connection the next page is usually ready by the time it is clicked. Hovering over Projects also fetches the images for the first project cards, using the same srcset and sizes as the cards themselves, so the browser downloads exactly the variant it will show.\n\nAccessibility throughout. Semantic HTML, visually hidden labels for screen readers, and a dedicated pass on buttons and focus states. Animations respect the reduced motion setting: the loading screen fades instead of sliding, and the experience timeline shows its path in full instead of drawing it as you scroll.",
+
+      "contentAsData": "No project is written into a component. All projects live in a single JSON file, and each entry decides how its card looks: its size in the grid, which buttons it shows (GitHub, live site, prototype, PDF), and whether it links to a case study. A field that is left out simply means the button is not there.\n\nCase study pages, including this one, are generated from the same entries through a custom hook, and a small config file works as a feature flag for pages that are still in progress. Adding a project means writing data, not code.\n\nTry it below. The controls change this portfolio's own entry from the data, and the card underneath is the same ProjectCard component the Projects page uses.",
+
+      "designSystem": "Colors, spacing, typography and breakpoints are defined once as CSS custom properties and shared styled-components mixins. Every component reads from the same tokens, so a change in one place carries through the whole site.\n\nLayouts are mobile-first with min-width breakpoints, and spacing tokens grow with the screen: section padding goes from 1rem on a phone to 16rem on a wide desktop. Components such as the Button keep the interface consistent: one component with primary, secondary and tertiary variants that renders as a router link, an external link or a native button depending on its props, and marks links that open a new tab or download a file.\n\nThe overview below is not a screenshot. It is rendered from the site's live tokens, so the values you see are the ones the site is using right now.",
+
+      "outcome": "The performance sprint cut the JavaScript loaded on first visit by 21%, from 141 kB to 112 kB gzipped. Before it, React and all of my own code shipped as a single 72 kB chunk; after it, my own startup code was down to 13 kB.\n\nSince then I have deliberately given some of that back. The loading screen needs Framer Motion from the first frame, so the initial load is now 130 kB, still 8% below where it started. Meanwhile the total JavaScript across the site has kept shrinking, from 210 kB to 150 kB (−28%), as unused code was removed and more of the site became lazy loaded.\n\nLighthouse scores of 95+ for accessibility and 100 for best practices and SEO, with performance traded off knowingly for the loading screen.\n\nAdding a new project takes one JSON entry and one image. A full case study takes a few more fields, with no new components.",
+
+      "reflection": "[DRAFT: Add your own reflection. Some starting points below.]\n\nBuilding the site over a year, in phases rather than in one go, meant my own work kept changing what the site needed: first a place for frontend projects, then case studies, then an About page.\n\nThe most useful lesson was to measure before optimizing and to treat every trade-off as a choice I can explain, including the ones that lower a score.",
+
+      "sectionTitles": {
+        "problem": "The Challenge",
+        "insight": "Key Trade-off",
+        "approach": "How It's Built",
+        "results": "Where It Landed",
+        "reflection": "What I Learned"
+      }
     },
     {
       "id": 8,

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -11,6 +11,7 @@ const SLIDE_UP_MS = 900
 export const LoadingScreen = ({ onComplete }) => {
   const [percentage, setPercentage] = useState(0)
   const [phase, setPhase] = useState('slideIn')
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     const splash = document.getElementById('splash')
@@ -77,22 +78,28 @@ export const LoadingScreen = ({ onComplete }) => {
     }
   }, [onComplete])
 
-  return (
-    <Container>
-      <Overlay
-        as={motion.div}
-        initial={{ x: '-100%', y: '0%' }}
-        animate={
+  // With reduced motion the overlay fades in and out instead of sliding
+  const motionProps = reduceMotion
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: phase === 'slideIn' ? 1 : 0 },
+        transition: { duration: 0.3, ease: 'easeOut' }
+      }
+    : {
+        initial: { x: '-100%', y: '0%' },
+        animate:
           phase === 'slideIn'
             ? { x: '0%', y: '0%' }
-            : { x: '0%', y: '-100%' }
-        }
-        transition={
+            : { x: '0%', y: '-100%' },
+        transition:
           phase === 'slideIn'
             ? { duration: SLIDE_IN_MS / 1000, ease: [0.76, 0, 0.24, 1] }
             : { duration: SLIDE_UP_MS / 1000, ease: [0.76, 0, 0.24, 1] }
-        }
-      >
+      }
+
+  return (
+    <Container>
+      <Overlay as={motion.div} {...motionProps}>
         <PercentageText>{percentage}%</PercentageText>
       </Overlay>
     </Container>
