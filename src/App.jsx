@@ -3,7 +3,15 @@ import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Footer, HamburgerMenu, LoadingScreen, Nav, PerformanceMonitor, ScrollToTop } from './components'
+// Imported file by file, not through the components barrel: the barrel would
+// pull every component it exports, case study demos included, into the
+// startup bundle instead of the lazy-loaded pages that use them
+import { Footer } from './components/Footer'
+import { HamburgerMenu } from './components/HamburgerMenu'
+import { LoadingScreen } from './components/LoadingScreen'
+import { Nav } from './components/Nav'
+import { PerformanceMonitor } from './components/PerformanceMonitor'
+import { ScrollToTop } from './components/ScrollToTop'
 import GlobalStyle from './styles/GlobalStyle'
 import { getRouteName, mainRoutes, preloadRoute } from './utils/routePreloader'
 

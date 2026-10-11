@@ -4,12 +4,14 @@ import styled from 'styled-components'
 import { Button } from '../Button'
 import { ImageLightbox } from '../ImageLightbox'
 import { AccessibilityShowcase } from './AccessibilityShowcase'
+import { BundleSizeChart } from './BundleSizeChart'
 import { ContentAsDataShowcase } from './ContentAsDataShowcase'
 import { DesignSystemShowcase } from './DesignSystemShowcase'
 
 // Live components a section can render below its text, keyed by name in the data
 const showcases = {
   accessibility: AccessibilityShowcase,
+  bundleSizes: BundleSizeChart,
   contentAsData: ContentAsDataShowcase,
   designSystem: DesignSystemShowcase
 }
@@ -24,6 +26,7 @@ export function CaseSection({
   ctaLabel,
   ctaUrl,
   showcase,
+  showcaseData,
   isDisclaimer
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -47,7 +50,7 @@ export function CaseSection({
         </ContentBody>
       )}
 
-      {Showcase && <Showcase />}
+      {Showcase && <Showcase data={showcaseData} />}
 
       {image && (
         <SectionImage

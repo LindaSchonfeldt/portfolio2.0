@@ -199,7 +199,11 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Outcome',
         title: titles.results || defaultTitles.results,
-        body: toArray(proj.outcome)
+        body: toArray(proj.outcome),
+        ...(proj.bundleSizes && {
+          showcase: 'bundleSizes',
+          showcaseData: proj.bundleSizes
+        })
       })
     }
 
