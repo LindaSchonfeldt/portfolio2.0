@@ -4,6 +4,7 @@ import {
   FaChevronDown,
   FaGraduationCap,
   FaHandHoldingHeart,
+  FaRegCommentDots,
   FaSeedling
 } from 'react-icons/fa'
 import styled from 'styled-components'
@@ -16,7 +17,8 @@ const typeIcons = {
   work: FaBriefcase,
   education: FaGraduationCap,
   volunteer: FaHandHoldingHeart,
-  other: FaSeedling
+  other: FaSeedling,
+  next: FaRegCommentDots
 }
 
 // trailIndex counts main-trail entries only, so the zigzag keeps its rhythm
@@ -46,6 +48,7 @@ export const TimelineEntry = ({
         $active={isOpen}
         $branch={entry.branch}
         $offset={trailIndex % 2 === 1}
+        $future={entry.type === 'next'}
       >
         <Icon aria-hidden='true' />
       </TimelineIcon>
@@ -105,15 +108,19 @@ const TimelineItem = styled(motion.li)`
 `
 
 const iconLeft = ({ $branch, $offset }, branchLeft, offsetLeft) =>
-  $branch ? branchLeft : $offset ? offsetLeft : '0'
+  $branch ? branchLeft : $offset ? offsetLeft : '0px'
 
+// The future entry's icon is larger. `grow` is how much larger, and half of
+// it is taken off left and top so the icon stays centered on the trail.
 const TimelineIcon = styled.div`
+  --grow: ${({ $future }) => ($future ? '12px' : '0px')};
   position: absolute;
   z-index: 1;
-  left: ${(props) => iconLeft(props, '48px', '14px')};
-  top: 1rem;
-  width: 32px;
-  height: 32px;
+  left: calc(${(props) => iconLeft(props, '48px', '14px')} - var(--grow) / 2);
+  top: calc(1rem - var(--grow) / 2);
+  width: calc(32px + var(--grow));
+  height: calc(32px + var(--grow));
+  font-size: ${({ $future }) => ($future ? '20px' : 'inherit')};
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -128,10 +135,11 @@ const TimelineIcon = styled.div`
     color 0.2s ease;
 
   @media ${devices.tablet} {
-    left: ${(props) => iconLeft(props, '92px', '44px')};
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+    --grow: ${({ $future }) => ($future ? '16px' : '0px')};
+    left: calc(${(props) => iconLeft(props, '92px', '44px')} - var(--grow) / 2);
+    width: calc(40px + var(--grow));
+    height: calc(40px + var(--grow));
+    font-size: ${({ $future }) => ($future ? '24px' : '18px')};
   }
 `
 

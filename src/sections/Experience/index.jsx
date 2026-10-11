@@ -16,8 +16,8 @@ const trailIndexes = timeline.map((entry, index) =>
 )
 
 export const Experience = () => {
-  // Timeline runs oldest first, so open the most recent entry
-  const [openId, setOpenId] = useState(timeline.at(-1)?.id)
+  // Timeline runs oldest first, so open the first entry where the story starts
+  const [openId, setOpenId] = useState(timeline[0]?.id)
   const { listRef, registerIcon, trail, progress } = useTrailPath()
 
   const toggle = (id) => setOpenId((current) => (current === id ? null : id))

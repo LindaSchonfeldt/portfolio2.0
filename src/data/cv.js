@@ -196,10 +196,24 @@ export const skills = [
   }
 ]
 
+// Temporary last step: a placeholder for the next role, always at the end
+export const nextStep = {
+  id: 'next-step',
+  type: 'next',
+  role: 'Your team?',
+  organization: 'Position open',
+  period: 'Next up',
+  tech: [],
+  description:
+    "This spot is saved for my next frontend role, ideally somewhere that makes people's everyday lives a little better. If that sounds like your team, let's fill it in together.",
+  links: [{ label: 'Get in touch', url: '/contact' }]
+}
+
 // All entries in one list, oldest first, so the timeline trail walks
 // forward in time
 export const timeline = [
-  ...experience,
-  ...education,
-  ...additionalExperience
-].sort((a, b) => a.start.localeCompare(b.start))
+  ...[...experience, ...education, ...additionalExperience].sort((a, b) =>
+    a.start.localeCompare(b.start)
+  ),
+  nextStep
+]

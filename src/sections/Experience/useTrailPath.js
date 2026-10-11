@@ -52,12 +52,13 @@ const splitAtY = (a, b, y) => {
 }
 
 // Winding trail through the main entries' icon centers: an S-curve between
-// each pair, plus a lead-in from the top and a tail out to the bottom of
-// the list. Side entries (branch) get their own short trail that leaves
-// the main trail just above them, plus `leadD`: the main trail up to that
-// fork, so the side trail can start drawing when the main one gets there.
-// Also returns the trail's start and end points for the scenes there.
-const buildTrailPath = (points, height) => {
+// each pair, plus a lead-in from the top. It ends at the last icon rather
+// than trailing off past it. Side entries (branch) get their own short trail
+// that leaves the main trail just above them, plus `leadD`: the main trail
+// up to that fork, so the side trail can start drawing when the main one
+// gets there. Also returns the trail's start and end points for the scenes
+// there.
+const buildTrailPath = (points) => {
   const main = points.filter((p) => !p.branch)
   if (main.length === 0)
     return { d: '', start: null, end: null, branches: [] }
@@ -65,8 +66,8 @@ const buildTrailPath = (points, height) => {
   const first = main[0]
   const last = main[main.length - 1]
   const start = { x: main[1]?.x ?? first.x, y: 0 }
-  const end = { x: main[main.length - 2]?.x ?? last.x, y: height }
-  const route = [start, ...main, end]
+  const end = last
+  const route = [start, ...main]
 
   const segments = route.slice(1).map((b, i) => curve(route[i], b))
   const d = [`M ${start.x} ${start.y}`, ...segments].join(' ')
@@ -76,12 +77,15 @@ const buildTrailPath = (points, height) => {
     .map((p) => {
       const y = Math.max(p.y - BRANCH_RISE, 0)
       const i = route.findIndex((b, j) => j > 0 && b.y >= y)
+      // A side entry below the last main icon has no trail to fork from
+      if (i === -1) return null
       const { point: fork, before } = splitAtY(route[i - 1], route[i], y)
       return {
         d: `M ${fork.x} ${fork.y} ${curve(fork, p)}`,
         leadD: [`M ${start.x} ${start.y}`, ...segments.slice(0, i - 1), before].join(' ')
       }
     })
+    .filter(Boolean)
 
   return { d, start, end, branches }
 }
@@ -117,7 +121,7 @@ export const useTrailPath = () => {
       setTrail({
         width: list.offsetWidth,
         height: list.offsetHeight,
-        ...buildTrailPath(points, list.offsetHeight)
+        ...buildTrailPath(points)
       })
     }
 
