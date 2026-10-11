@@ -61,6 +61,17 @@ export function useFormatProjectToCaseStudy(project) {
 
   const formatDate = useCallback((dateString) => {
     if (!dateString) return 'Recent'
+    // Ranges are written as "2025-09 - 2026-10"
+    if (dateString.includes(' - ')) {
+      return dateString
+        .split(' - ')
+        .map((part) => formatSingleDate(part.trim()))
+        .join(' – ')
+    }
+    return formatSingleDate(dateString)
+  }, [])
+
+  const formatSingleDate = (dateString) => {
     const [year, month] = dateString.split('-')
     const monthNames = [
       'Jan',
@@ -77,7 +88,7 @@ export function useFormatProjectToCaseStudy(project) {
       'Dec'
     ]
     return `${monthNames[parseInt(month) - 1] || ''} ${year}`
-  }, [])
+  }
 
   const generateSections = useCallback((proj) => {
     const sections = []

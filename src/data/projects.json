@@ -103,6 +103,78 @@
     },
 
     {
+      "id": 7,
+      "slug": "portfolio",
+      "title": "Portfolio",
+      "image": "portfolio",
+      "alt": "Portfolio website showcasing projects and design work",
+      "description": "You're looking at it. Built from scratch with React and Vite, where every project is a JSON entry rendered by the same set of components. A case study in data-driven architecture, measured performance, and accessibility built into the components.",
+      "categories": ["UI/UX", "Frontend"],
+      "technologies": ["React", "Vite", "Styled Components", "Zustand"],
+      "netlify": "",
+      "github": "https://github.com/LindaSchonfeldt/portfolio2.0",
+      "size": "medium",
+      "hasDetail": true,
+
+      "fullDescription": "The second version of my portfolio, designed and built from scratch with React, Vite and Styled Components. Beyond presenting my work, the site is a project in itself: a place to make, test and document frontend decisions about architecture, performance and accessibility.",
+      "metaDescription": "How I designed and built my portfolio with React and Vite: a data-driven content model, a performance sprint, and the trade-offs behind the loading screen.",
+
+      "category": "Frontend Development",
+      "date": "2025-09 - 2026-10",
+      "role": "Frontend Developer & Designer",
+      "client": "Personal project",
+
+      "problem": "What I enjoy most about coding is thinking in components: building something once and letting it vary. My first portfolio wasn't built that way, and version 2.0 was my chance to change that.\n\nI wanted a portfolio that was easy to develop and easy to update. A portfolio is never finished: projects are added, descriptions are rewritten, and some projects grow into full case studies. If every change meant editing layout code, the site would quickly fall behind my work.\n\nThe projects themselves made that harder. A frontend app needs a live site and a GitHub link, a UX case study needs a Figma prototype, and a research project needs a downloadable thesis. The challenge was to handle all of them with the same set of components, without building one-off pages.\n\nAt the same time, the site had to feel personal and still load fast, and performance had to be something I measured rather than assumed.",
+
+      "insight": "Performance is a design decision, not only a technical one.\n\nThe site opens with a full-screen loading screen. It sets the tone, but it delays first paint by roughly 2.75 seconds and lowers the Lighthouse performance score to around 40–55. Every other optimization on the site is in place, so the loading screen is the one deliberate cost.\n\nSo I made the wait do real work. While the animation plays, the code for the home page downloads in the background. The counter runs quickly to 90%, then slows to a crawl until that code has arrived, and only reaches 100% when the page is ready to render. The number on screen reflects actual progress, not a timer. Before any JavaScript has loaded, a static splash screen in the HTML covers the gap, so there is never a blank page.\n\nRather than removing it, I limited where it costs the most: it now runs once per session, and page transitions no longer fade in, so moving around the site after the first visit feels instant.",
+
+      "approach": "A performance sprint. Routes are code-split and lazy loaded, and vendor libraries are split into separate chunks. An image script generates WebP versions in three sizes, served through srcset with a shimmer placeholder. Fonts load asynchronously, and Framer Motion was removed from the hero to reduce the JavaScript that blocks the largest paint.\n\nPages that load before you click. Splitting the code means each page is downloaded separately, which could make navigation feel slower. To avoid that, the page you land on loads first, and the other main pages load in the background as soon as the browser is idle. Hovering over or focusing a link in the navigation starts the download immediately, so even on a slow connection the next page is usually ready by the time it is clicked. Hovering over Projects also fetches the images for the first project cards, using the same srcset and sizes as the cards themselves, so the browser downloads exactly the variant it will show.",
+
+      "contentAsData": "No project is written into a component. All projects live in a single JSON file, and each entry decides how its card looks: its size in the grid, which buttons it shows (GitHub, live site, prototype, PDF), and whether it links to a case study. A field that is left out simply means the button is not there.\n\nCase study pages, including this one, are generated from the same entries through a custom hook, and a small config file works as a feature flag for pages that are still in progress. Adding a project means writing data, not code.\n\nTry it below. The controls change this portfolio's own entry from the data, and the card underneath is the same ProjectCard component the Projects page uses.",
+
+      "designSystem": "Colors, spacing, typography and breakpoints are defined once as CSS custom properties and shared styled-components mixins. Every component reads from the same tokens, so a change in one place carries through the whole site.\n\nLayouts are mobile-first with min-width breakpoints, and spacing tokens grow with the screen: section padding goes from 1rem on a phone to 16rem on a wide desktop. Components such as the Button keep the interface consistent: one component with primary, secondary and tertiary variants that renders as a router link, an external link or a native button depending on its props, and marks links that open a new tab or download a file.\n\nThe overview below is not a screenshot. It is rendered from the site's live tokens, so the values you see are the ones the site is using right now.",
+
+      "accessibility": "Accessibility is built into the components rather than added page by page. The same Button component renders internal routes, external links, icon-only links and file downloads, and each case gets what it needs to be understood without seeing it.\n\nLinks that open a new tab show an icon and announce \"(opens in new tab)\" through visually hidden text. Icon-only buttons have no visible text, so their label moves to aria-label. PDF links are marked as downloads. One global rule gives every interactive element the same visible focus outline, shown only for keyboard focus. Every animation respects the reduced motion setting: a single MotionConfig turns movement off in all Framer Motion animations while fades remain, a global CSS rule does the same for CSS animations and smooth scrolling, and the loading screen and experience timeline have their own reduced versions on top.\n\nThe overview below renders the real buttons and reads their accessible names from the page, the same text a screen reader would announce.",
+
+      "bundleSizes": {
+        "_note": "Gzipped JavaScript from production builds of each version, measured October 2026",
+        "unit": "kB",
+        "versions": [
+          {
+            "label": "Before the sprint",
+            "date": "Oct 2025",
+            "initial": 140.7,
+            "total": 209.5
+          },
+          {
+            "label": "After the sprint",
+            "date": "Oct 2025",
+            "initial": 111.8,
+            "total": 178.2
+          },
+          {
+            "label": "Today",
+            "date": "Oct 2026",
+            "initial": 120.7,
+            "total": 158.9
+          }
+        ]
+      },
+
+      "outcome": "The performance sprint cut the JavaScript loaded on first visit by 21%, from 141 kB to 112 kB gzipped. Before it, React and all of my own code shipped as a single 72 kB chunk; after it, my own startup code was down to 13 kB.\n\nMeasuring again for this case study revealed a regression. I had later added a barrel file that re-exports every component from one place. Because the app's entry point imported through it, the bundler treated every component as startup code, including pages and demos that are only needed later. My own startup code had grown to 36 kB. Importing components file by file in the entry point brought it back down to 12 kB.\n\nToday the first visit loads 121 kB, 14% less than before the sprint, even though the loading screen needs Framer Motion from the first frame. The total JavaScript across the site is 159 kB, 24% less than where it started, interactive demos on this page included.\n\nLighthouse scores of 95+ for accessibility and 100 for best practices and SEO, with performance traded off knowingly for the loading screen.\n\nAdding a new project takes one JSON entry and one image. A full case study takes a few more fields, with no new components.",
+
+      "reflection": "Building the site over a year, in phases rather than all at once, put the component approach to the test. My own work kept changing what the site needed: first a place for frontend projects, then case studies, then an About page. Each addition built on what was already there instead of replacing it.\n\nWriting this case study became a review of its own. Every claim had to hold up against the code, and checking them uncovered an image preload that never ran, animations that ignored the reduced motion setting, and a barrel file that had tripled my startup code. All three are fixed, and the text now describes exactly what the site does.\n\nThe most useful lesson was to measure before optimizing, and to treat every trade-off as a choice I can explain, including the ones that lower a score.\n\nIn the end, this page sums up the project better than any paragraph. It is generated from a single entry in projects.json, and the demos above are the same components the rest of the site is built from. A case study about thinking in components, made of them.",
+
+      "sectionTitles": {
+        "problem": "The Challenge",
+        "insight": "Key Trade-off",
+        "approach": "How It's Built",
+        "results": "Where It Landed",
+        "reflection": "What I Learned"
+      }
+    },
+
+    {
       "id": 1,
       "slug": "app-review-tool",
       "title": "Swipe-based App Review Tool",
@@ -227,7 +299,7 @@
       "technologies": ["React", "Vite", "Chakra UI"],
       "netlify": "https://enkel-bokforing.netlify.app/",
       "github": "https://github.com/LindaSchonfeldt/accounting-website",
-      "size": "medium",
+      "size": "small",
       "hasDetail": false
     },
     {
@@ -265,77 +337,6 @@
         "/images/naima-map.webp",
         "/images/naima-wholesale.webp"
       ]
-    },
-    {
-      "id": 7,
-      "slug": "portfolio",
-      "title": "Portfolio",
-      "image": "portfolio",
-      "alt": "Portfolio website showcasing projects and design work",
-      "description": "You're looking at it. This is a showcase of user-centered design in action.",
-      "categories": ["UI/UX", "Frontend"],
-      "technologies": ["React", "Vite", "Styled Components", "Zustand"],
-      "netlify": "",
-      "github": "https://github.com/LindaSchonfeldt/portfolio2.0",
-      "size": "small",
-      "hasDetail": true,
-
-      "fullDescription": "The second version of my portfolio, designed and built from scratch with React, Vite and Styled Components. Beyond presenting my work, the site is a project in itself: a place to make, test and document frontend decisions about architecture, performance and accessibility.",
-      "metaDescription": "How I designed and built my portfolio with React and Vite: a data-driven content model, a performance sprint, and the trade-offs behind the loading screen.",
-
-      "category": "Frontend Development",
-      "date": "2025-09",
-      "role": "Frontend Developer & Designer",
-      "client": "Personal project",
-
-      "problem": "What I enjoy most about coding is thinking in components: building something once and letting it vary. My first portfolio wasn't built that way, and version 2.0 was my chance to change that.\n\nI wanted a portfolio that was easy to develop and easy to update. A portfolio is never finished: projects are added, descriptions are rewritten, and some projects grow into full case studies. If every change meant editing layout code, the site would quickly fall behind my work.\n\nThe projects themselves made that harder. A frontend app needs a live site and a GitHub link, a UX case study needs a Figma prototype, and a research project needs a downloadable thesis. The challenge was to handle all of them with the same set of components, without building one-off pages.\n\nAt the same time, the site had to feel personal and still load fast, and performance had to be something I measured rather than assumed.",
-
-      "insight": "Performance is a design decision, not only a technical one.\n\nThe site opens with a full-screen loading screen. It sets the tone, but it delays first paint by roughly 2.75 seconds and lowers the Lighthouse performance score to around 40–55. Every other optimization on the site is in place, so the loading screen is the one deliberate cost.\n\nSo I made the wait do real work. While the animation plays, the code for the home page downloads in the background. The counter runs quickly to 90%, then slows to a crawl until that code has arrived, and only reaches 100% when the page is ready to render. The number on screen reflects actual progress, not a timer. Before any JavaScript has loaded, a static splash screen in the HTML covers the gap, so there is never a blank page.\n\nRather than removing it, I limited where it costs the most: it now runs once per session, and page transitions no longer fade in, so moving around the site after the first visit feels instant.",
-
-      "approach": "A performance sprint. Routes are code-split and lazy loaded, and vendor libraries are split into separate chunks. An image script generates WebP versions in three sizes, served through srcset with a shimmer placeholder. Fonts load asynchronously, and Framer Motion was removed from the hero to reduce the JavaScript that blocks the largest paint.\n\nPages that load before you click. Splitting the code means each page is downloaded separately, which could make navigation feel slower. To avoid that, the page you land on loads first, and the other main pages load in the background as soon as the browser is idle. Hovering over or focusing a link in the navigation starts the download immediately, so even on a slow connection the next page is usually ready by the time it is clicked. Hovering over Projects also fetches the images for the first project cards, using the same srcset and sizes as the cards themselves, so the browser downloads exactly the variant it will show.",
-
-      "contentAsData": "No project is written into a component. All projects live in a single JSON file, and each entry decides how its card looks: its size in the grid, which buttons it shows (GitHub, live site, prototype, PDF), and whether it links to a case study. A field that is left out simply means the button is not there.\n\nCase study pages, including this one, are generated from the same entries through a custom hook, and a small config file works as a feature flag for pages that are still in progress. Adding a project means writing data, not code.\n\nTry it below. The controls change this portfolio's own entry from the data, and the card underneath is the same ProjectCard component the Projects page uses.",
-
-      "designSystem": "Colors, spacing, typography and breakpoints are defined once as CSS custom properties and shared styled-components mixins. Every component reads from the same tokens, so a change in one place carries through the whole site.\n\nLayouts are mobile-first with min-width breakpoints, and spacing tokens grow with the screen: section padding goes from 1rem on a phone to 16rem on a wide desktop. Components such as the Button keep the interface consistent: one component with primary, secondary and tertiary variants that renders as a router link, an external link or a native button depending on its props, and marks links that open a new tab or download a file.\n\nThe overview below is not a screenshot. It is rendered from the site's live tokens, so the values you see are the ones the site is using right now.",
-
-      "accessibility": "Accessibility is built into the components rather than added page by page. The same Button component renders internal routes, external links, icon-only links and file downloads, and each case gets what it needs to be understood without seeing it.\n\nLinks that open a new tab show an icon and announce \"(opens in new tab)\" through visually hidden text. Icon-only buttons have no visible text, so their label moves to aria-label. PDF links are marked as downloads. One global rule gives every interactive element the same visible focus outline, shown only for keyboard focus. Every animation respects the reduced motion setting: a single MotionConfig turns movement off in all Framer Motion animations while fades remain, a global CSS rule does the same for CSS animations and smooth scrolling, and the loading screen and experience timeline have their own reduced versions on top.\n\nThe overview below renders the real buttons and reads their accessible names from the page, the same text a screen reader would announce.",
-
-      "bundleSizes": {
-        "_note": "Gzipped JavaScript from production builds of each version, measured October 2026",
-        "unit": "kB",
-        "versions": [
-          {
-            "label": "Before the sprint",
-            "date": "Oct 2025",
-            "initial": 140.7,
-            "total": 209.5
-          },
-          {
-            "label": "After the sprint",
-            "date": "Oct 2025",
-            "initial": 111.8,
-            "total": 178.2
-          },
-          {
-            "label": "Today",
-            "date": "Oct 2026",
-            "initial": 120.7,
-            "total": 158.9
-          }
-        ]
-      },
-
-      "outcome": "The performance sprint cut the JavaScript loaded on first visit by 21%, from 141 kB to 112 kB gzipped. Before it, React and all of my own code shipped as a single 72 kB chunk; after it, my own startup code was down to 13 kB.\n\nMeasuring again for this case study revealed a regression. I had later added a barrel file that re-exports every component from one place. Because the app's entry point imported through it, the bundler treated every component as startup code, including pages and demos that are only needed later. My own startup code had grown to 36 kB. Importing components file by file in the entry point brought it back down to 12 kB.\n\nToday the first visit loads 121 kB, 14% less than before the sprint, even though the loading screen needs Framer Motion from the first frame. The total JavaScript across the site is 159 kB, 24% less than where it started, interactive demos on this page included.\n\nLighthouse scores of 95+ for accessibility and 100 for best practices and SEO, with performance traded off knowingly for the loading screen.\n\nAdding a new project takes one JSON entry and one image. A full case study takes a few more fields, with no new components.",
-
-      "reflection": "Building the site over a year, in phases rather than all at once, put the component approach to the test. My own work kept changing what the site needed: first a place for frontend projects, then case studies, then an About page. Each addition built on what was already there instead of replacing it.\n\nWriting this case study became a review of its own. Every claim had to hold up against the code, and checking them uncovered an image preload that never ran, animations that ignored the reduced motion setting, and a barrel file that had tripled my startup code. All three are fixed, and the text now describes exactly what the site does.\n\nThe most useful lesson was to measure before optimizing, and to treat every trade-off as a choice I can explain, including the ones that lower a score.\n\nIn the end, this page sums up the project better than any paragraph. It is generated from a single entry in projects.json, and the demos above are the same components the rest of the site is built from. A case study about thinking in components, made of them.",
-
-      "sectionTitles": {
-        "problem": "The Challenge",
-        "insight": "Key Trade-off",
-        "approach": "How It's Built",
-        "results": "Where It Landed",
-        "reflection": "What I Learned"
-      }
     },
     {
       "id": 8,
