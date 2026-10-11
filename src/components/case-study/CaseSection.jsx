@@ -3,11 +3,13 @@ import styled from 'styled-components'
 
 import { Button } from '../Button'
 import { ImageLightbox } from '../ImageLightbox'
+import { AccessibilityShowcase } from './AccessibilityShowcase'
 import { ContentAsDataShowcase } from './ContentAsDataShowcase'
 import { DesignSystemShowcase } from './DesignSystemShowcase'
 
 // Live components a section can render below its text, keyed by name in the data
 const showcases = {
+  accessibility: AccessibilityShowcase,
   contentAsData: ContentAsDataShowcase,
   designSystem: DesignSystemShowcase
 }

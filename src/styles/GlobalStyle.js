@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 import { colors } from './colors'
+import { focusStyles } from './mixins'
 import { spacing } from './spacing'
 import { typography } from './typography'
 
@@ -32,6 +33,34 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
     width: 1px;
     white-space: nowrap;
+  }
+
+  /* CSS counterpart to MotionConfig: CSS animations, transitions and smooth
+     scrolling are effectively turned off. !important beats inline styles */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* One keyboard focus style for every interactive element, so links and
+     controls without their own styles never fall back to the browser default */
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [tabindex]:not([tabindex='-1']) {
+    ${focusStyles}
   }
 
   :root {

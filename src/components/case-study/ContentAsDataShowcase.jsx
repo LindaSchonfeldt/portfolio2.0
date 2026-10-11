@@ -1,8 +1,9 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 
 import projectsData from '../../data/projects.json'
 import devices from '../../styles/devices'
+import { getProjectActions } from '../../utils/projectActions'
 import { ProjectCard } from '../ProjectCard'
 
 // This portfolio's own entry, so the preview is the card the site renders for it
@@ -18,11 +19,48 @@ const toggles = [
   { key: 'hasDetail', label: 'Case study', value: true }
 ]
 
+// Wait for the last change before announcing, so quickly arrowing through
+// the sizes gives one announcement instead of a queue of them
+const ANNOUNCE_DELAY_MS = 500
+
 // Long text is shortened in the code view only, the card gets the full value
 const shorten = (value) =>
   typeof value === 'string' && value.length > 60
     ? `${value.slice(0, 57)}…`
     : value
+
+// The entry exactly as it would be written in projects.json
+const buildEntry = (size, enabled) => ({
+  title: baseProject.title,
+  image: baseProject.image,
+  description: baseProject.description,
+  categories: baseProject.categories,
+  size,
+  ...Object.fromEntries(
+    toggles.filter((t) => enabled[t.key]).map((t) => [t.key, t.value])
+  )
+})
+
+// Fields left out of the entry are cleared, so the card only shows what is set
+const buildCard = (entry) => ({
+  ...baseProject,
+  github: '',
+  netlify: '',
+  prototype: '',
+  hasDetail: false,
+  ...entry
+})
+
+// Built from the same helper ProjectCard uses, so it always matches the card
+const describeCard = (card) => {
+  const buttons = getProjectActions(card).map((action) => action.label)
+  if (card.hasDetail) buttons.push('Case Study')
+
+  const list = buttons.length
+    ? `with ${new Intl.ListFormat('en').format(buttons)} ${buttons.length === 1 ? 'button' : 'buttons'}`
+    : 'with no buttons'
+  return `Card updated: ${card.size} size, ${list}.`
+}
 
 export function ContentAsDataShowcase() {
   const id = useId()
@@ -32,6 +70,18 @@ export function ContentAsDataShowcase() {
     Object.fromEntries(toggles.map((t) => [t.key, Boolean(baseProject?.[t.key])]))
   )
   const [lastChanged, setLastChanged] = useState(null)
+  const [announcement, setAnnouncement] = useState('')
+
+  // The preview is inert and hidden from screen readers, so describe the
+  // card in a live region instead. Nothing is announced until the first change
+  useEffect(() => {
+    if (!baseProject || lastChanged === null) return
+    const timer = setTimeout(
+      () => setAnnouncement(describeCard(buildCard(buildEntry(size, enabled)))),
+      ANNOUNCE_DELAY_MS
+    )
+    return () => clearTimeout(timer)
+  }, [size, enabled, lastChanged])
 
   if (!baseProject) return null
 
@@ -45,26 +95,8 @@ export function ContentAsDataShowcase() {
     setLastChanged('size')
   }
 
-  // The entry exactly as it would be written in projects.json
-  const entry = {
-    title: baseProject.title,
-    image: baseProject.image,
-    description: baseProject.description,
-    categories: baseProject.categories,
-    size,
-    ...Object.fromEntries(
-      toggles.filter((t) => enabled[t.key]).map((t) => [t.key, t.value])
-    )
-  }
-
-  const card = {
-    ...baseProject,
-    github: '',
-    netlify: '',
-    prototype: '',
-    hasDetail: false,
-    ...entry
-  }
+  const entry = buildEntry(size, enabled)
+  const card = buildCard(entry)
 
   return (
     <Showcase>
@@ -85,6 +117,9 @@ export function ContentAsDataShowcase() {
               </Option>
             ))}
           </Options>
+          {/* For sighted keyboard users. Screen readers already explain
+              radio groups, so it is hidden from them */}
+          <ArrowHint aria-hidden='true'>Use arrow keys to switch size</ArrowHint>
         </Fieldset>
 
         <Fieldset>
@@ -130,6 +165,10 @@ export function ContentAsDataShowcase() {
       <Preview $wide={size === 'large' || size === 'x-large'} inert=''>
         <ProjectCard project={card} size={size} showCurrentBadge={false} />
       </Preview>
+
+      <div className='visually-hidden' aria-live='polite'>
+        {announcement}
+      </div>
     </Showcase>
   )
 }
@@ -214,6 +253,18 @@ const Option = styled.label`
   input:focus-visible + span {
     outline: 2px solid var(--accent-orange);
     outline-offset: 2px;
+  }
+`
+
+// Space is always reserved, so showing the hint never shifts the layout
+const ArrowHint = styled.p`
+  margin: var(--gap-xs) 0 0;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  visibility: hidden;
+
+  fieldset:has(input:focus-visible) & {
+    visibility: visible;
   }
 `
 

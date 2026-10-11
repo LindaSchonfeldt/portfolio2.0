@@ -1,3 +1,4 @@
+import { MotionConfig } from 'framer-motion'
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -104,9 +105,13 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    // Follow the system's reduced motion setting for every animation:
+    // movement is skipped, while opacity and color still transition
+    <MotionConfig reducedMotion='user'>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </MotionConfig>
   )
 }
 

@@ -88,6 +88,7 @@ export function useFormatProjectToCaseStudy(project) {
       approach: 'Approach',
       contentAsData: 'Content as Data',
       designSystem: 'Design System',
+      accessibility: 'Built for Every Way of Browsing',
       results: 'Results & Impact',
       prototype: 'Prototype',
       reflection: 'Reflection'
@@ -147,6 +148,15 @@ export function useFormatProjectToCaseStudy(project) {
         title: titles.designSystem || defaultTitles.designSystem,
         body: toArray(proj.designSystem),
         showcase: 'designSystem'
+      })
+    }
+
+    if (proj.accessibility) {
+      sections.push({
+        eyebrow: 'Accessibility',
+        title: titles.accessibility || defaultTitles.accessibility,
+        body: toArray(proj.accessibility),
+        showcase: 'accessibility'
       })
     }
 
