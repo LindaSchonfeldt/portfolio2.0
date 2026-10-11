@@ -270,7 +270,7 @@
       "id": 7,
       "slug": "portfolio",
       "title": "Portfolio",
-      "image": "tree",
+      "image": "portfolio",
       "alt": "Portfolio website showcasing projects and design work",
       "description": "You're looking at it. This is a showcase of user-centered design in action.",
       "categories": ["UI/UX", "Frontend"],
@@ -304,9 +304,24 @@
         "_note": "Gzipped JavaScript from production builds of each version, measured October 2026",
         "unit": "kB",
         "versions": [
-          { "label": "Before the sprint", "date": "Oct 2025", "initial": 140.7, "total": 209.5 },
-          { "label": "After the sprint", "date": "Oct 2025", "initial": 111.8, "total": 178.2 },
-          { "label": "Today", "date": "Oct 2026", "initial": 120.7, "total": 158.9 }
+          {
+            "label": "Before the sprint",
+            "date": "Oct 2025",
+            "initial": 140.7,
+            "total": 209.5
+          },
+          {
+            "label": "After the sprint",
+            "date": "Oct 2025",
+            "initial": 111.8,
+            "total": 178.2
+          },
+          {
+            "label": "Today",
+            "date": "Oct 2026",
+            "initial": 120.7,
+            "total": 158.9
+          }
         ]
       },
 
