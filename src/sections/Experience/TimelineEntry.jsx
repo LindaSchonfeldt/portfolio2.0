@@ -1,4 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import {
   FaBriefcase,
   FaChevronDown,
@@ -21,6 +22,9 @@ const typeIcons = {
   next: FaRegCommentDots
 }
 
+// Seconds a card takes to expand or collapse
+const EXPAND_DURATION = 0.3
+
 // trailIndex counts main-trail entries only, so the zigzag keeps its rhythm
 // past side entries
 export const TimelineEntry = ({
@@ -33,9 +37,32 @@ export const TimelineEntry = ({
   const reduceMotion = useReducedMotion()
   const Icon = typeIcons[entry.type] ?? FaBriefcase
   const detailsId = `cv-details-${entry.id}`
+  const itemRef = useRef(null)
+  const scrollOnOpen = useRef(false)
+
+  // Only a card opened by a click scrolls, not the one open on page load
+  const handleToggle = () => {
+    scrollOnOpen.current = !isOpen
+    onToggle()
+  }
+
+  // Scroll to the card once the previously open card has collapsed, since
+  // that can move this one up the page
+  useEffect(() => {
+    if (!isOpen || !scrollOnOpen.current) return
+    scrollOnOpen.current = false
+    const timer = setTimeout(() => {
+      itemRef.current?.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start'
+      })
+    }, EXPAND_DURATION * 1000)
+    return () => clearTimeout(timer)
+  }, [isOpen, reduceMotion])
 
   return (
     <TimelineItem
+      ref={itemRef}
       $branch={entry.branch}
       initial={reduceMotion ? false : { opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -58,7 +85,7 @@ export const TimelineEntry = ({
           type='button'
           aria-expanded={isOpen}
           aria-controls={detailsId}
-          onClick={onToggle}
+          onClick={handleToggle}
         >
           <span>
             <TimelinePeriod>{entry.period}</TimelinePeriod>
@@ -81,7 +108,7 @@ export const TimelineEntry = ({
               initial={reduceMotion ? false : { height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: EXPAND_DURATION, ease: 'easeInOut' }}
             >
               <EntryDetails entry={entry} />
             </Details>
@@ -92,9 +119,11 @@ export const TimelineEntry = ({
   )
 }
 
-// Side entries (branch) are pushed right, off the main trail
+// Side entries (branch) are pushed right, off the main trail. The scroll
+// margin keeps a card scrolled into view clear of the fixed header.
 const TimelineItem = styled(motion.li)`
   position: relative;
+  scroll-margin-top: 100px;
   margin-bottom: 2rem;
   padding-left: ${({ $branch }) => ($branch ? '6rem' : '3.5rem')};
 
