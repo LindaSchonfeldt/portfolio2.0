@@ -86,6 +86,9 @@ export function useFormatProjectToCaseStudy(project) {
       problem: 'The Problem',
       insight: 'Key Insight',
       approach: 'Approach',
+      contentAsData: 'Content as Data',
+      designSystem: 'Design System',
+      accessibility: 'Built for Every Way of Browsing',
       results: 'Results & Impact',
       prototype: 'Prototype',
       reflection: 'Reflection'
@@ -130,6 +133,33 @@ export function useFormatProjectToCaseStudy(project) {
       })
     }
 
+    if (proj.contentAsData) {
+      sections.push({
+        eyebrow: 'Architecture',
+        title: titles.contentAsData || defaultTitles.contentAsData,
+        body: toArray(proj.contentAsData),
+        showcase: 'contentAsData'
+      })
+    }
+
+    if (proj.designSystem) {
+      sections.push({
+        eyebrow: 'Foundations',
+        title: titles.designSystem || defaultTitles.designSystem,
+        body: toArray(proj.designSystem),
+        showcase: 'designSystem'
+      })
+    }
+
+    if (proj.accessibility) {
+      sections.push({
+        eyebrow: 'Accessibility',
+        title: titles.accessibility || defaultTitles.accessibility,
+        body: toArray(proj.accessibility),
+        showcase: 'accessibility'
+      })
+    }
+
     if (proj.prototypeEmbed || proj.prototype) {
       const prototypeBody = toArray(proj.prototypeBody)
       sections.push({
@@ -169,7 +199,11 @@ export function useFormatProjectToCaseStudy(project) {
       sections.push({
         eyebrow: 'Outcome',
         title: titles.results || defaultTitles.results,
-        body: toArray(proj.outcome)
+        body: toArray(proj.outcome),
+        ...(proj.bundleSizes && {
+          showcase: 'bundleSizes',
+          showcaseData: proj.bundleSizes
+        })
       })
     }
 

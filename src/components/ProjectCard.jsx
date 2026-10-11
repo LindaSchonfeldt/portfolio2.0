@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import siteConfig from '../data/siteConfig.json'
 import devices from '../styles/devices'
 import { buttonBase } from '../styles/mixins'
-import { getMediaPath } from '../utils/mediaPath'
+import { getCardImageSizes, getMediaPath } from '../utils/mediaPath'
 import { getProjectActions } from '../utils/projectActions'
 import { ButtonGroup } from './ButtonGroup'
 import { ResponsiveImage } from './ResponsiveImage'
@@ -71,12 +71,7 @@ export const ProjectCard = ({
 
   // Calculate sizes attribute based on card size for responsive images
   // Tell browser the actual rendered width so it picks the right image variant
-  const imageSizes =
-    size === 'large' || size === 'x-large'
-      ? '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px'
-      : size === 'small'
-        ? '(max-width: 640px) 100vw, (max-width: 1024px) 400px, 400px'
-        : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px'
+  const imageSizes = getCardImageSizes(size)
 
   // Render media content
   const mediaContent = (

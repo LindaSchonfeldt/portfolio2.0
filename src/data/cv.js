@@ -26,7 +26,7 @@ export const experience = [
     type: 'work',
     role: 'Frontend Developer',
     employmentType: 'Internship',
-    organization: 'FIXMEAPP (via Technigo)',
+    organization: 'FIXMEAPP',
     location: 'Remote',
     start: '2025-09',
     end: '2025-10',
@@ -78,9 +78,31 @@ export const education = [
     start: '2021-08',
     end: '2024-06',
     period: '2021 – 2024',
-    tech: [],
-    description:
-      'Specialization in Interaction Design. Thesis on how dark patterns in social media apps undermine user autonomy.'
+    tech: ['Interaction design', 'UX research'],
+    // A highlight can be an object with `details` to nest sub-points under it
+    highlights: [
+      'Specialized in Interaction Design',
+      {
+        text: 'Thesis on how dark patterns in social media apps undermine user autonomy',
+        details: [
+          'Audited nine widely used social media apps and identified 34 dark patterns, 13 of them newly defined',
+          'Analyzed the findings with thematic analysis, guided by an established dark pattern ontology'
+        ]
+      }
+    ],
+    // `projectId` ties a link to a case study, so it stays disabled while
+    // that project is listed as under construction in siteConfig
+    links: [
+      {
+        label: 'Read the case study',
+        url: '/projects/exploitation-by-design',
+        projectId: 2
+      },
+      {
+        label: 'Download thesis (Swedish, PDF)',
+        url: '/pdfs/exploitation-by-design(SE).pdf'
+      }
+    ]
   }
 ]
 

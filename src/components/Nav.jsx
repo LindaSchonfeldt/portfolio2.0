@@ -18,6 +18,20 @@ export const Nav = () => {
 
   const { preloadOnHover } = useRoutePreloader()
 
+  // Projects also preloads its first card images. Both handlers run from one
+  // function, since spreading preloadOnHover after onMouseEnter would replace it
+  const projectsPreload = preloadOnHover('projects')
+  const preloadProjects = {
+    onMouseEnter: () => {
+      projectsPreload.onMouseEnter()
+      preloadProjectImages()
+    },
+    onFocus: () => {
+      projectsPreload.onFocus()
+      preloadProjectImages()
+    }
+  }
+
   return (
     <NavContainer $scrolled={scrolled}>
       <LogoLink to='/'>
@@ -31,11 +45,7 @@ export const Nav = () => {
           </StyledNavLink>
         </NavItem>
         <NavItem>
-          <StyledNavLink
-            to='/projects'
-            onMouseEnter={preloadProjectImages}
-            {...preloadOnHover('projects')}
-          >
+          <StyledNavLink to='/projects' {...preloadProjects}>
             <TextLabel>Projects</TextLabel>
           </StyledNavLink>
         </NavItem>

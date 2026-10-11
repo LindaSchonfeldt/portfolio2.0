@@ -3,6 +3,18 @@ import styled from 'styled-components'
 
 import { Button } from '../Button'
 import { ImageLightbox } from '../ImageLightbox'
+import { AccessibilityShowcase } from './AccessibilityShowcase'
+import { BundleSizeChart } from './BundleSizeChart'
+import { ContentAsDataShowcase } from './ContentAsDataShowcase'
+import { DesignSystemShowcase } from './DesignSystemShowcase'
+
+// Live components a section can render below its text, keyed by name in the data
+const showcases = {
+  accessibility: AccessibilityShowcase,
+  bundleSizes: BundleSizeChart,
+  contentAsData: ContentAsDataShowcase,
+  designSystem: DesignSystemShowcase
+}
 
 export function CaseSection({
   eyebrow,
@@ -13,9 +25,12 @@ export function CaseSection({
   embed,
   ctaLabel,
   ctaUrl,
+  showcase,
+  showcaseData,
   isDisclaimer
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const Showcase = showcases[showcase]
 
   // Normalize figma prototype URLs to the embeddable format for better sizing/controls
   const embedUrl = embed?.includes('figma.com/proto')
@@ -34,6 +49,8 @@ export function CaseSection({
           ))}
         </ContentBody>
       )}
+
+      {Showcase && <Showcase data={showcaseData} />}
 
       {image && (
         <SectionImage
