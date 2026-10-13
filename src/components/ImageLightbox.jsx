@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 
 export const ImageLightbox = ({ src, alt, onClose }) => {
@@ -9,35 +10,44 @@ export const ImageLightbox = ({ src, alt, onClose }) => {
     }
 
     document.addEventListener('keydown', handleEscape)
+    const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden' // Prevent background scrolling
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = previousOverflow
     }
   }, [onClose])
 
-  return (
+  // Portal to body so transformed ancestors don't break position: fixed
+  return createPortal(
     <LightboxOverlay onClick={onClose}>
+      <CloseButton
+        onClick={(e) => {
+          e.stopPropagation()
+          onClose()
+        }}
+        aria-label='Close fullscreen image'
+      >
+        <svg
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        >
+          <line x1='18' y1='6' x2='6' y2='18' />
+          <line x1='6' y1='6' x2='18' y2='18' />
+        </svg>
+      </CloseButton>
       <LightboxContent onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose} aria-label='Close fullscreen image'>
-          <svg
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          >
-            <line x1='18' y1='6' x2='6' y2='18' />
-            <line x1='6' y1='6' x2='18' y2='18' />
-          </svg>
-        </CloseButton>
         <LightboxImage src={src} alt={alt} />
       </LightboxContent>
-    </LightboxOverlay>
+    </LightboxOverlay>,
+    document.body
   )
 }
 
@@ -60,16 +70,18 @@ const LightboxContent = styled.div`
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
+  max-height: 90dvh;
   cursor: default;
 `
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.6);
   border: none;
-  color: black;
+  border-radius: 50%;
+  color: white;
   cursor: pointer;
   padding: 8px;
   display: flex;
@@ -91,9 +103,9 @@ const CloseButton = styled.button`
 const LightboxImage = styled.img`
   max-width: 90vw;
   max-height: 90vh;
+  max-height: 90dvh;
   width: auto;
   height: auto;
   object-fit: contain;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  cursor: zoom-out;
 `

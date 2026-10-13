@@ -120,6 +120,11 @@ export function ContentAsDataShowcase() {
           {/* For sighted keyboard users. Screen readers already explain
               radio groups, so it is hidden from them */}
           <ArrowHint aria-hidden='true'>Use arrow keys to switch size</ArrowHint>
+          <MobileNote>
+            On a phone every card is full width with the image above the text,
+            so the sizes look the same here. On a tablet or desktop, sizes
+            change the width and some place the image beside the text.
+          </MobileNote>
         </Fieldset>
 
         <Fieldset>
@@ -256,15 +261,33 @@ const Option = styled.label`
   }
 `
 
-// Space is always reserved, so showing the hint never shifts the layout
+// Space is always reserved, so showing the hint never shifts the layout.
+// Phones rarely have a keyboard to arrow with, so it is left out there
 const ArrowHint = styled.p`
+  display: none;
   margin: var(--gap-xs) 0 0;
   font-size: 0.8rem;
   color: var(--text-main);
   visibility: hidden;
 
+  @media ${devices.tablet} {
+    display: block;
+  }
+
   fieldset:has(input:focus-visible) & {
     visibility: visible;
+  }
+`
+
+// The size layouts only kick in from tablet width, so explain the lack of
+// change on narrow screens and hide the note where the difference is visible
+const MobileNote = styled.p`
+  margin: var(--gap-xs) 0 0;
+  font-size: 0.8rem;
+  color: var(--text-main);
+
+  @media ${devices.tablet} {
+    display: none;
   }
 `
 
