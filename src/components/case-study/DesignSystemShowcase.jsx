@@ -192,17 +192,22 @@ const Swatches = styled.ul`
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap-sm);
 
   @media ${devices.tablet} {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   li {
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
+  }
+
+  /* Long token names like --primary-green-dark break instead of widening the grid */
+  code {
+    overflow-wrap: anywhere;
   }
 `
 

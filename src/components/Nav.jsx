@@ -112,9 +112,12 @@ const LogoName = styled.span`
 const NavLinks = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
+  margin-left: auto;
   list-style: none;
+  background: var(--primary-green-dark);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
 `
 
 const NavItem = styled.li`
@@ -135,7 +138,7 @@ const StyledNavLink = styled(NavLink)`
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: var(--primary-green-dark);
+  color: var(--text-light);
   font-size: 0.9rem;
   font-weight: 600;
   padding: 1rem;

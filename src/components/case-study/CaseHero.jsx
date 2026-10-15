@@ -62,7 +62,7 @@ export function CaseHero({
 
 const HeaderStyled = styled.header`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--gap-lg);
   align-items: center;
   margin-bottom: var(--section-gap);
@@ -70,7 +70,7 @@ const HeaderStyled = styled.header`
   padding-bottom: var(--gap-lg);
 
   @media ${devices.tablet} {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `
 
