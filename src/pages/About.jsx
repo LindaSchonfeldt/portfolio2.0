@@ -22,11 +22,13 @@ const About = () => {
           <StyledText>
             <h1>About</h1>
             <p className='lead'>
-              I'm Linda, and I build things with a purpose, as a frontend
-              developer with a background in interaction design. I grew up in
-              the north of Sweden, and after almost 20 years in Stockholm, I'm
-              still a "norrlänning" at heart. People sometimes tell me I seem
-              calm. I like to think that's the north in me.
+              I'm Linda, and I <mark>build things with a purpose</mark>, as a{' '}
+              <mark>
+                frontend developer with a background in interaction design
+              </mark>
+              . I grew up in the north of Sweden, and after almost 20 years in
+              Stockholm, I'm still a "norrlänning" at heart. People sometimes
+              tell me I seem calm. I like to think that's the north in me.
             </p>
             <h2>Why I design the way I do</h2>
             <p>
@@ -36,9 +38,10 @@ const About = () => {
               to look and work. Most of all, I was drawn to how we're influenced
               without noticing it. That became the focus of my bachelor's thesis
               in Interaction Design, on how dark patterns in social media apps
-              undermine user autonomy. It taught me that design is an ethical
-              responsibility: if we can shape people's behavior without them
-              noticing, we'd better use that to help them.
+              undermine user autonomy. It taught me that{' '}
+              <mark>design is an ethical responsibility:</mark> if we can shape
+              people's behavior without them noticing, we'd better use that to
+              help them.
             </p>
             <h2>Why healthtech</h2>
             <p>
@@ -46,36 +49,42 @@ const About = () => {
               own life how hard it can be to ask for help: not knowing where to
               turn, whether you'll be taken seriously, or if it's even worth
               trying. When I needed support, there weren't many digital options.
-              Today there are, and I think lowering that threshold is one of the
-              most meaningful things technology can do. That's what I explored
-              in my case study on Din Psykolog's onboarding, and it's why I want
-              to work within mental health and women's health. When someone
-              opens an app on a hard day, I want it to feel calm, clear and
-              kind. Getting there means never assuming I know what users need,
-              which is why I care so much about user interviews and testing.
+              Today there are, and I think{' '}
+              <mark>
+                lowering that threshold is one of the most meaningful things
+                technology can do.
+              </mark>{' '}
+              That's what I explored in my case study on Din Psykolog's
+              onboarding, and it's why I want to work within mental health and
+              women's health. When someone opens an app on a hard day, I want it
+              to feel calm, clear and kind. Getting there means never assuming I
+              know what users need, which is why I care so much about user
+              interviews and testing.
             </p>
             <h2>What I'm looking for</h2>
             <p>
-              I'm looking for a frontend role close to design: building
-              interfaces in React and TypeScript while ideally also taking part
-              in user interviews, prototyping and conversations about flows.
-              Over time, I'd love to grow into design systems, where structure
-              and user experience meet. I thrive in small, close-knit teams
-              where decisions don't have to pass through several layers, where
-              we iterate quickly and I get real ownership of what I build.
-              During my internship at Univid I loved having that kind of
-              ownership, and I learned how much I value having time to try new
-              things. Most of all, I want to work somewhere that puts users
-              before short-term profit, and thinks long term about what digital
-              health products do to the people who use them.
+              I'm looking for a <mark>frontend role close to design</mark>:
+              building interfaces in <mark>React and TypeScript</mark> while
+              ideally also taking part in user interviews, prototyping and
+              conversations about flows. Over time, I'd love to grow into design
+              systems, where structure and user experience meet. I thrive in
+              small, close-knit teams where decisions don't have to pass through
+              several layers, where we iterate quickly and I get real ownership
+              of what I build. During my internship at Univid I loved having
+              that kind of ownership, and I learned how much I value having time
+              to try new things. Most of all, I want to work somewhere that{' '}
+              <mark>puts users before short-term profit</mark>, and thinks long
+              term about what digital health products do to the people who use
+              them.
             </p>
             <h2>Outside of work</h2>
             <p>
               Outside of work, I'm happiest when I'm creating or organizing
               something. I garden, knit and crochet, and nothing satisfies me
               quite like turning a mess into a space where everything has its
-              place (I may own a few too many storage boxes). I love walking and
-              hiking in nature, and I'm dreaming of having a dog again.
+              place (I may own a few too many cute storage boxes). I love
+              walking and hiking in nature, and I'm{' '}
+              <mark>dreaming of having a dog again.</mark>
             </p>
           </StyledText>
         </SectionContainer>
@@ -94,6 +103,15 @@ const StyledText = styled.div`
 
   p {
     margin-bottom: 1.5rem;
+  }
+
+  /* Highlighter stroke as tall as the text */
+  mark {
+    background: var(--primary-green);
+    color: inherit;
+    padding: 0 0.1em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   p:not(.lead) {
