@@ -205,7 +205,7 @@ export const nextStep = {
   period: 'Next up',
   tech: [],
   description:
-    "This spot is saved for my next frontend role, ideally somewhere that makes people's everyday lives a little better. If that sounds like your team, let's fill it in together.",
+    "This spot is saved for my next frontend role, ideally somewhere that makes people's everyday lives a little better. If that sounds like your team, let's talk.",
   links: [{ label: 'Get in touch', url: '/contact' }]
 }
 
