@@ -22,7 +22,8 @@ const About = () => {
           <StyledText>
             <h1>About</h1>
             <p className='lead'>
-              I'm Linda, and I <mark>build things with a purpose</mark>, as a{' '}
+              I'm Linda, and I{' '}
+              <mark>prefer to build things with a purpose</mark>, as a{' '}
               <mark>
                 frontend developer with a background in interaction design
               </mark>
