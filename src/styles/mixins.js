@@ -2,7 +2,7 @@ import { css } from 'styled-components'
 
 export const focusStyles = css`
   &:focus-visible {
-    outline: 2px solid var(--accent-orange);
+    outline: 4px solid var(--accent-orange);
     outline-offset: 2px;
   }
 `
