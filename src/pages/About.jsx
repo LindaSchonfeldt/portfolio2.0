@@ -125,7 +125,7 @@ const StyledText = styled.div`
   .photo {
     display: block;
     width: 100%;
-    max-width: 320px;
+    max-width: clamp(240px, 30vw, 400px);
     height: auto;
     margin: 0.5rem auto 0;
   }
