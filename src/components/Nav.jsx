@@ -117,7 +117,8 @@ const NavLinks = styled.ul`
   background: var(--primary-green-dark);
   margin-top: 0;
   margin-bottom: 0;
-  padding: 0;
+  /* Room for the focus ring (2px offset + 2px outline) to sit on green */
+  padding: 0.375rem;
 `
 
 const NavItem = styled.li`

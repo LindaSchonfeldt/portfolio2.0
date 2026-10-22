@@ -12,6 +12,7 @@ import { LoadingScreen } from './components/LoadingScreen'
 import { Nav } from './components/Nav'
 import { PerformanceMonitor } from './components/PerformanceMonitor'
 import { ScrollToTop } from './components/ScrollToTop'
+import { SkipLink } from './components/SkipLink'
 import GlobalStyle from './styles/GlobalStyle'
 import { getRouteName, mainRoutes, preloadRoute } from './utils/routePreloader'
 
@@ -32,6 +33,18 @@ const AppContainer = styled.div`
 
   @media (min-width: 1024px) {
     padding-top: 40px;
+  }
+`
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+
+  /* Focus lands here from the skip link; the ring would frame the whole page */
+  &:focus {
+    outline: none;
   }
 `
 
@@ -93,16 +106,23 @@ function AppContent() {
       <AppContainer>
         {showIntro && <LoadingScreen onComplete={handleIntroComplete} />}
         <ScrollToTop />
+        <SkipLink />
         <Nav />
         <HamburgerMenu />
         <Suspense fallback={null}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/projects' element={<Projects />} />
-            <Route path='/projects/:projectId' element={<ProjectCaseStudy />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} />
-          </Routes>
+          {/* tabIndex -1 lets the skip link move focus here, not just scroll */}
+          <Main id='main' tabIndex={-1}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/projects' element={<Projects />} />
+              <Route
+                path='/projects/:projectId'
+                element={<ProjectCaseStudy />}
+              />
+              <Route path='/about' element={<About />} />
+              <Route path='/contact' element={<Contact />} />
+            </Routes>
+          </Main>
           <Footer />
           <PerformanceMonitor />
         </Suspense>
