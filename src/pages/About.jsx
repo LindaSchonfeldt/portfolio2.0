@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+import melvinSrc from '../assets/melvin.webp'
 import { Meta, SectionContainer } from '../components'
 import { Experience } from '../sections'
 import devices from '../styles/devices'
@@ -87,6 +88,12 @@ const About = () => {
               walking and hiking in nature, and I'm{' '}
               <mark>dreaming of having a dog again.</mark>
             </p>
+            <img
+              className='photo'
+              src={melvinSrc}
+              alt='Linda cheek to cheek with Melvin, her schnauzer, in a pine forest'
+              loading='lazy'
+            />
           </StyledText>
         </SectionContainer>
         <SectionContainer id='cv'>
@@ -113,6 +120,14 @@ const StyledText = styled.div`
     padding: 0 0.1em;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin: 0.5rem auto 0;
   }
 
   p:not(.lead) {
