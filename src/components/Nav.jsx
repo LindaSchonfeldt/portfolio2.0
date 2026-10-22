@@ -136,65 +136,29 @@ const StyledNavLink = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
   text-decoration: none;
   color: var(--text-light);
   font-size: 0.9rem;
   font-weight: 600;
   padding: 1rem;
   text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  transition: color 0.2s ease;
   white-space: nowrap;
 
-  &:hover {
-    gap: 0.75rem;
+  &:hover,
+  &:focus-visible {
+    color: var(--accent-orange);
   }
 
+  /* Current page */
   &.active {
-    gap: 0.75rem;
-  }
-
-  ${(props) =>
-    props.$expanded &&
-    `
-    width: 120px;
-  `}
-
-  @media ${devices.desktop} {
-    width: 110px;
-
-    &:hover {
-      width: 120px;
-    }
-
-    &.active {
-      width: 110px;
-    }
-
-    ${(props) =>
-      props.$expanded &&
-      `
-      width: 110px;
-    `}
+    text-decoration: underline;
+    text-decoration-color: var(--accent-orange);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
 
   @media ${devices.laptopL} {
     width: 110px;
-
-    &:hover {
-      width: 120px;
-    }
-
-    &.active {
-      width: 110px;
-    }
-
-    ${(props) =>
-      props.$expanded &&
-      `
-      width: 110px;
-    `}
   }
 `
